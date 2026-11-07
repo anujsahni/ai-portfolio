@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-NEIGHBORHOOD-FERRY--c01",
+  "sourceId": "SF-NEIGHBORHOOD-FERRY",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Ferry Building and Embarcadero",
+  "section": "Ferry Building and Embarcadero",
+  "contentType": "neighborhood-guide",
+  "chunkIndex": 1,
+  "text": "This sample guide frames the Ferry Building area as an easy first stop for a relaxed waterfront day. A traveler might combine a coffee or snack stop with a short walk along the Embarcadero rather than scheduling several timed activities.",
+  "textChecksum": "1ad2b92a41037fcf9c812ac0ef2e22fc833fff5ddcff1e2da17cfbd184e30bc3",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

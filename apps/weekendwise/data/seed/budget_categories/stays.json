@@ -1,0 +1,22 @@
+{
+  "label": "Stays",
+  "badge": "estimate",
+  "displayOrder": 1,
+  "description": "Single lodging estimate for the party; no specific hotel.",
+  "relatedSourceIdsByCity": {
+    "san-francisco": [
+      "SF-PLANNING-LODGING"
+    ],
+    "portland": [
+      "PDX-PLANNING-BUDGET"
+    ],
+    "santa-cruz": [
+      "SC-PLANNING-BUDGET"
+    ],
+    "napa-valley": [
+      "NAPA-PLANNING-BUDGET"
+    ]
+  },
+  "isEstimate": true,
+  "active": true
+}

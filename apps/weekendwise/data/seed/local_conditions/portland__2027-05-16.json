@@ -1,0 +1,17 @@
+{
+  "cityId": "portland",
+  "city": "Portland",
+  "demoDate": "2027-05-16",
+  "dayOfWeek": "Sun",
+  "condition": "partly-cloudy",
+  "icon": "⛅",
+  "tempHighF": 64,
+  "tempLowF": 49,
+  "precipitationChancePct": 20,
+  "windMph": 6,
+  "indoorRecommended": false,
+  "summary": "Partly cloudy sample day with dry spells.",
+  "simulated": true,
+  "source": "WeekendWise deterministic demo fixture",
+  "disclaimer": "Simulated conditions for the demo. Not a forecast."
+}

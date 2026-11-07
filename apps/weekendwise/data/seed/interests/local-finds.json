@@ -1,0 +1,26 @@
+{
+  "label": "Local finds",
+  "icon": "⌂",
+  "displayOrder": 6,
+  "selectedByDefault": false,
+  "relatedSourceIdsByCity": {
+    "san-francisco": [
+      "SF-NEIGHBORHOOD-NORTHBEACH",
+      "SF-NEIGHBORHOOD-RICHMOND"
+    ],
+    "portland": [
+      "PDX-NEIGHBORHOOD-PEARL",
+      "PDX-NEIGHBORHOOD-EASTSIDE"
+    ],
+    "santa-cruz": [
+      "SC-ATTRACTION-BOARDWALK",
+      "SC-NEIGHBORHOOD-CAPITOLA"
+    ],
+    "napa-valley": [
+      "NAPA-TASTING-WINERIES",
+      "NAPA-TOWN-CALISTOGA"
+    ]
+  },
+  "retrievalHint": "bookstore wander, neighborhood browsing",
+  "active": true
+}

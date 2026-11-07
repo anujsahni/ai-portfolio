@@ -1,0 +1,17 @@
+{
+  "sourceId": "PDX-FOOD-CARTS",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Food-cart pods for a casual meal",
+  "contentType": "food-guide",
+  "sourceUri": "data/guides/portland-food-carts.md",
+  "version": 1,
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "9a41b6f5d6d554ae893fea4a0ecf219fcb6eb64886de8308cb4a6aae05b2d4d9",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

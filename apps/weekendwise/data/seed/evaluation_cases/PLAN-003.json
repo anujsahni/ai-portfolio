@@ -1,0 +1,22 @@
+{
+  "suite": "weekendwise-local-eval-v5",
+  "id": "PLAN-003",
+  "category": "budget-constrained",
+  "question": "Keep the weekend total under $300.",
+  "expected_sources_any": [
+    "SF-PLANNING-BUDGET"
+  ],
+  "expected_tool": false,
+  "must_disclose_demo_estimates": true,
+  "must_flag_over_budget": true,
+  "forbidden_sources": [],
+  "city": "San Francisco",
+  "mode": "plan",
+  "request": {
+    "interestIds": [
+      "coffee",
+      "art-design"
+    ],
+    "budget": 300
+  }
+}

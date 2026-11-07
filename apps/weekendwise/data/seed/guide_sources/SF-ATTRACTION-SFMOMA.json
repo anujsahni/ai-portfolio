@@ -1,0 +1,17 @@
+{
+  "sourceId": "SF-ATTRACTION-SFMOMA",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Modern art day: SFMOMA",
+  "contentType": "attraction-note",
+  "sourceUri": "data/guides/sfmoma.md",
+  "version": 1,
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "2bb34ccd2909dc5c7ad31eb4bd4d3193aba72e0486073d79d134397a7b4a92d3",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

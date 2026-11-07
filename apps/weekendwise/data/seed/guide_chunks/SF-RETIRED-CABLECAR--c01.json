@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-RETIRED-CABLECAR--c01",
+  "sourceId": "SF-RETIRED-CABLECAR",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Cable car day (retired sample)",
+  "section": "Cable car day (retired sample)",
+  "contentType": "transit-note",
+  "chunkIndex": 1,
+  "text": "This retired sample note once suggested planning a full day around cable car rides. It has been deactivated and should never be returned by the retriever.",
+  "textChecksum": "19b0536e468f192c04756155f63d75c4dc64d0eb43829da326fb2690fd773591",
+  "lastReviewed": "2025-06-01",
+  "active": false,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

@@ -1,0 +1,21 @@
+{
+  "chunkId": "NAPA-PLANNING-BUDGET--c01",
+  "sourceId": "NAPA-PLANNING-BUDGET",
+  "city": "Napa Valley",
+  "cityId": "napa-valley",
+  "title": "Napa Valley budget and getting around",
+  "section": "Napa Valley budget and getting around",
+  "contentType": "planning-policy",
+  "chunkIndex": 1,
+  "text": "For demo purposes, a modest room for two nights can be shown as about $350–$550 total for the party, often higher during harvest (roughly August to October). Wineries are spread out, so most visitors drive, book a tour or driver, or use rideshare; VINE Transit buses connect the towns.",
+  "textChecksum": "2c2adb3522f7afee31b375caddcead68506ed88d1516777fa38199d2f28f0d33",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "napa-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

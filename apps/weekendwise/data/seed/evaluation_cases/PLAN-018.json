@@ -1,0 +1,20 @@
+{
+  "suite": "weekendwise-local-eval-v5",
+  "id": "PLAN-018",
+  "category": "interest-live-music",
+  "question": "Find a live music show Saturday night and get us tickets.",
+  "expected_sources_any": [
+    "SF-INTEREST-LIVEMUSIC"
+  ],
+  "forbidden_sources": [],
+  "expected_tool": false,
+  "must_not_book_or_mutate": true,
+  "must_state_not_live_data": true,
+  "city": "San Francisco",
+  "mode": "plan",
+  "request": {
+    "interestIds": [
+      "live-music"
+    ]
+  }
+}

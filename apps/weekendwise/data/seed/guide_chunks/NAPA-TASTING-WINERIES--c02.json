@@ -1,0 +1,21 @@
+{
+  "chunkId": "NAPA-TASTING-WINERIES--c02",
+  "sourceId": "NAPA-TASTING-WINERIES",
+  "city": "Napa Valley",
+  "cityId": "napa-valley",
+  "title": "Planning a wine-tasting day",
+  "section": "Planning a wine-tasting day",
+  "contentType": "activity-note",
+  "chunkIndex": 2,
+  "text": "Every tasting plan must include a designated driver, tour, or rideshare and must not encourage drinking and driving. This demo makes no reservations; tasting fees are fabricated fixtures, shown as roughly $40–$75 per person.",
+  "textChecksum": "8e2599649ff245e899819194df54b24c685a3e8f9bb96cf7192fe5d882565b28",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "napa-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

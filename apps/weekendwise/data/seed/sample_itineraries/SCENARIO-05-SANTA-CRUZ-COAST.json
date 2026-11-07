@@ -1,0 +1,403 @@
+{
+  "cityId": "santa-cruz",
+  "status": "complete",
+  "headline": "Santa Cruz, salt air and redwoods.",
+  "subhead": "Boardwalk, cliffs, a show, and a slow Sunday in the trees.",
+  "tripSummary": {
+    "destination": "Santa Cruz",
+    "dates": "May 14–16, 2027",
+    "travelers": 2
+  },
+  "days": [
+    {
+      "date": "2027-05-14",
+      "dayLabel": "FRI",
+      "title": "Boardwalk evening",
+      "intro": "Arrive, park once, and walk the waterfront.",
+      "conditions": null,
+      "activities": [
+        {
+          "id": "d1-a1",
+          "time": "4:00 PM",
+          "type": "LOCAL FINDS · SEASIDE",
+          "title": "Beach Boardwalk and Wharf",
+          "description": "A stroll and a few rides, then out onto the wharf.",
+          "area": "Beach Flats",
+          "priceLabel": "Rides ≈ $20/person (demo)",
+          "estimatedCost": {
+            "categoryId": "activities",
+            "amount": 40,
+            "basis": "2 × $20 demo rides"
+          },
+          "citations": [
+            "SC-ATTRACTION-BOARDWALK--c01",
+            "SC-ATTRACTION-BOARDWALK--c02"
+          ],
+          "isEstimate": true
+        },
+        {
+          "id": "d1-a2",
+          "time": "6:30 PM",
+          "type": "GREAT FOOD",
+          "title": "Seafood near the wharf",
+          "description": "Casual seafood with a bay view.",
+          "area": "Wharf",
+          "priceLabel": "≈ $30/person (demo)",
+          "estimatedCost": {
+            "categoryId": "food-coffee",
+            "amount": 60,
+            "basis": "Dinner for 2, demo estimate"
+          },
+          "citations": [
+            "SC-FOOD-CASUAL--c01",
+            "SC-FOOD-CASUAL--c02"
+          ],
+          "isEstimate": true
+        }
+      ],
+      "transitTip": {
+        "text": "Downtown, the wharf, and the boardwalk are walkable; you'll want the car for the redwoods.",
+        "citations": [
+          "SC-PLANNING-BUDGET--c01"
+        ]
+      }
+    },
+    {
+      "date": "2027-05-15",
+      "dayLabel": "SAT",
+      "title": "Cliffs by day, music by night",
+      "intro": "An easy coastal walk and an evening show.",
+      "conditions": null,
+      "activities": [
+        {
+          "id": "d2-a1",
+          "time": "11:00 AM",
+          "type": "OUTDOORS · COAST",
+          "title": "West Cliff Drive to Natural Bridges",
+          "description": "An easy oceanfront walk; follow posted safety guidance.",
+          "area": "West Cliff",
+          "priceLabel": "Free",
+          "estimatedCost": {
+            "categoryId": "activities",
+            "amount": 0,
+            "basis": "No admission"
+          },
+          "citations": [
+            "SC-OUTDOOR-WESTCLIFF--c01",
+            "SC-OUTDOOR-WESTCLIFF--c02"
+          ],
+          "isEstimate": true
+        },
+        {
+          "id": "d2-a2",
+          "time": "1:30 PM",
+          "type": "LUNCH",
+          "title": "Taqueria lunch",
+          "description": "A relaxed, low-cost lunch.",
+          "area": "Westside",
+          "priceLabel": "$",
+          "estimatedCost": {
+            "categoryId": "food-coffee",
+            "amount": 30,
+            "basis": "Lunch for 2, demo estimate"
+          },
+          "citations": [
+            "SC-FOOD-CASUAL--c01"
+          ],
+          "isEstimate": true
+        },
+        {
+          "id": "d2-a3",
+          "time": "6:00 PM",
+          "type": "DINNER",
+          "title": "Pre-show dinner",
+          "description": "A casual dinner near the venue.",
+          "area": "Downtown",
+          "priceLabel": "≈ $30/person (demo)",
+          "estimatedCost": {
+            "categoryId": "food-coffee",
+            "amount": 60,
+            "basis": "Dinner for 2, demo estimate"
+          },
+          "citations": [
+            "SC-FOOD-CASUAL--c01"
+          ],
+          "isEstimate": true
+        },
+        {
+          "id": "d2-a4",
+          "time": "7:00 PM",
+          "type": "LIVE MUSIC",
+          "title": "Downtown dinner and a show",
+          "description": "Dinner on Pacific Avenue, then a show. Check current listings; no tickets are held.",
+          "area": "Downtown",
+          "priceLabel": "Show ≈ $35/person (demo)",
+          "estimatedCost": {
+            "categoryId": "activities",
+            "amount": 70,
+            "basis": "2 × $35 demo show"
+          },
+          "citations": [
+            "SC-INTEREST-LIVEMUSIC--c01",
+            "SC-INTEREST-LIVEMUSIC--c02"
+          ],
+          "isEstimate": true
+        }
+      ],
+      "transitTip": null
+    },
+    {
+      "date": "2027-05-16",
+      "dayLabel": "SUN",
+      "title": "Redwoods and a village stroll",
+      "intro": "A short drive inland, then Capitola on the way out.",
+      "conditions": null,
+      "activities": [
+        {
+          "id": "d3-a1",
+          "time": "10:00 AM",
+          "type": "OUTDOORS · REDWOODS",
+          "title": "Henry Cowell Redwoods",
+          "description": "A short, easy redwood loop. Check trail status and parking fees.",
+          "area": "Felton",
+          "priceLabel": "Parking ≈ $10 (demo)",
+          "estimatedCost": {
+            "categoryId": "activities",
+            "amount": 10,
+            "basis": "Demo parking fee"
+          },
+          "citations": [
+            "SC-OUTDOOR-REDWOODS--c01",
+            "SC-OUTDOOR-REDWOODS--c02"
+          ],
+          "isEstimate": true
+        },
+        {
+          "id": "d3-a2",
+          "time": "1:30 PM",
+          "type": "LOCAL FINDS",
+          "title": "Capitola Village stroll",
+          "description": "Cottages, small shops, and an ice-cream stop.",
+          "area": "Capitola",
+          "priceLabel": "$",
+          "estimatedCost": {
+            "categoryId": "food-coffee",
+            "amount": 16,
+            "basis": "2 treats, demo estimate"
+          },
+          "citations": [
+            "SC-NEIGHBORHOOD-CAPITOLA--c01",
+            "SC-NEIGHBORHOOD-CAPITOLA--c02"
+          ],
+          "isEstimate": true
+        }
+      ],
+      "transitTip": null
+    }
+  ],
+  "budget": {
+    "currency": "USD",
+    "limit": 750,
+    "lineItems": [
+      {
+        "categoryId": "stays",
+        "amount": 270,
+        "note": "Two nights, single demo estimate",
+        "citations": [
+          "SC-PLANNING-BUDGET--c01"
+        ]
+      },
+      {
+        "categoryId": "food-coffee",
+        "amount": 190,
+        "note": "Includes $24 for breakfasts not itemized above",
+        "citations": [
+          "SC-FOOD-CASUAL--c02"
+        ]
+      },
+      {
+        "categoryId": "activities",
+        "amount": 120,
+        "note": "Itemized from activities",
+        "citations": [
+          "SC-PLANNING-BUDGET--c02"
+        ]
+      },
+      {
+        "categoryId": "local-transit",
+        "amount": 60,
+        "note": "Gas and parking, demo estimate",
+        "citations": [
+          "SC-PLANNING-BUDGET--c01"
+        ]
+      }
+    ],
+    "total": 640,
+    "uncertaintyBufferPct": 10,
+    "totalWithBuffer": 704.0,
+    "status": "on-track",
+    "statusLabel": "ON TRACK",
+    "footnote": "Estimates only · no bookings included"
+  },
+  "whyThisFits": "You picked outdoors, great food, and live music, so each day pairs one outdoor block with a casual meal, and Saturday ends with a show.",
+  "assumptions": [
+    "The travelers have a car.",
+    "Conditions were not checked; no weather-dependent swap was requested."
+  ],
+  "caveats": [
+    "Guide content, prices, and conditions are demo data.",
+    "No reservation, ticket, or payment is made.",
+    "Follow posted beach, surf, and cliff-path guidance."
+  ],
+  "unansweredRequests": [],
+  "toolCalls": [],
+  "trace": [
+    {
+      "step": "normalize",
+      "label": "Read your trip details",
+      "status": "done"
+    },
+    {
+      "step": "retrieve",
+      "label": "Searched city guides",
+      "status": "done"
+    },
+    {
+      "step": "plan",
+      "label": "Drafted your days",
+      "status": "done"
+    },
+    {
+      "step": "review",
+      "label": "Reviewed sources and budget",
+      "status": "done"
+    }
+  ],
+  "review": {
+    "outcome": "approved",
+    "revisionCount": 0,
+    "checks": {
+      "citationsValid": true,
+      "budgetArithmetic": true,
+      "constraintsHonored": true,
+      "conditionsCaveated": true
+    },
+    "flags": []
+  },
+  "scenarioId": "SCENARIO-05-SANTA-CRUZ-COAST",
+  "citations": [
+    {
+      "chunkId": "SC-ATTRACTION-BOARDWALK--c01",
+      "sourceId": "SC-ATTRACTION-BOARDWALK",
+      "title": "Beach Boardwalk and Wharf",
+      "contentType": "attraction-note",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Fri: Beach Boardwalk and Wharf"
+    },
+    {
+      "chunkId": "SC-ATTRACTION-BOARDWALK--c02",
+      "sourceId": "SC-ATTRACTION-BOARDWALK",
+      "title": "Beach Boardwalk and Wharf",
+      "contentType": "attraction-note",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Fri: Beach Boardwalk and Wharf"
+    },
+    {
+      "chunkId": "SC-FOOD-CASUAL--c01",
+      "sourceId": "SC-FOOD-CASUAL",
+      "title": "Casual food in Santa Cruz",
+      "contentType": "food-guide",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Fri: Seafood near the wharf, Sat: Taqueria lunch, Sat: Pre-show dinner"
+    },
+    {
+      "chunkId": "SC-FOOD-CASUAL--c02",
+      "sourceId": "SC-FOOD-CASUAL",
+      "title": "Casual food in Santa Cruz",
+      "contentType": "food-guide",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Fri: Seafood near the wharf, Budget estimate"
+    },
+    {
+      "chunkId": "SC-PLANNING-BUDGET--c01",
+      "sourceId": "SC-PLANNING-BUDGET",
+      "title": "Santa Cruz budget and getting around",
+      "contentType": "planning-policy",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Getting around, Budget estimate"
+    },
+    {
+      "chunkId": "SC-OUTDOOR-WESTCLIFF--c01",
+      "sourceId": "SC-OUTDOOR-WESTCLIFF",
+      "title": "West Cliff Drive to Natural Bridges",
+      "contentType": "outdoor-guide",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Sat: West Cliff Drive to Natural Bridges"
+    },
+    {
+      "chunkId": "SC-OUTDOOR-WESTCLIFF--c02",
+      "sourceId": "SC-OUTDOOR-WESTCLIFF",
+      "title": "West Cliff Drive to Natural Bridges",
+      "contentType": "outdoor-guide",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Sat: West Cliff Drive to Natural Bridges"
+    },
+    {
+      "chunkId": "SC-INTEREST-LIVEMUSIC--c01",
+      "sourceId": "SC-INTEREST-LIVEMUSIC",
+      "title": "Live music in Santa Cruz",
+      "contentType": "interest-note",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Sat: Downtown dinner and a show"
+    },
+    {
+      "chunkId": "SC-INTEREST-LIVEMUSIC--c02",
+      "sourceId": "SC-INTEREST-LIVEMUSIC",
+      "title": "Live music in Santa Cruz",
+      "contentType": "interest-note",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Sat: Downtown dinner and a show"
+    },
+    {
+      "chunkId": "SC-OUTDOOR-REDWOODS--c01",
+      "sourceId": "SC-OUTDOOR-REDWOODS",
+      "title": "Redwoods at Henry Cowell",
+      "contentType": "outdoor-guide",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Sun: Henry Cowell Redwoods"
+    },
+    {
+      "chunkId": "SC-OUTDOOR-REDWOODS--c02",
+      "sourceId": "SC-OUTDOOR-REDWOODS",
+      "title": "Redwoods at Henry Cowell",
+      "contentType": "outdoor-guide",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Sun: Henry Cowell Redwoods"
+    },
+    {
+      "chunkId": "SC-NEIGHBORHOOD-CAPITOLA--c01",
+      "sourceId": "SC-NEIGHBORHOOD-CAPITOLA",
+      "title": "Capitola Village",
+      "contentType": "neighborhood-guide",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Sun: Capitola Village stroll"
+    },
+    {
+      "chunkId": "SC-NEIGHBORHOOD-CAPITOLA--c02",
+      "sourceId": "SC-NEIGHBORHOOD-CAPITOLA",
+      "title": "Capitola Village",
+      "contentType": "neighborhood-guide",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Sun: Capitola Village stroll"
+    },
+    {
+      "chunkId": "SC-PLANNING-BUDGET--c02",
+      "sourceId": "SC-PLANNING-BUDGET",
+      "title": "Santa Cruz budget and getting around",
+      "contentType": "planning-policy",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Budget estimate"
+    }
+  ],
+  "demoOnly": true
+}

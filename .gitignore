@@ -1,0 +1,68 @@
+# Secrets and private settings
+.env
+.env.*
+!.env.example
+*.pem
+*-key.json
+service-account*.json
+credentials*.json
+application_default_credentials.json
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+backend.hcl
+*.auto.tfvars.json
+*.tfplan
+crash.log
+crash.*.log
+infra/.verify-*.log
+.terraform.tfstate.lock.info
+override.tf
+*_override.tf
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# OS and editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Claude Code personal settings (shared .claude/settings.json can be committed)
+.claude/settings.local.json
+
+# Local run outputs
+reports/
+
+# Last image built by make build (IAC-05)
+infra/.last-build
+
+# App-local environments and generated state (applies at any directory depth)
+**/.venv/
+**/.terraform/
+**/*.tfstate
+**/*.tfstate.*
+**/backend.hcl
+**/*.auto.tfvars.json
+**/*.tfplan
+**/.env
+**/.env.*
+!**/.env.example
+**/__pycache__/
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+**/reports/

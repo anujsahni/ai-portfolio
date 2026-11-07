@@ -1,0 +1,17 @@
+{
+  "sourceId": "PDX-ATTRACTION-ART",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Art in Portland: museum and Alberta Arts",
+  "contentType": "attraction-note",
+  "sourceUri": "data/guides/portland-art.md",
+  "version": 1,
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "43bcf032dc3785ce14026a5adf6d74c4ad8f7f7ed15aab3fba81a9132ef99139",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

@@ -1,0 +1,17 @@
+{
+  "sourceId": "SF-PLANNING-BUDGET",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Budget-aware itinerary planning",
+  "contentType": "planning-policy",
+  "sourceUri": "data/guides/budget-planning.md",
+  "version": 1,
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "13cec3ac662a3dbd16fa9a200a8a5480d2439163f9dff93eb9df39f5cb14cd00",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

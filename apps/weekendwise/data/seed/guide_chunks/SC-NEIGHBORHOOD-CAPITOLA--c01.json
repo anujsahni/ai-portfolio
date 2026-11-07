@@ -1,0 +1,21 @@
+{
+  "chunkId": "SC-NEIGHBORHOOD-CAPITOLA--c01",
+  "sourceId": "SC-NEIGHBORHOOD-CAPITOLA",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "Capitola Village",
+  "section": "Capitola Village",
+  "contentType": "neighborhood-guide",
+  "chunkIndex": 1,
+  "text": "This sample guide suggests Capitola, a small beach village just east of Santa Cruz, for a slow stroll among colorful cottages, small shops, and a short pier. It works as a half-day add-on with a coffee or ice-cream stop.",
+  "textChecksum": "1de0e79eb8434ce9251c45896de2fe8c6f9be7b82b69dc831ea21bb53ef5e53f",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sc-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

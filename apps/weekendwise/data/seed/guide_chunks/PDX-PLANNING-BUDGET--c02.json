@@ -1,0 +1,21 @@
+{
+  "chunkId": "PDX-PLANNING-BUDGET--c02",
+  "sourceId": "PDX-PLANNING-BUDGET",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Portland budget and lodging estimates",
+  "section": "Portland budget and lodging estimates",
+  "contentType": "planning-policy",
+  "chunkIndex": 2,
+  "text": "All amounts are fabricated fixtures, not current prices. Show them as labeled estimates, itemize categories, and flag any plan that exceeds the traveler's budget.",
+  "textChecksum": "44bff5401a0124594b29648d404d564be1c4104d07a4ec91e50037e6db1104d7",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "pdx-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

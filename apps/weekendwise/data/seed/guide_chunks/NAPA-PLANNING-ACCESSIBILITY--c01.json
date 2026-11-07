@@ -1,0 +1,21 @@
+{
+  "chunkId": "NAPA-PLANNING-ACCESSIBILITY--c01",
+  "sourceId": "NAPA-PLANNING-ACCESSIBILITY",
+  "city": "Napa Valley",
+  "cityId": "napa-valley",
+  "title": "Accessibility and trip constraints in Napa Valley",
+  "section": "Accessibility and trip constraints in Napa Valley",
+  "contentType": "planning-policy",
+  "chunkIndex": 1,
+  "text": "If a traveler shares an accessibility or mobility need, keep it throughout planning and ask which accommodations matter when unclear. In Napa Valley, details such as winery grounds, tasting rooms, and transport between towns vary by place and should be confirmed in advance.",
+  "textChecksum": "39d96754300c3209a4dae88630964ee16ef11267f9223a870a72a1b612fa5c14",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "napa-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

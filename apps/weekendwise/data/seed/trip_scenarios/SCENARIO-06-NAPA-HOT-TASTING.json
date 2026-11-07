@@ -1,0 +1,43 @@
+{
+  "title": "Napa tasting weekend on a hot Saturday",
+  "cityId": "napa-valley",
+  "demoPurpose": "Tool call returns simulated heat, over-budget revision, and a no-drink-driving caveat.",
+  "request": {
+    "destination": "Napa Valley",
+    "cityId": "napa-valley",
+    "startDate": "2027-05-14",
+    "endDate": "2027-05-16",
+    "travelers": 2,
+    "budget": 900,
+    "currency": "USD",
+    "interestIds": [
+      "local-finds",
+      "great-food",
+      "live-music"
+    ],
+    "constraints": [
+      "Plan around the heat on Saturday",
+      "Keep the total under $900"
+    ],
+    "notes": "First time in wine country; we want a couple of tastings and good food."
+  },
+  "expected": {
+    "toolCalls": 1,
+    "expectedToolArgs": {
+      "city": "Napa Valley",
+      "demo_date": "2027-05-15"
+    },
+    "expectedSourceIds": [
+      "NAPA-TASTING-WINERIES",
+      "NAPA-PLAN-HOT-DAY",
+      "NAPA-PLANNING-BUDGET",
+      "NAPA-FOOD-OXBOW"
+    ],
+    "budgetStatus": "over-budget",
+    "reviewOutcome": "approved-after-revision",
+    "mustIncludeNoDrinkDrivingCaveat": true,
+    "sampleItineraryId": "SCENARIO-06-NAPA-HOT-TASTING"
+  },
+  "demoOnly": true,
+  "syntheticTraveler": true
+}

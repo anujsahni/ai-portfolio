@@ -1,0 +1,21 @@
+{
+  "chunkId": "PDX-TRANSIT-TRIMET--c02",
+  "sourceId": "PDX-TRANSIT-TRIMET",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Getting around Portland without a car",
+  "section": "Getting around Portland without a car",
+  "contentType": "transit-note",
+  "chunkIndex": 2,
+  "text": "No schedules, fares, or service alerts are verified in this fixture. Use official TriMet information before travel.",
+  "textChecksum": "c97fafd220a3c877858bb9b89b3c7ab0b910a0b00da1abd196a9666a60f0fec5",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "pdx-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

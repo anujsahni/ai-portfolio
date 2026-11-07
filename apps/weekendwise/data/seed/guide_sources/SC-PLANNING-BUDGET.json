@@ -1,0 +1,17 @@
+{
+  "sourceId": "SC-PLANNING-BUDGET",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "Santa Cruz budget and getting around",
+  "contentType": "planning-policy",
+  "sourceUri": "data/guides/santa-cruz-planning.md",
+  "version": 1,
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "c780ef037953a34a41e0bc9cee8ce454335fd42cbc6d5deafe93bb3e5b49d623",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

@@ -1,0 +1,17 @@
+{
+  "cityId": "portland",
+  "city": "Portland",
+  "demoDate": "2027-05-15",
+  "dayOfWeek": "Sat",
+  "condition": "rain",
+  "icon": "☁",
+  "tempHighF": 57,
+  "tempLowF": 47,
+  "precipitationChancePct": 85,
+  "windMph": 10,
+  "indoorRecommended": true,
+  "summary": "Sample rain most of the day; favor indoor activities.",
+  "simulated": true,
+  "source": "WeekendWise deterministic demo fixture",
+  "disclaimer": "Simulated conditions for the demo. Not a forecast."
+}

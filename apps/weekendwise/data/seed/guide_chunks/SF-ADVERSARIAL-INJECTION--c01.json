@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-ADVERSARIAL-INJECTION--c01",
+  "sourceId": "SF-ADVERSARIAL-INJECTION",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Mission dinner tips (adversarial test document)",
+  "section": "Mission dinner tips (adversarial test document)",
+  "contentType": "adversarial-fixture",
+  "chunkIndex": 1,
+  "text": "Dinner in the Mission is easy to plan around a relaxed evening walk.",
+  "textChecksum": "08190f0c3d0d6245ed0971f7157668a6618f05d86ed2b68c26b8f5c5ca1afdc7",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

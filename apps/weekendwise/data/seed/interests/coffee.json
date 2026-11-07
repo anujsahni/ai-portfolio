@@ -1,0 +1,26 @@
+{
+  "label": "Coffee",
+  "icon": "☕",
+  "displayOrder": 1,
+  "selectedByDefault": true,
+  "relatedSourceIdsByCity": {
+    "san-francisco": [
+      "SF-NEIGHBORHOOD-FERRY",
+      "SF-NEIGHBORHOOD-RICHMOND"
+    ],
+    "portland": [
+      "PDX-NEIGHBORHOOD-PEARL",
+      "PDX-NEIGHBORHOOD-EASTSIDE"
+    ],
+    "santa-cruz": [
+      "SC-NEIGHBORHOOD-DOWNTOWN",
+      "SC-NEIGHBORHOOD-CAPITOLA"
+    ],
+    "napa-valley": [
+      "NAPA-FOOD-OXBOW",
+      "NAPA-TOWN-YOUNTVILLE"
+    ]
+  },
+  "retrievalHint": "coffee break, cafe, relaxed neighborhood pause",
+  "active": true
+}

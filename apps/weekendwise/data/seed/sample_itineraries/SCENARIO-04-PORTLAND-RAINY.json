@@ -1,0 +1,377 @@
+{
+  "cityId": "portland",
+  "status": "complete",
+  "headline": "Portland, at an easy pace.",
+  "subhead": "Books and coffee first, gardens once the rain passes.",
+  "tripSummary": {
+    "destination": "Portland",
+    "dates": "May 14–16, 2027",
+    "travelers": 2
+  },
+  "days": [
+    {
+      "date": "2027-05-14",
+      "dayLabel": "FRI",
+      "title": "Books and carts",
+      "intro": "Arrive by MAX and settle into the Pearl.",
+      "conditions": null,
+      "activities": [
+        {
+          "id": "d1-a1",
+          "time": "2:00 PM",
+          "type": "LOCAL FINDS · BOOKS",
+          "title": "Powell's City of Books",
+          "description": "Browse the block-sized bookstore, then take a coffee break nearby.",
+          "area": "Pearl District",
+          "priceLabel": "Coffee $–$$",
+          "estimatedCost": {
+            "categoryId": "food-coffee",
+            "amount": 12,
+            "basis": "2 coffees, demo estimate"
+          },
+          "citations": [
+            "PDX-NEIGHBORHOOD-PEARL--c01"
+          ],
+          "isEstimate": true
+        },
+        {
+          "id": "d1-a2",
+          "time": "6:30 PM",
+          "type": "CASUAL DINNER",
+          "title": "Food-cart pod dinner",
+          "description": "Everyone picks their own cart; keep it relaxed.",
+          "area": "Downtown",
+          "priceLabel": "≈ $17/person (demo)",
+          "estimatedCost": {
+            "categoryId": "food-coffee",
+            "amount": 34,
+            "basis": "2 cart meals, demo estimate"
+          },
+          "citations": [
+            "PDX-FOOD-CARTS--c01",
+            "PDX-FOOD-CARTS--c02"
+          ],
+          "isEstimate": true
+        }
+      ],
+      "transitTip": {
+        "text": "Take MAX light rail from the airport to downtown; group stops on one side of the river.",
+        "citations": [
+          "PDX-TRANSIT-TRIMET--c01"
+        ]
+      }
+    },
+    {
+      "date": "2027-05-15",
+      "dayLabel": "SAT",
+      "title": "A cozy indoor day",
+      "intro": "The simulated conditions show rain, so the gardens moved to Sunday.",
+      "conditions": {
+        "source": "check_local_conditions",
+        "conditionsDocId": "portland__2027-05-15",
+        "icon": "☁",
+        "tempHighF": 57,
+        "condition": "rain",
+        "label": "☁ 57° · SAMPLE",
+        "simulated": true
+      },
+      "activities": [
+        {
+          "id": "d2-a1",
+          "time": "10:30 AM",
+          "type": "ART · INDOOR SWAP",
+          "title": "Portland Art Museum",
+          "description": "An unhurried indoor morning. Check official hours and admission.",
+          "area": "Downtown",
+          "priceLabel": "≈ $25/person (demo)",
+          "estimatedCost": {
+            "categoryId": "activities",
+            "amount": 50,
+            "basis": "2 × $25 demo admission"
+          },
+          "citations": [
+            "PDX-ATTRACTION-ART--c01",
+            "PDX-PLAN-RAINY-DAY--c01"
+          ],
+          "isEstimate": true
+        },
+        {
+          "id": "d2-a2",
+          "time": "2:00 PM",
+          "type": "COFFEE & BAKERY",
+          "title": "Division Street café stop",
+          "description": "A warm café and bakery break on the eastside.",
+          "area": "Division / Clinton",
+          "priceLabel": "$–$$",
+          "estimatedCost": {
+            "categoryId": "food-coffee",
+            "amount": 20,
+            "basis": "2 coffees + pastry, demo estimate"
+          },
+          "citations": [
+            "PDX-NEIGHBORHOOD-EASTSIDE--c01"
+          ],
+          "isEstimate": true
+        }
+      ],
+      "transitTip": {
+        "text": "A bus connects downtown to Division; check current TriMet information.",
+        "citations": [
+          "PDX-NEIGHBORHOOD-EASTSIDE--c02"
+        ]
+      }
+    },
+    {
+      "date": "2027-05-16",
+      "dayLabel": "SUN",
+      "title": "Gardens, rescheduled",
+      "intro": "Sunday conditions were not checked; keep the walk short.",
+      "conditions": null,
+      "activities": [
+        {
+          "id": "d3-a1",
+          "time": "10:00 AM",
+          "type": "OUTDOORS · GARDENS",
+          "title": "Washington Park gardens",
+          "description": "The Japanese Garden or Rose Test Garden, with a short walk.",
+          "area": "Washington Park",
+          "priceLabel": "≈ $20/person (demo)",
+          "estimatedCost": {
+            "categoryId": "activities",
+            "amount": 40,
+            "basis": "2 × $20 demo admission"
+          },
+          "citations": [
+            "PDX-OUTDOOR-WASHINGTONPARK--c01",
+            "PDX-OUTDOOR-WASHINGTONPARK--c02"
+          ],
+          "isEstimate": true
+        },
+        {
+          "id": "d3-a2",
+          "time": "1:00 PM",
+          "type": "LUNCH",
+          "title": "Lunch before heading home",
+          "description": "A simple lunch near the MAX line.",
+          "area": "Downtown",
+          "priceLabel": "$$",
+          "estimatedCost": {
+            "categoryId": "food-coffee",
+            "amount": 46,
+            "basis": "Lunch for 2, demo estimate"
+          },
+          "citations": [
+            "PDX-FOOD-CARTS--c01"
+          ],
+          "isEstimate": true
+        }
+      ],
+      "transitTip": null
+    }
+  ],
+  "budget": {
+    "currency": "USD",
+    "limit": 650,
+    "lineItems": [
+      {
+        "categoryId": "stays",
+        "amount": 210,
+        "note": "Two nights, single demo estimate",
+        "citations": [
+          "PDX-PLANNING-BUDGET--c01"
+        ]
+      },
+      {
+        "categoryId": "food-coffee",
+        "amount": 140,
+        "note": "Includes $28 for breakfasts not itemized above",
+        "citations": [
+          "PDX-PLANNING-BUDGET--c02"
+        ]
+      },
+      {
+        "categoryId": "activities",
+        "amount": 90,
+        "note": "Itemized from activities",
+        "citations": [
+          "PDX-PLANNING-BUDGET--c02"
+        ]
+      },
+      {
+        "categoryId": "local-transit",
+        "amount": 30,
+        "note": "Demo transit estimate for 2",
+        "citations": [
+          "PDX-TRANSIT-TRIMET--c01",
+          "PDX-PLANNING-BUDGET--c01"
+        ]
+      }
+    ],
+    "total": 470,
+    "uncertaintyBufferPct": 10,
+    "totalWithBuffer": 517.0,
+    "status": "on-track",
+    "statusLabel": "ON TRACK",
+    "footnote": "Estimates only · no bookings included"
+  },
+  "whyThisFits": "You picked local finds, coffee, and outdoors. Saturday's simulated rain moved the gardens to Sunday and kept the bookstore and café time.",
+  "assumptions": [
+    "Only Saturday's conditions were checked (one tool call per request).",
+    "Transit only; no car."
+  ],
+  "caveats": [
+    "Guide content, prices, and conditions are demo data.",
+    "No reservation, ticket, or payment is made.",
+    "Saturday's rain is simulated, not a forecast."
+  ],
+  "unansweredRequests": [],
+  "toolCalls": [
+    {
+      "tool": "check_local_conditions",
+      "args": {
+        "city": "Portland",
+        "demo_date": "2027-05-15"
+      },
+      "status": "ok",
+      "resultDocId": "portland__2027-05-15"
+    }
+  ],
+  "trace": [
+    {
+      "step": "normalize",
+      "label": "Read your trip details",
+      "status": "done"
+    },
+    {
+      "step": "retrieve",
+      "label": "Searched city guides",
+      "status": "done"
+    },
+    {
+      "step": "tool",
+      "label": "Checked simulated local conditions",
+      "status": "done"
+    },
+    {
+      "step": "plan",
+      "label": "Drafted your days",
+      "status": "done"
+    },
+    {
+      "step": "review",
+      "label": "Reviewed sources and budget",
+      "status": "done"
+    }
+  ],
+  "review": {
+    "outcome": "approved",
+    "revisionCount": 0,
+    "checks": {
+      "citationsValid": true,
+      "budgetArithmetic": true,
+      "constraintsHonored": true,
+      "conditionsCaveated": true
+    },
+    "flags": []
+  },
+  "scenarioId": "SCENARIO-04-PORTLAND-RAINY",
+  "citations": [
+    {
+      "chunkId": "PDX-NEIGHBORHOOD-PEARL--c01",
+      "sourceId": "PDX-NEIGHBORHOOD-PEARL",
+      "title": "Pearl District: books and coffee",
+      "contentType": "neighborhood-guide",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Fri: Powell's City of Books"
+    },
+    {
+      "chunkId": "PDX-FOOD-CARTS--c01",
+      "sourceId": "PDX-FOOD-CARTS",
+      "title": "Food-cart pods for a casual meal",
+      "contentType": "food-guide",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Fri: Food-cart pod dinner, Sun: Lunch before heading home"
+    },
+    {
+      "chunkId": "PDX-FOOD-CARTS--c02",
+      "sourceId": "PDX-FOOD-CARTS",
+      "title": "Food-cart pods for a casual meal",
+      "contentType": "food-guide",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Fri: Food-cart pod dinner"
+    },
+    {
+      "chunkId": "PDX-TRANSIT-TRIMET--c01",
+      "sourceId": "PDX-TRANSIT-TRIMET",
+      "title": "Getting around Portland without a car",
+      "contentType": "transit-note",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Getting around, Budget estimate"
+    },
+    {
+      "chunkId": "PDX-ATTRACTION-ART--c01",
+      "sourceId": "PDX-ATTRACTION-ART",
+      "title": "Art in Portland: museum and Alberta Arts",
+      "contentType": "attraction-note",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Sat: Portland Art Museum"
+    },
+    {
+      "chunkId": "PDX-PLAN-RAINY-DAY--c01",
+      "sourceId": "PDX-PLAN-RAINY-DAY",
+      "title": "Rainy-day planning in Portland",
+      "contentType": "planning-policy",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Sat: Portland Art Museum"
+    },
+    {
+      "chunkId": "PDX-NEIGHBORHOOD-EASTSIDE--c01",
+      "sourceId": "PDX-NEIGHBORHOOD-EASTSIDE",
+      "title": "Eastside neighborhoods: Hawthorne, Division, and Mississippi",
+      "contentType": "neighborhood-guide",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Sat: Division Street café stop"
+    },
+    {
+      "chunkId": "PDX-NEIGHBORHOOD-EASTSIDE--c02",
+      "sourceId": "PDX-NEIGHBORHOOD-EASTSIDE",
+      "title": "Eastside neighborhoods: Hawthorne, Division, and Mississippi",
+      "contentType": "neighborhood-guide",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Getting around"
+    },
+    {
+      "chunkId": "PDX-OUTDOOR-WASHINGTONPARK--c01",
+      "sourceId": "PDX-OUTDOOR-WASHINGTONPARK",
+      "title": "Washington Park gardens",
+      "contentType": "outdoor-guide",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Sun: Washington Park gardens"
+    },
+    {
+      "chunkId": "PDX-OUTDOOR-WASHINGTONPARK--c02",
+      "sourceId": "PDX-OUTDOOR-WASHINGTONPARK",
+      "title": "Washington Park gardens",
+      "contentType": "outdoor-guide",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Sun: Washington Park gardens"
+    },
+    {
+      "chunkId": "PDX-PLANNING-BUDGET--c01",
+      "sourceId": "PDX-PLANNING-BUDGET",
+      "title": "Portland budget and lodging estimates",
+      "contentType": "planning-policy",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Budget estimate"
+    },
+    {
+      "chunkId": "PDX-PLANNING-BUDGET--c02",
+      "sourceId": "PDX-PLANNING-BUDGET",
+      "title": "Portland budget and lodging estimates",
+      "contentType": "planning-policy",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Budget estimate"
+    }
+  ],
+  "demoOnly": true
+}

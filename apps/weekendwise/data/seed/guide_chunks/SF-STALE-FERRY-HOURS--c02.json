@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-STALE-FERRY-HOURS--c02",
+  "sourceId": "SF-STALE-FERRY-HOURS",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Ferry Building market hours (outdated note)",
+  "section": "Ferry Building market hours (outdated note)",
+  "contentType": "stale-fixture",
+  "chunkIndex": 2,
+  "text": "This fixture is intentionally stale and conflicts with the newer Ferry Building guide. A reviewer should flag the conflict, prefer the more recently reviewed source, and tell the traveler to confirm hours with official sources.",
+  "textChecksum": "82ec4fc9d406bb35e6a8372f02b9f3fa8c551e637e0f184eee7a03619666afdf",
+  "lastReviewed": "2024-03-01",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

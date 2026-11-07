@@ -1,0 +1,17 @@
+{
+  "cityId": "san-francisco",
+  "city": "San Francisco",
+  "demoDate": "2027-05-16",
+  "dayOfWeek": "Sun",
+  "condition": "clear",
+  "icon": "☀",
+  "tempHighF": 65,
+  "tempLowF": 54,
+  "precipitationChancePct": 10,
+  "windMph": 10,
+  "indoorRecommended": false,
+  "summary": "Clearing sample morning with a light breeze.",
+  "simulated": true,
+  "source": "WeekendWise deterministic demo fixture",
+  "disclaimer": "Simulated conditions for the demo. Not a forecast."
+}

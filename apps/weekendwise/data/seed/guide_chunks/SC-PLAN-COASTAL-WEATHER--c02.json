@@ -1,0 +1,21 @@
+{
+  "chunkId": "SC-PLAN-COASTAL-WEATHER--c02",
+  "sourceId": "SC-PLAN-COASTAL-WEATHER",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "Fog and coastal weather in Santa Cruz",
+  "section": "Fog and coastal weather in Santa Cruz",
+  "contentType": "planning-policy",
+  "chunkIndex": 2,
+  "text": "Ocean conditions and cliff paths can be hazardous. Mark weather as simulated, and tell travelers to follow posted beach and surf guidance.",
+  "textChecksum": "7416f2fe5e30bf3407c9268a13d841a1c8eef4f5b16bb44dfe2391aa5e086d1b",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sc-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

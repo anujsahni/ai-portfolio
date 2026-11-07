@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-ATTRACTION-DEYOUNG--c01",
+  "sourceId": "SF-ATTRACTION-DEYOUNG",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Art and a rainy-day option",
+  "section": "Art and a rainy-day option",
+  "contentType": "attraction-note",
+  "chunkIndex": 1,
+  "text": "This sample attraction note uses the de Young Museum as an example of an indoor activity that could fit an art-focused itinerary. A planner should leave time for travel and avoid promising that a specific exhibit or facility is available.",
+  "textChecksum": "e29f992a3524dd7ec03c0cf39b17283208c9532e1bede3ddfcdc54614c7528d0",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

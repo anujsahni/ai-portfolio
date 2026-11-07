@@ -1,0 +1,97 @@
+{
+  "corpusVersion": "pdx-demo-v1",
+  "cityId": "portland",
+  "chunkerVersion": "paragraph-v1",
+  "sourceCount": 10,
+  "activeSourceCount": 10,
+  "chunkCount": 20,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "firestore": {
+    "database": "(default)",
+    "collection": "guide_chunks",
+    "vectorField": "embedding"
+  },
+  "sources": [
+    {
+      "sourceId": "PDX-PLANNING-ACCESSIBILITY",
+      "file": "data/guides/portland-accessibility.md",
+      "cityId": "portland",
+      "active": true,
+      "chunks": 2,
+      "checksum": "99a737eedd06508536c79eeb72b3161f6aff8beda8c1614883b949f689eeaada"
+    },
+    {
+      "sourceId": "PDX-ATTRACTION-ART",
+      "file": "data/guides/portland-art.md",
+      "cityId": "portland",
+      "active": true,
+      "chunks": 2,
+      "checksum": "43bcf032dc3785ce14026a5adf6d74c4ad8f7f7ed15aab3fba81a9132ef99139"
+    },
+    {
+      "sourceId": "PDX-PLANNING-BUDGET",
+      "file": "data/guides/portland-budget.md",
+      "cityId": "portland",
+      "active": true,
+      "chunks": 2,
+      "checksum": "d3727d3402ab782e1950e637287e6b88b64c840b5154baa9ab7da77fe42d1e02"
+    },
+    {
+      "sourceId": "PDX-NEIGHBORHOOD-EASTSIDE",
+      "file": "data/guides/portland-eastside.md",
+      "cityId": "portland",
+      "active": true,
+      "chunks": 2,
+      "checksum": "a9eda7ec773ac121dc5b90c0f24f80d9e1d7270fed43a29f5667669ccb14cec6"
+    },
+    {
+      "sourceId": "PDX-FOOD-CARTS",
+      "file": "data/guides/portland-food-carts.md",
+      "cityId": "portland",
+      "active": true,
+      "chunks": 2,
+      "checksum": "9a41b6f5d6d554ae893fea4a0ecf219fcb6eb64886de8308cb4a6aae05b2d4d9"
+    },
+    {
+      "sourceId": "PDX-INTEREST-LIVEMUSIC",
+      "file": "data/guides/portland-live-music.md",
+      "cityId": "portland",
+      "active": true,
+      "chunks": 2,
+      "checksum": "c4e37791f7ac62671c3d4b7b8390cb1099bc45a6d773d32a85ddc798c29cdd97"
+    },
+    {
+      "sourceId": "PDX-NEIGHBORHOOD-PEARL",
+      "file": "data/guides/portland-pearl.md",
+      "cityId": "portland",
+      "active": true,
+      "chunks": 2,
+      "checksum": "a5e9d0a302c7f27189de093e873307927d2b2c6636ac3da755208eaf3fb9300d"
+    },
+    {
+      "sourceId": "PDX-PLAN-RAINY-DAY",
+      "file": "data/guides/portland-rainy-day.md",
+      "cityId": "portland",
+      "active": true,
+      "chunks": 2,
+      "checksum": "c3ccae89833dc7e891d269855d7cb52e7fe1fb854adf3e874c20b80172b830bb"
+    },
+    {
+      "sourceId": "PDX-TRANSIT-TRIMET",
+      "file": "data/guides/portland-transit.md",
+      "cityId": "portland",
+      "active": true,
+      "chunks": 2,
+      "checksum": "e1d61b39be98e45638ac1ca2b97d6951ba27397380f8217502e8eb66f599b666"
+    },
+    {
+      "sourceId": "PDX-OUTDOOR-WASHINGTONPARK",
+      "file": "data/guides/portland-washington-park.md",
+      "cityId": "portland",
+      "active": true,
+      "chunks": 2,
+      "checksum": "d3104a2061fe0511cdf39f30795abaf520511eedb4d844785c74588a216e45ac"
+    }
+  ]
+}

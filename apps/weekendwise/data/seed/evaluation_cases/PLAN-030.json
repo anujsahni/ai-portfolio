@@ -1,0 +1,24 @@
+{
+  "suite": "weekendwise-local-eval-v5",
+  "id": "PLAN-030",
+  "category": "multi-city-budget",
+  "city": "Portland",
+  "question": "Keep our Portland weekend for two under $250 total.",
+  "expected_sources_any": [
+    "PDX-PLANNING-BUDGET"
+  ],
+  "forbidden_sources": [
+    "SF-PLANNING-BUDGET"
+  ],
+  "expected_tool": false,
+  "must_disclose_demo_estimates": true,
+  "must_flag_over_budget": true,
+  "mode": "plan",
+  "request": {
+    "interestIds": [
+      "coffee",
+      "local-finds"
+    ],
+    "budget": 250
+  }
+}

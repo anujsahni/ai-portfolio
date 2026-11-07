@@ -1,0 +1,21 @@
+{
+  "chunkId": "NAPA-PLAN-HOT-DAY--c02",
+  "sourceId": "NAPA-PLAN-HOT-DAY",
+  "city": "Napa Valley",
+  "cityId": "napa-valley",
+  "title": "Hot-day planning in Napa Valley",
+  "section": "Hot-day planning in Napa Valley",
+  "contentType": "planning-policy",
+  "chunkIndex": 2,
+  "text": "Encourage water and shade, especially on tasting days. Mark weather as simulated and do not claim live forecasts.",
+  "textChecksum": "f283701f48c51e0df43170477b231f5e5bfc5bc41a3ee4f25059e07053cecbef",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "napa-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

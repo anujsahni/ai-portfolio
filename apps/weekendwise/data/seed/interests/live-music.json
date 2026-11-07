@@ -1,0 +1,22 @@
+{
+  "label": "Live music",
+  "icon": "♫",
+  "displayOrder": 5,
+  "selectedByDefault": false,
+  "relatedSourceIdsByCity": {
+    "san-francisco": [
+      "SF-INTEREST-LIVEMUSIC"
+    ],
+    "portland": [
+      "PDX-INTEREST-LIVEMUSIC"
+    ],
+    "santa-cruz": [
+      "SC-INTEREST-LIVEMUSIC"
+    ],
+    "napa-valley": [
+      "NAPA-INTEREST-LIVEMUSIC"
+    ]
+  },
+  "retrievalHint": "live music evening, venue listings",
+  "active": true
+}

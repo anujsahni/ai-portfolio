@@ -1,0 +1,21 @@
+{
+  "chunkId": "SC-PLAN-COASTAL-WEATHER--c01",
+  "sourceId": "SC-PLAN-COASTAL-WEATHER",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "Fog and coastal weather in Santa Cruz",
+  "section": "Fog and coastal weather in Santa Cruz",
+  "contentType": "planning-policy",
+  "chunkIndex": 1,
+  "text": "Santa Cruz mornings are often foggy, especially in summer, and usually clear by midday. When the simulated conditions show fog, schedule indoor or town activities in the morning and move coastal walks and beach time to the afternoon.",
+  "textChecksum": "111cb722855821b51abb8bf499327044fc5544d3024b3ec3a059ad64de18cac7",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sc-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

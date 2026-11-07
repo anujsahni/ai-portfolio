@@ -1,0 +1,17 @@
+{
+  "sourceId": "SC-INTEREST-LIVEMUSIC",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "Live music in Santa Cruz",
+  "contentType": "interest-note",
+  "sourceUri": "data/guides/santa-cruz-live-music.md",
+  "version": 1,
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "0b75a0979ec396f839b11a1b7e9c815d560a63d05462fdf3f00641ba32b42c94",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

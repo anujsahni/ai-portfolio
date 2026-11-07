@@ -1,0 +1,21 @@
+{
+  "suite": "weekendwise-local-eval-v5",
+  "id": "PLAN-021",
+  "category": "outdoors-tool",
+  "question": "Add a Golden Gate Park stroll on Saturday unless the demo conditions are poor.",
+  "trip_scenario_id": "SCENARIO-02-RAINY-SATURDAY",
+  "expected_sources_any": [
+    "SF-OUTDOOR-GGPARK",
+    "SF-PLAN-RAINY-DAY"
+  ],
+  "forbidden_sources": [],
+  "expected_tool": true,
+  "expected_tool_args": {
+    "city": "San Francisco",
+    "demo_date": "2027-05-15"
+  },
+  "must_disclose_demo_estimates": true,
+  "city": "San Francisco",
+  "mode": "plan",
+  "request": {}
+}

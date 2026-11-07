@@ -1,0 +1,17 @@
+{
+  "cityId": "santa-cruz",
+  "city": "Santa Cruz",
+  "demoDate": "2027-05-14",
+  "dayOfWeek": "Fri",
+  "condition": "fog",
+  "icon": "☁",
+  "tempHighF": 63,
+  "tempLowF": 51,
+  "precipitationChancePct": 5,
+  "windMph": 9,
+  "indoorRecommended": false,
+  "summary": "Sample morning fog clearing by early afternoon.",
+  "simulated": true,
+  "source": "WeekendWise deterministic demo fixture",
+  "disclaimer": "Simulated conditions for the demo. Not a forecast."
+}

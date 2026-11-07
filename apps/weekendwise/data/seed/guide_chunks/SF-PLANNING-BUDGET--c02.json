@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-PLANNING-BUDGET--c02",
+  "sourceId": "SF-PLANNING-BUDGET",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Budget-aware itinerary planning",
+  "section": "Budget-aware itinerary planning",
+  "contentType": "planning-policy",
+  "chunkIndex": 2,
+  "text": "All demo amounts are fabricated fixtures. They are not current admission, dining, lodging, or transportation prices.",
+  "textChecksum": "9b283904ea91fe9ef8df3be12a0aac88daac3c0742bd73db62009d2d1b4f9420",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

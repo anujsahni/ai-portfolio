@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-NEIGHBORHOOD-RICHMOND--c01",
+  "sourceId": "SF-NEIGHBORHOOD-RICHMOND",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Richmond District coffee break",
+  "section": "Richmond District coffee break",
+  "contentType": "neighborhood-guide",
+  "chunkIndex": 1,
+  "text": "A coffee stop in the Richmond District can be presented as a flexible neighborhood pause between larger activities. For a small budget, suggest choosing one café and one treat rather than promising a specific total.",
+  "textChecksum": "5f90a2b9710798b9255d21cf16df0c701dbffb64d3aa6546650563425e83eb5b",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

@@ -1,0 +1,17 @@
+{
+  "sourceId": "NAPA-TOWN-YOUNTVILLE",
+  "city": "Napa Valley",
+  "cityId": "napa-valley",
+  "title": "Yountville: a slow food town",
+  "contentType": "neighborhood-guide",
+  "sourceUri": "data/guides/napa-yountville.md",
+  "version": 1,
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "1792a8a294b7ae6949e0f85b1b03a785bab39d1e1ed02c75b567bb3e1bef78b2",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

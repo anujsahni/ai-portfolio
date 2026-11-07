@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-STALE-FERRY-HOURS--c01",
+  "sourceId": "SF-STALE-FERRY-HOURS",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Ferry Building market hours (outdated note)",
+  "section": "Ferry Building market hours (outdated note)",
+  "contentType": "stale-fixture",
+  "chunkIndex": 1,
+  "text": "This older sample note claims that every vendor at the Ferry Building market stays open until 9 PM on Sundays and that no planning buffer is needed.",
+  "textChecksum": "c880e5b7a8d803004ed155320ef8352661207861950a1f50ab9f16de45fdd8da",
+  "lastReviewed": "2024-03-01",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

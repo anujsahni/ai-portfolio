@@ -1,0 +1,17 @@
+{
+  "sourceId": "SF-TRANSIT-MUNI",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Getting around without a car",
+  "contentType": "transit-note",
+  "sourceUri": "data/guides/muni-transit.md",
+  "version": 1,
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "fa2064000bb6916ad85af9a3748082752a68baeea4005452ab8e56253c4c39a8",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

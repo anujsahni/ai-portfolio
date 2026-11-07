@@ -1,0 +1,23 @@
+{
+  "suite": "weekendwise-local-eval-v5",
+  "id": "PLAN-001",
+  "category": "answerable",
+  "question": "Plan an art-and-coffee weekend in San Francisco under $600.",
+  "expected_sources_any": [
+    "SF-ATTRACTION-SFMOMA",
+    "SF-NEIGHBORHOOD-FERRY",
+    "SF-PLANNING-BUDGET"
+  ],
+  "expected_tool": false,
+  "must_disclose_demo_estimates": true,
+  "forbidden_sources": [],
+  "city": "San Francisco",
+  "mode": "plan",
+  "request": {
+    "interestIds": [
+      "art-design",
+      "coffee"
+    ],
+    "budget": 600
+  }
+}

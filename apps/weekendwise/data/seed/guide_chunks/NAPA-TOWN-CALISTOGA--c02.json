@@ -1,0 +1,21 @@
+{
+  "chunkId": "NAPA-TOWN-CALISTOGA--c02",
+  "sourceId": "NAPA-TOWN-CALISTOGA",
+  "city": "Napa Valley",
+  "cityId": "napa-valley",
+  "title": "Calistoga: hot springs and a spa break",
+  "section": "Calistoga: hot springs and a spa break",
+  "contentType": "neighborhood-guide",
+  "chunkIndex": 2,
+  "text": "Spa services usually need reservations; this demo does not book them. Prices and hours are not verified.",
+  "textChecksum": "0ec13e137d7239cd3b8e3f73135611927be009c307044ef52f680fe03c3dffe8",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "napa-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

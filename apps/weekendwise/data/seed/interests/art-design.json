@@ -1,0 +1,23 @@
+{
+  "label": "Art & design",
+  "icon": "◫",
+  "displayOrder": 2,
+  "selectedByDefault": true,
+  "relatedSourceIdsByCity": {
+    "san-francisco": [
+      "SF-ATTRACTION-SFMOMA",
+      "SF-ATTRACTION-DEYOUNG"
+    ],
+    "portland": [
+      "PDX-ATTRACTION-ART"
+    ],
+    "santa-cruz": [
+      "SC-NEIGHBORHOOD-DOWNTOWN"
+    ],
+    "napa-valley": [
+      "NAPA-ART-GALLERIES"
+    ]
+  },
+  "retrievalHint": "modern art museum, indoor art visit",
+  "active": true
+}

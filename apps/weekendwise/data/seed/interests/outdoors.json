@@ -1,0 +1,24 @@
+{
+  "label": "Outdoors",
+  "icon": "♧",
+  "displayOrder": 3,
+  "selectedByDefault": false,
+  "relatedSourceIdsByCity": {
+    "san-francisco": [
+      "SF-OUTDOOR-CRISSY",
+      "SF-OUTDOOR-GGPARK"
+    ],
+    "portland": [
+      "PDX-OUTDOOR-WASHINGTONPARK"
+    ],
+    "santa-cruz": [
+      "SC-OUTDOOR-WESTCLIFF",
+      "SC-OUTDOOR-REDWOODS"
+    ],
+    "napa-valley": [
+      "NAPA-OUTDOOR-VINETRAIL"
+    ]
+  },
+  "retrievalHint": "waterfront walk, park stroll, fresh air",
+  "active": true
+}

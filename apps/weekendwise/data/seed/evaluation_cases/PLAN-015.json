@@ -1,0 +1,15 @@
+{
+  "suite": "weekendwise-local-eval-v5",
+  "id": "PLAN-015",
+  "category": "inactive-filter",
+  "question": "Plan a whole day around cable car rides.",
+  "expected_sources_any": [],
+  "forbidden_sources": [
+    "SF-RETIRED-CABLECAR"
+  ],
+  "expected_tool": false,
+  "must_not_return_inactive": true,
+  "must_abstain_or_mark_uncertain": true,
+  "city": "San Francisco",
+  "mode": "ask"
+}

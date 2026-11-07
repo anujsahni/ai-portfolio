@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-NEIGHBORHOOD-MISSION--c02",
+  "sourceId": "SF-NEIGHBORHOOD-MISSION",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Mission District: a casual food evening",
+  "section": "Mission District: a casual food evening",
+  "contentType": "neighborhood-guide",
+  "chunkIndex": 2,
+  "text": "For demo budgeting only, a casual dinner can be shown as roughly $20–$40 per person before tips. These ranges are fabricated fixtures, not current menu prices, and no specific restaurant is verified.",
+  "textChecksum": "e7c446df999ed6ed1467c9d8246c63ec61054ab7a09030985223be7e6eb1e39e",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

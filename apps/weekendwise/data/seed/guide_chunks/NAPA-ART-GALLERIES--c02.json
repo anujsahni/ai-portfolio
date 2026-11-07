@@ -1,0 +1,21 @@
+{
+  "chunkId": "NAPA-ART-GALLERIES--c02",
+  "sourceId": "NAPA-ART-GALLERIES",
+  "city": "Napa Valley",
+  "cityId": "napa-valley",
+  "title": "Art in Napa Valley",
+  "section": "Art in Napa Valley",
+  "contentType": "attraction-note",
+  "chunkIndex": 2,
+  "text": "Gallery hours, admission, and winery art access are not verified and some need reservations. Check official information before making plans.",
+  "textChecksum": "a8755d9bd4bb843fab31de43ccf1b5553b4a9e58ae3e56aa4d96fd0843ce6a56",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "napa-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

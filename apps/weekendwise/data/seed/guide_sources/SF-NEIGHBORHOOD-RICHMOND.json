@@ -1,0 +1,17 @@
+{
+  "sourceId": "SF-NEIGHBORHOOD-RICHMOND",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Richmond District coffee break",
+  "contentType": "neighborhood-guide",
+  "sourceUri": "data/guides/richmond-coffee.md",
+  "version": 1,
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "27d77a18e9f61440f172a5d7fb54a55c155c9b74acfb712794769c5f7aa5a65f",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

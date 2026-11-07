@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-INTEREST-LIVEMUSIC--c01",
+  "sourceId": "SF-INTEREST-LIVEMUSIC",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "An evening of live music",
+  "section": "An evening of live music",
+  "contentType": "interest-note",
+  "chunkIndex": 1,
+  "text": "When a traveler lists live music as an interest, a planner can reserve an open evening block and suggest checking current venue listings. The draft should not name a specific show, set time, or ticket price as if it were confirmed.",
+  "textChecksum": "2bc5ac5aab731f8a77c9adf3492bd2c53ea9a074d8805babe0cb758871a9396b",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

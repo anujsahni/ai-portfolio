@@ -1,0 +1,21 @@
+{
+  "chunkId": "PDX-FOOD-CARTS--c02",
+  "sourceId": "PDX-FOOD-CARTS",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Food-cart pods for a casual meal",
+  "section": "Food-cart pods for a casual meal",
+  "contentType": "food-guide",
+  "chunkIndex": 2,
+  "text": "For demo budgeting only, a cart meal can be shown as roughly $12–$20 per person. Specific carts, locations, and hours change often and are not included in this fixture.",
+  "textChecksum": "bb905d3ccd6cf44a6911528dfbe59a4cae29c664d105074552e7e2ae2dcbd2cb",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "pdx-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

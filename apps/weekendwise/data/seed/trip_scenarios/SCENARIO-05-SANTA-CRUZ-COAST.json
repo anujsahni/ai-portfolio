@@ -1,0 +1,39 @@
+{
+  "title": "Santa Cruz coast, food, and a show",
+  "cityId": "santa-cruz",
+  "demoPurpose": "Preference-based coastal plan with a car; no tool call.",
+  "request": {
+    "destination": "Santa Cruz",
+    "cityId": "santa-cruz",
+    "startDate": "2027-05-14",
+    "endDate": "2027-05-16",
+    "travelers": 2,
+    "budget": 750,
+    "currency": "USD",
+    "interestIds": [
+      "outdoors",
+      "great-food",
+      "live-music"
+    ],
+    "constraints": [
+      "We will have a car",
+      "Keep mornings slow"
+    ],
+    "notes": "Ocean views, redwoods, and one night of live music."
+  },
+  "expected": {
+    "toolCalls": 0,
+    "expectedSourceIds": [
+      "SC-OUTDOOR-WESTCLIFF",
+      "SC-OUTDOOR-REDWOODS",
+      "SC-FOOD-CASUAL",
+      "SC-INTEREST-LIVEMUSIC",
+      "SC-PLANNING-BUDGET"
+    ],
+    "budgetStatus": "on-track",
+    "reviewOutcome": "approved",
+    "sampleItineraryId": "SCENARIO-05-SANTA-CRUZ-COAST"
+  },
+  "demoOnly": true,
+  "syntheticTraveler": true
+}

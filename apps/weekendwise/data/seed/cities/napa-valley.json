@@ -1,0 +1,107 @@
+{
+  "name": "Napa Valley",
+  "state": "CA",
+  "country": "US",
+  "region": "North Bay wine country",
+  "supported": true,
+  "trending": true,
+  "timezone": "America/Los_Angeles",
+  "tagline": "Vineyards, small towns, and slow food-focused days.",
+  "description": "A roughly 30-mile valley of wineries and small towns, from the city of Napa north to Calistoga. Weekends center on wine tasting, long meals, and spa time.",
+  "corpusVersion": "napa-demo-v1",
+  "defaultTripLengthDays": 3,
+  "neighborhoods": [
+    "Downtown Napa / Oxbow District",
+    "Yountville",
+    "Oakville and Rutherford",
+    "St. Helena",
+    "Calistoga"
+  ],
+  "nearestAirports": [
+    {
+      "code": "STS",
+      "name": "Charles M. Schulz–Sonoma County"
+    },
+    {
+      "code": "OAK",
+      "name": "Oakland International"
+    },
+    {
+      "code": "SFO",
+      "name": "San Francisco International"
+    }
+  ],
+  "fromSanFrancisco": {
+    "approxMiles": 50,
+    "typicalTravel": "About 1–1.5 hours by car, longer with weekend traffic; ferry to Vallejo is an option"
+  },
+  "gettingAround": {
+    "carNeeded": true,
+    "summary": "Wineries are spread out; most visitors drive, book a tour or driver, or use rideshare. The Vine Trail suits short bike rides.",
+    "transitSystems": [
+      "VINE Transit",
+      "Napa Valley Vine Trail (bike/walk)"
+    ]
+  },
+  "highlights": [
+    {
+      "interestId": "great-food",
+      "title": "Yountville and Oxbow Public Market",
+      "note": "Destination dining and a casual food hall in Napa."
+    },
+    {
+      "interestId": "local-finds",
+      "title": "Wine tasting",
+      "note": "Many wineries require advance tasting reservations."
+    },
+    {
+      "interestId": "outdoors",
+      "title": "Napa Valley Vine Trail and Bothe-Napa Valley State Park",
+      "note": "Easy rides along vineyards and shaded hiking."
+    },
+    {
+      "interestId": "local-finds",
+      "title": "Calistoga hot springs and mud baths",
+      "note": "Spa-focused town at the north end of the valley."
+    },
+    {
+      "interestId": "art-design",
+      "title": "Winery art collections and galleries",
+      "note": "Several wineries and downtown Napa galleries show art."
+    },
+    {
+      "interestId": "live-music",
+      "title": "Downtown Napa music venues",
+      "note": "Evening shows in the city of Napa."
+    }
+  ],
+  "bestSeasons": [
+    "September",
+    "October"
+  ],
+  "weatherNotes": "Hot, dry summers and mild, wetter winters; harvest (roughly August to October) is the busiest and priciest time.",
+  "demoDailyBudgetPerPersonUsd": {
+    "low": 200,
+    "high": 450,
+    "note": "Fabricated demo range, not a current price."
+  },
+  "travelTips": [
+    "Book tastings ahead; walk-ins are limited at many wineries.",
+    "Plan a designated driver, tour, or rideshare for tasting days.",
+    "Every wine-tasting plan must include a designated driver, tour, or rideshare."
+  ],
+  "plannerReadiness": {
+    "hasGuides": true,
+    "hasConditionsFixture": true,
+    "blockers": []
+  },
+  "seededConditionDates": [
+    "2027-05-14",
+    "2027-05-15",
+    "2027-05-16"
+  ],
+  "notice": "Sample guides and simulated conditions only. Verify hours, prices, and access with official sources.",
+  "verifyNote": "General orientation for the demo. Verify hours, prices, reservations, and access with official sources.",
+  "demoOnly": true,
+  "updatedAt": "2026-11-05"
+}

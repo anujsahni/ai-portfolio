@@ -1,0 +1,13 @@
+# Copied to terraform.tfvars by `make configure` (which also adds a random suffix to project_id).
+# terraform.tfvars is git-ignored. Do NOT put billing_account_id here:
+#   export TF_VAR_billing_account_id=XXXXXX-XXXXXX-XXXXXX
+
+project_id        = "weekendwise-demo"
+region            = "us-central1"
+budget_amount_usd = 20 # maximum allowed is 20
+budget_currency   = "USD"
+alert_emails      = [] # e.g. ["you@example.com"]; billing admins are always emailed
+
+# Only if your account belongs to an organization and you must create the project in it:
+# org_id    = "123456789012"
+# folder_id = "123456789012"

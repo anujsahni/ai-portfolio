@@ -1,0 +1,17 @@
+{
+  "sourceId": "SF-NEIGHBORHOOD-FERRY",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Ferry Building and Embarcadero",
+  "contentType": "neighborhood-guide",
+  "sourceUri": "data/guides/ferry-building.md",
+  "version": 1,
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "317a3886901c93827ad8098777d43c9f8f7a5860157aa5f82bd0103449621a46",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

@@ -1,0 +1,21 @@
+{
+  "chunkId": "PDX-ATTRACTION-ART--c02",
+  "sourceId": "PDX-ATTRACTION-ART",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Art in Portland: museum and Alberta Arts",
+  "section": "Art in Portland: museum and Alberta Arts",
+  "contentType": "attraction-note",
+  "chunkIndex": 2,
+  "text": "Admission, exhibits, and gallery hours are intentionally not treated as live facts. Check official museum information before making plans.",
+  "textChecksum": "d4c6001abf8612f320a9496b6e211ee2c11c4f2ca22e87db45e58397c8d4ccc2",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "pdx-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

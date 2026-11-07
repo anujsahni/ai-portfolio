@@ -1,0 +1,22 @@
+{
+  "suite": "weekendwise-local-eval-v5",
+  "id": "PLAN-026",
+  "category": "multi-city-tool",
+  "city": "Santa Cruz",
+  "question": "Is Friday morning good for West Cliff Drive, or should we start in town?",
+  "trip_scenario_id": "SCENARIO-05-SANTA-CRUZ-COAST",
+  "expected_sources_any": [
+    "SC-PLAN-COASTAL-WEATHER",
+    "SC-OUTDOOR-WESTCLIFF",
+    "SC-NEIGHBORHOOD-DOWNTOWN"
+  ],
+  "forbidden_sources": [],
+  "expected_tool": true,
+  "expected_tool_args": {
+    "city": "Santa Cruz",
+    "demo_date": "2027-05-14"
+  },
+  "must_disclose_demo_estimates": true,
+  "mode": "plan",
+  "request": {}
+}

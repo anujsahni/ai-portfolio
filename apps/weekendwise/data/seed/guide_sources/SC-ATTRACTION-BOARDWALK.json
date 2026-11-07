@@ -1,0 +1,17 @@
+{
+  "sourceId": "SC-ATTRACTION-BOARDWALK",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "Beach Boardwalk and Wharf",
+  "contentType": "attraction-note",
+  "sourceUri": "data/guides/santa-cruz-boardwalk.md",
+  "version": 1,
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "45bb35a5dfdbc1e24c45293824b7908c2ddff4296f7b7ee18853c4e258326b44",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

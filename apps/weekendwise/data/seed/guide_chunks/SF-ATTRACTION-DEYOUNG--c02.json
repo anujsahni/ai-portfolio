@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-ATTRACTION-DEYOUNG--c02",
+  "sourceId": "SF-ATTRACTION-DEYOUNG",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Art and a rainy-day option",
+  "section": "Art and a rainy-day option",
+  "contentType": "attraction-note",
+  "chunkIndex": 2,
+  "text": "This content is a mock planning fixture. Verify current hours, admission, exhibits, transit, and accessibility details using official sources.",
+  "textChecksum": "cea7c52ec24470ca2bfed7490c58ccf690f577d7e35e20d85f6bd238aa79de10",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

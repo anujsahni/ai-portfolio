@@ -1,0 +1,21 @@
+{
+  "chunkId": "PDX-NEIGHBORHOOD-EASTSIDE--c01",
+  "sourceId": "PDX-NEIGHBORHOOD-EASTSIDE",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Eastside neighborhoods: Hawthorne, Division, and Mississippi",
+  "section": "Eastside neighborhoods: Hawthorne, Division, and Mississippi",
+  "contentType": "neighborhood-guide",
+  "chunkIndex": 1,
+  "text": "This sample guide suggests an eastside afternoon for local finds: vintage and record shops on Hawthorne, cafés and bakeries along Division, or small shops on Mississippi Avenue. Pick one street and wander rather than trying to cover all three.",
+  "textChecksum": "b4d8990815b815f594b8f1d159eaaa9196c388d18be9c8a4cb957699fdf581af",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "pdx-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

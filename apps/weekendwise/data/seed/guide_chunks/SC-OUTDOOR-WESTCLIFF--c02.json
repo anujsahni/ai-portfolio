@@ -1,0 +1,21 @@
+{
+  "chunkId": "SC-OUTDOOR-WESTCLIFF--c02",
+  "sourceId": "SC-OUTDOOR-WESTCLIFF",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "West Cliff Drive to Natural Bridges",
+  "section": "West Cliff Drive to Natural Bridges",
+  "contentType": "outdoor-guide",
+  "chunkIndex": 2,
+  "text": "Cliff paths can be windy and beach access can change. Conditions are simulated in this demo; confirm current park and safety guidance before travel.",
+  "textChecksum": "62e02c9f77e28d4e4260be111a58cde8aba88398571842addb3e5a7912cc28c8",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sc-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

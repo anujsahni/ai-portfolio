@@ -1,0 +1,41 @@
+{
+  "title": "Outdoors weekend with a rainy Saturday",
+  "demoPurpose": "Simulated conditions tool is called once and the plan swaps in an indoor option.",
+  "request": {
+    "destination": "San Francisco",
+    "cityId": "san-francisco",
+    "startDate": "2027-05-14",
+    "endDate": "2027-05-16",
+    "travelers": 2,
+    "budget": 700,
+    "currency": "USD",
+    "interestIds": [
+      "outdoors",
+      "art-design",
+      "coffee"
+    ],
+    "constraints": [
+      "Show an indoor alternative for Saturday if the demo conditions are rainy"
+    ],
+    "notes": "We would love a park stroll on Saturday if the weather allows."
+  },
+  "expected": {
+    "toolCalls": 1,
+    "expectedToolArgs": {
+      "city": "San Francisco",
+      "demo_date": "2027-05-15"
+    },
+    "expectedSourceIds": [
+      "SF-PLAN-RAINY-DAY",
+      "SF-ATTRACTION-DEYOUNG",
+      "SF-OUTDOOR-CRISSY",
+      "SF-OUTDOOR-GGPARK"
+    ],
+    "budgetStatus": "on-track",
+    "reviewOutcome": "approved",
+    "sampleItineraryId": "SCENARIO-02-RAINY-SATURDAY"
+  },
+  "cityId": "san-francisco",
+  "demoOnly": true,
+  "syntheticTraveler": true
+}

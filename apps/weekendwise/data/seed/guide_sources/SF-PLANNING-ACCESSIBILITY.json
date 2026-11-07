@@ -1,0 +1,17 @@
+{
+  "sourceId": "SF-PLANNING-ACCESSIBILITY",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Accessibility and trip constraints",
+  "contentType": "planning-policy",
+  "sourceUri": "data/guides/accessibility-planning.md",
+  "version": 1,
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "6ca9ee1d98779b7edff76440262f922c5a24a1774d50c70a61a1f3218846d782",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

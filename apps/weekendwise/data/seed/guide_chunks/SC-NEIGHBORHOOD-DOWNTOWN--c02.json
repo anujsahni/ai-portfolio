@@ -1,0 +1,21 @@
+{
+  "chunkId": "SC-NEIGHBORHOOD-DOWNTOWN--c02",
+  "sourceId": "SC-NEIGHBORHOOD-DOWNTOWN",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "Downtown Santa Cruz: art and coffee",
+  "section": "Downtown Santa Cruz: art and coffee",
+  "contentType": "neighborhood-guide",
+  "chunkIndex": 2,
+  "text": "Museum admission, exhibits, and café hours are not verified. Use the guide as a preference cue and confirm details before travel.",
+  "textChecksum": "9f96bfa19695a3078de7a61be43554d6f173f46e551a7a8c6179b7bfd47bee52",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sc-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

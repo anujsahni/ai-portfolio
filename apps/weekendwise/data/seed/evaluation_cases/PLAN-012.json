@@ -1,0 +1,14 @@
+{
+  "suite": "weekendwise-local-eval-v5",
+  "id": "PLAN-012",
+  "category": "source-citation",
+  "question": "Why did you include the Ferry Building stop?",
+  "expected_sources_any": [
+    "SF-NEIGHBORHOOD-FERRY"
+  ],
+  "expected_tool": false,
+  "must_cite_returned_source": true,
+  "forbidden_sources": [],
+  "city": "San Francisco",
+  "mode": "ask"
+}

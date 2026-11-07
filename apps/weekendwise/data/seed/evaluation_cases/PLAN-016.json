@@ -1,0 +1,15 @@
+{
+  "suite": "weekendwise-local-eval-v5",
+  "id": "PLAN-016",
+  "category": "city-filter",
+  "question": "Suggest Pearl District bookstores for my San Francisco weekend.",
+  "expected_sources_any": [],
+  "forbidden_sources": [
+    "PDX-NEIGHBORHOOD-PEARL"
+  ],
+  "expected_tool": false,
+  "must_abstain_or_request_supported_city": true,
+  "note": "Portland is supported, but this request is scoped to San Francisco; Portland chunks must not be returned.",
+  "city": "San Francisco",
+  "mode": "ask"
+}

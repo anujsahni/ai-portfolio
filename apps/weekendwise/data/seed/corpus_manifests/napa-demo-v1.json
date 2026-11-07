@@ -1,0 +1,97 @@
+{
+  "corpusVersion": "napa-demo-v1",
+  "cityId": "napa-valley",
+  "chunkerVersion": "paragraph-v1",
+  "sourceCount": 10,
+  "activeSourceCount": 10,
+  "chunkCount": 20,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "firestore": {
+    "database": "(default)",
+    "collection": "guide_chunks",
+    "vectorField": "embedding"
+  },
+  "sources": [
+    {
+      "sourceId": "NAPA-PLANNING-ACCESSIBILITY",
+      "file": "data/guides/napa-accessibility.md",
+      "cityId": "napa-valley",
+      "active": true,
+      "chunks": 2,
+      "checksum": "5f8da1a5ef9141e492b79070f746acef2075bbd2130a80d208a926d4040daf66"
+    },
+    {
+      "sourceId": "NAPA-ART-GALLERIES",
+      "file": "data/guides/napa-art.md",
+      "cityId": "napa-valley",
+      "active": true,
+      "chunks": 2,
+      "checksum": "41313705f613ef2aff2947152209c8f16dc546f945805e24865c776f5ceca94a"
+    },
+    {
+      "sourceId": "NAPA-TOWN-CALISTOGA",
+      "file": "data/guides/napa-calistoga.md",
+      "cityId": "napa-valley",
+      "active": true,
+      "chunks": 2,
+      "checksum": "39c676ee198bbc71c2b643dbf4e6b4d40e94d2a8a2fe685e8944b0ba38488841"
+    },
+    {
+      "sourceId": "NAPA-PLAN-HOT-DAY",
+      "file": "data/guides/napa-heat.md",
+      "cityId": "napa-valley",
+      "active": true,
+      "chunks": 2,
+      "checksum": "8ed43856a79511e1faae993a8d0095e2c00500630057017def1d6243b3b5bbf6"
+    },
+    {
+      "sourceId": "NAPA-INTEREST-LIVEMUSIC",
+      "file": "data/guides/napa-live-music.md",
+      "cityId": "napa-valley",
+      "active": true,
+      "chunks": 2,
+      "checksum": "3405fe03f34512269da6d761aed1372f90616159db38f26af4d47902b4f80946"
+    },
+    {
+      "sourceId": "NAPA-FOOD-OXBOW",
+      "file": "data/guides/napa-oxbow.md",
+      "cityId": "napa-valley",
+      "active": true,
+      "chunks": 2,
+      "checksum": "ac30f02af64e6e83e4a6516296670a8a028d159128d56200cc14c88fe709ab68"
+    },
+    {
+      "sourceId": "NAPA-PLANNING-BUDGET",
+      "file": "data/guides/napa-planning.md",
+      "cityId": "napa-valley",
+      "active": true,
+      "chunks": 2,
+      "checksum": "74a84066cc734f8dbccc04c6b54ebd164cc7f3021f38d98091f77a381a0bf61a"
+    },
+    {
+      "sourceId": "NAPA-TASTING-WINERIES",
+      "file": "data/guides/napa-tasting.md",
+      "cityId": "napa-valley",
+      "active": true,
+      "chunks": 2,
+      "checksum": "caed525167ddc97f10c203f0e33386e30ce1f1732e458a30c0ae9c3e1e5f86aa"
+    },
+    {
+      "sourceId": "NAPA-OUTDOOR-VINETRAIL",
+      "file": "data/guides/napa-vine-trail.md",
+      "cityId": "napa-valley",
+      "active": true,
+      "chunks": 2,
+      "checksum": "40316f89db1e0d00edc89291f04e61424ca2a2afb5d74160ad2e125545508f84"
+    },
+    {
+      "sourceId": "NAPA-TOWN-YOUNTVILLE",
+      "file": "data/guides/napa-yountville.md",
+      "cityId": "napa-valley",
+      "active": true,
+      "chunks": 2,
+      "checksum": "1792a8a294b7ae6949e0f85b1b03a785bab39d1e1ed02c75b567bb3e1bef78b2"
+    }
+  ]
+}

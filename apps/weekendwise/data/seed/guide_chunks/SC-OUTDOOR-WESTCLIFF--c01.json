@@ -1,0 +1,21 @@
+{
+  "chunkId": "SC-OUTDOOR-WESTCLIFF--c01",
+  "sourceId": "SC-OUTDOOR-WESTCLIFF",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "West Cliff Drive to Natural Bridges",
+  "section": "West Cliff Drive to Natural Bridges",
+  "contentType": "outdoor-guide",
+  "chunkIndex": 1,
+  "text": "This sample outdoor guide suggests an easy oceanfront walk or bike ride along West Cliff Drive, ending at Natural Bridges State Beach. It fits a relaxed morning once any fog lifts.",
+  "textChecksum": "b7d34961ce60bd41a987676e53c3ddff90407f7b7e653f5c9731c876289432ab",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sc-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

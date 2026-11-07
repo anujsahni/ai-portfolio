@@ -1,0 +1,17 @@
+{
+  "sourceId": "SC-NEIGHBORHOOD-CAPITOLA",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "Capitola Village",
+  "contentType": "neighborhood-guide",
+  "sourceUri": "data/guides/santa-cruz-capitola.md",
+  "version": 1,
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "da6e34ad3afa176f25127aae3e09045315462390d1ea71f60d31ad5b4fa2b2be",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

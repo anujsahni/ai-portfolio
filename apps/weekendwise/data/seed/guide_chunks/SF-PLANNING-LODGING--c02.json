@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-PLANNING-LODGING--c02",
+  "sourceId": "SF-PLANNING-LODGING",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Lodging estimates for a weekend sample",
+  "section": "Lodging estimates for a weekend sample",
+  "contentType": "planning-policy",
+  "chunkIndex": 2,
+  "text": "These figures are fabricated planning fixtures. The app does not search, hold, or book rooms, and real rates vary by date, location, and availability.",
+  "textChecksum": "1d16bbe2fd0768e510a378fcb6153caa02862430a3fc175cbbcb73794b844c31",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

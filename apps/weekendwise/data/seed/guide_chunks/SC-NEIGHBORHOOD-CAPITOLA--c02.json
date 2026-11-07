@@ -1,0 +1,21 @@
+{
+  "chunkId": "SC-NEIGHBORHOOD-CAPITOLA--c02",
+  "sourceId": "SC-NEIGHBORHOOD-CAPITOLA",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "Capitola Village",
+  "section": "Capitola Village",
+  "contentType": "neighborhood-guide",
+  "chunkIndex": 2,
+  "text": "Parking is limited on busy weekends and a car or bus ride is needed from Santa Cruz. Businesses and hours are not verified here.",
+  "textChecksum": "b17ae8ee7e8f4fa469d59a9482595f7a1be38979e5ea91df7000e144a9a724d3",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sc-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

@@ -1,0 +1,21 @@
+{
+  "chunkId": "PDX-TRANSIT-TRIMET--c01",
+  "sourceId": "PDX-TRANSIT-TRIMET",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Getting around Portland without a car",
+  "section": "Getting around Portland without a car",
+  "contentType": "transit-note",
+  "chunkIndex": 1,
+  "text": "This sample transit note suggests MAX light rail from the airport to downtown, and the streetcar or buses between central neighborhoods. Group stops on the same side of the Willamette River to cut transfer time.",
+  "textChecksum": "0d2193786dfdab140b288fd35c862ef418ecdfdc3b270e52f8fcde2d659488f9",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "pdx-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

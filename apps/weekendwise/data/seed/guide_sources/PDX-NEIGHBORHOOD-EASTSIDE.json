@@ -1,0 +1,17 @@
+{
+  "sourceId": "PDX-NEIGHBORHOOD-EASTSIDE",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Eastside neighborhoods: Hawthorne, Division, and Mississippi",
+  "contentType": "neighborhood-guide",
+  "sourceUri": "data/guides/portland-eastside.md",
+  "version": 1,
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "a9eda7ec773ac121dc5b90c0f24f80d9e1d7270fed43a29f5667669ccb14cec6",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

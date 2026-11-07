@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "supportedCityIds": [
+    "san-francisco",
+    "portland",
+    "santa-cruz",
+    "napa-valley"
+  ],
+  "retrieval": {
+    "collection": "guide_chunks",
+    "vectorField": "embedding",
+    "topK": 4,
+    "maxTopK": 5,
+    "distanceMeasure": "COSINE",
+    "maxDistance": null,
+    "maxDistanceNote": "Calibrate on the evaluation set after embeddings exist (MVP-05).",
+    "preFilters": [
+      "cityId",
+      "active"
+    ]
+  },
+  "models": {
+    "generationModelId": "gemini-3.8-flash",
+    "generationLocation": "global",
+    "thinkingLevel": "LOW",
+    "embeddingModelId": "gemini-embedding-001",
+    "embeddingLocation": "us-central1",
+    "embeddingDimension": 768,
+    "verifiedOn": "2026-11-06",
+    "note": "Reference copy. The server reads model settings from its environment (.env / Cloud Run env vars), never from the browser."
+  },
+  "limits": {
+    "maxModelCallsPerRequest": 4,
+    "maxToolCallsPerRequest": 1,
+    "maxRevisionsPerRequest": 1,
+    "maxOutputTokens": 2048,
+    "maxRetrievedChunks": 5,
+    "maxPromptChars": 24000,
+    "requestTimeoutSeconds": 45,
+    "modelRetryAttempts": 1,
+    "maxEmbeddingBatch": 50
+  },
+  "tools": {
+    "allowlist": [
+      "check_local_conditions"
+    ],
+    "readOnly": true
+  },
+  "budget": {
+    "currency": "USD",
+    "uncertaintyBufferPct": 10,
+    "arithmeticTolerance": 1,
+    "categoryIds": [
+      "stays",
+      "food-coffee",
+      "activities",
+      "local-transit"
+    ]
+  },
+  "tripForm": {
+    "travelerOptions": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "defaultTravelers": 2,
+    "budgetMin": 50,
+    "budgetStep": 50,
+    "budgetSliderMin": 200,
+    "budgetSliderMax": 2000,
+    "defaultBudget": 600,
+    "defaultDestination": "San Francisco",
+    "trendingCityIds": [
+      "portland",
+      "santa-cruz",
+      "napa-valley"
+    ],
+    "maxTripDays": 3
+  },
+  "progressSteps": [
+    {
+      "id": "normalize",
+      "label": "Getting a feel for your trip"
+    },
+    {
+      "id": "retrieve",
+      "label": "Finding places you’ll love"
+    },
+    {
+      "id": "check",
+      "label": "Checking the little details"
+    },
+    {
+      "id": "plan",
+      "label": "Putting your days together"
+    }
+  ],
+  "traceLabels": {
+    "retrieve": "Searched city guides",
+    "tool": "Checked simulated local conditions",
+    "review": "Reviewed sources and budget",
+    "revise": "Revised the draft once"
+  },
+  "disclaimers": {
+    "banner": "DEMO · SAMPLE DATA",
+    "conditions": "Sample conditions · not live",
+    "budget": "Estimates only · no bookings included",
+    "sources": "This prototype uses a small fictional demo corpus and simulated conditions. It doesn’t access live maps, verify current venue hours, or make reservations."
+  },
+  "updatedAt": "2026-11-06",
+  "corpusVersions": {
+    "san-francisco": "sf-demo-v1",
+    "portland": "pdx-demo-v1",
+    "santa-cruz": "sc-demo-v1",
+    "napa-valley": "napa-demo-v1"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "sourceId": "PDX-PLAN-RAINY-DAY",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Rainy-day planning in Portland",
+  "contentType": "planning-policy",
+  "sourceUri": "data/guides/portland-rainy-day.md",
+  "version": 1,
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "c3ccae89833dc7e891d269855d7cb52e7fe1fb854adf3e874c20b80172b830bb",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

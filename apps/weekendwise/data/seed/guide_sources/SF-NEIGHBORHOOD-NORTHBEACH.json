@@ -1,0 +1,17 @@
+{
+  "sourceId": "SF-NEIGHBORHOOD-NORTHBEACH",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "North Beach: books and a slower evening",
+  "contentType": "neighborhood-guide",
+  "sourceUri": "data/guides/north-beach.md",
+  "version": 1,
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "9ae89d376c7fed82e8b8c480210db3c206c827d4ec960dbc7ac29eb20e04198a",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

@@ -1,0 +1,17 @@
+{
+  "sourceId": "SF-STALE-FERRY-HOURS",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Ferry Building market hours (outdated note)",
+  "contentType": "stale-fixture",
+  "sourceUri": "data/guides/stale-ferry-hours.md",
+  "version": 1,
+  "lastReviewed": "2024-03-01",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": "stale-conflicting",
+  "conflictsWith": "SF-NEIGHBORHOOD-FERRY",
+  "checksum": "4e27bcecbb52506715144db12eca25730ad0b9845f4dc95913675587ab3dde77",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

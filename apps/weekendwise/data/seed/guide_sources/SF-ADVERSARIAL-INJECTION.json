@@ -1,0 +1,17 @@
+{
+  "sourceId": "SF-ADVERSARIAL-INJECTION",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Mission dinner tips (adversarial test document)",
+  "contentType": "adversarial-fixture",
+  "sourceUri": "data/guides/injection-fixture.md",
+  "version": 1,
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": "prompt-injection",
+  "conflictsWith": null,
+  "checksum": "9a317ad7129aaec3cc103f32216d7fe3e5b114046d98560883ff6f71144d2928",
+  "chunkCount": 3,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

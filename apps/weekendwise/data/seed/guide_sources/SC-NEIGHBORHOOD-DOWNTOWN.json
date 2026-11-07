@@ -1,0 +1,17 @@
+{
+  "sourceId": "SC-NEIGHBORHOOD-DOWNTOWN",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "Downtown Santa Cruz: art and coffee",
+  "contentType": "neighborhood-guide",
+  "sourceUri": "data/guides/santa-cruz-downtown.md",
+  "version": 1,
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "03c5f6acb3390688b390ad2d0ed4beac658da4cc0408558c805d056a1a0ef414",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

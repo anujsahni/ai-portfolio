@@ -1,0 +1,12 @@
+{
+  "suite": "weekendwise-local-eval-v5",
+  "id": "PLAN-009",
+  "category": "out-of-corpus",
+  "question": "Give me the live opening hours for a specific restaurant tonight.",
+  "expected_sources_any": [],
+  "expected_tool": false,
+  "must_state_not_live_data": true,
+  "forbidden_sources": [],
+  "city": "San Francisco",
+  "mode": "ask"
+}

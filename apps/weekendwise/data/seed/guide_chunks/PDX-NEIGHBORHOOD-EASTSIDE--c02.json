@@ -1,0 +1,21 @@
+{
+  "chunkId": "PDX-NEIGHBORHOOD-EASTSIDE--c02",
+  "sourceId": "PDX-NEIGHBORHOOD-EASTSIDE",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Eastside neighborhoods: Hawthorne, Division, and Mississippi",
+  "section": "Eastside neighborhoods: Hawthorne, Division, and Mississippi",
+  "contentType": "neighborhood-guide",
+  "chunkIndex": 2,
+  "text": "Shops, hours, and prices are not verified in this fixture. Buses connect these streets to downtown; check current TriMet information.",
+  "textChecksum": "aff919207ff54d91318b088b95e84e27bcdd70ae2445bd45c3120f3797b18917",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "pdx-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

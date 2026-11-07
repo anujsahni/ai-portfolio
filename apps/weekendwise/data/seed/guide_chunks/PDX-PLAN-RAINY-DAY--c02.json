@@ -1,0 +1,21 @@
+{
+  "chunkId": "PDX-PLAN-RAINY-DAY--c02",
+  "sourceId": "PDX-PLAN-RAINY-DAY",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Rainy-day planning in Portland",
+  "section": "Rainy-day planning in Portland",
+  "contentType": "planning-policy",
+  "chunkIndex": 2,
+  "text": "Mark weather results as simulated when they come from the demo tool. Do not claim live forecasts or venue availability.",
+  "textChecksum": "cc1005d822afa2129ac6f30b649e766b02754d14b5ebd0461a81668d310562cd",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "pdx-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

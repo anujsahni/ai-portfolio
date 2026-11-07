@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-INTEREST-LIVEMUSIC--c02",
+  "sourceId": "SF-INTEREST-LIVEMUSIC",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "An evening of live music",
+  "section": "An evening of live music",
+  "contentType": "interest-note",
+  "chunkIndex": 2,
+  "text": "This demo corpus has no event calendar and cannot buy or hold tickets. Present live music as an optional idea and point the traveler to official venue listings.",
+  "textChecksum": "676f4f8f65f6b80d1504347e5b2eaaa27ba2412d6665c43d1dcb0ad5e34c2317",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

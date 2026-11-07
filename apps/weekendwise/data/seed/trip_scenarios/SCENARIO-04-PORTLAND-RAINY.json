@@ -1,0 +1,43 @@
+{
+  "title": "Portland books, coffee, and gardens",
+  "cityId": "portland",
+  "demoPurpose": "Tool call returns simulated rain; garden time moves to Sunday.",
+  "request": {
+    "destination": "Portland",
+    "cityId": "portland",
+    "startDate": "2027-05-14",
+    "endDate": "2027-05-16",
+    "travelers": 2,
+    "budget": 650,
+    "currency": "USD",
+    "interestIds": [
+      "local-finds",
+      "coffee",
+      "outdoors"
+    ],
+    "constraints": [
+      "Use public transit",
+      "Indoor backup for Saturday if it rains"
+    ],
+    "notes": "We love bookstores and want to see a garden."
+  },
+  "expected": {
+    "toolCalls": 1,
+    "expectedToolArgs": {
+      "city": "Portland",
+      "demo_date": "2027-05-15"
+    },
+    "expectedSourceIds": [
+      "PDX-NEIGHBORHOOD-PEARL",
+      "PDX-PLAN-RAINY-DAY",
+      "PDX-ATTRACTION-ART",
+      "PDX-OUTDOOR-WASHINGTONPARK",
+      "PDX-TRANSIT-TRIMET"
+    ],
+    "budgetStatus": "on-track",
+    "reviewOutcome": "approved",
+    "sampleItineraryId": "SCENARIO-04-PORTLAND-RAINY"
+  },
+  "demoOnly": true,
+  "syntheticTraveler": true
+}

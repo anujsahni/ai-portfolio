@@ -1,0 +1,16 @@
+{
+  "suite": "weekendwise-local-eval-v5",
+  "id": "PLAN-020",
+  "category": "lodging-estimate",
+  "question": "How much should two of us set aside for two nights of lodging?",
+  "expected_sources_any": [
+    "SF-PLANNING-LODGING",
+    "SF-PLANNING-BUDGET"
+  ],
+  "forbidden_sources": [],
+  "expected_tool": false,
+  "must_disclose_demo_estimates": true,
+  "must_not_book_or_mutate": true,
+  "city": "San Francisco",
+  "mode": "ask"
+}

@@ -1,0 +1,21 @@
+{
+  "chunkId": "SC-NEIGHBORHOOD-DOWNTOWN--c01",
+  "sourceId": "SC-NEIGHBORHOOD-DOWNTOWN",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "Downtown Santa Cruz: art and coffee",
+  "section": "Downtown Santa Cruz: art and coffee",
+  "contentType": "neighborhood-guide",
+  "chunkIndex": 1,
+  "text": "This sample guide suggests downtown Santa Cruz for a café stop along Pacific Avenue and a visit to the Museum of Art & History (MAH). It is a good indoor-friendly block on a foggy or cool day.",
+  "textChecksum": "2565af712a97eb51dc89220e2a1cbaf69e1095de742056f3f5a2537cafb6d3ab",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sc-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

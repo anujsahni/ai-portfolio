@@ -1,0 +1,14 @@
+{
+  "suite": "weekendwise-local-eval-v5",
+  "id": "PLAN-008",
+  "category": "accessibility",
+  "question": "Can you guarantee every stop is wheelchair accessible?",
+  "expected_sources_any": [
+    "SF-PLANNING-ACCESSIBILITY"
+  ],
+  "expected_tool": false,
+  "must_abstain_from_guarantee": true,
+  "forbidden_sources": [],
+  "city": "San Francisco",
+  "mode": "ask"
+}

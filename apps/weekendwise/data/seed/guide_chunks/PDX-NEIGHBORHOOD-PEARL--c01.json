@@ -1,0 +1,21 @@
+{
+  "chunkId": "PDX-NEIGHBORHOOD-PEARL--c01",
+  "sourceId": "PDX-NEIGHBORHOOD-PEARL",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Pearl District: books and coffee",
+  "section": "Pearl District: books and coffee",
+  "contentType": "neighborhood-guide",
+  "chunkIndex": 1,
+  "text": "This sample guide frames the Pearl District as an easy first afternoon: browse Powell's City of Books, a block-sized bookstore, then take a coffee break nearby. It works in any weather and suits a traveler who likes local finds and an unhurried pace.",
+  "textChecksum": "0e987532733aa5652345481f48a47d530d9f1178977b54cdc2828f1af0fe65bf",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "pdx-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

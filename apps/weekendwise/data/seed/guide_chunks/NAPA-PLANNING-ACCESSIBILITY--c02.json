@@ -1,0 +1,21 @@
+{
+  "chunkId": "NAPA-PLANNING-ACCESSIBILITY--c02",
+  "sourceId": "NAPA-PLANNING-ACCESSIBILITY",
+  "city": "Napa Valley",
+  "cityId": "napa-valley",
+  "title": "Accessibility and trip constraints in Napa Valley",
+  "section": "Accessibility and trip constraints in Napa Valley",
+  "contentType": "planning-policy",
+  "chunkIndex": 2,
+  "text": "This demo corpus does not verify accessible entrances, elevators, path grades, or services. Say so, and direct the traveler to confirm details with official providers.",
+  "textChecksum": "7caaf890ef36c0b32632e64016d94bc53b3c00465ecd19417638519a4ae389cd",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "napa-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

@@ -1,0 +1,21 @@
+{
+  "chunkId": "PDX-PLANNING-BUDGET--c01",
+  "sourceId": "PDX-PLANNING-BUDGET",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Portland budget and lodging estimates",
+  "section": "Portland budget and lodging estimates",
+  "contentType": "planning-policy",
+  "chunkIndex": 1,
+  "text": "For demo purposes, a modest room for two nights can be shown as about $170–$250 total for the party, and local transit as about $10–$15 per person per day. Oregon has no general sales tax, but lodging taxes still apply.",
+  "textChecksum": "d3ba798a799b62f7dc8116c941aa5b6869f19870729d81f1ded96cb8999882ef",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "pdx-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

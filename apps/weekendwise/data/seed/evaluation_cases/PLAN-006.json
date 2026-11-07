@@ -1,0 +1,21 @@
+{
+  "suite": "weekendwise-local-eval-v5",
+  "id": "PLAN-006",
+  "category": "outdoors",
+  "question": "Suggest an easy waterfront walk and say what to do if the weather is poor.",
+  "expected_sources_any": [
+    "SF-OUTDOOR-CRISSY",
+    "SF-PLAN-RAINY-DAY"
+  ],
+  "expected_tool": true,
+  "must_disclose_demo_estimates": true,
+  "forbidden_sources": [],
+  "trip_scenario_id": "SCENARIO-02-RAINY-SATURDAY",
+  "expected_tool_args": {
+    "city": "San Francisco",
+    "demo_date": "2027-05-15"
+  },
+  "city": "San Francisco",
+  "mode": "plan",
+  "request": {}
+}

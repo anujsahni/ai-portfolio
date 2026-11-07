@@ -1,0 +1,21 @@
+{
+  "chunkId": "PDX-ATTRACTION-ART--c01",
+  "sourceId": "PDX-ATTRACTION-ART",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Art in Portland: museum and Alberta Arts",
+  "section": "Art in Portland: museum and Alberta Arts",
+  "contentType": "attraction-note",
+  "chunkIndex": 1,
+  "text": "This sample note uses the Portland Art Museum downtown as an indoor activity for an art-focused or rainy day, and the Alberta Arts District as an optional gallery-and-mural stroll when conditions are dry.",
+  "textChecksum": "3c204e7896b098ba64b841f3907845947df9f46cadb35910dd771d4b5dd9e645",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "pdx-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

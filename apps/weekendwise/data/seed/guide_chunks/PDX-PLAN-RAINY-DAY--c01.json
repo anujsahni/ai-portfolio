@@ -1,0 +1,21 @@
+{
+  "chunkId": "PDX-PLAN-RAINY-DAY--c01",
+  "sourceId": "PDX-PLAN-RAINY-DAY",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Rainy-day planning in Portland",
+  "section": "Rainy-day planning in Portland",
+  "contentType": "planning-policy",
+  "chunkIndex": 1,
+  "text": "Portland often sees drizzle from fall through spring. When the simulated conditions are rainy, keep the traveler's interests and swap outdoor garden time for indoor options such as the art museum, Powell's, or a café, then move outdoor blocks to a drier day.",
+  "textChecksum": "c7d03f6740e14129aa6afe3e58aae53049b0a69d14e6eb3051088126ace2d6a8",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "pdx-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

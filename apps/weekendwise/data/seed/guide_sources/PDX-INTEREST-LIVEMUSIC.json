@@ -1,0 +1,17 @@
+{
+  "sourceId": "PDX-INTEREST-LIVEMUSIC",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Live music in Portland",
+  "contentType": "interest-note",
+  "sourceUri": "data/guides/portland-live-music.md",
+  "version": 1,
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "c4e37791f7ac62671c3d4b7b8390cb1099bc45a6d773d32a85ddc798c29cdd97",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

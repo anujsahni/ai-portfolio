@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-PLAN-RAINY-DAY--c02",
+  "sourceId": "SF-PLAN-RAINY-DAY",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Rainy-day planning pattern",
+  "section": "Rainy-day planning pattern",
+  "contentType": "planning-policy",
+  "chunkIndex": 2,
+  "text": "If no suitable indoor source is retrieved, ask a follow-up or state that the guide set does not support a confident alternative. Do not claim live forecasts or venue availability.",
+  "textChecksum": "220eea1456fce77964f9dc988c6e6a862a2942789179c9f363021a7ab01b4f6d",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

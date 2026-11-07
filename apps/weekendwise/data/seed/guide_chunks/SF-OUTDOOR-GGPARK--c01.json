@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-OUTDOOR-GGPARK--c01",
+  "sourceId": "SF-OUTDOOR-GGPARK",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Golden Gate Park: an easy green break",
+  "section": "Golden Gate Park: an easy green break",
+  "contentType": "outdoor-guide",
+  "chunkIndex": 1,
+  "text": "This sample guide treats Golden Gate Park as a flexible outdoor block that pairs well with a nearby museum visit. A planner can suggest a short, unhurried stroll before or after an indoor activity rather than a long hike.",
+  "textChecksum": "9530248142fbfbbd0fb9412e855ec44e317c75fe2d57cfdf13a0876165934b0e",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

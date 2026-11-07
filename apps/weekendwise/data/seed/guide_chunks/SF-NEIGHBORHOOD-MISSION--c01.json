@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-NEIGHBORHOOD-MISSION--c01",
+  "sourceId": "SF-NEIGHBORHOOD-MISSION",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Mission District: a casual food evening",
+  "section": "Mission District: a casual food evening",
+  "contentType": "neighborhood-guide",
+  "chunkIndex": 1,
+  "text": "This sample guide frames the Mission District as a good fit for a traveler who lists great food as an interest. A planner can suggest a casual early dinner followed by a short neighborhood walk, and let the group choose a spot that fits its budget.",
+  "textChecksum": "cfb5b28484b65ef430beb9f8ad8fb9a515d2a0cd10db0d49d3f3be7a30bf7d79",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

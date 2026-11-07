@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-PLANNING-ACCESSIBILITY--c01",
+  "sourceId": "SF-PLANNING-ACCESSIBILITY",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Accessibility and trip constraints",
+  "section": "Accessibility and trip constraints",
+  "contentType": "planning-policy",
+  "chunkIndex": 1,
+  "text": "If a traveler provides an accessibility or mobility constraint, preserve it throughout planning and do not infer that a venue, route, or activity is accessible without supporting evidence. Ask what accommodations matter when the request is unclear.",
+  "textChecksum": "721f2dbd2e99a6050223d6841965e735f272f716d69b070b839a28e05b064e69",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

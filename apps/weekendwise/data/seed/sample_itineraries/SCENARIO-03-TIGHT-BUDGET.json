@@ -1,0 +1,311 @@
+{
+  "scenarioId": "SCENARIO-03-TIGHT-BUDGET",
+  "cityId": "san-francisco",
+  "status": "complete",
+  "headline": "Good food and music on a small budget.",
+  "subhead": "This draft runs over your $150 limit; lower-cost swaps are listed below.",
+  "tripSummary": {
+    "destination": "San Francisco",
+    "dates": "June 11–13, 2027",
+    "travelers": 1
+  },
+  "days": [
+    {
+      "date": "2027-06-11",
+      "dayLabel": "FRI",
+      "title": "A casual food evening",
+      "intro": "Arrive, settle in, and keep dinner simple.",
+      "conditions": null,
+      "activities": [
+        {
+          "id": "d1-a1",
+          "time": "6:30 PM",
+          "type": "GREAT FOOD",
+          "title": "Mission District casual dinner",
+          "description": "Choose a casual spot that fits the budget, then take a short neighborhood walk.",
+          "area": "Mission District",
+          "priceLabel": "≈ $20–$40 (demo)",
+          "estimatedCost": {
+            "categoryId": "food-coffee",
+            "amount": 30,
+            "basis": "1 dinner, demo estimate"
+          },
+          "citations": [
+            "SF-NEIGHBORHOOD-MISSION--c01",
+            "SF-NEIGHBORHOOD-MISSION--c02"
+          ],
+          "isEstimate": true
+        }
+      ],
+      "transitTip": {
+        "text": "Group stops by neighborhood; no route numbers or live service are verified.",
+        "citations": [
+          "SF-TRANSIT-MUNI--c01"
+        ]
+      }
+    },
+    {
+      "date": "2027-06-12",
+      "dayLabel": "SAT",
+      "title": "Open day, music at night",
+      "intro": "A loose daytime plan and one optional music evening.",
+      "conditions": null,
+      "activities": [
+        {
+          "id": "d2-a1",
+          "time": "11:00 AM",
+          "type": "LOCAL BITES",
+          "title": "Ferry Building snack stop",
+          "description": "A snack and a waterfront walk.",
+          "area": "Embarcadero",
+          "priceLabel": "$",
+          "estimatedCost": {
+            "categoryId": "food-coffee",
+            "amount": 15,
+            "basis": "Snack, demo estimate"
+          },
+          "citations": [
+            "SF-NEIGHBORHOOD-FERRY--c01"
+          ],
+          "isEstimate": true
+        },
+        {
+          "id": "d2-a2",
+          "time": "8:00 PM",
+          "type": "LIVE MUSIC · OPTIONAL",
+          "title": "Live music evening",
+          "description": "Check current venue listings; no show, set time, or ticket is confirmed.",
+          "area": "Your choice",
+          "priceLabel": "Cover ≈ $45 (demo)",
+          "estimatedCost": {
+            "categoryId": "activities",
+            "amount": 45,
+            "basis": "1 cover charge, demo estimate"
+          },
+          "citations": [
+            "SF-INTEREST-LIVEMUSIC--c01",
+            "SF-INTEREST-LIVEMUSIC--c02"
+          ],
+          "isEstimate": true
+        }
+      ],
+      "transitTip": null
+    },
+    {
+      "date": "2027-06-13",
+      "dayLabel": "SUN",
+      "title": "Easy send-off",
+      "intro": "One more meal before heading home.",
+      "conditions": null,
+      "activities": [
+        {
+          "id": "d3-a1",
+          "time": "12:00 PM",
+          "type": "LUNCH",
+          "title": "Casual lunch",
+          "description": "A simple lunch near your last stop.",
+          "area": "Embarcadero",
+          "priceLabel": "$",
+          "estimatedCost": {
+            "categoryId": "food-coffee",
+            "amount": 25,
+            "basis": "1 lunch, demo estimate"
+          },
+          "citations": [
+            "SF-PLANNING-BUDGET--c01"
+          ],
+          "isEstimate": true
+        }
+      ],
+      "transitTip": null
+    }
+  ],
+  "budget": {
+    "currency": "USD",
+    "limit": 150,
+    "lineItems": [
+      {
+        "categoryId": "stays",
+        "amount": 150,
+        "note": "Two nights, budget-conscious demo estimate",
+        "citations": [
+          "SF-PLANNING-LODGING--c01"
+        ]
+      },
+      {
+        "categoryId": "food-coffee",
+        "amount": 110,
+        "note": "Includes $40 for breakfasts and coffee not itemized above",
+        "citations": [
+          "SF-PLANNING-BUDGET--c01"
+        ]
+      },
+      {
+        "categoryId": "activities",
+        "amount": 45,
+        "note": "Itemized from activities",
+        "citations": [
+          "SF-INTEREST-LIVEMUSIC--c01"
+        ]
+      },
+      {
+        "categoryId": "local-transit",
+        "amount": 30,
+        "note": "Flat demo estimate for 1",
+        "citations": [
+          "SF-TRANSIT-MUNI--c01"
+        ]
+      }
+    ],
+    "total": 335,
+    "uncertaintyBufferPct": 10,
+    "totalWithBuffer": 368.5,
+    "status": "over-budget",
+    "statusLabel": "OVER BUDGET",
+    "footnote": "Estimates only · no bookings included",
+    "suggestedSubstitutions": [
+      {
+        "replaces": "d2-a2",
+        "suggestion": "Pick a free or low-cover music option from current listings.",
+        "estimatedSavings": 35,
+        "citations": [
+          "SF-INTEREST-LIVEMUSIC--c01"
+        ]
+      },
+      {
+        "replaces": "stays",
+        "suggestion": "Use the low end of the budget-conscious lodging range.",
+        "estimatedSavings": 20,
+        "citations": [
+          "SF-PLANNING-LODGING--c01"
+        ]
+      }
+    ],
+    "totalAfterSubstitutions": 280
+  },
+  "whyThisFits": "You picked great food and live music, so the plan keeps meals casual and leaves one optional music evening.",
+  "citations": [
+    {
+      "chunkId": "SF-NEIGHBORHOOD-MISSION--c02",
+      "sourceId": "SF-NEIGHBORHOOD-MISSION",
+      "title": "Mission District: a casual food evening",
+      "contentType": "neighborhood-guide",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Friday dinner price range"
+    },
+    {
+      "chunkId": "SF-NEIGHBORHOOD-FERRY--c01",
+      "sourceId": "SF-NEIGHBORHOOD-FERRY",
+      "title": "Ferry Building and Embarcadero",
+      "contentType": "neighborhood-guide",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Saturday snack"
+    },
+    {
+      "chunkId": "SF-INTEREST-LIVEMUSIC--c01",
+      "sourceId": "SF-INTEREST-LIVEMUSIC",
+      "title": "An evening of live music",
+      "contentType": "interest-note",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Saturday evening"
+    },
+    {
+      "chunkId": "SF-PLANNING-BUDGET--c01",
+      "sourceId": "SF-PLANNING-BUDGET",
+      "title": "Budget-aware itinerary planning",
+      "contentType": "planning-policy",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Over-budget handling"
+    },
+    {
+      "chunkId": "SF-PLANNING-LODGING--c01",
+      "sourceId": "SF-PLANNING-LODGING",
+      "title": "Lodging estimates for a weekend sample",
+      "contentType": "planning-policy",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Stay estimate"
+    },
+    {
+      "chunkId": "SF-TRANSIT-MUNI--c01",
+      "sourceId": "SF-TRANSIT-MUNI",
+      "title": "Getting around without a car",
+      "contentType": "transit-note",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Route suggestions"
+    },
+    {
+      "chunkId": "SF-NEIGHBORHOOD-MISSION--c01",
+      "sourceId": "SF-NEIGHBORHOOD-MISSION",
+      "title": "Mission District: a casual food evening",
+      "contentType": "neighborhood-guide",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Friday dinner idea"
+    },
+    {
+      "chunkId": "SF-INTEREST-LIVEMUSIC--c02",
+      "sourceId": "SF-INTEREST-LIVEMUSIC",
+      "title": "An evening of live music",
+      "contentType": "interest-note",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "No tickets caveat"
+    }
+  ],
+  "assumptions": [
+    "Two nights of lodging for one traveler.",
+    "Breakfasts and coffee are bundled into the food line."
+  ],
+  "caveats": [
+    "Guide content, prices, and conditions are demo data.",
+    "No reservation, ticket, or payment is made.",
+    "The estimate is over your budget; see the suggested swaps."
+  ],
+  "unansweredRequests": [
+    {
+      "request": "Tonight's opening hours for a specific restaurant",
+      "reason": "The demo guides have no live hours or named businesses. Check the restaurant's official website or listing."
+    }
+  ],
+  "toolCalls": [],
+  "trace": [
+    {
+      "step": "normalize",
+      "label": "Read your trip details",
+      "status": "done"
+    },
+    {
+      "step": "retrieve",
+      "label": "Searched city guides",
+      "status": "done"
+    },
+    {
+      "step": "plan",
+      "label": "Drafted your days",
+      "status": "done"
+    },
+    {
+      "step": "review",
+      "label": "Reviewed sources and budget",
+      "status": "done"
+    },
+    {
+      "step": "revise",
+      "label": "Revised the draft once",
+      "status": "done"
+    }
+  ],
+  "review": {
+    "outcome": "approved",
+    "revisionCount": 0,
+    "checks": {
+      "citationsValid": true,
+      "budgetArithmetic": true,
+      "constraintsHonored": false,
+      "conditionsCaveated": true
+    },
+    "flags": [
+      "Estimate exceeds the $150 budget; status set to OVER BUDGET with substitutions.",
+      "Live opening hours were requested but are not in the corpus; marked as unanswered."
+    ]
+  },
+  "demoOnly": true
+}

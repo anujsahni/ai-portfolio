@@ -1,0 +1,17 @@
+{
+  "sourceId": "SC-PLANNING-ACCESSIBILITY",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "Accessibility and trip constraints in Santa Cruz",
+  "contentType": "planning-policy",
+  "sourceUri": "data/guides/santa-cruz-accessibility.md",
+  "version": 1,
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "09de81392e5c4d91280ca5e76085bb9d920ca1363ea82176e51a2c7906513f09",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

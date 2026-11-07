@@ -1,0 +1,21 @@
+{
+  "chunkId": "NAPA-PLANNING-BUDGET--c02",
+  "sourceId": "NAPA-PLANNING-BUDGET",
+  "city": "Napa Valley",
+  "cityId": "napa-valley",
+  "title": "Napa Valley budget and getting around",
+  "section": "Napa Valley budget and getting around",
+  "contentType": "planning-policy",
+  "chunkIndex": 2,
+  "text": "All amounts are fabricated fixtures, not current prices. Napa trips are usually more expensive than city weekends, so flag over-budget plans and suggest lower-cost swaps such as a picnic or a single tasting.",
+  "textChecksum": "fab56a5c4010c4bde895eac6b404b0d2bbcce451fccf63d3a61782d9ab0b3a92",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "napa-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

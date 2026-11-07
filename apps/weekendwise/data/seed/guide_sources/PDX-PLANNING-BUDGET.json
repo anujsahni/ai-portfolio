@@ -1,0 +1,17 @@
+{
+  "sourceId": "PDX-PLANNING-BUDGET",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Portland budget and lodging estimates",
+  "contentType": "planning-policy",
+  "sourceUri": "data/guides/portland-budget.md",
+  "version": 1,
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "d3727d3402ab782e1950e637287e6b88b64c840b5154baa9ab7da77fe42d1e02",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

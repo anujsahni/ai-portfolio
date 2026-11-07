@@ -1,0 +1,17 @@
+{
+  "sourceId": "SF-RETIRED-CABLECAR",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Cable car day (retired sample)",
+  "contentType": "transit-note",
+  "sourceUri": "data/guides/retired-cable-car.md",
+  "version": 1,
+  "lastReviewed": "2025-06-01",
+  "active": false,
+  "demoOnly": true,
+  "testFixture": "inactive-source",
+  "conflictsWith": null,
+  "checksum": "a4cea3710d7f6365e244e1d000f8d3efd6cb3c7e821e025b36b89cce4ac7836b",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

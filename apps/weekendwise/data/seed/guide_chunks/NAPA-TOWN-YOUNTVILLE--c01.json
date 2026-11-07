@@ -1,0 +1,21 @@
+{
+  "chunkId": "NAPA-TOWN-YOUNTVILLE--c01",
+  "sourceId": "NAPA-TOWN-YOUNTVILLE",
+  "city": "Napa Valley",
+  "cityId": "napa-valley",
+  "title": "Yountville: a slow food town",
+  "section": "Yountville: a slow food town",
+  "contentType": "neighborhood-guide",
+  "chunkIndex": 1,
+  "text": "This sample guide frames Yountville as a walkable small town for a relaxed dinner or bakery stop. A planner can suggest a stroll and a meal that fits the budget instead of naming a specific restaurant.",
+  "textChecksum": "1dc9996bf15e161b3b8eafc5c85420f2a91a4d441eae78e784d1a4dee15ac11b",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "napa-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

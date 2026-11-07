@@ -1,0 +1,17 @@
+{
+  "sourceId": "SF-ATTRACTION-DEYOUNG",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Art and a rainy-day option",
+  "contentType": "attraction-note",
+  "sourceUri": "data/guides/de-young.md",
+  "version": 1,
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "d077e739316debd0798b1d9e28688ac7955cce4c3be47fdc722a11246df55e10",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

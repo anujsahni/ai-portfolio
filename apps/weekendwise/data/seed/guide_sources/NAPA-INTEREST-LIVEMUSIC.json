@@ -1,0 +1,17 @@
+{
+  "sourceId": "NAPA-INTEREST-LIVEMUSIC",
+  "city": "Napa Valley",
+  "cityId": "napa-valley",
+  "title": "Live music in downtown Napa",
+  "contentType": "interest-note",
+  "sourceUri": "data/guides/napa-live-music.md",
+  "version": 1,
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "3405fe03f34512269da6d761aed1372f90616159db38f26af4d47902b4f80946",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

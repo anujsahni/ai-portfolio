@@ -1,0 +1,21 @@
+{
+  "chunkId": "SC-ATTRACTION-BOARDWALK--c02",
+  "sourceId": "SC-ATTRACTION-BOARDWALK",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "Beach Boardwalk and Wharf",
+  "section": "Beach Boardwalk and Wharf",
+  "contentType": "attraction-note",
+  "chunkIndex": 2,
+  "text": "Ride prices, seasonal hours, and parking are not verified. Summer weekends are busy; suggest arriving early and checking official information.",
+  "textChecksum": "d47c7e1f5a150759193ecb719162902205581fda35fd8e8addca9e78528286a3",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sc-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

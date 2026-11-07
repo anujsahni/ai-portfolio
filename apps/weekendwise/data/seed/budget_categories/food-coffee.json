@@ -1,0 +1,23 @@
+{
+  "label": "Food & coffee",
+  "badge": null,
+  "displayOrder": 2,
+  "description": "Meals, coffee, and snacks across the trip.",
+  "relatedSourceIdsByCity": {
+    "san-francisco": [
+      "SF-NEIGHBORHOOD-MISSION",
+      "SF-NEIGHBORHOOD-FERRY"
+    ],
+    "portland": [
+      "PDX-FOOD-CARTS"
+    ],
+    "santa-cruz": [
+      "SC-FOOD-CASUAL"
+    ],
+    "napa-valley": [
+      "NAPA-FOOD-OXBOW"
+    ]
+  },
+  "isEstimate": true,
+  "active": true
+}

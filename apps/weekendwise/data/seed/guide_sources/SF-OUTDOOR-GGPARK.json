@@ -1,0 +1,17 @@
+{
+  "sourceId": "SF-OUTDOOR-GGPARK",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Golden Gate Park: an easy green break",
+  "contentType": "outdoor-guide",
+  "sourceUri": "data/guides/golden-gate-park.md",
+  "version": 1,
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "8d64800516a92435424b12210d703d040c16433d2064f2e31a1e92965bd25943",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

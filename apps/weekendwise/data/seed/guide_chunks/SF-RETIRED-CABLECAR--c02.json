@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-RETIRED-CABLECAR--c02",
+  "sourceId": "SF-RETIRED-CABLECAR",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Cable car day (retired sample)",
+  "section": "Cable car day (retired sample)",
+  "contentType": "transit-note",
+  "chunkIndex": 2,
+  "text": "It remains in the repository only to test that inactive chunks are filtered out server-side.",
+  "textChecksum": "0aadef1fae66d17100ebac9609741d680903cc79d7dfee3257cb756e38806dd5",
+  "lastReviewed": "2025-06-01",
+  "active": false,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

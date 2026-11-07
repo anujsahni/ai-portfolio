@@ -1,0 +1,17 @@
+{
+  "cityId": "san-francisco",
+  "city": "San Francisco",
+  "demoDate": "2027-06-13",
+  "dayOfWeek": "Sun",
+  "condition": "partly-cloudy",
+  "icon": "⛅",
+  "tempHighF": 63,
+  "tempLowF": 53,
+  "precipitationChancePct": 10,
+  "windMph": 9,
+  "indoorRecommended": false,
+  "summary": "Partly cloudy sample day.",
+  "simulated": true,
+  "source": "WeekendWise deterministic demo fixture",
+  "disclaimer": "Simulated conditions for the demo. Not a forecast."
+}

@@ -1,0 +1,17 @@
+{
+  "sourceId": "SC-OUTDOOR-WESTCLIFF",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "West Cliff Drive to Natural Bridges",
+  "contentType": "outdoor-guide",
+  "sourceUri": "data/guides/santa-cruz-west-cliff.md",
+  "version": 1,
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "916724fe264bcbd52dd9208a242d2506d9fa8a54edee3dc936c19f2b9bdf8cd1",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

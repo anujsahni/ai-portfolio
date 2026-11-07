@@ -1,0 +1,23 @@
+{
+  "suite": "weekendwise-local-eval-v5",
+  "id": "PLAN-028",
+  "category": "multi-city-interest",
+  "city": "Napa Valley",
+  "question": "We like art. Is there anything besides wine in Napa?",
+  "expected_sources_any": [
+    "NAPA-ART-GALLERIES"
+  ],
+  "forbidden_sources": [
+    "SF-ATTRACTION-SFMOMA",
+    "SF-ATTRACTION-DEYOUNG"
+  ],
+  "expected_tool": false,
+  "must_disclose_demo_estimates": true,
+  "mode": "plan",
+  "request": {
+    "interestIds": [
+      "art-design"
+    ],
+    "budget": 900
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "sourceId": "PDX-NEIGHBORHOOD-PEARL",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Pearl District: books and coffee",
+  "contentType": "neighborhood-guide",
+  "sourceUri": "data/guides/portland-pearl.md",
+  "version": 1,
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "a5e9d0a302c7f27189de093e873307927d2b2c6636ac3da755208eaf3fb9300d",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

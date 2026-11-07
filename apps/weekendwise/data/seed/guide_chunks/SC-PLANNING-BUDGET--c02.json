@@ -1,0 +1,21 @@
+{
+  "chunkId": "SC-PLANNING-BUDGET--c02",
+  "sourceId": "SC-PLANNING-BUDGET",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "Santa Cruz budget and getting around",
+  "section": "Santa Cruz budget and getting around",
+  "contentType": "planning-policy",
+  "chunkIndex": 2,
+  "text": "All amounts are fabricated fixtures, not current prices. Show them as labeled estimates and flag any plan that exceeds the traveler's budget.",
+  "textChecksum": "24533160db440ebf2091337cc2438d2c866fb146831b2d36b732adc7bbfc6cff",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sc-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

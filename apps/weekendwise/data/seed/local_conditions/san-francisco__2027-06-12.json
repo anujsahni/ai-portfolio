@@ -1,0 +1,17 @@
+{
+  "cityId": "san-francisco",
+  "city": "San Francisco",
+  "demoDate": "2027-06-12",
+  "dayOfWeek": "Sat",
+  "condition": "fog",
+  "icon": "☁",
+  "tempHighF": 58,
+  "tempLowF": 51,
+  "precipitationChancePct": 15,
+  "windMph": 12,
+  "indoorRecommended": false,
+  "summary": "Sample morning fog clearing by midday; bring a layer.",
+  "simulated": true,
+  "source": "WeekendWise deterministic demo fixture",
+  "disclaimer": "Simulated conditions for the demo. Not a forecast."
+}

@@ -1,0 +1,21 @@
+{
+  "chunkId": "SC-FOOD-CASUAL--c02",
+  "sourceId": "SC-FOOD-CASUAL",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "Casual food in Santa Cruz",
+  "section": "Casual food in Santa Cruz",
+  "contentType": "food-guide",
+  "chunkIndex": 2,
+  "text": "For demo budgeting only, a casual meal can be shown as roughly $15–$35 per person. Specific restaurants, hours, and prices are not verified in this fixture.",
+  "textChecksum": "d4ae084948b30f9f8ce98c37d8e1872f311434a8fa36b925a7bbde499b49e6a0",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sc-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-ATTRACTION-SFMOMA--c01",
+  "sourceId": "SF-ATTRACTION-SFMOMA",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Modern art day: SFMOMA",
+  "section": "Modern art day: SFMOMA",
+  "contentType": "attraction-note",
+  "chunkIndex": 1,
+  "text": "For an art-focused itinerary, this sample note suggests allowing an unhurried indoor block for a modern-art museum visit and leaving time for a nearby coffee or meal. It is an example of how a planner can balance a major attraction with open time.",
+  "textChecksum": "2c0b5d99af70c49a4794bbc45a0fda6db7d570454aa16181acdd5df75ab3ebd8",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

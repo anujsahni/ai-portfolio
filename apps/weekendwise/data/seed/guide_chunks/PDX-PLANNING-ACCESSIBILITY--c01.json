@@ -1,0 +1,21 @@
+{
+  "chunkId": "PDX-PLANNING-ACCESSIBILITY--c01",
+  "sourceId": "PDX-PLANNING-ACCESSIBILITY",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Accessibility and trip constraints in Portland",
+  "section": "Accessibility and trip constraints in Portland",
+  "contentType": "planning-policy",
+  "chunkIndex": 1,
+  "text": "If a traveler shares an accessibility or mobility need, keep it throughout planning and ask which accommodations matter when unclear. In Portland, details such as MAX light rail and streetcars vary by place and should be confirmed in advance.",
+  "textChecksum": "98a288f870c34621c2a8cc72edf18787d8a25015064471e1a00f1e802d8e43b7",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "pdx-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

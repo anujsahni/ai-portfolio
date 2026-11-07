@@ -1,0 +1,17 @@
+{
+  "sourceId": "SC-OUTDOOR-REDWOODS",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "Redwoods at Henry Cowell",
+  "contentType": "outdoor-guide",
+  "sourceUri": "data/guides/santa-cruz-redwoods.md",
+  "version": 1,
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "42639958eede2e40f7930c4f9f36a4e71e7d716fc02127bd5db6619a5fed0bdd",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

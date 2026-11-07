@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-OUTDOOR-GGPARK--c02",
+  "sourceId": "SF-OUTDOOR-GGPARK",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Golden Gate Park: an easy green break",
+  "section": "Golden Gate Park: an easy green break",
+  "contentType": "outdoor-guide",
+  "chunkIndex": 2,
+  "text": "Paths, gardens, facilities, and events are not verified in this fixture. In poor simulated conditions, shorten or drop the outdoor block and keep the indoor option.",
+  "textChecksum": "6120f148d49829f5ba55b8568847ac2162b0bc53ab8079867b00af45ca58fe30",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

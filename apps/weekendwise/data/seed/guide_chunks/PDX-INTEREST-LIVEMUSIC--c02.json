@@ -1,0 +1,21 @@
+{
+  "chunkId": "PDX-INTEREST-LIVEMUSIC--c02",
+  "sourceId": "PDX-INTEREST-LIVEMUSIC",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Live music in Portland",
+  "section": "Live music in Portland",
+  "contentType": "interest-note",
+  "chunkIndex": 2,
+  "text": "This demo has no event calendar and cannot buy or hold tickets. For demo budgeting only, a club cover can be shown as roughly $15–$35; check current venue listings for shows and prices.",
+  "textChecksum": "b5482fda06de9db7ca8550984d530563cde447d976fa199aca3b9635eae0124c",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "pdx-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

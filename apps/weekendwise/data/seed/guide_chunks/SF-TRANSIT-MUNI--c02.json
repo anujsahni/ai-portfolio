@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-TRANSIT-MUNI--c02",
+  "sourceId": "SF-TRANSIT-MUNI",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Getting around without a car",
+  "section": "Getting around without a car",
+  "contentType": "transit-note",
+  "chunkIndex": 2,
+  "text": "No schedules, fares, or current disruptions are verified in this fixture. Use official transit information before travel.",
+  "textChecksum": "c8410a9d30cdd4462630b5be3a14957dcdfb9abdfd952a25a59da08f54e8652d",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

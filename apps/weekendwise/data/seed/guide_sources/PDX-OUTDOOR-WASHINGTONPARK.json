@@ -1,0 +1,17 @@
+{
+  "sourceId": "PDX-OUTDOOR-WASHINGTONPARK",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Washington Park gardens",
+  "contentType": "outdoor-guide",
+  "sourceUri": "data/guides/portland-washington-park.md",
+  "version": 1,
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "d3104a2061fe0511cdf39f30795abaf520511eedb4d844785c74588a216e45ac",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

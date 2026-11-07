@@ -1,0 +1,21 @@
+{
+  "chunkId": "NAPA-OUTDOOR-VINETRAIL--c02",
+  "sourceId": "NAPA-OUTDOOR-VINETRAIL",
+  "city": "Napa Valley",
+  "cityId": "napa-valley",
+  "title": "Napa Valley Vine Trail",
+  "section": "Napa Valley Vine Trail",
+  "contentType": "outdoor-guide",
+  "chunkIndex": 2,
+  "text": "Summer afternoons can be hot. Trail sections, bike rentals, and conditions are not verified; check official trail information.",
+  "textChecksum": "df9c15ae1da28655e9de56c2f3273342d2a7182d3f66787b0cc463a1588731b8",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "napa-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

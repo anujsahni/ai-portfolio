@@ -1,0 +1,27 @@
+{
+  "label": "Activities",
+  "badge": null,
+  "displayOrder": 3,
+  "description": "Admissions and paid activities; free activities listed at $0.",
+  "relatedSourceIdsByCity": {
+    "san-francisco": [
+      "SF-ATTRACTION-SFMOMA",
+      "SF-ATTRACTION-DEYOUNG"
+    ],
+    "portland": [
+      "PDX-ATTRACTION-ART",
+      "PDX-OUTDOOR-WASHINGTONPARK",
+      "PDX-INTEREST-LIVEMUSIC"
+    ],
+    "santa-cruz": [
+      "SC-ATTRACTION-BOARDWALK",
+      "SC-INTEREST-LIVEMUSIC"
+    ],
+    "napa-valley": [
+      "NAPA-TASTING-WINERIES",
+      "NAPA-TOWN-CALISTOGA"
+    ]
+  },
+  "isEstimate": true,
+  "active": true
+}

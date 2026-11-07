@@ -1,0 +1,21 @@
+{
+  "chunkId": "SC-OUTDOOR-REDWOODS--c02",
+  "sourceId": "SC-OUTDOOR-REDWOODS",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "Redwoods at Henry Cowell",
+  "section": "Redwoods at Henry Cowell",
+  "contentType": "outdoor-guide",
+  "chunkIndex": 2,
+  "text": "A car is usually needed. Trail status, parking fees, and hours are not verified in this fixture; check official state park information.",
+  "textChecksum": "1fdb486f0425bf1f42a4040cb916c16060936d35b942a46dd003d7291f3784de",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sc-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

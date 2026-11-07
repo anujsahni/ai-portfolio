@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-PLANNING-LODGING--c01",
+  "sourceId": "SF-PLANNING-LODGING",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Lodging estimates for a weekend sample",
+  "section": "Lodging estimates for a weekend sample",
+  "contentType": "planning-policy",
+  "chunkIndex": 1,
+  "text": "The sample budget treats lodging as a single estimated line rather than a specific hotel. For demo purposes, a modest room for two nights can be shown as about $180–$260 in total for the party, and a budget-conscious stay as about $120–$180.",
+  "textChecksum": "af7b8606d95fd64ddc60fb7aaca913d23ddacb2f8f5b74cdcb2f5e33d4fc5ae6",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

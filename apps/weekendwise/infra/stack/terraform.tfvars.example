@@ -1,0 +1,9 @@
+# Optional stack overrides. Copy to terraform.tfvars (git-ignored) only if you need to change a default.
+# project_id and region come from bootstrap.auto.tfvars.json; operator_principals from operator.auto.tfvars.json.
+
+# embedding_dimension = 768            # must equal VERTEX_EMBEDDING_DIMENSION in .env
+# firestore_location  = "us-central1"  # defaults to the project region; can't change after creation
+
+# Added by IAC-05:
+# max_instances         = 2
+# allow_unauthenticated = false

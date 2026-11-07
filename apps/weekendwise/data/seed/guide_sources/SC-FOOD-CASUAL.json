@@ -1,0 +1,17 @@
+{
+  "sourceId": "SC-FOOD-CASUAL",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "Casual food in Santa Cruz",
+  "contentType": "food-guide",
+  "sourceUri": "data/guides/santa-cruz-food.md",
+  "version": 1,
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "e93888a0d003346c0b381a88e44ae588204d52eab2ba192f8dde0c6b637df4a0",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

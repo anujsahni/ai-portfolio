@@ -1,0 +1,17 @@
+{
+  "sourceId": "PDX-TRANSIT-TRIMET",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Getting around Portland without a car",
+  "contentType": "transit-note",
+  "sourceUri": "data/guides/portland-transit.md",
+  "version": 1,
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "e1d61b39be98e45638ac1ca2b97d6951ba27397380f8217502e8eb66f599b666",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

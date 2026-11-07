@@ -1,0 +1,17 @@
+{
+  "sourceId": "SF-PLAN-RAINY-DAY",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Rainy-day planning pattern",
+  "contentType": "planning-policy",
+  "sourceUri": "data/guides/rainy-day.md",
+  "version": 1,
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "d266cf9c95f6d029ade031c5daa477ca2ab1a0d645eee46de3897b66e1831146",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

@@ -1,0 +1,21 @@
+{
+  "chunkId": "SC-FOOD-CASUAL--c01",
+  "sourceId": "SC-FOOD-CASUAL",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "Casual food in Santa Cruz",
+  "section": "Casual food in Santa Cruz",
+  "contentType": "food-guide",
+  "chunkIndex": 1,
+  "text": "This sample food guide suggests casual seafood on or near the wharf, a taqueria lunch, or a downtown dinner along Pacific Avenue. Santa Cruz meals tend to be relaxed, so a planner can leave the choice open.",
+  "textChecksum": "c308e24474f5c4e44d2d825c3666ae0d5165c4c67a9ccb01a83bed1314f556f6",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sc-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

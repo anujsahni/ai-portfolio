@@ -1,0 +1,104 @@
+{
+  "name": "Portland",
+  "state": "OR",
+  "country": "US",
+  "region": "Pacific Northwest",
+  "supported": true,
+  "trending": true,
+  "timezone": "America/Los_Angeles",
+  "tagline": "Coffee, bookstores, gardens, and food carts.",
+  "description": "A laid-back city split by the Willamette River, known for independent coffee, a big walkable bookstore, gardens, and food-cart pods. Neighborhoods on both sides of the river suit an unhurried weekend.",
+  "corpusVersion": "pdx-demo-v1",
+  "defaultTripLengthDays": 3,
+  "neighborhoods": [
+    "Pearl District",
+    "Downtown",
+    "Old Town Chinatown",
+    "Nob Hill / Northwest 23rd",
+    "Alberta Arts District",
+    "Mississippi Avenue",
+    "Hawthorne",
+    "Division / Clinton"
+  ],
+  "nearestAirports": [
+    {
+      "code": "PDX",
+      "name": "Portland International"
+    }
+  ],
+  "fromSanFrancisco": {
+    "approxMiles": 635,
+    "typicalTravel": "About a 1 h 45 min flight, or a full-day drive"
+  },
+  "gettingAround": {
+    "carNeeded": false,
+    "summary": "MAX light rail runs from the airport to downtown; the streetcar and buses cover central neighborhoods.",
+    "transitSystems": [
+      "TriMet MAX",
+      "Portland Streetcar",
+      "TriMet buses"
+    ]
+  },
+  "highlights": [
+    {
+      "interestId": "local-finds",
+      "title": "Powell's City of Books",
+      "note": "A block-sized bookstore in the Pearl District."
+    },
+    {
+      "interestId": "coffee",
+      "title": "Independent coffee roasters",
+      "note": "Many neighborhood cafés and roasters."
+    },
+    {
+      "interestId": "great-food",
+      "title": "Food-cart pods",
+      "note": "Clusters of food carts with varied, casual options."
+    },
+    {
+      "interestId": "outdoors",
+      "title": "Washington Park and Forest Park",
+      "note": "The Japanese Garden, the International Rose Test Garden, and miles of forest trails."
+    },
+    {
+      "interestId": "art-design",
+      "title": "Portland Art Museum and Alberta Arts District",
+      "note": "A downtown museum plus a gallery-and-mural neighborhood."
+    },
+    {
+      "interestId": "live-music",
+      "title": "Neighborhood music venues",
+      "note": "Small and mid-size venues across the city."
+    }
+  ],
+  "bestSeasons": [
+    "June",
+    "July",
+    "August",
+    "September"
+  ],
+  "weatherNotes": "Mild, dry summers; frequent drizzle from roughly October to May, so indoor backups matter.",
+  "demoDailyBudgetPerPersonUsd": {
+    "low": 100,
+    "high": 220,
+    "note": "Fabricated demo range, not a current price."
+  },
+  "travelTips": [
+    "Plan an indoor block for rainy months.",
+    "Oregon has no sales tax, but restaurant and lodging taxes still apply."
+  ],
+  "plannerReadiness": {
+    "hasGuides": true,
+    "hasConditionsFixture": true,
+    "blockers": []
+  },
+  "seededConditionDates": [
+    "2027-05-14",
+    "2027-05-15",
+    "2027-05-16"
+  ],
+  "notice": "Sample guides and simulated conditions only. Verify hours, prices, and access with official sources.",
+  "verifyNote": "General orientation for the demo. Verify hours, prices, reservations, and access with official sources.",
+  "demoOnly": true,
+  "updatedAt": "2026-11-05"
+}

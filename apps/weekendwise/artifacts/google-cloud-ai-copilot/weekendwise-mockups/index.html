@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0f766e" />
+    <meta name="description" content="WeekendWise helps you turn a few trip preferences into a thoughtful weekend plan." />
+    <title>WeekendWise — Plan a weekend that feels like yours</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="architecture.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#/plan" aria-label="WeekendWise home">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M20 5.5c-6.3 0-11.4 5.1-11.4 11.4 0 8.3 11.4 17.6 11.4 17.6s11.4-9.3 11.4-17.6C31.4 10.6 26.3 5.5 20 5.5Z"/><circle cx="20" cy="16.9" r="4.1"/><path class="mark-route" d="M7 8.5c3.5-3.1 7.6-4.7 12.2-4.7"/></svg></span>
+          <span class="brand-name">weekend<span>wise</span></span>
+        </a>
+        <div class="workspace-label">YOUR TRAVEL STUDIO</div>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a class="nav-item" data-nav="plan" href="#/plan"><span class="nav-icon">✳</span> Plan a trip</a>
+          <a class="nav-item" data-nav="itinerary" href="#/itinerary"><span class="nav-icon">▤</span> My itinerary</a>
+          <a class="nav-item" data-nav="sources" href="#/sources"><span class="nav-icon">◉</span> Sources & notes</a>
+        </nav>
+        <div class="nav-section-label">UNDER THE HOOD</div>
+        <nav class="main-nav" aria-label="Technical navigation">
+          <a class="nav-item" data-nav="architecture" href="#/architecture"><span class="nav-icon">◇</span> Architecture</a>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="sidebar-tip"><span class="tip-spark">✦</span><p><strong>A little more you.</strong><br />Good trips start with what you love.</p></div>
+          <button class="profile-button"><span class="avatar">A</span><span class="profile-copy"><strong>Alex Morgan</strong><small>Personal space</small></span><span class="profile-dots">···</span></button>
+        </div>
+      </aside>
+
+      <main class="main-area">
+        <header class="topbar">
+          <div class="breadcrumbs"><span>My travel studio</span><span class="crumb-sep">/</span><strong id="topbar-title">Plan a trip</strong></div>
+          <div class="topbar-right"><span class="demo-pill" title="Local UI prototype. Google Cloud services are not connected."><i></i> LOCAL MOCK · NO CLOUD</span><button class="help-button" aria-label="Help" title="This prototype uses sample data only">?</button></div>
+        </header>
+
+        <section class="screen active" id="screen-plan" aria-labelledby="plan-title">
+          <div class="page-heading">
+            <div class="eyebrow"><span class="eyebrow-line"></span> YOUR NEXT CHAPTER</div>
+            <h1 id="plan-title">A weekend that<br class="mobile-break" /> feels like <em>yours.</em></h1>
+            <p class="lead">Tell us what you’re in the mood for. We’ll shape a thoughtful plan around it.</p>
+          </div>
+          <div class="planner-layout">
+            <form class="planner-card" id="trip-form" onsubmit="startPlanning(event)">
+              <div class="form-section destination-section">
+                <label class="field-label" for="destination">WHERE TO?</label>
+                <div class="input-with-icon"><span class="field-icon">⌖</span><input id="destination" name="destination" value="San Francisco" placeholder="City or destination" required /><span class="input-trailing">⌄</span></div>
+                <div class="suggestion-row"><span class="suggestion-label">TRENDING</span><button type="button" class="suggestion-chip" onclick="setDestination('Portland')">Portland</button><button type="button" class="suggestion-chip" onclick="setDestination('Santa Cruz')">Santa Cruz</button><button type="button" class="suggestion-chip" onclick="setDestination('Napa Valley')">Napa Valley</button></div>
+              </div>
+              <div class="form-grid form-section">
+                <div><label class="field-label" for="dates">WHEN?</label><div class="input-with-icon"><span class="field-icon">▦</span><input id="dates" value="May 14 – 16, 2027" /></div></div>
+                <div><label class="field-label" for="travelers">WHO’S GOING?</label><div class="input-with-icon"><span class="field-icon">♧</span><select id="travelers"><option>2 travelers</option><option>1 traveler</option><option>3 travelers</option><option>4 travelers</option></select><span class="input-trailing">⌄</span></div></div>
+              </div>
+              <div class="form-section budget-section">
+                <div class="label-row"><label class="field-label" for="budget">YOUR BUDGET</label><span class="field-hint">Excluding flights</span></div>
+                <div class="budget-input"><span>$</span><input id="budget" type="number" min="50" step="50" value="600" /><span class="budget-suffix">total</span></div>
+                <input class="budget-range" type="range" min="200" max="2000" step="50" value="600" aria-label="Budget slider" oninput="syncBudget(this.value)" />
+                <div class="range-labels"><span>$200</span><span>$2,000+</span></div>
+              </div>
+              <div class="form-section interests-section">
+                <div class="label-row"><label class="field-label">WHAT ARE YOU INTO?</label><span class="field-hint">Pick a few</span></div>
+                <div class="interest-chips">
+                  <button type="button" class="interest-chip selected" aria-pressed="true">☕ Coffee</button>
+                  <button type="button" class="interest-chip selected" aria-pressed="true">◫ Art & design</button>
+                  <button type="button" class="interest-chip">♧ Outdoors</button>
+                  <button type="button" class="interest-chip">♨ Great food</button>
+                  <button type="button" class="interest-chip">♫ Live music</button>
+                  <button type="button" class="interest-chip">⌂ Local finds</button>
+                </div>
+              </div>
+              <div class="form-footer"><span class="privacy-note"><span>✦</span> Your plan, your pace. No bookings made.</span><button class="primary-button" type="submit">Make my weekend <span>→</span></button></div>
+            </form>
+            <aside class="inspiration-card">
+              <div class="inspiration-image" role="img" aria-label="Illustration of the San Francisco waterfront"><div class="sun-disc"></div><div class="hill hill-back"></div><div class="hill hill-front"></div><div class="bridge bridge-one"></div><div class="bridge bridge-two"></div><span class="image-caption">SAN FRANCISCO, CA</span></div>
+              <div class="inspiration-copy"><div class="mini-kicker">A GOOD PLACE TO START</div><h2>City days,<br />coastal air.</h2><p>Colorful streets, the smell of sourdough, and that first view of the bay.</p><div class="inspiration-meta"><span>☀ Usually mild in May</span><span>◷ 2–3 days is just right</span></div></div>
+              <div class="inspiration-decoration">✳</div>
+            </aside>
+          </div>
+          <div class="bottom-note"><span class="sparkle">✦</span> Made for the “we should get away” kind of weekend.</div>
+        </section>
+
+        <section class="screen" id="screen-working" aria-labelledby="working-title">
+          <div class="working-wrap">
+            <div class="working-orbit"><div class="orbit-ring ring-one"></div><div class="orbit-ring ring-two"></div><div class="orbit-core">✳</div><span class="orbit-dot dot-a"></span><span class="orbit-dot dot-b"></span><span class="orbit-dot dot-c"></span></div>
+            <div class="eyebrow centered"><span class="eyebrow-line"></span> PUTTING IT TOGETHER</div>
+            <h1 id="working-title">Finding your<br /><em>kind of weekend.</em></h1>
+            <p class="working-subtitle">We’re gathering a few good ideas and making sure they fit.</p>
+            <div class="trip-summary-strip"><span class="summary-pin">⌖</span><strong id="working-destination">San Francisco</strong><span>·</span><span>May 14–16</span><span>·</span><span id="working-budget">$600</span></div>
+            <div class="progress-list" id="progress-list">
+              <div class="progress-step complete"><span class="step-check">✓</span><span>Getting a feel for your trip</span><small>DONE</small></div>
+              <div class="progress-step current"><span class="step-loader"></span><span>Finding places you’ll love</span><small>IN PROGRESS</small></div>
+              <div class="progress-step"><span class="step-empty"></span><span>Checking the little details</span><small></small></div>
+              <div class="progress-step"><span class="step-empty"></span><span>Putting your days together</span><small></small></div>
+            </div>
+            <p class="simulated-note"><span>ℹ</span> Conditions and recommendations in this demo use sample data.</p>
+            <button class="text-button" onclick="showScreen('plan')">← Edit trip details</button>
+          </div>
+        </section>
+
+        <section class="screen" id="screen-itinerary" aria-labelledby="itinerary-title">
+          <div class="results-header">
+            <div><div class="eyebrow"><span class="eyebrow-line"></span> YOUR WEEKEND, WELL SPENT</div><h1 id="itinerary-title"><span id="result-destination">San Francisco</span>, <em>your way.</em></h1><p class="lead compact">A little art, excellent coffee, and room to wander.</p></div>
+            <div class="result-actions"><button class="secondary-button" onclick="showScreen('plan')">✎ Edit trip</button><button class="icon-action" aria-label="Share itinerary" onclick="showToast('Share link copied (demo)')">↗</button></div>
+          </div>
+          <div class="trip-meta-row"><span id="result-dates">▦ MAY 14–16, 2027</span><span id="result-travelers">♧ 2 TRAVELERS</span><span id="result-city">⌖ SAN FRANCISCO</span><span class="demo-conditions">☁ Sample conditions · not live</span></div>
+          <div class="results-layout">
+            <div class="itinerary-column">
+              <div class="day-tabs"><button class="day-tab active" onclick="selectDay(this,'day-one')"><span>FRI</span><strong>14</strong></button><button class="day-tab" onclick="selectDay(this,'day-two')"><span>SAT</span><strong>15</strong></button><button class="day-tab" onclick="selectDay(this,'day-three')"><span>SUN</span><strong>16</strong></button><span class="day-tabs-caption">3 thoughtfully unhurried days</span></div>
+              <div id="day-one" class="day-plan active">
+                <div class="day-intro"><span class="day-weather">☀ 64°</span><h2>Arrive & ease in</h2><p>Keep the first afternoon light. The city will still be here tomorrow.</p></div>
+                <article class="activity-card"><div class="activity-time">11:30 <small>AM</small></div><div class="activity-pin coffee-pin">☕</div><div class="activity-content"><div class="activity-type">A SLOW START · COFFEE</div><h3>Blue Bottle, Ferry Building</h3><p>Grab a New Orleans-style iced coffee, then browse the local stalls along the waterfront.</p><div class="activity-tags"><span>⌖ Embarcadero</span><span>$–$$</span><button onclick="openSources()">Source ↗</button></div></div><span class="activity-more">···</span></article>
+                <article class="activity-card"><div class="activity-time">1:00 <small>PM</small></div><div class="activity-pin art-pin">◫</div><div class="activity-content"><div class="activity-type">A LITTLE ART · 1.5 HOURS</div><h3>SFMOMA</h3><p>Ease into the weekend with a few floors of modern art. The rooftop garden is a lovely breather.</p><div class="activity-tags"><span>⌖ SoMa</span><span>≈ $30/person</span><button onclick="openSources()">Source ↗</button></div></div><span class="activity-more">···</span></article>
+                <div class="connector-note"><span>↘</span><span>Take the scenic walk toward the waterfront, or hop on the F Market streetcar.</span></div>
+                <article class="activity-card"><div class="activity-time">4:00 <small>PM</small></div><div class="activity-pin local-pin">⌂</div><div class="activity-content"><div class="activity-type">WANDER A WHILE · NEIGHBORHOOD</div><h3>North Beach & City Lights</h3><p>Browse the bookshop, find a square of sunshine, and let dinner happen when it happens.</p><div class="activity-tags"><span>⌖ North Beach</span><span>Free to wander</span><button onclick="openSources()">Source ↗</button></div></div><span class="activity-more">···</span></article>
+              </div>
+              <div id="day-two" class="day-plan"><div class="day-intro"><span class="day-weather">☁ 61° · SAMPLE</span><h2>Color, coffee & a cozy backup</h2><p>We planned an indoor-friendly day in case the sample forecast holds.</p></div><article class="activity-card"><div class="activity-time">10:00 <small>AM</small></div><div class="activity-pin art-pin">◫</div><div class="activity-content"><div class="activity-type">ART & ARCHITECTURE</div><h3>de Young Museum</h3><p>Spend a relaxed morning with art from around the world. Check the museum’s official hours before you go.</p><div class="activity-tags"><span>⌖ Golden Gate Park</span><span>≈ $20/person</span><button onclick="openSources()">Source ↗</button></div></div></article><article class="activity-card"><div class="activity-time">1:30 <small>PM</small></div><div class="activity-pin coffee-pin">☕</div><div class="activity-content"><div class="activity-type">COFFEE & SOMETHING SWEET</div><h3>Richmond District café hop</h3><p>Pick one neighborhood café, linger over a pastry, and keep the afternoon flexible.</p><div class="activity-tags"><span>⌖ Inner Richmond</span><span>$–$$</span><button onclick="openSources()">Source ↗</button></div></div></article></div>
+              <div id="day-three" class="day-plan"><div class="day-intro"><span class="day-weather">☀ 65°</span><h2>One last look at the bay</h2><p>A gentle final morning with an easy route back toward town.</p></div><article class="activity-card"><div class="activity-time">9:30 <small>AM</small></div><div class="activity-pin local-pin">⌂</div><div class="activity-content"><div class="activity-type">FRESH AIR · EASY PACE</div><h3>Crissy Field waterfront walk</h3><p>Take in the bridge views, then choose a nearby café for a late breakfast.</p><div class="activity-tags"><span>⌖ Presidio</span><span>Free</span><button onclick="openSources()">Source ↗</button></div></div></article><article class="activity-card"><div class="activity-time">12:00 <small>PM</small></div><div class="activity-pin food-pin">♨</div><div class="activity-content"><div class="activity-type">A PROPER SEND-OFF</div><h3>Lunch near the Ferry Building</h3><p>One last local bite before heading home. Leave a little buffer for the journey.</p><div class="activity-tags"><span>⌖ Embarcadero</span><span>$$</span><button onclick="openSources()">Source ↗</button></div></div></article></div>
+              <button class="more-ideas" onclick="showToast('More ideas are coming in the full app')"><span>✳</span> Give me a few more ideas</button>
+            </div>
+            <aside class="trip-sidebar">
+              <div class="budget-card"><div class="card-label-row"><span class="field-label">YOUR BUDGET</span><span class="budget-status" id="result-budget-status">ON TRACK</span></div><div class="budget-total"><strong id="result-estimate">$486</strong><span id="result-budget">of $600</span></div><div class="budget-meter"><span id="result-budget-meter" style="width:81%"></span></div><div class="budget-rows"><div><span>Stays <small>estimate</small></span><strong>$210</strong></div><div><span>Food & coffee</span><strong>$146</strong></div><div><span>Activities</span><strong>$90</strong></div><div><span>Local transit</span><strong>$40</strong></div></div><div class="budget-footnote">Estimates only · no bookings included</div></div>
+              <div class="why-card"><div class="why-icon">✦</div><div><strong>Why this fits you</strong><p id="result-interests">You said coffee, art, and a relaxed pace. We left open space between stops.</p><button onclick="openSources()">See trip sources <span>→</span></button></div></div>
+              <div class="agent-trace"><div class="trace-heading"><span class="trace-pulse"></span><strong>HOW THIS PLAN CAME TOGETHER</strong></div><div class="trace-item"><span class="trace-check">✓</span><span>Matched your interests to city guides</span></div><div class="trace-item"><span class="trace-check">✓</span><span>Checked sample local conditions</span></div><div class="trace-item"><span class="trace-check">✓</span><span>Reviewed sources and budget</span></div><div class="trace-foot">Local mock itinerary · no AI service connected</div></div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="screen" id="screen-sources" aria-labelledby="sources-title">
+          <div class="sources-heading"><button class="back-link" onclick="showScreen('itinerary')">← Back to itinerary</button><div class="eyebrow"><span class="eyebrow-line"></span> TRANSPARENCY, BUILT IN</div><h1 id="sources-title">Where the ideas<br /><em>came from.</em></h1><p class="lead">Recommendations are tied to the demo guides below. Hours, prices, and conditions can change.</p></div>
+          <div class="sources-layout"><div class="source-list"><article class="source-card"><div class="source-number">01</div><div class="source-content"><div class="source-category">SAMPLE NEIGHBORHOOD GUIDE · OCT 2026</div><h2>Ferry Building & Embarcadero</h2><p>A waterfront marketplace with local food vendors, coffee counters, and easy access to the bay promenade.</p><div class="source-meta"><span>Used for: Friday coffee stop</span><span class="source-score">DEMO MATCH</span></div></div><span class="source-kind">GUIDE</span></article><article class="source-card"><div class="source-number">02</div><div class="source-content"><div class="source-category">SAMPLE ATTRACTION NOTE · OCT 2026</div><h2>Modern art day: SFMOMA</h2><p>Visitor overview, approximate admission range, transit area, and a note to verify current hours on the museum website.</p><div class="source-meta"><span>Used for: Friday afternoon</span><span class="source-score">DEMO MATCH</span></div></div><span class="source-kind">PLACE</span></article><article class="source-card"><div class="source-number">03</div><div class="source-content"><div class="source-category">SAMPLE TRANSIT NOTE · OCT 2026</div><h2>Getting around without a car</h2><p>Sample guide to Muni routes, walking connections, and planning a little extra time between neighborhoods.</p><div class="source-meta"><span>Used for: Route suggestions</span><span class="source-score">DEMO MATCH</span></div></div><span class="source-kind">TIP</span></article></div><aside class="source-side-note"><span class="source-spark">✳</span><h3>Good to know</h3><p>This prototype uses a small fictional demo corpus and simulated conditions. It doesn’t access live maps, verify current venue hours, or make reservations.</p><button class="secondary-button" onclick="showScreen('itinerary')">Back to my plan</button></aside></div>
+        </section>
+
+
+        <section class="screen" id="screen-architecture" aria-labelledby="architecture-title">
+          <div class="arch-heading">
+            <div>
+              <div class="eyebrow"><span class="eyebrow-line"></span> UNDER THE HOOD</div>
+              <h1 id="architecture-title">How WeekendWise <em>works.</em></h1>
+              <p class="lead">The target MVP architecture on Google Cloud. Hover over any service to see what it does, or walk through a request from the browser to a cited itinerary.</p>
+            </div>
+            <div class="arch-stats" aria-label="Architecture at a glance">
+              <div class="arch-stat"><strong>4</strong><span>Cities · 47 guides</span></div>
+              <div class="arch-stat"><strong>≤ 3</strong><span>Model calls / trip</span></div>
+              <div class="arch-stat"><strong>0</strong><span>API keys stored</span></div>
+              <div class="arch-stat"><strong>$20</strong><span>Monthly budget</span></div>
+            </div>
+          </div>
+          <div class="arch-layout">
+            <div class="arch-canvas">
+              <div class="arch-canvas-head"><strong>Service map</strong><span>Hover <span class="inline-i">i</span> for details · click to pin</span></div>
+              <svg id="arch-svg" viewBox="0 0 800 1064" role="img" aria-label="WeekendWise architecture diagram: a traveler's browser calls a Streamlit app on Cloud Run, where a LangGraph workflow retrieves guide passages from Firestore using Vertex AI embeddings, optionally checks a simulated conditions tool, drafts and reviews an itinerary with Gemini, and returns a cited plan."></svg>
+              <div class="arch-legend">
+                <span><i class="legend-swatch gcp"></i>Google Cloud</span>
+                <span><i class="legend-swatch oss"></i>Open source</span>
+                <span><i class="legend-swatch app"></i>WeekendWise code</span>
+                <span><i class="legend-line"></i>Request flow</span>
+                <span><i class="legend-line ops"></i>Build &amp; data load</span>
+                <span><i class="legend-line optional"></i>Optional call</span>
+              </div>
+            </div>
+            <aside class="arch-panel">
+              <div class="arch-card arch-detail" id="arch-detail" aria-live="polite"></div>
+              <div class="arch-card">
+                <div class="walk-head"><strong>Walkthrough</strong><span id="arch-counter">Overview</span></div>
+                <ol class="arch-steps" id="arch-steps"></ol>
+                <div class="walk-controls">
+                  <button class="secondary-button" id="arch-prev" onclick="archPrev()" aria-label="Previous step">←</button>
+                  <button class="primary-button" id="arch-next" onclick="archNext()">Start walkthrough →</button>
+                </div>
+                <button class="walk-reset" onclick="archReset()">Show the full diagram</button>
+              </div>
+            </aside>
+          </div>
+          <div class="arch-tip" id="arch-tip" role="tooltip"></div>
+        </section>
+
+        <footer class="app-footer"><span>WEEKENDWISE</span><span>Make room for a little wonder <b>✳</b></span><span>DEMO · SAMPLE DATA</span></footer>
+      </main>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <script src="select-menu.js"></script>
+    <script src="app.js"></script>
+    <script src="architecture.js"></script>
+  </body>
+</html>

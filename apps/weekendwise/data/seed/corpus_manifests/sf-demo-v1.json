@@ -1,0 +1,153 @@
+{
+  "corpusVersion": "sf-demo-v1",
+  "cityId": "san-francisco",
+  "chunkerVersion": "paragraph-v1",
+  "sourceCount": 17,
+  "activeSourceCount": 16,
+  "chunkCount": 35,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "firestore": {
+    "database": "(default)",
+    "collection": "guide_chunks",
+    "vectorField": "embedding"
+  },
+  "sources": [
+    {
+      "sourceId": "SF-PLANNING-ACCESSIBILITY",
+      "file": "data/guides/accessibility-planning.md",
+      "cityId": "san-francisco",
+      "active": true,
+      "chunks": 2,
+      "checksum": "6ca9ee1d98779b7edff76440262f922c5a24a1774d50c70a61a1f3218846d782"
+    },
+    {
+      "sourceId": "SF-PLANNING-BUDGET",
+      "file": "data/guides/budget-planning.md",
+      "cityId": "san-francisco",
+      "active": true,
+      "chunks": 2,
+      "checksum": "13cec3ac662a3dbd16fa9a200a8a5480d2439163f9dff93eb9df39f5cb14cd00"
+    },
+    {
+      "sourceId": "SF-OUTDOOR-CRISSY",
+      "file": "data/guides/crissy-field.md",
+      "cityId": "san-francisco",
+      "active": true,
+      "chunks": 2,
+      "checksum": "237e2d596c7a21b07af905f225cdaedb75e7f5118be03f047d64a2b7db105132"
+    },
+    {
+      "sourceId": "SF-ATTRACTION-DEYOUNG",
+      "file": "data/guides/de-young.md",
+      "cityId": "san-francisco",
+      "active": true,
+      "chunks": 2,
+      "checksum": "d077e739316debd0798b1d9e28688ac7955cce4c3be47fdc722a11246df55e10"
+    },
+    {
+      "sourceId": "SF-NEIGHBORHOOD-FERRY",
+      "file": "data/guides/ferry-building.md",
+      "cityId": "san-francisco",
+      "active": true,
+      "chunks": 2,
+      "checksum": "317a3886901c93827ad8098777d43c9f8f7a5860157aa5f82bd0103449621a46"
+    },
+    {
+      "sourceId": "SF-OUTDOOR-GGPARK",
+      "file": "data/guides/golden-gate-park.md",
+      "cityId": "san-francisco",
+      "active": true,
+      "chunks": 2,
+      "checksum": "8d64800516a92435424b12210d703d040c16433d2064f2e31a1e92965bd25943"
+    },
+    {
+      "sourceId": "SF-ADVERSARIAL-INJECTION",
+      "file": "data/guides/injection-fixture.md",
+      "cityId": "san-francisco",
+      "active": true,
+      "chunks": 3,
+      "checksum": "9a317ad7129aaec3cc103f32216d7fe3e5b114046d98560883ff6f71144d2928"
+    },
+    {
+      "sourceId": "SF-INTEREST-LIVEMUSIC",
+      "file": "data/guides/live-music.md",
+      "cityId": "san-francisco",
+      "active": true,
+      "chunks": 2,
+      "checksum": "a753ea53bf8290a89a5381cdddf903a35a303e0be20d0e61ef53c1229f84cdc1"
+    },
+    {
+      "sourceId": "SF-PLANNING-LODGING",
+      "file": "data/guides/lodging-estimates.md",
+      "cityId": "san-francisco",
+      "active": true,
+      "chunks": 2,
+      "checksum": "2406c19f4cbb8a322a9d03ae69326d43e0e253cba7f23ba3be777e3b209e6dc0"
+    },
+    {
+      "sourceId": "SF-NEIGHBORHOOD-MISSION",
+      "file": "data/guides/mission-food.md",
+      "cityId": "san-francisco",
+      "active": true,
+      "chunks": 2,
+      "checksum": "e4d6d294df094b82283abfbd786768fc193fa9956320f3e2c8dbf67c9d5c515a"
+    },
+    {
+      "sourceId": "SF-TRANSIT-MUNI",
+      "file": "data/guides/muni-transit.md",
+      "cityId": "san-francisco",
+      "active": true,
+      "chunks": 2,
+      "checksum": "fa2064000bb6916ad85af9a3748082752a68baeea4005452ab8e56253c4c39a8"
+    },
+    {
+      "sourceId": "SF-NEIGHBORHOOD-NORTHBEACH",
+      "file": "data/guides/north-beach.md",
+      "cityId": "san-francisco",
+      "active": true,
+      "chunks": 2,
+      "checksum": "9ae89d376c7fed82e8b8c480210db3c206c827d4ec960dbc7ac29eb20e04198a"
+    },
+    {
+      "sourceId": "SF-PLAN-RAINY-DAY",
+      "file": "data/guides/rainy-day.md",
+      "cityId": "san-francisco",
+      "active": true,
+      "chunks": 2,
+      "checksum": "d266cf9c95f6d029ade031c5daa477ca2ab1a0d645eee46de3897b66e1831146"
+    },
+    {
+      "sourceId": "SF-RETIRED-CABLECAR",
+      "file": "data/guides/retired-cable-car.md",
+      "cityId": "san-francisco",
+      "active": false,
+      "chunks": 2,
+      "checksum": "a4cea3710d7f6365e244e1d000f8d3efd6cb3c7e821e025b36b89cce4ac7836b"
+    },
+    {
+      "sourceId": "SF-NEIGHBORHOOD-RICHMOND",
+      "file": "data/guides/richmond-coffee.md",
+      "cityId": "san-francisco",
+      "active": true,
+      "chunks": 2,
+      "checksum": "27d77a18e9f61440f172a5d7fb54a55c155c9b74acfb712794769c5f7aa5a65f"
+    },
+    {
+      "sourceId": "SF-ATTRACTION-SFMOMA",
+      "file": "data/guides/sfmoma.md",
+      "cityId": "san-francisco",
+      "active": true,
+      "chunks": 2,
+      "checksum": "2bb34ccd2909dc5c7ad31eb4bd4d3193aba72e0486073d79d134397a7b4a92d3"
+    },
+    {
+      "sourceId": "SF-STALE-FERRY-HOURS",
+      "file": "data/guides/stale-ferry-hours.md",
+      "cityId": "san-francisco",
+      "active": true,
+      "chunks": 2,
+      "checksum": "4e27bcecbb52506715144db12eca25730ad0b9845f4dc95913675587ab3dde77"
+    }
+  ]
+}

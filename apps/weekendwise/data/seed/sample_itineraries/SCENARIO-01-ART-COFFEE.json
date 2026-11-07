@@ -1,0 +1,349 @@
+{
+  "scenarioId": "SCENARIO-01-ART-COFFEE",
+  "cityId": "san-francisco",
+  "status": "complete",
+  "headline": "San Francisco, your way.",
+  "subhead": "A little art, good coffee, and room to wander.",
+  "tripSummary": {
+    "destination": "San Francisco",
+    "dates": "May 14–16, 2027",
+    "travelers": 2
+  },
+  "days": [
+    {
+      "date": "2027-05-14",
+      "dayLabel": "FRI",
+      "title": "Arrive & ease in",
+      "intro": "Keep the first afternoon light.",
+      "conditions": null,
+      "activities": [
+        {
+          "id": "d1-a1",
+          "time": "11:30 AM",
+          "type": "A SLOW START · COFFEE",
+          "title": "Coffee at the Ferry Building",
+          "description": "Start with a coffee, then take a short walk along the Embarcadero.",
+          "area": "Embarcadero",
+          "priceLabel": "$–$$",
+          "estimatedCost": {
+            "categoryId": "food-coffee",
+            "amount": 14,
+            "basis": "2 coffees, demo estimate"
+          },
+          "citations": [
+            "SF-NEIGHBORHOOD-FERRY--c01"
+          ],
+          "isEstimate": true
+        },
+        {
+          "id": "d1-a2",
+          "time": "1:00 PM",
+          "type": "A LITTLE ART · 1.5 HOURS",
+          "title": "SFMOMA",
+          "description": "An unhurried indoor block of modern art. Check official hours and admission before you go.",
+          "area": "SoMa",
+          "priceLabel": "≈ $25/person (demo)",
+          "estimatedCost": {
+            "categoryId": "activities",
+            "amount": 50,
+            "basis": "2 × $25 demo admission"
+          },
+          "citations": [
+            "SF-ATTRACTION-SFMOMA--c01",
+            "SF-ATTRACTION-SFMOMA--c02"
+          ],
+          "isEstimate": true
+        },
+        {
+          "id": "d1-a3",
+          "time": "4:00 PM",
+          "type": "WANDER A WHILE · NEIGHBORHOOD",
+          "title": "North Beach wander",
+          "description": "Browse a bookstore, rest in a public square, and choose dinner based on energy and budget.",
+          "area": "North Beach",
+          "priceLabel": "Dinner ≈ $30/person (demo)",
+          "estimatedCost": {
+            "categoryId": "food-coffee",
+            "amount": 60,
+            "basis": "Dinner for 2, demo estimate"
+          },
+          "citations": [
+            "SF-NEIGHBORHOOD-NORTHBEACH--c01"
+          ],
+          "isEstimate": true
+        }
+      ],
+      "transitTip": {
+        "text": "Group stops by neighborhood and check the current transit map; leave extra transfer time.",
+        "citations": [
+          "SF-TRANSIT-MUNI--c01"
+        ]
+      }
+    },
+    {
+      "date": "2027-05-15",
+      "dayLabel": "SAT",
+      "title": "Color, coffee & a cozy pace",
+      "intro": "An indoor-friendly art morning and a flexible afternoon.",
+      "conditions": null,
+      "activities": [
+        {
+          "id": "d2-a1",
+          "time": "10:00 AM",
+          "type": "ART & ARCHITECTURE",
+          "title": "de Young Museum",
+          "description": "A relaxed museum morning. Verify current hours, exhibits, and admission.",
+          "area": "Golden Gate Park",
+          "priceLabel": "≈ $20/person (demo)",
+          "estimatedCost": {
+            "categoryId": "activities",
+            "amount": 40,
+            "basis": "2 × $20 demo admission"
+          },
+          "citations": [
+            "SF-ATTRACTION-DEYOUNG--c01"
+          ],
+          "isEstimate": true
+        },
+        {
+          "id": "d2-a2",
+          "time": "1:30 PM",
+          "type": "COFFEE & SOMETHING SWEET",
+          "title": "Richmond District café stop",
+          "description": "Pick one café, share a treat, and keep the afternoon open.",
+          "area": "Inner Richmond",
+          "priceLabel": "$–$$",
+          "estimatedCost": {
+            "categoryId": "food-coffee",
+            "amount": 18,
+            "basis": "2 coffees + 1 pastry, demo estimate"
+          },
+          "citations": [
+            "SF-NEIGHBORHOOD-RICHMOND--c01"
+          ],
+          "isEstimate": true
+        }
+      ],
+      "transitTip": null
+    },
+    {
+      "date": "2027-05-16",
+      "dayLabel": "SUN",
+      "title": "One last look at the bay",
+      "intro": "A gentle final morning.",
+      "conditions": null,
+      "activities": [
+        {
+          "id": "d3-a1",
+          "time": "9:30 AM",
+          "type": "FRESH AIR · EASY PACE",
+          "title": "Crissy Field waterfront walk",
+          "description": "A relaxed waterfront walk if conditions suit; paths and facilities are not verified.",
+          "area": "Presidio",
+          "priceLabel": "Free",
+          "estimatedCost": {
+            "categoryId": "activities",
+            "amount": 0,
+            "basis": "No admission"
+          },
+          "citations": [
+            "SF-OUTDOOR-CRISSY--c01"
+          ],
+          "isEstimate": true
+        },
+        {
+          "id": "d3-a2",
+          "time": "12:00 PM",
+          "type": "A PROPER SEND-OFF",
+          "title": "Lunch near the Ferry Building",
+          "description": "One last bite before heading home; leave a buffer for the journey.",
+          "area": "Embarcadero",
+          "priceLabel": "$$",
+          "estimatedCost": {
+            "categoryId": "food-coffee",
+            "amount": 54,
+            "basis": "Lunch for 2, demo estimate"
+          },
+          "citations": [
+            "SF-NEIGHBORHOOD-FERRY--c01"
+          ],
+          "isEstimate": true
+        }
+      ],
+      "transitTip": null
+    }
+  ],
+  "budget": {
+    "currency": "USD",
+    "limit": 600,
+    "lineItems": [
+      {
+        "categoryId": "stays",
+        "amount": 210,
+        "note": "Two nights, single demo estimate",
+        "citations": [
+          "SF-PLANNING-LODGING--c01"
+        ]
+      },
+      {
+        "categoryId": "food-coffee",
+        "amount": 146,
+        "note": "Itemized from activities",
+        "citations": [
+          "SF-PLANNING-BUDGET--c01"
+        ]
+      },
+      {
+        "categoryId": "activities",
+        "amount": 90,
+        "note": "Itemized from activities",
+        "citations": [
+          "SF-PLANNING-BUDGET--c01"
+        ]
+      },
+      {
+        "categoryId": "local-transit",
+        "amount": 40,
+        "note": "Flat demo estimate for 2",
+        "citations": [
+          "SF-TRANSIT-MUNI--c01"
+        ]
+      }
+    ],
+    "total": 486,
+    "uncertaintyBufferPct": 10,
+    "totalWithBuffer": 534.6,
+    "status": "on-track",
+    "statusLabel": "ON TRACK",
+    "footnote": "Estimates only · no bookings included"
+  },
+  "whyThisFits": "You picked coffee and art & design and asked for a relaxed pace, so each day has one main stop and open time.",
+  "citations": [
+    {
+      "chunkId": "SF-NEIGHBORHOOD-FERRY--c01",
+      "sourceId": "SF-NEIGHBORHOOD-FERRY",
+      "title": "Ferry Building and Embarcadero",
+      "contentType": "neighborhood-guide",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Friday coffee stop and Sunday lunch"
+    },
+    {
+      "chunkId": "SF-ATTRACTION-SFMOMA--c01",
+      "sourceId": "SF-ATTRACTION-SFMOMA",
+      "title": "Modern art day: SFMOMA",
+      "contentType": "attraction-note",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Friday afternoon"
+    },
+    {
+      "chunkId": "SF-NEIGHBORHOOD-NORTHBEACH--c01",
+      "sourceId": "SF-NEIGHBORHOOD-NORTHBEACH",
+      "title": "North Beach: books and a slower evening",
+      "contentType": "neighborhood-guide",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Friday evening"
+    },
+    {
+      "chunkId": "SF-ATTRACTION-DEYOUNG--c01",
+      "sourceId": "SF-ATTRACTION-DEYOUNG",
+      "title": "Art and a rainy-day option",
+      "contentType": "attraction-note",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Saturday morning"
+    },
+    {
+      "chunkId": "SF-NEIGHBORHOOD-RICHMOND--c01",
+      "sourceId": "SF-NEIGHBORHOOD-RICHMOND",
+      "title": "Richmond District coffee break",
+      "contentType": "neighborhood-guide",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Saturday afternoon"
+    },
+    {
+      "chunkId": "SF-OUTDOOR-CRISSY--c01",
+      "sourceId": "SF-OUTDOOR-CRISSY",
+      "title": "Crissy Field waterfront walk",
+      "contentType": "outdoor-guide",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Sunday morning"
+    },
+    {
+      "chunkId": "SF-TRANSIT-MUNI--c01",
+      "sourceId": "SF-TRANSIT-MUNI",
+      "title": "Getting around without a car",
+      "contentType": "transit-note",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Route suggestions"
+    },
+    {
+      "chunkId": "SF-PLANNING-BUDGET--c01",
+      "sourceId": "SF-PLANNING-BUDGET",
+      "title": "Budget-aware itinerary planning",
+      "contentType": "planning-policy",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Budget method"
+    },
+    {
+      "chunkId": "SF-PLANNING-LODGING--c01",
+      "sourceId": "SF-PLANNING-LODGING",
+      "title": "Lodging estimates for a weekend sample",
+      "contentType": "planning-policy",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Stay estimate"
+    },
+    {
+      "chunkId": "SF-ATTRACTION-SFMOMA--c02",
+      "sourceId": "SF-ATTRACTION-SFMOMA",
+      "title": "Modern art day: SFMOMA",
+      "contentType": "attraction-note",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Hours and admission caveat"
+    }
+  ],
+  "assumptions": [
+    "Two nights of lodging are estimated as a single line.",
+    "Transit is preferred over a rental car.",
+    "Admission amounts are demo fixtures."
+  ],
+  "caveats": [
+    "Guide content, prices, and conditions are demo data.",
+    "No reservation, ticket, or payment is made.",
+    "Verify hours, prices, and accessibility with official sources."
+  ],
+  "unansweredRequests": [],
+  "toolCalls": [],
+  "trace": [
+    {
+      "step": "normalize",
+      "label": "Read your trip details",
+      "status": "done"
+    },
+    {
+      "step": "retrieve",
+      "label": "Searched city guides",
+      "status": "done"
+    },
+    {
+      "step": "plan",
+      "label": "Drafted your days",
+      "status": "done"
+    },
+    {
+      "step": "review",
+      "label": "Reviewed sources and budget",
+      "status": "done"
+    }
+  ],
+  "review": {
+    "outcome": "approved",
+    "revisionCount": 0,
+    "checks": {
+      "citationsValid": true,
+      "budgetArithmetic": true,
+      "constraintsHonored": true,
+      "conditionsCaveated": true
+    },
+    "flags": []
+  },
+  "demoOnly": true
+}

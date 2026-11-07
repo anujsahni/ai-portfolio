@@ -1,0 +1,21 @@
+{
+  "chunkId": "PDX-NEIGHBORHOOD-PEARL--c02",
+  "sourceId": "PDX-NEIGHBORHOOD-PEARL",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Pearl District: books and coffee",
+  "section": "Pearl District: books and coffee",
+  "contentType": "neighborhood-guide",
+  "chunkIndex": 2,
+  "text": "Store hours, café choices, and prices are not verified in this fixture. Confirm current details with official sources before travel.",
+  "textChecksum": "ae62732ed71add9c31349fb6ec032efc9364d2fd91bb65a595e15ef1e2f9ad13",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "pdx-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

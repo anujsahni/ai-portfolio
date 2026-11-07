@@ -1,0 +1,21 @@
+{
+  "chunkId": "SC-PLANNING-BUDGET--c01",
+  "sourceId": "SC-PLANNING-BUDGET",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "Santa Cruz budget and getting around",
+  "section": "Santa Cruz budget and getting around",
+  "contentType": "planning-policy",
+  "chunkIndex": 1,
+  "text": "For demo purposes, a modest room for two nights can be shown as about $220–$320 total for the party, with higher rates on summer weekends. Downtown, the wharf, and the boardwalk are walkable; a car helps for redwoods and outer beaches, and Santa Cruz METRO buses cover town.",
+  "textChecksum": "8b85052c3843be94161c3e8f98f54857a58b2449262e62e88c8dc7abcaf6eb42",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sc-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

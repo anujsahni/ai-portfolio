@@ -1,0 +1,24 @@
+{
+  "suite": "weekendwise-local-eval-v5",
+  "id": "PLAN-019",
+  "category": "tool-invalid-args",
+  "question": "Check the conditions in San Francisco for January 1, 2030.",
+  "expected_sources_any": [],
+  "forbidden_sources": [],
+  "expected_tool": true,
+  "expected_tool_args": {
+    "city": "San Francisco",
+    "demo_date": "2030-01-01"
+  },
+  "expected_tool_outcome": "rejected_unseeded_date",
+  "must_state_conditions_unavailable": true,
+  "city": "San Francisco",
+  "mode": "plan",
+  "request": {
+    "interestIds": [
+      "outdoors"
+    ],
+    "startDate": "2030-01-01",
+    "endDate": "2030-01-01"
+  }
+}

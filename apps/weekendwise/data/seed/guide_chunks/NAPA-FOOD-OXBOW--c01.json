@@ -1,0 +1,21 @@
+{
+  "chunkId": "NAPA-FOOD-OXBOW--c01",
+  "sourceId": "NAPA-FOOD-OXBOW",
+  "city": "Napa Valley",
+  "cityId": "napa-valley",
+  "title": "Downtown Napa and Oxbow Public Market",
+  "section": "Downtown Napa and Oxbow Public Market",
+  "contentType": "food-guide",
+  "chunkIndex": 1,
+  "text": "This sample guide suggests Oxbow Public Market, a casual food hall in downtown Napa, for an easy lunch or coffee, followed by a walk along the river. It is a good low-key arrival block.",
+  "textChecksum": "502861ec770135573f114db01d7c451fa83edd76bf68d6d6f603ccc77368020d",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "napa-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

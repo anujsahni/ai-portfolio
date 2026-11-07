@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-NEIGHBORHOOD-FERRY--c02",
+  "sourceId": "SF-NEIGHBORHOOD-FERRY",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Ferry Building and Embarcadero",
+  "section": "Ferry Building and Embarcadero",
+  "contentType": "neighborhood-guide",
+  "chunkIndex": 2,
+  "text": "The guide is illustrative only. Vendors, prices, opening times, access, and transit conditions can change; confirm details with official sources before travel.",
+  "textChecksum": "ac69d9ce617d449a6b3916909cd758cce2a0a934a50f26bbd4a42f01b71bf995",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

@@ -1,0 +1,21 @@
+{
+  "chunkId": "NAPA-TASTING-WINERIES--c01",
+  "sourceId": "NAPA-TASTING-WINERIES",
+  "city": "Napa Valley",
+  "cityId": "napa-valley",
+  "title": "Planning a wine-tasting day",
+  "section": "Planning a wine-tasting day",
+  "contentType": "activity-note",
+  "chunkIndex": 1,
+  "text": "This sample note suggests limiting a tasting day to two or three wineries with a long lunch in between. Many wineries require advance tasting reservations, so the plan should say to book directly rather than claim a slot is available.",
+  "textChecksum": "f74931a4f5b144b27841765851a983a0af2780dea56f8e7362bbc01b3b01968e",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "napa-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

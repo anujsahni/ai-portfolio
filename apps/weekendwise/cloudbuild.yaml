@@ -1,0 +1,11 @@
+# IAC-05: container build run by `make build` as the weekendwise-build service account.
+# Logs go to Cloud Logging only (required when a build uses its own service account).
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args: ["build", "--build-arg", "APP_VERSION=${_TAG}", "-t", "${_IMAGE}:${_TAG}", "."]
+images:
+  - "${_IMAGE}:${_TAG}"
+options:
+  logging: CLOUD_LOGGING_ONLY
+  machineType: E2_MEDIUM
+timeout: 900s

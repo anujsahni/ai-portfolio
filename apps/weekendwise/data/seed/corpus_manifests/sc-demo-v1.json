@@ -1,0 +1,97 @@
+{
+  "corpusVersion": "sc-demo-v1",
+  "cityId": "santa-cruz",
+  "chunkerVersion": "paragraph-v1",
+  "sourceCount": 10,
+  "activeSourceCount": 10,
+  "chunkCount": 20,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "firestore": {
+    "database": "(default)",
+    "collection": "guide_chunks",
+    "vectorField": "embedding"
+  },
+  "sources": [
+    {
+      "sourceId": "SC-PLANNING-ACCESSIBILITY",
+      "file": "data/guides/santa-cruz-accessibility.md",
+      "cityId": "santa-cruz",
+      "active": true,
+      "chunks": 2,
+      "checksum": "09de81392e5c4d91280ca5e76085bb9d920ca1363ea82176e51a2c7906513f09"
+    },
+    {
+      "sourceId": "SC-ATTRACTION-BOARDWALK",
+      "file": "data/guides/santa-cruz-boardwalk.md",
+      "cityId": "santa-cruz",
+      "active": true,
+      "chunks": 2,
+      "checksum": "45bb35a5dfdbc1e24c45293824b7908c2ddff4296f7b7ee18853c4e258326b44"
+    },
+    {
+      "sourceId": "SC-NEIGHBORHOOD-CAPITOLA",
+      "file": "data/guides/santa-cruz-capitola.md",
+      "cityId": "santa-cruz",
+      "active": true,
+      "chunks": 2,
+      "checksum": "da6e34ad3afa176f25127aae3e09045315462390d1ea71f60d31ad5b4fa2b2be"
+    },
+    {
+      "sourceId": "SC-NEIGHBORHOOD-DOWNTOWN",
+      "file": "data/guides/santa-cruz-downtown.md",
+      "cityId": "santa-cruz",
+      "active": true,
+      "chunks": 2,
+      "checksum": "03c5f6acb3390688b390ad2d0ed4beac658da4cc0408558c805d056a1a0ef414"
+    },
+    {
+      "sourceId": "SC-PLAN-COASTAL-WEATHER",
+      "file": "data/guides/santa-cruz-fog.md",
+      "cityId": "santa-cruz",
+      "active": true,
+      "chunks": 2,
+      "checksum": "2c13dadb81def0cf6d9bfad6504575f44256e723bf687685d7928307fc9ffaf0"
+    },
+    {
+      "sourceId": "SC-FOOD-CASUAL",
+      "file": "data/guides/santa-cruz-food.md",
+      "cityId": "santa-cruz",
+      "active": true,
+      "chunks": 2,
+      "checksum": "e93888a0d003346c0b381a88e44ae588204d52eab2ba192f8dde0c6b637df4a0"
+    },
+    {
+      "sourceId": "SC-INTEREST-LIVEMUSIC",
+      "file": "data/guides/santa-cruz-live-music.md",
+      "cityId": "santa-cruz",
+      "active": true,
+      "chunks": 2,
+      "checksum": "0b75a0979ec396f839b11a1b7e9c815d560a63d05462fdf3f00641ba32b42c94"
+    },
+    {
+      "sourceId": "SC-PLANNING-BUDGET",
+      "file": "data/guides/santa-cruz-planning.md",
+      "cityId": "santa-cruz",
+      "active": true,
+      "chunks": 2,
+      "checksum": "c780ef037953a34a41e0bc9cee8ce454335fd42cbc6d5deafe93bb3e5b49d623"
+    },
+    {
+      "sourceId": "SC-OUTDOOR-REDWOODS",
+      "file": "data/guides/santa-cruz-redwoods.md",
+      "cityId": "santa-cruz",
+      "active": true,
+      "chunks": 2,
+      "checksum": "42639958eede2e40f7930c4f9f36a4e71e7d716fc02127bd5db6619a5fed0bdd"
+    },
+    {
+      "sourceId": "SC-OUTDOOR-WESTCLIFF",
+      "file": "data/guides/santa-cruz-west-cliff.md",
+      "cityId": "santa-cruz",
+      "active": true,
+      "chunks": 2,
+      "checksum": "916724fe264bcbd52dd9208a242d2506d9fa8a54edee3dc936c19f2b9bdf8cd1"
+    }
+  ]
+}

@@ -1,0 +1,491 @@
+{
+  "cityId": "napa-valley",
+  "status": "complete",
+  "headline": "Napa Valley, with the heat in mind.",
+  "subhead": "This draft runs over your $900 limit; lower-cost swaps are listed below.",
+  "tripSummary": {
+    "destination": "Napa Valley",
+    "dates": "May 14–16, 2027",
+    "travelers": 2
+  },
+  "days": [
+    {
+      "date": "2027-05-14",
+      "dayLabel": "FRI",
+      "title": "Downtown Napa",
+      "intro": "An easy arrival with food and music within walking distance.",
+      "conditions": null,
+      "activities": [
+        {
+          "id": "d1-a1",
+          "time": "1:00 PM",
+          "type": "GREAT FOOD",
+          "title": "Oxbow Public Market lunch",
+          "description": "A casual food-hall lunch, then a river walk.",
+          "area": "Downtown Napa",
+          "priceLabel": "≈ $20/person (demo)",
+          "estimatedCost": {
+            "categoryId": "food-coffee",
+            "amount": 40,
+            "basis": "Lunch for 2, demo estimate"
+          },
+          "citations": [
+            "NAPA-FOOD-OXBOW--c01",
+            "NAPA-FOOD-OXBOW--c02"
+          ],
+          "isEstimate": true
+        },
+        {
+          "id": "d1-a2",
+          "time": "6:30 PM",
+          "type": "DINNER",
+          "title": "Downtown dinner",
+          "description": "Choose a spot that fits the budget.",
+          "area": "Downtown Napa",
+          "priceLabel": "≈ $45/person (demo)",
+          "estimatedCost": {
+            "categoryId": "food-coffee",
+            "amount": 90,
+            "basis": "Dinner for 2, demo estimate"
+          },
+          "citations": [
+            "NAPA-FOOD-OXBOW--c01"
+          ],
+          "isEstimate": true
+        },
+        {
+          "id": "d1-a3",
+          "time": "8:30 PM",
+          "type": "LIVE MUSIC",
+          "title": "Live music downtown",
+          "description": "A walkable evening show. Check listings; no tickets are held.",
+          "area": "Downtown Napa",
+          "priceLabel": "≈ $30/person (demo)",
+          "estimatedCost": {
+            "categoryId": "activities",
+            "amount": 60,
+            "basis": "2 × $30 demo show"
+          },
+          "citations": [
+            "NAPA-INTEREST-LIVEMUSIC--c01",
+            "NAPA-INTEREST-LIVEMUSIC--c02"
+          ],
+          "isEstimate": true
+        }
+      ],
+      "transitTip": null
+    },
+    {
+      "date": "2027-05-15",
+      "dayLabel": "SAT",
+      "title": "Tastings around the heat",
+      "intro": "Simulated heat: outdoor time early, tastings late morning, a cool soak after lunch.",
+      "conditions": {
+        "source": "check_local_conditions",
+        "conditionsDocId": "napa-valley__2027-05-15",
+        "icon": "☀",
+        "tempHighF": 95,
+        "condition": "hot",
+        "label": "☀ 95° · SAMPLE",
+        "simulated": true
+      },
+      "activities": [
+        {
+          "id": "d2-a1",
+          "time": "7:30 AM",
+          "type": "OUTDOORS · EARLY",
+          "title": "Vine Trail morning walk",
+          "description": "A short walk before it gets hot. Bring water.",
+          "area": "Yountville section",
+          "priceLabel": "Free",
+          "estimatedCost": {
+            "categoryId": "activities",
+            "amount": 0,
+            "basis": "No fee"
+          },
+          "citations": [
+            "NAPA-OUTDOOR-VINETRAIL--c01",
+            "NAPA-OUTDOOR-VINETRAIL--c02",
+            "NAPA-PLAN-HOT-DAY--c01"
+          ],
+          "isEstimate": true
+        },
+        {
+          "id": "d2-a2",
+          "time": "10:30 AM",
+          "type": "LOCAL FINDS · TASTING",
+          "title": "Two winery tastings",
+          "description": "Two tastings with a long lunch between. Book directly with each winery. Use a driver, tour, or rideshare; do not drink and drive.",
+          "area": "Oakville / Rutherford",
+          "priceLabel": "≈ $55/person each (demo)",
+          "estimatedCost": {
+            "categoryId": "activities",
+            "amount": 220,
+            "basis": "2 tastings × 2 × $55 demo fee"
+          },
+          "citations": [
+            "NAPA-TASTING-WINERIES--c01",
+            "NAPA-TASTING-WINERIES--c02"
+          ],
+          "isEstimate": true
+        },
+        {
+          "id": "d2-a3",
+          "time": "3:00 PM",
+          "type": "INDOOR · COOL DOWN",
+          "title": "Calistoga mineral soak",
+          "description": "A shaded, cool break during the hottest hours. Reservations are usually needed.",
+          "area": "Calistoga",
+          "priceLabel": "≈ $45/person (demo)",
+          "estimatedCost": {
+            "categoryId": "activities",
+            "amount": 90,
+            "basis": "2 × $45 demo fee"
+          },
+          "citations": [
+            "NAPA-TOWN-CALISTOGA--c01",
+            "NAPA-TOWN-CALISTOGA--c02",
+            "NAPA-PLAN-HOT-DAY--c02"
+          ],
+          "isEstimate": true
+        }
+      ],
+      "transitTip": {
+        "text": "Tasting day: use a designated driver, tour, or rideshare between wineries.",
+        "citations": [
+          "NAPA-PLANNING-BUDGET--c01",
+          "NAPA-TASTING-WINERIES--c02"
+        ]
+      }
+    },
+    {
+      "date": "2027-05-16",
+      "dayLabel": "SUN",
+      "title": "Yountville send-off",
+      "intro": "Sunday conditions were not checked; keep it light.",
+      "conditions": null,
+      "activities": [
+        {
+          "id": "d3-a1",
+          "time": "9:30 AM",
+          "type": "COFFEE & BAKERY",
+          "title": "Yountville bakery stroll",
+          "description": "Coffee, a pastry, and a walk through town.",
+          "area": "Yountville",
+          "priceLabel": "$–$$",
+          "estimatedCost": {
+            "categoryId": "food-coffee",
+            "amount": 30,
+            "basis": "2 coffees + pastries, demo estimate"
+          },
+          "citations": [
+            "NAPA-TOWN-YOUNTVILLE--c01"
+          ],
+          "isEstimate": true
+        },
+        {
+          "id": "d3-a2",
+          "time": "11:30 AM",
+          "type": "ART",
+          "title": "Gallery or winery art stop",
+          "description": "One art stop on the way out. Check hours and reservations.",
+          "area": "Downtown Napa / Carneros",
+          "priceLabel": "Free–$",
+          "estimatedCost": {
+            "categoryId": "activities",
+            "amount": 0,
+            "basis": "Free gallery, demo estimate"
+          },
+          "citations": [
+            "NAPA-ART-GALLERIES--c01",
+            "NAPA-ART-GALLERIES--c02"
+          ],
+          "isEstimate": true
+        }
+      ],
+      "transitTip": null
+    }
+  ],
+  "budget": {
+    "currency": "USD",
+    "limit": 900,
+    "lineItems": [
+      {
+        "categoryId": "stays",
+        "amount": 450,
+        "note": "Two nights, single demo estimate",
+        "citations": [
+          "NAPA-PLANNING-BUDGET--c01"
+        ]
+      },
+      {
+        "categoryId": "food-coffee",
+        "amount": 200,
+        "note": "Includes $40 for breakfasts and coffee not itemized above",
+        "citations": [
+          "NAPA-FOOD-OXBOW--c02"
+        ]
+      },
+      {
+        "categoryId": "activities",
+        "amount": 370,
+        "note": "Itemized from activities",
+        "citations": [
+          "NAPA-TASTING-WINERIES--c02"
+        ]
+      },
+      {
+        "categoryId": "local-transit",
+        "amount": 80,
+        "note": "Rideshare on tasting day, demo estimate",
+        "citations": [
+          "NAPA-PLANNING-BUDGET--c01"
+        ]
+      }
+    ],
+    "total": 1100,
+    "uncertaintyBufferPct": 10,
+    "totalWithBuffer": 1210.0,
+    "status": "over-budget",
+    "statusLabel": "OVER BUDGET",
+    "footnote": "Estimates only · no bookings included",
+    "suggestedSubstitutions": [
+      {
+        "replaces": "d2-a2",
+        "suggestion": "Do one tasting and a picnic instead of a second tasting.",
+        "estimatedSavings": 110,
+        "citations": [
+          "NAPA-PLANNING-BUDGET--c02"
+        ]
+      },
+      {
+        "replaces": "d2-a3",
+        "suggestion": "Skip the paid soak; rest in shade or visit a free gallery.",
+        "estimatedSavings": 90,
+        "citations": [
+          "NAPA-PLAN-HOT-DAY--c01",
+          "NAPA-ART-GALLERIES--c01"
+        ]
+      },
+      {
+        "replaces": "stays",
+        "suggestion": "Use the low end of the lodging range.",
+        "estimatedSavings": 50,
+        "citations": [
+          "NAPA-PLANNING-BUDGET--c01"
+        ]
+      }
+    ],
+    "totalAfterSubstitutions": 850
+  },
+  "whyThisFits": "You picked local finds, great food, and live music. Saturday's simulated heat put the walk early and a cool soak after lunch.",
+  "assumptions": [
+    "Only Saturday's conditions were checked (one tool call per request).",
+    "Tasting fees and lodging are demo fixtures; harvest season would cost more."
+  ],
+  "caveats": [
+    "Guide content, prices, and conditions are demo data.",
+    "No reservation, ticket, or payment is made.",
+    "Use a designated driver, tour, or rideshare on tasting days. Do not drink and drive.",
+    "Saturday's heat is simulated, not a forecast.",
+    "The estimate is over your budget; see the suggested swaps."
+  ],
+  "unansweredRequests": [],
+  "toolCalls": [
+    {
+      "tool": "check_local_conditions",
+      "args": {
+        "city": "Napa Valley",
+        "demo_date": "2027-05-15"
+      },
+      "status": "ok",
+      "resultDocId": "napa-valley__2027-05-15"
+    }
+  ],
+  "trace": [
+    {
+      "step": "normalize",
+      "label": "Read your trip details",
+      "status": "done"
+    },
+    {
+      "step": "retrieve",
+      "label": "Searched city guides",
+      "status": "done"
+    },
+    {
+      "step": "tool",
+      "label": "Checked simulated local conditions",
+      "status": "done"
+    },
+    {
+      "step": "plan",
+      "label": "Drafted your days",
+      "status": "done"
+    },
+    {
+      "step": "review",
+      "label": "Reviewed sources and budget",
+      "status": "done"
+    },
+    {
+      "step": "revise",
+      "label": "Revised the draft once",
+      "status": "done"
+    }
+  ],
+  "review": {
+    "outcome": "approved-after-revision",
+    "revisionCount": 1,
+    "checks": {
+      "citationsValid": true,
+      "budgetArithmetic": true,
+      "constraintsHonored": false,
+      "conditionsCaveated": true
+    },
+    "flags": [
+      "Estimate exceeds the $900 budget; status set to OVER BUDGET with substitutions.",
+      "No-drink-driving caveat added to the tasting day."
+    ]
+  },
+  "scenarioId": "SCENARIO-06-NAPA-HOT-TASTING",
+  "citations": [
+    {
+      "chunkId": "NAPA-FOOD-OXBOW--c01",
+      "sourceId": "NAPA-FOOD-OXBOW",
+      "title": "Downtown Napa and Oxbow Public Market",
+      "contentType": "food-guide",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Fri: Oxbow Public Market lunch, Fri: Downtown dinner"
+    },
+    {
+      "chunkId": "NAPA-FOOD-OXBOW--c02",
+      "sourceId": "NAPA-FOOD-OXBOW",
+      "title": "Downtown Napa and Oxbow Public Market",
+      "contentType": "food-guide",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Fri: Oxbow Public Market lunch, Budget estimate"
+    },
+    {
+      "chunkId": "NAPA-INTEREST-LIVEMUSIC--c01",
+      "sourceId": "NAPA-INTEREST-LIVEMUSIC",
+      "title": "Live music in downtown Napa",
+      "contentType": "interest-note",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Fri: Live music downtown"
+    },
+    {
+      "chunkId": "NAPA-INTEREST-LIVEMUSIC--c02",
+      "sourceId": "NAPA-INTEREST-LIVEMUSIC",
+      "title": "Live music in downtown Napa",
+      "contentType": "interest-note",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Fri: Live music downtown"
+    },
+    {
+      "chunkId": "NAPA-OUTDOOR-VINETRAIL--c01",
+      "sourceId": "NAPA-OUTDOOR-VINETRAIL",
+      "title": "Napa Valley Vine Trail",
+      "contentType": "outdoor-guide",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Sat: Vine Trail morning walk"
+    },
+    {
+      "chunkId": "NAPA-OUTDOOR-VINETRAIL--c02",
+      "sourceId": "NAPA-OUTDOOR-VINETRAIL",
+      "title": "Napa Valley Vine Trail",
+      "contentType": "outdoor-guide",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Sat: Vine Trail morning walk"
+    },
+    {
+      "chunkId": "NAPA-PLAN-HOT-DAY--c01",
+      "sourceId": "NAPA-PLAN-HOT-DAY",
+      "title": "Hot-day planning in Napa Valley",
+      "contentType": "planning-policy",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Sat: Vine Trail morning walk, Budget swap"
+    },
+    {
+      "chunkId": "NAPA-TASTING-WINERIES--c01",
+      "sourceId": "NAPA-TASTING-WINERIES",
+      "title": "Planning a wine-tasting day",
+      "contentType": "activity-note",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Sat: Two winery tastings"
+    },
+    {
+      "chunkId": "NAPA-TASTING-WINERIES--c02",
+      "sourceId": "NAPA-TASTING-WINERIES",
+      "title": "Planning a wine-tasting day",
+      "contentType": "activity-note",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Sat: Two winery tastings, Getting around, Budget estimate"
+    },
+    {
+      "chunkId": "NAPA-TOWN-CALISTOGA--c01",
+      "sourceId": "NAPA-TOWN-CALISTOGA",
+      "title": "Calistoga: hot springs and a spa break",
+      "contentType": "neighborhood-guide",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Sat: Calistoga mineral soak"
+    },
+    {
+      "chunkId": "NAPA-TOWN-CALISTOGA--c02",
+      "sourceId": "NAPA-TOWN-CALISTOGA",
+      "title": "Calistoga: hot springs and a spa break",
+      "contentType": "neighborhood-guide",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Sat: Calistoga mineral soak"
+    },
+    {
+      "chunkId": "NAPA-PLAN-HOT-DAY--c02",
+      "sourceId": "NAPA-PLAN-HOT-DAY",
+      "title": "Hot-day planning in Napa Valley",
+      "contentType": "planning-policy",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Sat: Calistoga mineral soak"
+    },
+    {
+      "chunkId": "NAPA-PLANNING-BUDGET--c01",
+      "sourceId": "NAPA-PLANNING-BUDGET",
+      "title": "Napa Valley budget and getting around",
+      "contentType": "planning-policy",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Getting around, Budget estimate, Budget swap"
+    },
+    {
+      "chunkId": "NAPA-TOWN-YOUNTVILLE--c01",
+      "sourceId": "NAPA-TOWN-YOUNTVILLE",
+      "title": "Yountville: a slow food town",
+      "contentType": "neighborhood-guide",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Sun: Yountville bakery stroll"
+    },
+    {
+      "chunkId": "NAPA-ART-GALLERIES--c01",
+      "sourceId": "NAPA-ART-GALLERIES",
+      "title": "Art in Napa Valley",
+      "contentType": "attraction-note",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Sun: Gallery or winery art stop, Budget swap"
+    },
+    {
+      "chunkId": "NAPA-ART-GALLERIES--c02",
+      "sourceId": "NAPA-ART-GALLERIES",
+      "title": "Art in Napa Valley",
+      "contentType": "attraction-note",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Sun: Gallery or winery art stop"
+    },
+    {
+      "chunkId": "NAPA-PLANNING-BUDGET--c02",
+      "sourceId": "NAPA-PLANNING-BUDGET",
+      "title": "Napa Valley budget and getting around",
+      "contentType": "planning-policy",
+      "lastReviewed": "2026-11-05",
+      "usedFor": "Budget swap"
+    }
+  ],
+  "demoOnly": true
+}

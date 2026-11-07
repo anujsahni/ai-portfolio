@@ -1,0 +1,22 @@
+{
+  "suite": "weekendwise-local-eval-v5",
+  "id": "PLAN-027",
+  "category": "multi-city-tool",
+  "city": "Napa Valley",
+  "question": "Saturday might be hot. How should we arrange the Vine Trail and tastings?",
+  "trip_scenario_id": "SCENARIO-06-NAPA-HOT-TASTING",
+  "expected_sources_any": [
+    "NAPA-PLAN-HOT-DAY",
+    "NAPA-OUTDOOR-VINETRAIL",
+    "NAPA-TASTING-WINERIES"
+  ],
+  "forbidden_sources": [],
+  "expected_tool": true,
+  "expected_tool_args": {
+    "city": "Napa Valley",
+    "demo_date": "2027-05-15"
+  },
+  "must_include_no_drink_driving_caveat": true,
+  "mode": "plan",
+  "request": {}
+}

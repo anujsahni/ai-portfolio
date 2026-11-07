@@ -1,0 +1,21 @@
+{
+  "suite": "weekendwise-local-eval-v5",
+  "id": "PLAN-010",
+  "category": "unsupported-destination",
+  "question": "Plan the same trip in Tokyo.",
+  "expected_sources_any": [],
+  "expected_tool": false,
+  "must_abstain_or_request_supported_city": true,
+  "forbidden_sources": [],
+  "city": "San Francisco",
+  "note": "Supported cities are San Francisco, Portland, Santa Cruz, and Napa Valley; Tokyo is not.",
+  "mode": "plan",
+  "request": {
+    "destination": "Tokyo",
+    "cityId": "tokyo",
+    "interestIds": [
+      "art-design",
+      "coffee"
+    ]
+  }
+}

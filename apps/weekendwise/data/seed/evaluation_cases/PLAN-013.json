@@ -1,0 +1,16 @@
+{
+  "suite": "weekendwise-local-eval-v5",
+  "id": "PLAN-013",
+  "category": "stale-conflicting",
+  "question": "Is every Ferry Building vendor open until 9 PM on Sunday?",
+  "expected_sources_any": [
+    "SF-NEIGHBORHOOD-FERRY",
+    "SF-STALE-FERRY-HOURS"
+  ],
+  "forbidden_sources": [],
+  "expected_tool": false,
+  "must_flag_conflict_or_stale": true,
+  "must_state_not_live_data": true,
+  "city": "San Francisco",
+  "mode": "ask"
+}

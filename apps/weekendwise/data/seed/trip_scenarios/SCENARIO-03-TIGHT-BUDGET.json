@@ -1,0 +1,38 @@
+{
+  "title": "Tight budget with a live-data request",
+  "demoPurpose": "Budget below what the guides' prices allow: the plan must be flagged OVER BUDGET with substitutions, and the live-hours request must be marked unanswerable.",
+  "request": {
+    "destination": "San Francisco",
+    "cityId": "san-francisco",
+    "startDate": "2027-06-11",
+    "endDate": "2027-06-13",
+    "travelers": 1,
+    "budget": 150,
+    "currency": "USD",
+    "interestIds": [
+      "great-food",
+      "live-music"
+    ],
+    "constraints": [
+      "Keep the weekend total under $150",
+      "Tell me tonight's opening hours for a specific restaurant"
+    ],
+    "notes": "Solo trip; happy with simple food and one evening of music."
+  },
+  "expected": {
+    "toolCalls": 0,
+    "expectedSourceIds": [
+      "SF-PLANNING-BUDGET",
+      "SF-PLANNING-LODGING",
+      "SF-NEIGHBORHOOD-MISSION",
+      "SF-INTEREST-LIVEMUSIC"
+    ],
+    "budgetStatus": "over-budget",
+    "reviewOutcome": "approved",
+    "mustStateNotLiveData": true,
+    "sampleItineraryId": "SCENARIO-03-TIGHT-BUDGET"
+  },
+  "cityId": "san-francisco",
+  "demoOnly": true,
+  "syntheticTraveler": true
+}

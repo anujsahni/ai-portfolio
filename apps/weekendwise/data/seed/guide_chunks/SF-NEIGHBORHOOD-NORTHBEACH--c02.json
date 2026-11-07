@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-NEIGHBORHOOD-NORTHBEACH--c02",
+  "sourceId": "SF-NEIGHBORHOOD-NORTHBEACH",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "North Beach: books and a slower evening",
+  "section": "North Beach: books and a slower evening",
+  "contentType": "neighborhood-guide",
+  "chunkIndex": 2,
+  "text": "The note does not verify individual businesses, accessibility, hours, or current prices. The itinerary should offer this as a general idea, not a reservation or guarantee.",
+  "textChecksum": "79ddc97396521f38fb58371466d87bbbd395c589c123aae2acd2c5170aa8893a",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

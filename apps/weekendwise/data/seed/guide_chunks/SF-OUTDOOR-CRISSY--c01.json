@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-OUTDOOR-CRISSY--c01",
+  "sourceId": "SF-OUTDOOR-CRISSY",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Crissy Field waterfront walk",
+  "section": "Crissy Field waterfront walk",
+  "contentType": "outdoor-guide",
+  "chunkIndex": 1,
+  "text": "This sample guide suggests a relaxed waterfront walk as an outdoor option when conditions are suitable. The itinerary should include a weather-aware indoor alternative and should not assume that paths or facilities are open.",
+  "textChecksum": "0c6734ee72628d5421fafa0d4812c727fd9a82b7bd125d6505d09df41878e04d",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

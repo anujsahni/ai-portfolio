@@ -1,0 +1,17 @@
+{
+  "sourceId": "PDX-PLANNING-ACCESSIBILITY",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Accessibility and trip constraints in Portland",
+  "contentType": "planning-policy",
+  "sourceUri": "data/guides/portland-accessibility.md",
+  "version": 1,
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "99a737eedd06508536c79eeb72b3161f6aff8beda8c1614883b949f689eeaada",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

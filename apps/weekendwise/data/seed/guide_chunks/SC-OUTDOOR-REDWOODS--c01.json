@@ -1,0 +1,21 @@
+{
+  "chunkId": "SC-OUTDOOR-REDWOODS--c01",
+  "sourceId": "SC-OUTDOOR-REDWOODS",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "Redwoods at Henry Cowell",
+  "section": "Redwoods at Henry Cowell",
+  "contentType": "outdoor-guide",
+  "chunkIndex": 1,
+  "text": "This sample guide suggests a short, easy redwood loop at Henry Cowell Redwoods State Park, a short drive inland from town. It pairs well with a slow morning and a picnic.",
+  "textChecksum": "cbebec5128aadaccb313b0a15c62d0f5b193b7631afef6931a4d89733cfe17f5",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sc-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

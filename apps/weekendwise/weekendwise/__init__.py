@@ -1,0 +1,1 @@
+"""WeekendWise server-side package."""

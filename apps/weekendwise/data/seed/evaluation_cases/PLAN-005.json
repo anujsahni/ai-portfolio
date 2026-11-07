@@ -1,0 +1,20 @@
+{
+  "suite": "weekendwise-local-eval-v5",
+  "id": "PLAN-005",
+  "category": "neighborhood",
+  "question": "Suggest a relaxed Friday evening around North Beach.",
+  "expected_sources_any": [
+    "SF-NEIGHBORHOOD-NORTHBEACH"
+  ],
+  "expected_tool": false,
+  "must_disclose_demo_estimates": true,
+  "forbidden_sources": [],
+  "city": "San Francisco",
+  "mode": "plan",
+  "request": {
+    "interestIds": [
+      "great-food",
+      "local-finds"
+    ]
+  }
+}

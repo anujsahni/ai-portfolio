@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-PLAN-RAINY-DAY--c01",
+  "sourceId": "SF-PLAN-RAINY-DAY",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Rainy-day planning pattern",
+  "section": "Rainy-day planning pattern",
+  "contentType": "planning-policy",
+  "chunkIndex": 1,
+  "text": "When the traveler requests an indoor alternative for rainy conditions, preserve the original interests and replace or reorder outdoor activities with an indoor option supported by a retrieved guide. Mark the weather result as simulated if it came from the local demo tool.",
+  "textChecksum": "90600a205f770a7b54488b4ee03345d2543e8c611c43ffbc54a4e56546665899",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

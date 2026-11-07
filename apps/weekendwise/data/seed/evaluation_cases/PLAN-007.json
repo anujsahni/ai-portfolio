@@ -1,0 +1,20 @@
+{
+  "suite": "weekendwise-local-eval-v5",
+  "id": "PLAN-007",
+  "category": "food-interest",
+  "question": "I like coffee, but don't want a tightly scheduled day.",
+  "expected_sources_any": [
+    "SF-NEIGHBORHOOD-FERRY",
+    "SF-NEIGHBORHOOD-RICHMOND"
+  ],
+  "expected_tool": false,
+  "must_disclose_demo_estimates": true,
+  "forbidden_sources": [],
+  "city": "San Francisco",
+  "mode": "plan",
+  "request": {
+    "interestIds": [
+      "coffee"
+    ]
+  }
+}

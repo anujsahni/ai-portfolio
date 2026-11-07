@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-PLANNING-BUDGET--c01",
+  "sourceId": "SF-PLANNING-BUDGET",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Budget-aware itinerary planning",
+  "section": "Budget-aware itinerary planning",
+  "contentType": "planning-policy",
+  "chunkIndex": 1,
+  "text": "Treat the user’s budget as a hard planning constraint for the sample. Show a clearly labeled estimate, itemize the categories used, and leave an uncertainty buffer. If the estimated total is over budget, say so and suggest lower-cost substitutions rather than labeling the plan “on track.”",
+  "textChecksum": "5435c5611c11b72fe6fcf69eeea18461183473b63d6b3fd81dacbeec0b98b80c",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

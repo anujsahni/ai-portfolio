@@ -1,0 +1,16 @@
+{
+  "suite": "weekendwise-local-eval-v5",
+  "id": "PLAN-029",
+  "category": "multi-city-accessibility",
+  "city": "Santa Cruz",
+  "question": "Can you guarantee the beach and cliff path are wheelchair accessible?",
+  "expected_sources_any": [
+    "SC-PLANNING-ACCESSIBILITY"
+  ],
+  "forbidden_sources": [
+    "SF-PLANNING-ACCESSIBILITY"
+  ],
+  "expected_tool": false,
+  "must_abstain_from_guarantee": true,
+  "mode": "ask"
+}

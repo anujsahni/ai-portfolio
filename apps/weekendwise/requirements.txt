@@ -1,0 +1,7 @@
+# Runtime dependencies (pinned). Install: make venv
+google-genai==3.0.0
+google-auth==2.62.1
+google-cloud-firestore==2.34.1
+langgraph==1.2.20
+starlette==1.10.0
+uvicorn==0.54.0

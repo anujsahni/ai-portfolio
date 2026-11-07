@@ -1,0 +1,21 @@
+{
+  "chunkId": "NAPA-PLAN-HOT-DAY--c01",
+  "sourceId": "NAPA-PLAN-HOT-DAY",
+  "city": "Napa Valley",
+  "cityId": "napa-valley",
+  "title": "Hot-day planning in Napa Valley",
+  "section": "Hot-day planning in Napa Valley",
+  "contentType": "planning-policy",
+  "chunkIndex": 1,
+  "text": "Napa Valley summer afternoons can be very hot. When the simulated conditions show heat, put outdoor time such as the Vine Trail in the early morning and plan shaded or indoor activities, such as a spa, gallery, or indoor tasting room, for the afternoon.",
+  "textChecksum": "f3f806f4a226ea0604ef5cc68ffbdcbd191888fd8f1a498d7a3fa65c1b35dd0b",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "napa-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

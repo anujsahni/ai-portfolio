@@ -1,0 +1,8 @@
+# Only the app, its pinned requirements, and data/seed go into the image.
+*
+!Dockerfile
+!requirements.txt
+!weekendwise/
+!data/seed/
+**/__pycache__
+**/*.pyc

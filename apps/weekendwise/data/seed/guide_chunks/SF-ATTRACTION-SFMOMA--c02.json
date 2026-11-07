@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-ATTRACTION-SFMOMA--c02",
+  "sourceId": "SF-ATTRACTION-SFMOMA",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Modern art day: SFMOMA",
+  "section": "Modern art day: SFMOMA",
+  "contentType": "attraction-note",
+  "chunkIndex": 2,
+  "text": "Admission, exhibits, access requirements, and hours are intentionally not treated as live facts. Check the museum’s official information before making plans.",
+  "textChecksum": "ff4d12e08d574cb212441788762de43e683cbc9af03a62b787697dc0961fec87",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

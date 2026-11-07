@@ -1,0 +1,17 @@
+{
+  "cityId": "napa-valley",
+  "city": "Napa Valley",
+  "demoDate": "2027-05-15",
+  "dayOfWeek": "Sat",
+  "condition": "hot",
+  "icon": "☀",
+  "tempHighF": 95,
+  "tempLowF": 58,
+  "precipitationChancePct": 0,
+  "windMph": 5,
+  "indoorRecommended": true,
+  "summary": "Very hot sample afternoon; plan outdoor time for the morning and an indoor or shaded break after lunch.",
+  "simulated": true,
+  "source": "WeekendWise deterministic demo fixture",
+  "disclaimer": "Simulated conditions for the demo. Not a forecast."
+}

@@ -1,0 +1,24 @@
+{
+  "label": "Great food",
+  "icon": "♨",
+  "displayOrder": 4,
+  "selectedByDefault": false,
+  "relatedSourceIdsByCity": {
+    "san-francisco": [
+      "SF-NEIGHBORHOOD-MISSION",
+      "SF-NEIGHBORHOOD-FERRY"
+    ],
+    "portland": [
+      "PDX-FOOD-CARTS"
+    ],
+    "santa-cruz": [
+      "SC-FOOD-CASUAL"
+    ],
+    "napa-valley": [
+      "NAPA-FOOD-OXBOW",
+      "NAPA-TOWN-YOUNTVILLE"
+    ]
+  },
+  "retrievalHint": "casual dinner, food market, local bites",
+  "active": true
+}

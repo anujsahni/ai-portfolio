@@ -1,0 +1,21 @@
+{
+  "chunkId": "PDX-OUTDOOR-WASHINGTONPARK--c02",
+  "sourceId": "PDX-OUTDOOR-WASHINGTONPARK",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Washington Park gardens",
+  "section": "Washington Park gardens",
+  "contentType": "outdoor-guide",
+  "chunkIndex": 2,
+  "text": "Portland often has drizzle from fall through spring. If simulated conditions are rainy, move this block and use an indoor option. Garden admission, hours, and paths are not verified here.",
+  "textChecksum": "ab1d07d19f5ee1c39737568469ce3b9e2aa605bc7c3fe06f16ab101321e488a6",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "pdx-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

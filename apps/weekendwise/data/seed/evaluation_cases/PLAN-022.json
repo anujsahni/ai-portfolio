@@ -1,0 +1,30 @@
+{
+  "suite": "weekendwise-local-eval-v5",
+  "id": "PLAN-022",
+  "category": "multi-city-tool",
+  "city": "Portland",
+  "question": "Plan a Portland Saturday with gardens, but give me an indoor option if the demo conditions are rainy.",
+  "expected_sources_any": [
+    "PDX-OUTDOOR-WASHINGTONPARK",
+    "PDX-ATTRACTION-ART",
+    "PDX-NEIGHBORHOOD-PEARL"
+  ],
+  "forbidden_sources": [
+    "SF-PLAN-RAINY-DAY",
+    "SF-ATTRACTION-DEYOUNG"
+  ],
+  "expected_tool": true,
+  "expected_tool_args": {
+    "city": "Portland",
+    "demo_date": "2027-05-15"
+  },
+  "must_disclose_demo_estimates": true,
+  "mode": "plan",
+  "request": {
+    "interestIds": [
+      "outdoors",
+      "art-design"
+    ],
+    "budget": 650
+  }
+}

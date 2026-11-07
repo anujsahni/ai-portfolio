@@ -1,0 +1,21 @@
+{
+  "chunkId": "PDX-OUTDOOR-WASHINGTONPARK--c01",
+  "sourceId": "PDX-OUTDOOR-WASHINGTONPARK",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Washington Park gardens",
+  "section": "Washington Park gardens",
+  "contentType": "outdoor-guide",
+  "chunkIndex": 1,
+  "text": "This sample outdoor guide suggests a relaxed garden block in Washington Park, home to the Portland Japanese Garden and the International Rose Test Garden. Plan it for a dry part of the day and keep the walk short.",
+  "textChecksum": "f2407a53bca712b7efe47d57dab5f58bd33c323da72aef36024761d3b71630f0",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "pdx-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

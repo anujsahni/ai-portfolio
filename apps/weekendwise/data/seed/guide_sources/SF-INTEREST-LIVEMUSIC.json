@@ -1,0 +1,17 @@
+{
+  "sourceId": "SF-INTEREST-LIVEMUSIC",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "An evening of live music",
+  "contentType": "interest-note",
+  "sourceUri": "data/guides/live-music.md",
+  "version": 1,
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "a753ea53bf8290a89a5381cdddf903a35a303e0be20d0e61ef53c1229f84cdc1",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

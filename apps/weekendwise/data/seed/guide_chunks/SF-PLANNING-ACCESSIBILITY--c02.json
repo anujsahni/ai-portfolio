@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-PLANNING-ACCESSIBILITY--c02",
+  "sourceId": "SF-PLANNING-ACCESSIBILITY",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Accessibility and trip constraints",
+  "section": "Accessibility and trip constraints",
+  "contentType": "planning-policy",
+  "chunkIndex": 2,
+  "text": "This demo corpus does not verify accessible entrances, elevators, path grades, or service availability. State this limitation and direct the traveler to confirm details with official providers.",
+  "textChecksum": "af584536059942c09a06af11305a5f5a7d5e2335621de03670bb9027f2931a65",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

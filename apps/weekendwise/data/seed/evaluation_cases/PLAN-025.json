@@ -1,0 +1,23 @@
+{
+  "suite": "weekendwise-local-eval-v5",
+  "id": "PLAN-025",
+  "category": "multi-city-interest",
+  "city": "Portland",
+  "question": "We love live music. Add a Portland show night to our weekend.",
+  "expected_sources_any": [
+    "PDX-INTEREST-LIVEMUSIC"
+  ],
+  "forbidden_sources": [
+    "SF-INTEREST-LIVEMUSIC"
+  ],
+  "expected_tool": false,
+  "must_not_book_or_mutate": true,
+  "must_disclose_demo_estimates": true,
+  "mode": "plan",
+  "request": {
+    "interestIds": [
+      "live-music"
+    ],
+    "budget": 650
+  }
+}

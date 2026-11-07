@@ -1,0 +1,16 @@
+# What `make build` uploads to Cloud Build: only what the Dockerfile needs.
+# Everything else (.env, Terraform state and vars, .venv, reports, docs) stays on your machine.
+*
+!Dockerfile
+!.dockerignore
+!cloudbuild.yaml
+!requirements.txt
+!weekendwise/
+!weekendwise/**
+!data/
+data/*
+!data/seed/
+!data/seed/**
+**/__pycache__/
+**/*.pyc
+.DS_Store

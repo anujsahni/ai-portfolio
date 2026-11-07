@@ -1,0 +1,17 @@
+{
+  "cityId": "santa-cruz",
+  "city": "Santa Cruz",
+  "demoDate": "2027-05-16",
+  "dayOfWeek": "Sun",
+  "condition": "partly-cloudy",
+  "icon": "⛅",
+  "tempHighF": 66,
+  "tempLowF": 52,
+  "precipitationChancePct": 5,
+  "windMph": 10,
+  "indoorRecommended": false,
+  "summary": "Partly cloudy sample day with a sea breeze.",
+  "simulated": true,
+  "source": "WeekendWise deterministic demo fixture",
+  "disclaimer": "Simulated conditions for the demo. Not a forecast."
+}

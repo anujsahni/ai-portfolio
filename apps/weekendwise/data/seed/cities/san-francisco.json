@@ -1,0 +1,97 @@
+{
+  "name": "San Francisco",
+  "state": "CA",
+  "country": "US",
+  "region": "San Francisco Bay Area",
+  "supported": true,
+  "timezone": "America/Los_Angeles",
+  "tagline": "Art, coffee, and bay views in a compact, walkable city.",
+  "description": "A dense, hilly city where neighborhoods are easy to group into relaxed half-days. Good for art, food, and waterfront walks without a car.",
+  "corpusVersion": "sf-demo-v1",
+  "defaultTripLengthDays": 3,
+  "neighborhoods": [
+    "Embarcadero",
+    "SoMa",
+    "North Beach",
+    "Golden Gate Park",
+    "Inner Richmond",
+    "Presidio",
+    "Mission District"
+  ],
+  "nearestAirports": [
+    {
+      "code": "SFO",
+      "name": "San Francisco International"
+    },
+    {
+      "code": "OAK",
+      "name": "Oakland International"
+    }
+  ],
+  "fromSanFrancisco": null,
+  "gettingAround": {
+    "carNeeded": false,
+    "summary": "Walking plus Muni buses, streetcars, and BART cover most visitor areas.",
+    "transitSystems": [
+      "Muni",
+      "BART"
+    ]
+  },
+  "highlights": [
+    {
+      "interestId": "art-design",
+      "title": "SFMOMA and the de Young",
+      "note": "Two major art museums in different neighborhoods."
+    },
+    {
+      "interestId": "coffee",
+      "title": "Ferry Building and Richmond cafés",
+      "note": "Easy coffee stops between bigger activities."
+    },
+    {
+      "interestId": "outdoors",
+      "title": "Crissy Field and Golden Gate Park",
+      "note": "Flat waterfront and park walks."
+    },
+    {
+      "interestId": "great-food",
+      "title": "Mission District",
+      "note": "Casual dinners and a lively evening walk."
+    },
+    {
+      "interestId": "local-finds",
+      "title": "North Beach",
+      "note": "Bookstores and a slower evening."
+    }
+  ],
+  "bestSeasons": [
+    "September",
+    "October"
+  ],
+  "weatherNotes": "Cool year-round with summer fog; layers help in every season.",
+  "demoDailyBudgetPerPersonUsd": {
+    "low": 120,
+    "high": 250,
+    "note": "Fabricated demo range, not a current price."
+  },
+  "travelTips": [
+    "Group stops by neighborhood to cut transit time.",
+    "Bring a layer; afternoons can turn cool and windy."
+  ],
+  "plannerReadiness": {
+    "hasGuides": true,
+    "hasConditionsFixture": true,
+    "blockers": []
+  },
+  "seededConditionDates": [
+    "2027-05-14",
+    "2027-05-15",
+    "2027-05-16",
+    "2027-06-12",
+    "2027-06-13"
+  ],
+  "notice": "Sample guides and simulated conditions only. Verify hours, prices, and access with official sources.",
+  "verifyNote": "General orientation for the demo. Verify hours, prices, reservations, and access with official sources.",
+  "demoOnly": true,
+  "updatedAt": "2026-11-05"
+}

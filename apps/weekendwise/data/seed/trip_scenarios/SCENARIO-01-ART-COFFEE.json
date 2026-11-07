@@ -1,0 +1,38 @@
+{
+  "title": "Art-and-coffee weekend",
+  "demoPurpose": "Preference-based plan with citations; no tool call.",
+  "request": {
+    "destination": "San Francisco",
+    "cityId": "san-francisco",
+    "startDate": "2027-05-14",
+    "endDate": "2027-05-16",
+    "travelers": 2,
+    "budget": 600,
+    "currency": "USD",
+    "interestIds": [
+      "coffee",
+      "art-design"
+    ],
+    "constraints": [
+      "Relaxed pace with open time between stops",
+      "Prefer public transit; no rental car"
+    ],
+    "notes": "First visit; we like modern art and a good coffee break."
+  },
+  "expected": {
+    "toolCalls": 0,
+    "expectedSourceIds": [
+      "SF-NEIGHBORHOOD-FERRY",
+      "SF-ATTRACTION-SFMOMA",
+      "SF-ATTRACTION-DEYOUNG",
+      "SF-TRANSIT-MUNI",
+      "SF-PLANNING-BUDGET"
+    ],
+    "budgetStatus": "on-track",
+    "reviewOutcome": "approved",
+    "sampleItineraryId": "SCENARIO-01-ART-COFFEE"
+  },
+  "cityId": "san-francisco",
+  "demoOnly": true,
+  "syntheticTraveler": true
+}

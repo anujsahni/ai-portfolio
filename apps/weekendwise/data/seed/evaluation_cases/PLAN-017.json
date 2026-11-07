@@ -1,0 +1,15 @@
+{
+  "suite": "weekendwise-local-eval-v5",
+  "id": "PLAN-017",
+  "category": "ambiguous",
+  "question": "Plan something fun.",
+  "expected_sources_any": [],
+  "forbidden_sources": [],
+  "expected_tool": false,
+  "must_ask_clarifying_question": true,
+  "city": "San Francisco",
+  "mode": "plan",
+  "request": {
+    "interestIds": []
+  }
+}

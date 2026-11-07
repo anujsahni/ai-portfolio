@@ -1,0 +1,102 @@
+{
+  "name": "Santa Cruz",
+  "state": "CA",
+  "country": "US",
+  "region": "Monterey Bay / Central Coast",
+  "supported": true,
+  "trending": true,
+  "timezone": "America/Los_Angeles",
+  "tagline": "Beach town with a boardwalk, cliffs, and redwoods nearby.",
+  "description": "A relaxed coastal town on the north end of Monterey Bay. Weekends mix a classic beach boardwalk, an ocean-cliff path, and short drives to redwood parks.",
+  "corpusVersion": "sc-demo-v1",
+  "defaultTripLengthDays": 3,
+  "neighborhoods": [
+    "Downtown / Pacific Avenue",
+    "Beach Flats and the Boardwalk",
+    "West Cliff",
+    "Seabright",
+    "Westside",
+    "Capitola (neighboring town)"
+  ],
+  "nearestAirports": [
+    {
+      "code": "SJC",
+      "name": "San José Mineta International"
+    },
+    {
+      "code": "SFO",
+      "name": "San Francisco International"
+    }
+  ],
+  "fromSanFrancisco": {
+    "approxMiles": 75,
+    "typicalTravel": "About 1.5–2 hours by car; traffic on Highway 17 and Highway 1 varies"
+  },
+  "gettingAround": {
+    "carNeeded": true,
+    "summary": "Downtown, the wharf, and the boardwalk are walkable or bikeable; a car helps for redwood parks and nearby beaches.",
+    "transitSystems": [
+      "Santa Cruz METRO"
+    ]
+  },
+  "highlights": [
+    {
+      "interestId": "outdoors",
+      "title": "West Cliff Drive and Natural Bridges",
+      "note": "An oceanfront path ending at a state beach."
+    },
+    {
+      "interestId": "outdoors",
+      "title": "Henry Cowell Redwoods State Park",
+      "note": "Easy redwood trails a short drive inland."
+    },
+    {
+      "interestId": "local-finds",
+      "title": "Santa Cruz Beach Boardwalk and Wharf",
+      "note": "A seaside amusement park and a long wooden wharf."
+    },
+    {
+      "interestId": "art-design",
+      "title": "Museum of Art & History (MAH)",
+      "note": "A small downtown museum with rotating exhibits."
+    },
+    {
+      "interestId": "coffee",
+      "title": "Downtown and Westside cafés",
+      "note": "Casual coffee stops near Pacific Avenue."
+    },
+    {
+      "interestId": "great-food",
+      "title": "Casual seafood and taquerias",
+      "note": "Relaxed, budget-friendly meals."
+    }
+  ],
+  "bestSeasons": [
+    "September",
+    "October"
+  ],
+  "weatherNotes": "Mild year-round; summer mornings are often foggy, and early fall is usually the clearest and warmest.",
+  "demoDailyBudgetPerPersonUsd": {
+    "low": 110,
+    "high": 230,
+    "note": "Fabricated demo range, not a current price."
+  },
+  "travelTips": [
+    "Summer weekends are busy; arrive early for beach parking.",
+    "Ocean water is cold year-round; check posted beach and surf conditions."
+  ],
+  "plannerReadiness": {
+    "hasGuides": true,
+    "hasConditionsFixture": true,
+    "blockers": []
+  },
+  "seededConditionDates": [
+    "2027-05-14",
+    "2027-05-15",
+    "2027-05-16"
+  ],
+  "notice": "Sample guides and simulated conditions only. Verify hours, prices, and access with official sources.",
+  "verifyNote": "General orientation for the demo. Verify hours, prices, reservations, and access with official sources.",
+  "demoOnly": true,
+  "updatedAt": "2026-11-05"
+}

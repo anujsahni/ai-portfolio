@@ -1,0 +1,17 @@
+{
+  "sourceId": "SF-NEIGHBORHOOD-MISSION",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Mission District: a casual food evening",
+  "contentType": "neighborhood-guide",
+  "sourceUri": "data/guides/mission-food.md",
+  "version": 1,
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "demoOnly": true,
+  "testFixture": null,
+  "conflictsWith": null,
+  "checksum": "e4d6d294df094b82283abfbd786768fc193fa9956320f3e2c8dbf67c9d5c515a",
+  "chunkCount": 2,
+  "provenance": "Original synthetic text written for the WeekendWise demo."
+}

@@ -1,0 +1,22 @@
+{
+  "label": "Local transit",
+  "badge": null,
+  "displayOrder": 4,
+  "description": "Transit, rideshare, and walking connections between neighborhoods.",
+  "relatedSourceIdsByCity": {
+    "san-francisco": [
+      "SF-TRANSIT-MUNI"
+    ],
+    "portland": [
+      "PDX-TRANSIT-TRIMET"
+    ],
+    "santa-cruz": [
+      "SC-PLANNING-BUDGET"
+    ],
+    "napa-valley": [
+      "NAPA-PLANNING-BUDGET"
+    ]
+  },
+  "isEstimate": true,
+  "active": true
+}

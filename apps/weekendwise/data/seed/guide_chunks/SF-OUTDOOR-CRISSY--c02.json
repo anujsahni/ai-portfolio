@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-OUTDOOR-CRISSY--c02",
+  "sourceId": "SF-OUTDOOR-CRISSY",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Crissy Field waterfront walk",
+  "section": "Crissy Field waterfront walk",
+  "contentType": "outdoor-guide",
+  "chunkIndex": 2,
+  "text": "Conditions, access, transit, and safety details are simulated or unverified. Confirm current local guidance before travel.",
+  "textChecksum": "88da805ad1301a69cf0d82ac1fad17fa0f605bf0ab22e6d582d71a4bc7076e99",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

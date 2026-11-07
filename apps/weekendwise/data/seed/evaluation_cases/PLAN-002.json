@@ -1,0 +1,21 @@
+{
+  "suite": "weekendwise-local-eval-v5",
+  "id": "PLAN-002",
+  "category": "tool-needed",
+  "question": "Show an indoor alternative for Saturday if the demo conditions are rainy.",
+  "expected_sources_any": [
+    "SF-PLAN-RAINY-DAY",
+    "SF-ATTRACTION-DEYOUNG"
+  ],
+  "expected_tool": true,
+  "must_disclose_demo_estimates": true,
+  "forbidden_sources": [],
+  "trip_scenario_id": "SCENARIO-02-RAINY-SATURDAY",
+  "expected_tool_args": {
+    "city": "San Francisco",
+    "demo_date": "2027-05-15"
+  },
+  "city": "San Francisco",
+  "mode": "plan",
+  "request": {}
+}

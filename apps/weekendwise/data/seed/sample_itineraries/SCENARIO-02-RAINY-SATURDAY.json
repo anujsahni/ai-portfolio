@@ -1,0 +1,381 @@
+{
+  "scenarioId": "SCENARIO-02-RAINY-SATURDAY",
+  "cityId": "san-francisco",
+  "status": "complete",
+  "headline": "Fresh air, with a cozy backup.",
+  "subhead": "Outdoor time Friday and Sunday; Saturday moves indoors.",
+  "tripSummary": {
+    "destination": "San Francisco",
+    "dates": "May 14–16, 2027",
+    "travelers": 2
+  },
+  "days": [
+    {
+      "date": "2027-05-14",
+      "dayLabel": "FRI",
+      "title": "Waterfront start",
+      "intro": "Conditions were only checked for Saturday.",
+      "conditions": null,
+      "activities": [
+        {
+          "id": "d1-a1",
+          "time": "10:30 AM",
+          "type": "COFFEE",
+          "title": "Coffee at the Ferry Building",
+          "description": "A coffee and a short Embarcadero stroll.",
+          "area": "Embarcadero",
+          "priceLabel": "$–$$",
+          "estimatedCost": {
+            "categoryId": "food-coffee",
+            "amount": 14,
+            "basis": "2 coffees, demo estimate"
+          },
+          "citations": [
+            "SF-NEIGHBORHOOD-FERRY--c01"
+          ],
+          "isEstimate": true
+        },
+        {
+          "id": "d1-a2",
+          "time": "1:00 PM",
+          "type": "FRESH AIR · EASY PACE",
+          "title": "Crissy Field waterfront walk",
+          "description": "A relaxed walk if conditions suit; do not assume paths or facilities are open.",
+          "area": "Presidio",
+          "priceLabel": "Free",
+          "estimatedCost": {
+            "categoryId": "activities",
+            "amount": 0,
+            "basis": "No admission"
+          },
+          "citations": [
+            "SF-OUTDOOR-CRISSY--c01",
+            "SF-OUTDOOR-CRISSY--c02"
+          ],
+          "isEstimate": true
+        },
+        {
+          "id": "d1-a3",
+          "time": "6:30 PM",
+          "type": "DINNER",
+          "title": "Casual dinner nearby",
+          "description": "Pick a casual spot that fits the budget.",
+          "area": "Marina / Embarcadero",
+          "priceLabel": "≈ $30/person (demo)",
+          "estimatedCost": {
+            "categoryId": "food-coffee",
+            "amount": 60,
+            "basis": "Dinner for 2, demo estimate"
+          },
+          "citations": [
+            "SF-PLANNING-BUDGET--c01"
+          ],
+          "isEstimate": true
+        }
+      ],
+      "transitTip": null
+    },
+    {
+      "date": "2027-05-15",
+      "dayLabel": "SAT",
+      "title": "Indoor art for a rainy day",
+      "intro": "The simulated conditions show rain, so the park stroll moved to Sunday.",
+      "conditions": {
+        "source": "check_local_conditions",
+        "conditionsDocId": "san-francisco__2027-05-15",
+        "icon": "☁",
+        "tempHighF": 61,
+        "condition": "rain",
+        "label": "☁ 61° · SAMPLE",
+        "simulated": true
+      },
+      "activities": [
+        {
+          "id": "d2-a1",
+          "time": "10:00 AM",
+          "type": "ART · INDOOR SWAP",
+          "title": "de Young Museum",
+          "description": "Replaces the outdoor stroll while keeping your art interest. Verify hours before you go.",
+          "area": "Golden Gate Park",
+          "priceLabel": "≈ $20/person (demo)",
+          "estimatedCost": {
+            "categoryId": "activities",
+            "amount": 40,
+            "basis": "2 × $20 demo admission"
+          },
+          "citations": [
+            "SF-ATTRACTION-DEYOUNG--c01",
+            "SF-PLAN-RAINY-DAY--c01"
+          ],
+          "isEstimate": true
+        },
+        {
+          "id": "d2-a2",
+          "time": "1:30 PM",
+          "type": "COFFEE BREAK",
+          "title": "Richmond District café stop",
+          "description": "A warm, flexible indoor pause.",
+          "area": "Inner Richmond",
+          "priceLabel": "$–$$",
+          "estimatedCost": {
+            "categoryId": "food-coffee",
+            "amount": 18,
+            "basis": "2 coffees + 1 pastry, demo estimate"
+          },
+          "citations": [
+            "SF-NEIGHBORHOOD-RICHMOND--c01"
+          ],
+          "isEstimate": true
+        }
+      ],
+      "transitTip": null
+    },
+    {
+      "date": "2027-05-16",
+      "dayLabel": "SUN",
+      "title": "The park stroll, rescheduled",
+      "intro": "Sunday conditions were not checked; keep the stroll short and flexible.",
+      "conditions": null,
+      "activities": [
+        {
+          "id": "d3-a1",
+          "time": "10:00 AM",
+          "type": "FRESH AIR",
+          "title": "Golden Gate Park stroll",
+          "description": "A short, unhurried walk; drop it if the weather turns.",
+          "area": "Golden Gate Park",
+          "priceLabel": "Free",
+          "estimatedCost": {
+            "categoryId": "activities",
+            "amount": 0,
+            "basis": "No admission"
+          },
+          "citations": [
+            "SF-OUTDOOR-GGPARK--c01",
+            "SF-OUTDOOR-GGPARK--c02"
+          ],
+          "isEstimate": true
+        },
+        {
+          "id": "d3-a2",
+          "time": "12:30 PM",
+          "type": "LUNCH",
+          "title": "Lunch near the Ferry Building",
+          "description": "A last bite before heading home.",
+          "area": "Embarcadero",
+          "priceLabel": "$$",
+          "estimatedCost": {
+            "categoryId": "food-coffee",
+            "amount": 58,
+            "basis": "Lunch for 2, demo estimate"
+          },
+          "citations": [
+            "SF-NEIGHBORHOOD-FERRY--c01"
+          ],
+          "isEstimate": true
+        }
+      ],
+      "transitTip": {
+        "text": "Check the current transit map and leave extra transfer time between neighborhoods.",
+        "citations": [
+          "SF-TRANSIT-MUNI--c01"
+        ]
+      }
+    }
+  ],
+  "budget": {
+    "currency": "USD",
+    "limit": 700,
+    "lineItems": [
+      {
+        "categoryId": "stays",
+        "amount": 230,
+        "note": "Two nights, single demo estimate",
+        "citations": [
+          "SF-PLANNING-LODGING--c01"
+        ]
+      },
+      {
+        "categoryId": "food-coffee",
+        "amount": 150,
+        "note": "Itemized from activities",
+        "citations": [
+          "SF-PLANNING-BUDGET--c01"
+        ]
+      },
+      {
+        "categoryId": "activities",
+        "amount": 40,
+        "note": "Itemized from activities",
+        "citations": [
+          "SF-PLANNING-BUDGET--c01"
+        ]
+      },
+      {
+        "categoryId": "local-transit",
+        "amount": 45,
+        "note": "Flat demo estimate for 2",
+        "citations": [
+          "SF-TRANSIT-MUNI--c01"
+        ]
+      }
+    ],
+    "total": 465,
+    "uncertaintyBufferPct": 10,
+    "totalWithBuffer": 511.5,
+    "status": "on-track",
+    "statusLabel": "ON TRACK",
+    "footnote": "Estimates only · no bookings included"
+  },
+  "whyThisFits": "You wanted outdoor time and art. Saturday's simulated rain swapped the park for a museum, and the stroll moved to Sunday.",
+  "citations": [
+    {
+      "chunkId": "SF-NEIGHBORHOOD-FERRY--c01",
+      "sourceId": "SF-NEIGHBORHOOD-FERRY",
+      "title": "Ferry Building and Embarcadero",
+      "contentType": "neighborhood-guide",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Friday coffee and Sunday lunch"
+    },
+    {
+      "chunkId": "SF-OUTDOOR-CRISSY--c01",
+      "sourceId": "SF-OUTDOOR-CRISSY",
+      "title": "Crissy Field waterfront walk",
+      "contentType": "outdoor-guide",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Friday walk"
+    },
+    {
+      "chunkId": "SF-PLAN-RAINY-DAY--c01",
+      "sourceId": "SF-PLAN-RAINY-DAY",
+      "title": "Rainy-day planning pattern",
+      "contentType": "planning-policy",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Saturday indoor swap"
+    },
+    {
+      "chunkId": "SF-ATTRACTION-DEYOUNG--c01",
+      "sourceId": "SF-ATTRACTION-DEYOUNG",
+      "title": "Art and a rainy-day option",
+      "contentType": "attraction-note",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Saturday morning"
+    },
+    {
+      "chunkId": "SF-NEIGHBORHOOD-RICHMOND--c01",
+      "sourceId": "SF-NEIGHBORHOOD-RICHMOND",
+      "title": "Richmond District coffee break",
+      "contentType": "neighborhood-guide",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Saturday afternoon"
+    },
+    {
+      "chunkId": "SF-OUTDOOR-GGPARK--c01",
+      "sourceId": "SF-OUTDOOR-GGPARK",
+      "title": "Golden Gate Park: an easy green break",
+      "contentType": "outdoor-guide",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Sunday stroll"
+    },
+    {
+      "chunkId": "SF-TRANSIT-MUNI--c01",
+      "sourceId": "SF-TRANSIT-MUNI",
+      "title": "Getting around without a car",
+      "contentType": "transit-note",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Route suggestions"
+    },
+    {
+      "chunkId": "SF-PLANNING-BUDGET--c01",
+      "sourceId": "SF-PLANNING-BUDGET",
+      "title": "Budget-aware itinerary planning",
+      "contentType": "planning-policy",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Budget method"
+    },
+    {
+      "chunkId": "SF-PLANNING-LODGING--c01",
+      "sourceId": "SF-PLANNING-LODGING",
+      "title": "Lodging estimates for a weekend sample",
+      "contentType": "planning-policy",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Stay estimate"
+    },
+    {
+      "chunkId": "SF-OUTDOOR-CRISSY--c02",
+      "sourceId": "SF-OUTDOOR-CRISSY",
+      "title": "Crissy Field waterfront walk",
+      "contentType": "outdoor-guide",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Conditions caveat"
+    },
+    {
+      "chunkId": "SF-OUTDOOR-GGPARK--c02",
+      "sourceId": "SF-OUTDOOR-GGPARK",
+      "title": "Golden Gate Park: an easy green break",
+      "contentType": "outdoor-guide",
+      "lastReviewed": "2026-10-15",
+      "usedFor": "Poor-conditions fallback"
+    }
+  ],
+  "assumptions": [
+    "Only Saturday's conditions were checked (one tool call per request).",
+    "Admission amounts are demo fixtures."
+  ],
+  "caveats": [
+    "Guide content, prices, and conditions are demo data.",
+    "No reservation, ticket, or payment is made.",
+    "Saturday's rain is simulated, not a forecast."
+  ],
+  "unansweredRequests": [],
+  "toolCalls": [
+    {
+      "tool": "check_local_conditions",
+      "args": {
+        "city": "San Francisco",
+        "demo_date": "2027-05-15"
+      },
+      "status": "ok",
+      "resultDocId": "san-francisco__2027-05-15"
+    }
+  ],
+  "trace": [
+    {
+      "step": "normalize",
+      "label": "Read your trip details",
+      "status": "done"
+    },
+    {
+      "step": "retrieve",
+      "label": "Searched city guides",
+      "status": "done"
+    },
+    {
+      "step": "tool",
+      "label": "Checked simulated local conditions",
+      "status": "done"
+    },
+    {
+      "step": "plan",
+      "label": "Drafted your days",
+      "status": "done"
+    },
+    {
+      "step": "review",
+      "label": "Reviewed sources and budget",
+      "status": "done"
+    }
+  ],
+  "review": {
+    "outcome": "approved",
+    "revisionCount": 0,
+    "checks": {
+      "citationsValid": true,
+      "budgetArithmetic": true,
+      "constraintsHonored": true,
+      "conditionsCaveated": true
+    },
+    "flags": []
+  },
+  "demoOnly": true
+}

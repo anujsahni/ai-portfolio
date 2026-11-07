@@ -1,0 +1,21 @@
+{
+  "chunkId": "PDX-FOOD-CARTS--c01",
+  "sourceId": "PDX-FOOD-CARTS",
+  "city": "Portland",
+  "cityId": "portland",
+  "title": "Food-cart pods for a casual meal",
+  "section": "Food-cart pods for a casual meal",
+  "contentType": "food-guide",
+  "chunkIndex": 1,
+  "text": "For a traveler who lists great food, this sample guide suggests a lunch or dinner at one of Portland's food-cart pods, where a group can each pick something different. It is a flexible, budget-friendly option.",
+  "textChecksum": "c742c16a031bc5718afd2f1120c0aa2a2732635050a57c0f00549bb2a21de07e",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "pdx-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

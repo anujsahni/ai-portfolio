@@ -1,0 +1,21 @@
+{
+  "chunkId": "SC-INTEREST-LIVEMUSIC--c01",
+  "sourceId": "SC-INTEREST-LIVEMUSIC",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "Live music in Santa Cruz",
+  "section": "Live music in Santa Cruz",
+  "contentType": "interest-note",
+  "chunkIndex": 1,
+  "text": "Santa Cruz has a long-running downtown music scene, with clubs and a well-known concert venue near Pacific Avenue. This sample note suggests keeping one evening open for a show, with dinner downtown beforehand.",
+  "textChecksum": "9bcd419c6397553e0c1ab2b028507fdcdb4fcc095b1df8f8a5c91e754f1bebd6",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sc-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

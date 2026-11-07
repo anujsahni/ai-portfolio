@@ -1,0 +1,21 @@
+{
+  "chunkId": "SC-INTEREST-LIVEMUSIC--c02",
+  "sourceId": "SC-INTEREST-LIVEMUSIC",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "Live music in Santa Cruz",
+  "section": "Live music in Santa Cruz",
+  "contentType": "interest-note",
+  "chunkIndex": 2,
+  "text": "This demo has no event calendar and cannot buy or hold tickets. For demo budgeting only, a show can be shown as roughly $20–$45; check current venue listings.",
+  "textChecksum": "a55b4ba6cdee56073bc7b86c4f6e45d6c03d7933e8b9454347d5e53b07055a0b",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sc-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

@@ -1,0 +1,21 @@
+{
+  "chunkId": "SC-PLANNING-ACCESSIBILITY--c01",
+  "sourceId": "SC-PLANNING-ACCESSIBILITY",
+  "city": "Santa Cruz",
+  "cityId": "santa-cruz",
+  "title": "Accessibility and trip constraints in Santa Cruz",
+  "section": "Accessibility and trip constraints in Santa Cruz",
+  "contentType": "planning-policy",
+  "chunkIndex": 1,
+  "text": "If a traveler shares an accessibility or mobility need, keep it throughout planning and ask which accommodations matter when unclear. In Santa Cruz, details such as beach access and cliff paths vary by place and should be confirmed in advance.",
+  "textChecksum": "90f80c676126e06e164e9f8ce4dcb685d32ded2483727de3db75a6a34e68c759",
+  "lastReviewed": "2026-11-05",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sc-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

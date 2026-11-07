@@ -1,0 +1,21 @@
+{
+  "chunkId": "SF-NEIGHBORHOOD-RICHMOND--c02",
+  "sourceId": "SF-NEIGHBORHOOD-RICHMOND",
+  "city": "San Francisco",
+  "cityId": "san-francisco",
+  "title": "Richmond District coffee break",
+  "section": "Richmond District coffee break",
+  "contentType": "neighborhood-guide",
+  "chunkIndex": 2,
+  "text": "Named businesses, exact locations, hours, and prices are not included in this demo guide. Use the sample as a preference cue, not verified local advice.",
+  "textChecksum": "24dcf38ccc0e550a4eb45687055d3cef507a5746d1669f8f0d07dd3a8c9b1c6d",
+  "lastReviewed": "2026-10-15",
+  "active": true,
+  "version": 1,
+  "corpusVersion": "sf-demo-v1",
+  "chunkerVersion": "paragraph-v1",
+  "embedding": null,
+  "embeddingModel": null,
+  "embeddingDimension": null,
+  "embeddingStatus": "pending"
+}

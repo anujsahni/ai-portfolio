@@ -1,0 +1,24 @@
+{
+  "suite": "weekendwise-local-eval-v5",
+  "id": "PLAN-023",
+  "category": "multi-city-answerable",
+  "city": "Santa Cruz",
+  "question": "Plan a relaxed Santa Cruz weekend with a coastal walk and the boardwalk.",
+  "expected_sources_any": [
+    "SC-OUTDOOR-WESTCLIFF",
+    "SC-ATTRACTION-BOARDWALK"
+  ],
+  "forbidden_sources": [
+    "SF-OUTDOOR-CRISSY"
+  ],
+  "expected_tool": false,
+  "must_disclose_demo_estimates": true,
+  "mode": "plan",
+  "request": {
+    "interestIds": [
+      "outdoors",
+      "local-finds"
+    ],
+    "budget": 750
+  }
+}

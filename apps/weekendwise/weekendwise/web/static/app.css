@@ -1,0 +1,66 @@
+/* Additions for the live app (MVP-07). Same palette as the approved mockup: evergreen teal, coral, cream. */
+.demo-pill.live i { background: var(--teal); box-shadow: 0 0 0 3px var(--teal-soft); }
+.profile-button { cursor: default; }
+
+/* Plan form */
+.input-with-icon select#destination { font-size: 12px; font-weight: 600; }
+.date-pair { display: flex; align-items: center; gap: 6px; }
+.date-pair .input-with-icon { flex: 1; min-width: 0; padding: 0 9px; }
+.date-pair input[type="date"] { font-size: 11px; }
+.date-sep { color: #9aa6a2; font-size: 9px; }
+.notes-section { border-bottom: 0; padding-bottom: 8px; }
+.notes-section textarea { width: 100%; padding: 10px 12px; border: 1px solid #dfe7e2; border-radius: 8px; resize: vertical; color: var(--ink); font: inherit; font-size: 11px; line-height: 1.5; outline: 0; }
+.notes-section textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(15,118,110,.09); }
+.sample-row { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+#sample-chips { display: contents; }
+.primary-button:disabled { opacity: .6; cursor: wait; transform: none; }
+
+.form-alert { margin: -12px 0 18px; padding: 12px 15px; border-radius: 10px; border: 1px solid #f3cdbf; background: var(--coral-soft); color: #8a4330; font-size: 11px; line-height: 1.5; }
+.form-alert.info { border-color: #cfe3da; background: var(--teal-soft); color: var(--teal-dark); }
+.form-alert ul { margin: 5px 0 0; padding-left: 18px; }
+
+/* City artwork on the inspiration card */
+.city-portland .inspiration-image { background: linear-gradient(165deg, #dfe6e4 0 43%, #b9d3c8 43% 57%, #6f9f92 57% 100%); }
+.city-portland .sun-disc { background: #c9d6d3; box-shadow: 0 0 0 14px rgba(255,255,255,.25); }
+.city-santa-cruz .inspiration-image { background: linear-gradient(165deg, #fbe0a6 0 40%, #9fd3d0 40% 58%, #4d9a9b 58% 100%); }
+.city-santa-cruz .bridge { display: none; }
+.city-napa-valley .inspiration-image { background: linear-gradient(165deg, #f6cf8d 0 42%, #e3c99a 42% 55%, #9aa35d 55% 100%); }
+.city-napa-valley .hill-back { background: #b6b46e; }
+.city-napa-valley .hill-front { background: #7f8f47; }
+.city-napa-valley .bridge { border-top-style: dashed; border-top-color: rgba(255,255,255,.6); }
+
+/* Progress */
+.progress-step span em { display: block; margin-top: 2px; color: #93a19d; font-size: 8px; font-style: normal; font-weight: 400; }
+.progress-step.warn { color: #8a5a3c; }
+.step-check.warn, .trace-check.warn { background: var(--coral-soft); color: var(--coral); }
+
+/* Itinerary */
+.empty-state { max-width: 520px; padding: 30px 0; }
+.empty-state .primary-button { margin-top: 18px; }
+.review-banner { margin: 0 0 14px; padding: 11px 14px; border-radius: 10px; font-size: 10px; line-height: 1.5; }
+.review-banner.warn { border: 1px solid #f3cdbf; background: var(--coral-soft); color: #8a4330; }
+.review-banner.info { border: 1px solid #cfe3da; background: var(--teal-soft); color: var(--teal-dark); }
+.review-banner ul { margin: 4px 0 0; padding-left: 18px; }
+.activity-time small { display: block; line-height: 1.3; }
+.activity-tags button { font-weight: 700; }
+.empty-day { padding: 8px 4px; }
+.notes-card { margin-top: 14px; padding: 13px 15px; border: 1px solid #f0e8d9; border-radius: 10px; background: #fffaf1; display: grid; gap: 10px; }
+.notes-card strong { color: #4a605d; font: 600 11px Georgia, serif; }
+.notes-card ul { margin: 4px 0 0; padding-left: 17px; color: #7d8b89; font-size: 9px; line-height: 1.55; }
+.budget-meter span.over { background: linear-gradient(90deg, var(--coral), #f0a68f); }
+.substitutions { margin-top: 12px; padding: 9px 10px; border-radius: 8px; background: var(--coral-soft); color: #8a4330; font-size: 8px; }
+.substitutions ul { margin: 4px 0 0; padding-left: 15px; line-height: 1.5; }
+
+/* Sources */
+.source-card { scroll-margin: 90px; transition: border-color .3s, box-shadow .3s; }
+.source-card.highlight { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(15,118,110,.12); }
+#source-limits ul { margin: -6px 0 16px; padding-left: 16px; color: #6f8580; font-size: 9px; line-height: 1.6; }
+
+@media (max-width: 580px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .date-pair { flex-wrap: wrap; }
+  .date-sep { display: none; }
+  .date-pair .input-with-icon { flex-basis: 100%; }
+}
+@media (max-width: 850px) { .nav-section-label { display: none; } }
+.source-content p + p { margin-top: 6px; }
