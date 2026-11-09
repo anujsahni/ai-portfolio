@@ -1,0 +1,37 @@
+# Local secrets and configuration
+.env
+.env.*
+!.env.example
+*.pem
+credentials*.json
+.aws/
+
+# Python environment and generated files
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Terraform state, caches, plans, and private operator config
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+backend.hcl
+*.auto.tfvars.json
+*.tfplan
+crash.log
+crash.*.log
+.terraform.tfstate.lock.info
+
+# App-local generated data, reports and build metadata
+data/out/
+reports/
+infra/.verify-*.log
+infra/.last-build
+infra/.build-src/

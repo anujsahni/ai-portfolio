@@ -1,0 +1,29 @@
+# Streamlit settings for DealPulse (read when `streamlit run` starts in apps/dealpulse/).
+[theme]
+base = "light"
+primaryColor = "#2f5bd3"
+backgroundColor = "#f5f6f9"
+secondaryBackgroundColor = "#ffffff"
+textColor = "#14213d"
+font = "IBM Plex Sans:https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+headingFont = "Newsreader:https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap"
+codeFont = "IBM Plex Mono:https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap"
+borderColor = "#e2e6ee"
+baseRadius = "medium"
+
+[theme.sidebar]
+backgroundColor = "#14213d"
+secondaryBackgroundColor = "#1b2a4d"
+textColor = "#c8d1e6"
+borderColor = "#263559"
+
+[browser]
+gatherUsageStats = false
+
+[client]
+toolbarMode = "minimal"
+showErrorDetails = "type"
+
+[server]
+headless = true
+runOnSave = false

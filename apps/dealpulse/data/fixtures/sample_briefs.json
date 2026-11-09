@@ -1,0 +1,301 @@
+{
+  "notice": "Sample deal briefs written by hand from the synthetic notes and playbook, for the offline UI. In the live app Claude writes these (MVP-08). Citations are real record IDs.",
+  "briefs": {
+    "006DP0000000007": {
+      "summary": "Forecast as Commit for December 5, but the evidence points the other way. After 135 days nobody above manager level has engaged, the budget isn't approved, no one inside the customer owns the decision, and the close date has already slipped once. The model estimates 17%, against 60% for the stage.",
+      "risks": [
+        {
+          "text": "No economic buyer or executive contact. Finance will decide \"later this quarter\" and the budget is not yet approved.",
+          "driver": "No executive meeting in the last 30 days",
+          "citations": [
+            "00TDP0000000057",
+            "00TDP0000000047"
+          ]
+        },
+        {
+          "text": "No champion. Contacts are supportive but say they can't drive the decision internally.",
+          "driver": "No champion identified",
+          "citations": [
+            "00UDP0000000010",
+            "00TDP0000000055"
+          ]
+        },
+        {
+          "text": "Engagement is fading: two follow-ups went unanswered and a voicemail got no reply.",
+          "driver": "3 activities in the last 30 days",
+          "citations": [
+            "00TDP0000000056",
+            "00TDP0000000054"
+          ]
+        },
+        {
+          "text": "The close date already moved to December 5 after legal review slipped.",
+          "driver": "Close date moved 1 time(s)",
+          "citations": [
+            "00TDP0000000058"
+          ]
+        },
+        {
+          "text": "Lumora Analytics is named as a competitor; without an executive sponsor the decision tends to become a price comparison.",
+          "driver": "Competitor in the deal",
+          "citations": [
+            "PB-05"
+          ]
+        }
+      ],
+      "nextSteps": [
+        {
+          "text": "Ask Ines Vasquez who signs off on this budget, and propose a 30-minute executive alignment call with that person and Priya Raman.",
+          "owner": "Account executive",
+          "citations": [
+            "PB-02",
+            "00TDP0000000057"
+          ]
+        },
+        {
+          "text": "Test Mateo Vasquez as a champion with the three asks: the decision process, a meeting with the economic buyer, and presenting the business case internally.",
+          "owner": "Account executive",
+          "citations": [
+            "PB-03",
+            "00UDP0000000010"
+          ]
+        },
+        {
+          "text": "Move the forecast to Best Case until an executive meeting has happened and the mutual action plan has dated steps.",
+          "owner": "Sales manager",
+          "citations": [
+            "PO-04",
+            "PB-04"
+          ]
+        },
+        {
+          "text": "Confirm the 18% discount has regional sales manager approval before it is quoted.",
+          "owner": "Account executive",
+          "citations": [
+            "PO-01"
+          ]
+        }
+      ],
+      "crmUpdate": {
+        "nextStep": "Get budget owner intro via Ines Vasquez; propose exec alignment call with Priya Raman before Nov 20.",
+        "description": "Risks: no economic buyer engaged, budget not approved, no internal champion, close date slipped once (legal), Lumora Analytics competing. Recommend Best Case until exec meeting held and MAP dated. 18% discount needs RSM approval."
+      },
+      "openQuestions": [
+        "Who owns the budget decision, and when does finance meet?",
+        "How far along is Lumora Analytics in the evaluation?",
+        "What does legal still need before December 5?"
+      ],
+      "qa": [
+        {
+          "q": "What did they say about the budget?",
+          "a": "The budget isn't approved. On October 15 Ines Vasquez said finance will decide \"later this quarter\", and a June request for an introduction to the CFO didn't lead to a meeting.",
+          "citations": [
+            "00TDP0000000057",
+            "00TDP0000000047"
+          ]
+        }
+      ]
+    },
+    "006DP0000000001": {
+      "summary": "Forecast as Commit for December 7, and the model agrees (80%), mainly because the deal has reached Negotiation. The notes show risks the score weighs only lightly: no executive has joined a call, the budget isn't approved, and the close date has moved twice. Treat the Commit as fragile until the budget owner is engaged.",
+      "risks": [
+        {
+          "text": "Budget not approved and no route to the CFO. The latest introduction request (October 21) got no meeting.",
+          "driver": "No executive meeting in the last 30 days",
+          "citations": [
+            "00TDP0000000010",
+            "00TDP0000000002"
+          ]
+        },
+        {
+          "text": "Nobody above director level has joined a call; the approval path is unclear.",
+          "driver": "No executive meeting in the last 30 days",
+          "citations": [
+            "00TDP0000000004"
+          ]
+        },
+        {
+          "text": "Two slips: November 15 (legal review) and then December 7 (procurement backlog).",
+          "driver": "Close date moved 2 time(s)",
+          "citations": [
+            "00TDP0000000003",
+            "00TDP0000000009"
+          ]
+        },
+        {
+          "text": "Activity has slowed to two touches in the last 30 days, after earlier follow-ups went unanswered.",
+          "driver": "2 activities in the last 30 days",
+          "citations": [
+            "00TDP0000000007"
+          ]
+        }
+      ],
+      "nextSteps": [
+        {
+          "text": "Ask Omar Bose to arrange a 30-minute executive alignment call with the budget owner before the procurement step.",
+          "owner": "Account executive",
+          "citations": [
+            "PB-02",
+            "00TDP0000000010"
+          ]
+        },
+        {
+          "text": "Review the deal with the sales manager: two slips mean the compelling event and the economic buyer's commitment need re-confirming.",
+          "owner": "Sales manager",
+          "citations": [
+            "PB-04"
+          ]
+        },
+        {
+          "text": "Close the remaining proof-of-value item (finance cube refresh time) so it can't hold up signature.",
+          "owner": "Sales engineer",
+          "citations": [
+            "00TDP0000000006"
+          ]
+        }
+      ],
+      "crmUpdate": {
+        "nextStep": "Exec alignment call with budget owner via Omar Bose; re-confirm Dec 7 date and procurement steps.",
+        "description": "Model 80% (Negotiation) but budget not approved, no exec engaged, close date moved twice (legal, procurement). Keep Commit only if budget owner meeting is held before Nov 20."
+      },
+      "openQuestions": [
+        "Who approves the budget, and is it in this fiscal year?",
+        "What is left in procurement before December 7?"
+      ],
+      "qa": [
+        {
+          "q": "Why did the close date move?",
+          "a": "It moved twice: to November 15 because legal review slipped by two weeks, then to December 7 at the customer's request because of a procurement backlog.",
+          "citations": [
+            "00TDP0000000003",
+            "00TDP0000000009"
+          ]
+        }
+      ]
+    },
+    "006DP0000000003": {
+      "summary": "Forecast as Commit for December 8 with strong sponsorship: the VP of Data & Analytics confirmed the budget and supports the rollout. The main risk is commercial. Procurement wants 35% off to sign this quarter, which needs CFO approval under the pricing policy, while Stackwell has quoted lower. The model estimates 68%, against 75% for the stage.",
+      "risks": [
+        {
+          "text": "Procurement asked for 35% off list. Discounts above 30% need CFO approval before they are quoted.",
+          "driver": "Discount at 35%",
+          "citations": [
+            "00TDP0000000025",
+            "00TDP0000000027",
+            "PO-01"
+          ]
+        },
+        {
+          "text": "Stackwell came in with a lower quote; procurement wants a three-year cost comparison.",
+          "driver": "Competitor in the deal",
+          "citations": [
+            "00TDP0000000023",
+            "PB-05"
+          ]
+        },
+        {
+          "text": "The close date moved to December 8 because the customer's budget meeting was rescheduled.",
+          "driver": "Close date moved 1 time(s)",
+          "citations": [
+            "00TDP0000000029"
+          ]
+        }
+      ],
+      "strengths": [
+        {
+          "text": "Executive sponsor engaged: Mateo Brennan (VP of Data & Analytics) confirmed the business case and that the budget is approved.",
+          "citations": [
+            "00UDP0000000006",
+            "00UDP0000000005"
+          ]
+        },
+        {
+          "text": "Active champion (Priya Zielinski) drafted the internal ROI memo, and a mutual action plan has dated steps.",
+          "citations": [
+            "00TDP0000000024",
+            "00TDP0000000028"
+          ]
+        }
+      ],
+      "nextSteps": [
+        {
+          "text": "Don't quote 35% yet. Get CFO approval first, or counter with a two-year term, which allows up to 5 extra points within the approval tiers.",
+          "owner": "Account executive",
+          "citations": [
+            "PO-01",
+            "PO-03"
+          ]
+        },
+        {
+          "text": "Send a three-year total-cost comparison against Stackwell that includes the effort to maintain definitions and access rules.",
+          "owner": "Account executive",
+          "citations": [
+            "PB-05",
+            "00TDP0000000023"
+          ]
+        },
+        {
+          "text": "Confirm the rescheduled budget meeting date with Mateo Brennan and update the mutual action plan.",
+          "owner": "Account executive",
+          "citations": [
+            "PB-04",
+            "00TDP0000000028"
+          ]
+        }
+      ],
+      "crmUpdate": {
+        "nextStep": "Seek CFO approval or propose 2-year term instead of 35%; send 3-yr TCO vs Stackwell; confirm budget meeting date.",
+        "description": "Strong exec sponsor (VP Data & Analytics), budget approved, champion active, MAP in place. Risk: 35% discount ask (needs CFO approval) and Stackwell lower quote. Close moved to Dec 8."
+      },
+      "openQuestions": [
+        "Would a two-year term meet procurement's price target?",
+        "When is the rescheduled budget meeting?"
+      ],
+      "qa": [
+        {
+          "q": "Can we give them 35%?",
+          "a": "Not without CFO approval: the policy requires it for any discount above 30%, and approval must come before the discount is quoted. A two-year term can add up to 5 points within the same tiers.",
+          "citations": [
+            "PO-01",
+            "PO-03",
+            "00TDP0000000025"
+          ]
+        }
+      ]
+    }
+  },
+  "trace": [
+    [
+      "Checked access",
+      "{persona} can view deals owned by {owner}"
+    ],
+    [
+      "Loaded the deal",
+      "{notes} notes, stage history and contact roles from the CRM snapshot"
+    ],
+    [
+      "Scored the deal",
+      "SageMaker model: {model}% (stage default {stage}%)"
+    ],
+    [
+      "Searched this deal's notes",
+      "Hybrid search, filtered to this opportunity only"
+    ],
+    [
+      "Searched shared guidance",
+      "Playbook, pricing policy and win/loss reviews"
+    ],
+    [
+      "Screened with Guardrails",
+      "Prompt-attack check on the evidence; contact details masked"
+    ],
+    [
+      "Drafted the brief",
+      "1 Claude call, structured output"
+    ],
+    [
+      "Checked citations and numbers",
+      "Every citation is from this deal or shared guidance; amount, dates and score match the CRM"
+    ]
+  ]
+}

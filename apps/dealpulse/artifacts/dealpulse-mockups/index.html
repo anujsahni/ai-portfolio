@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#14213d" />
+    <meta name="description" content="DealPulse: which deals need attention before the forecast call, and why. Clickable mockup with synthetic data." />
+    <title>DealPulse Mockup</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" />
+    <link rel="stylesheet" href="architecture.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#pipeline" aria-label="DealPulse home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 40 40"><path class="mark-line" d="M5 24h7l4-11 6 18 4-10h9" /></svg>
+          </span>
+          <span class="brand-name">Deal<span>Pulse</span></span>
+        </a>
+        <div class="nav-label">DEAL DESK</div>
+        <nav class="main-nav" aria-label="Deal desk">
+          <a class="nav-item" data-nav="pipeline" href="#pipeline"><span class="nav-icon" aria-hidden="true">▤</span> Pipeline</a>
+          <a class="nav-item" data-nav="deal" href="#deal"><span class="nav-icon" aria-hidden="true">◎</span> Deal brief</a>
+          <a class="nav-item" data-nav="sources" href="#sources"><span class="nav-icon" aria-hidden="true">❝</span> Sources</a>
+        </nav>
+        <div class="nav-label">UNDER THE HOOD</div>
+        <nav class="main-nav" aria-label="Under the hood">
+          <a class="nav-item" data-nav="model" href="#model"><span class="nav-icon" aria-hidden="true">∿</span> Model</a>
+          <a class="nav-item" data-nav="architecture" href="#architecture"><span class="nav-icon" aria-hidden="true">◇</span> Architecture</a>
+        </nav>
+        <div class="sidebar-bottom">
+          <label class="persona-label" for="persona">Viewing as</label>
+          <select id="persona" class="persona-select"></select>
+          <p class="persona-note" id="persona-note"></p>
+        </div>
+      </aside>
+
+      <main class="main-area">
+        <header class="topbar">
+          <div class="breadcrumbs"><span>Altura Analytics</span><span class="crumb-sep">/</span><strong id="topbar-title">Pipeline</strong></div>
+          <div class="topbar-right">
+            <span class="data-pill" title="Clickable mockup. Synthetic CRM data and real scores from the trained model; no AWS calls."><i></i>MOCKUP · SYNTHETIC DATA · NO CRM CHANGES</span>
+          </div>
+        </header>
+
+        <!-- Pipeline -->
+        <section class="screen" id="screen-pipeline" aria-labelledby="pipeline-title">
+          <div class="page-head">
+            <div>
+              <div class="eyebrow" id="pipeline-eyebrow">Q4 2026 · SNAPSHOT NOV 2</div>
+              <h1 id="pipeline-title">Pipeline review</h1>
+              <p class="lead" id="pipeline-lead">Every open deal this quarter, with the rep's forecast next to the model's win probability.</p>
+            </div>
+          </div>
+          <div class="kpi-row" id="kpis"></div>
+          <div class="toolbar">
+            <div class="chip-group" role="group" aria-label="Forecast category" id="forecast-filter">
+              <button class="chip active" data-forecast="All">All</button>
+              <button class="chip" data-forecast="Commit">Commit</button>
+              <button class="chip" data-forecast="Best Case">Best Case</button>
+              <button class="chip" data-forecast="Pipeline">Pipeline</button>
+            </div>
+            <label class="toggle"><input type="checkbox" id="flagged-only" /> <span>Disagreements only</span></label>
+            <div class="toolbar-right">
+              <label class="select-inline" for="owner-filter">Owner <select id="owner-filter"></select></label>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="deal-table" id="deal-table">
+              <thead>
+                <tr>
+                  <th scope="col">Deal</th>
+                  <th scope="col">Owner</th>
+                  <th scope="col" class="num">Amount</th>
+                  <th scope="col">Stage</th>
+                  <th scope="col">Close</th>
+                  <th scope="col">Forecast</th>
+                  <th scope="col" class="score-col">Stage vs. model</th>
+                  <th scope="col">Biggest risk you can act on</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <p class="foot-note">Model scores come from the trained SageMaker model (XGBoost, version 1). A deal is flagged when it is forecast as Commit or Best Case and the model scores it at least <span id="gap-points">25</span> points below its stage probability. No language model is used on this page.</p>
+        </section>
+
+        <!-- Deal brief -->
+        <section class="screen" id="screen-deal" aria-labelledby="deal-title">
+          <a class="back-link" href="#pipeline">← Pipeline</a>
+          <div id="deal-root"></div>
+        </section>
+
+        <!-- Sources -->
+        <section class="screen" id="screen-sources" aria-labelledby="sources-title">
+          <div id="sources-root"></div>
+        </section>
+
+        <!-- Model -->
+        <section class="screen" id="screen-model" aria-labelledby="model-title">
+          <div id="model-root"></div>
+        </section>
+
+        <!-- Architecture (same files as dealpulse/ui/architecture/) -->
+        <section class="screen" id="screen-architecture" aria-labelledby="architecture-title">
+          <div class="arch-heading">
+            <div>
+              <div class="eyebrow">UNDER THE HOOD</div>
+              <h1 id="architecture-title">How DealPulse <em>works.</em></h1>
+              <p class="lead">The MVP architecture on AWS. Hover over any service to see what it does, or walk through a deal review from the browser to a scored, cited brief.</p>
+            </div>
+            <div class="arch-stats" aria-label="Architecture at a glance">
+              <div class="arch-stat"><strong>~60</strong><span>Open deals · synthetic</span></div>
+              <div class="arch-stat"><strong>≤ 2</strong><span>Claude calls / brief</span></div>
+              <div class="arch-stat"><strong>0</strong><span>Access keys stored</span></div>
+              <div class="arch-stat"><strong>$60</strong><span>Monthly budget</span></div>
+            </div>
+          </div>
+          <div class="arch-layout">
+            <div class="arch-canvas">
+              <div class="arch-canvas-head"><strong>Service map</strong><span>Hover <span class="inline-i">i</span> for details · click to pin</span></div>
+              <svg id="arch-svg" viewBox="0 0 800 1212" role="img" aria-label="DealPulse architecture diagram: the Streamlit app on ECS Fargate runs a LangGraph workflow that loads a deal from S3, scores it with a SageMaker serverless endpoint, retrieves evidence from OpenSearch using Titan embeddings, drafts a cited brief with Claude on Amazon Bedrock behind Bedrock Guardrails, verifies it in code and returns it."></svg>
+              <div class="arch-legend">
+                <span><i class="legend-swatch aws"></i>AWS service</span>
+                <span><i class="legend-swatch oss"></i>Open source</span>
+                <span><i class="legend-swatch app"></i>DealPulse code</span>
+                <span><i class="legend-swatch ext"></i>Future source</span>
+                <span><i class="legend-line"></i>Request flow</span>
+                <span><i class="legend-line ops"></i>Build, training &amp; data load</span>
+                <span><i class="legend-line optional"></i>Future connection</span>
+              </div>
+            </div>
+            <aside class="arch-panel">
+              <div class="arch-card arch-detail" id="arch-detail" aria-live="polite"></div>
+              <div class="arch-card">
+                <div class="walk-head"><strong>Walkthrough</strong><span id="arch-counter">Overview</span></div>
+                <ol class="arch-steps" id="arch-steps"></ol>
+                <div class="walk-controls">
+                  <button class="secondary-button" id="arch-prev" data-arch-action="prev" aria-label="Previous step">←</button>
+                  <button class="primary-button" id="arch-next" data-arch-action="next">Start walkthrough →</button>
+                </div>
+                <button class="walk-reset" data-arch-action="reset">Show the full diagram</button>
+              </div>
+            </aside>
+          </div>
+          <div class="arch-tip" id="arch-tip" role="tooltip"></div>
+        </section>
+
+        <footer class="app-footer"><span>DEALPULSE</span><span>Fictional vendor and customers · scores advise, people decide</span><span>MOCKUP</span></footer>
+      </main>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="sample-data.js"></script>
+    <script src="sample-briefs.js"></script>
+    <script src="app.js"></script>
+    <script src="architecture.js"></script>
+  </body>
+</html>

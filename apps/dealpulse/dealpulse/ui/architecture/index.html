@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DealPulse · How it works</title>
+    <link rel="stylesheet" href="architecture.css" />
+  </head>
+  <body>
+    <main class="arch-page">
+      <section id="screen-architecture" aria-labelledby="architecture-title">
+        <div class="arch-heading">
+          <div>
+            <div class="eyebrow"><span class="eyebrow-line"></span> UNDER THE HOOD</div>
+            <h1 id="architecture-title">How DealPulse <em>works.</em></h1>
+            <p class="lead">The MVP architecture on AWS. Hover over any service to see what it does, or walk through a deal review from the browser to a scored, cited brief.</p>
+            <p class="demo-note">Design for the MVP · all CRM data is synthetic · nothing is written back to Salesforce</p>
+          </div>
+          <div class="arch-stats" aria-label="Architecture at a glance">
+            <div class="arch-stat"><strong>~60</strong><span>Open deals · synthetic</span></div>
+            <div class="arch-stat"><strong>≤ 2</strong><span>Claude calls / brief</span></div>
+            <div class="arch-stat"><strong>0</strong><span>Access keys stored</span></div>
+            <div class="arch-stat"><strong>$60</strong><span>Monthly budget</span></div>
+          </div>
+        </div>
+        <div class="arch-layout">
+          <div class="arch-canvas">
+            <div class="arch-canvas-head"><strong>Service map</strong><span>Hover <span class="inline-i">i</span> for details · click to pin</span></div>
+            <svg id="arch-svg" viewBox="0 0 800 1212" role="img" aria-label="DealPulse architecture diagram: a sales manager's browser reaches the DealPulse Streamlit app on ECS Fargate. A LangGraph workflow loads the deal from an S3 CRM snapshot, scores it with a SageMaker serverless endpoint, retrieves deal notes and playbook passages from OpenSearch using Titan embeddings, drafts a cited brief with Claude on Amazon Bedrock behind Bedrock Guardrails, verifies it in code and returns it. Offline jobs generate synthetic Salesforce data, train and register the model, and load the knowledge base; CodeBuild, ECR, IAM, AWS Budgets and Terraform form the foundation."></svg>
+            <div class="arch-legend">
+              <span><i class="legend-swatch aws"></i>AWS service</span>
+              <span><i class="legend-swatch oss"></i>Open source</span>
+              <span><i class="legend-swatch app"></i>DealPulse code</span>
+              <span><i class="legend-swatch ext"></i>Future source</span>
+              <span><i class="legend-line"></i>Request flow</span>
+              <span><i class="legend-line ops"></i>Build, training &amp; data load</span>
+              <span><i class="legend-line optional"></i>Future connection</span>
+            </div>
+          </div>
+          <aside class="arch-panel">
+            <div class="arch-card arch-detail" id="arch-detail" aria-live="polite"></div>
+            <div class="arch-card">
+              <div class="walk-head"><strong>Walkthrough</strong><span id="arch-counter">Overview</span></div>
+              <ol class="arch-steps" id="arch-steps"></ol>
+              <div class="walk-controls">
+                <button class="secondary-button" id="arch-prev" data-arch-action="prev" aria-label="Previous step">←</button>
+                <button class="primary-button" id="arch-next" data-arch-action="next">Start walkthrough →</button>
+              </div>
+              <button class="walk-reset" data-arch-action="reset">Show the full diagram</button>
+            </div>
+          </aside>
+        </div>
+        <div class="arch-tip" id="arch-tip" role="tooltip"></div>
+      </section>
+    </main>
+    <script src="architecture.js"></script>
+  </body>
+</html>

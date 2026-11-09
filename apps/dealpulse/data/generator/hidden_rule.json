@@ -1,0 +1,27 @@
+{
+  "description": "Hidden rule that decides each synthetic deal's outcome. Used only by the generator and by evaluation (do the model's top drivers match these?). The app never reads this file.",
+  "intercept": -1.4,
+  "weights": {
+    "exec_engaged": 1.3,
+    "champion": 0.8,
+    "competitor": -0.7,
+    "discount_points_over_15": -0.06,
+    "close_pushes": -0.45,
+    "activity_level_minus_1": 1.1,
+    "severe_cases": -0.6,
+    "expansion": 0.6,
+    "enterprise": -0.3
+  },
+  "noise_sd": 0.3,
+  "notes": {
+    "exec_engaged": "1 if an executive (C-level or VP) on the customer side engaged in meetings",
+    "champion": "1 if a champion contact role exists",
+    "competitor": "1 if a named competitor is in the deal",
+    "discount_points_over_15": "max(0, discount % - 15)",
+    "close_pushes": "number of times the close date moved later",
+    "activity_level_minus_1": "relative activity rate minus 1 (0.3 to 1.8 before centring)",
+    "severe_cases": "Sev-1/Sev-2 support cases open on the account during the deal",
+    "expansion": "1 for an expansion of an existing customer",
+    "enterprise": "1 for the Enterprise segment"
+  }
+}

@@ -1,12 +1,14 @@
 .DEFAULT_GOAL := help
 .PHONY: help weekendwise weekendwise-test weekendwise-mockups weekendwise-run \
 	weekendwise-scenarios weekendwise-evaluate weekendwise-seed weekendwise-help \
-	test mockups run scenarios evaluate seed
+	test mockups run scenarios evaluate seed \
+	dealpulse dealpulse-help dealpulse-test dealpulse-verify dealpulse-architecture
 
 APP := apps/weekendwise
+DP  := apps/dealpulse
 
 help: ## Show portfolio-level shortcuts
-	@printf '%s\n' 'GCP AI Portfolio shortcuts:' \
+	@printf '%s\n' 'AI Portfolio shortcuts:' \
 	  '  make weekendwise-test       Run WeekendWise offline tests' \
 	  '  make weekendwise-mockups    Serve the local WeekendWise UI preview' \
 	  '  make weekendwise-run        Run the WeekendWise backend locally' \
@@ -14,7 +16,12 @@ help: ## Show portfolio-level shortcuts
 	  '  make weekendwise-evaluate   Run the WeekendWise evaluation set' \
 	  '  make weekendwise-seed       Seed WeekendWise Firestore data (uses Google Cloud)' \
 	  '  make weekendwise-help       Show all WeekendWise commands' \
-	  '  make test / scenarios / mockups   Compatibility shortcuts for WeekendWise'
+	  '  make test / scenarios / mockups   Compatibility shortcuts for WeekendWise' \
+	  '' \
+	  '  make dealpulse-test         Run DealPulse offline tests' \
+	  '  make dealpulse-verify       Check DealPulse AWS resources for drift and permissions (reads only)' \
+	  '  make dealpulse-architecture Render the DealPulse architecture diagram for its README' \
+	  '  make dealpulse-help         Show all DealPulse commands'
 
 weekendwise: weekendwise-help ## Show commands for the WeekendWise app
 
@@ -51,3 +58,19 @@ scenarios: weekendwise-scenarios ## Run the default app's live scenarios
 evaluate: weekendwise-evaluate ## Run the default app's live evaluation
 
 seed: weekendwise-seed ## Seed the default app's Firestore data
+
+# ---------------------------------------------------------------- DealPulse (AWS)
+
+dealpulse: dealpulse-help ## Show commands for the DealPulse app
+
+dealpulse-help: ## Show all DealPulse commands
+	$(MAKE) -C $(DP) help
+
+dealpulse-test: ## Run DealPulse offline tests
+	$(MAKE) -C $(DP) test
+
+dealpulse-verify: ## Check DealPulse AWS resources for drift and permissions (reads only)
+	$(MAKE) -C $(DP) verify
+
+dealpulse-architecture: ## Render the DealPulse architecture diagram to its README image
+	$(MAKE) -C $(DP) architecture

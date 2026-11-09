@@ -1,0 +1,3 @@
+# The stack needs no hand-written settings today: `make bootstrap` writes
+# bootstrap.auto.tfvars.json (name_prefix, region) and backend.hcl (state location).
+# Optional overrides for later stories go in terraform.tfvars (git-ignored).

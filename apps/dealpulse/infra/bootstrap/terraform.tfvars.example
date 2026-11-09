@@ -1,0 +1,6 @@
+name_prefix = "dealpulse-xxxx"
+region      = "us-east-1"
+
+# Budget alerts (IAC-02). Budgets only alert; they never stop spending.
+budget_amount_usd = 60
+alert_emails      = ["you@example.com"]
