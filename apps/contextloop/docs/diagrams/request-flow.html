@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ContextLoop request flow</title>
+<link rel="stylesheet" href="diagram.css">
+<script src="diagram.js"></script>
+</head>
+<body>
+<div class="canvas"></div>
+<script>
+// Left: Act 1 naive agent (x 70, w 360). Right: Act 4 steps (x 520, w 330) and the tools they call (x 880, w 330).
+const S = 520, SW = 330, T = 880, TW = 330;
+const row = (i) => 240 + i * 90;
+draw({
+  width: 1280, height: 1180, legendH: 56,
+  title: "ContextLoop · the headline question, before and after",
+  subtitle: "Same model, same question. Act 1 gets raw SQL only; Act 4 gets governed context through MCP. Both answers are scored against the hidden truth.",
+  groups: [
+    { x: 40,  y: 190, w: 420, h: 780, label: "Act 1 · Naive agent · raw data", labelColor: "#B4282D" },
+    { x: 490, y: 190, w: 750, h: 780, label: "Act 4 · Governed agent · request flow", labelColor: "#13734F" },
+  ],
+  nodes: [
+    { id: "q", x: 40, y: 84, w: 1200, h: 70, kind: "ext", badge: "COO", cls: "quote center",
+      title: "“Which of our strategic accounts are at risk because of late shipments, and what should the account teams do this week?”" },
+
+    // Act 1
+    { id: "a1", x: 70, y: 240, w: 360, kind: "ai", badge: "C", title: "Agent · Claude", sub: "Raw SQL access only, no definitions" },
+    { id: "a2", x: 70, y: 350, w: 360, kind: "open", badge: "DD", title: "DuckDB raw schemas", sub: "VBAK · LIKP · Account · ticket" },
+    { id: "a3", x: 70, y: 460, w: 360, h: 290, kind: "bad", badge: "✗", title: "Confident, wrong answer", sub: "The wrong accounts, with invented precision",
+      body: "<b>What went wrong</b><ul>" +
+        "<li>Counted cancelled orders</li>" +
+        "<li>Used the planned ship date, not the actual one</li>" +
+        "<li>Mixed EUR and USD</li>" +
+        "<li>Double-counted a look-alike duplicate account</li>" +
+        "<li>Used a tier that changed mid-quarter</li>" +
+        "<li>Treated two-day-old data as current</li></ul>" },
+    { id: "a4", x: 70, y: row(7), w: 360, kind: "app", badge: "✓", title: "Score against ground truth", sub: "Low: wrong accounts named" },
+
+    // Act 4 steps
+    { id: "s1", x: S, y: row(0), w: SW, kind: "app",  badge: "ST", step: 1, title: "Ask in the Streamlit app", sub: "Same question, same model" },
+    { id: "s2", x: S, y: row(1), w: SW, kind: "ai",   badge: "C",  step: 2, title: "Discover tools", sub: "The agent lists its MCP tools" },
+    { id: "s3", x: S, y: row(2), w: SW, kind: "ai",   badge: "C",  step: 3, title: "Read metric definitions", sub: "On-time, risk score, “strategic”" },
+    { id: "s4", x: S, y: row(3), w: SW, kind: "ai",   badge: "C",  step: 4, title: "Check freshness", sub: "Every source inside the window?" },
+    { id: "s5", x: S, y: row(4), w: SW, kind: "ai",   badge: "C",  step: 5, title: "Query the governed metric", sub: "By account, strategic accounts only" },
+    { id: "s6", x: S, y: row(5), w: SW, kind: "ai",   badge: "C",  step: 6, title: "Fetch lineage", sub: "Where each number came from" },
+    { id: "s7", x: S, y: row(6), w: SW, kind: "good", badge: "C",  step: 7, title: "Write the cited answer", sub: "Accounts · drivers · next step" },
+    { id: "s8", x: S, y: row(7), w: SW, kind: "app",  badge: "✓",  step: 8, title: "Score against ground truth", sub: "Shown next to Act 1’s score" },
+
+    // Tools
+    { id: "t2", x: T, y: row(1), w: TW, kind: "app", badge: "MCP", title: "Tool catalog", sub: "dbt MCP + 3 ContextLoop tools" },
+    { id: "t3", x: T, y: row(2), w: TW, kind: "app", badge: "MCP", title: "<code>list_metrics</code>", sub: "Metrics MCP · MetricFlow definitions" },
+    { id: "t4", x: T, y: row(3), w: TW, kind: "app", badge: "MCP", title: "<code>check_freshness</code>", sub: "Freshness MCP · reads the sync log" },
+    { id: "t5", x: T, y: row(4), w: TW, kind: "app", badge: "MCP", title: "<code>query_metric</code>", sub: "MetricFlow SQL over Iceberg marts" },
+    { id: "t6", x: T, y: row(5), w: TW, kind: "dbt", badge: "MCP", title: "dbt MCP server", sub: "Models · lineage · docs" },
+    { id: "t7", x: T, y: row(6), w: TW, h: 154, kind: "good", badge: "✓", title: "The answer includes",
+      body: "<ul><li>At-risk strategic accounts and why</li><li>A recommended next step for each</li><li>The metric definitions it used</li><li>How fresh each source is</li></ul>" },
+
+    { id: "score", x: 40, y: 1005, w: 1200, h: 64, kind: "app", badge: "POV", cls: "center",
+      title: "Side-by-side scorecard", sub: "Only the context changed between the two answers, so the gap in the score is the value of the data foundation" },
+  ],
+  edges: [
+    { from: "q", to: "a1", fo: -390 },
+    { from: "q", to: "s1", fo: 45 },
+    { from: "a1", to: "a2", label: "free-form SQL" },
+    { from: "a2", to: "a3", label: "rows with every trap intact" },
+    { from: "a3", to: "a4" },
+    ...["s1", "s2", "s3", "s4", "s5", "s6", "s7"].map((id, i) => ({ from: id, to: `s${i + 2}`, accent: true })),
+    { from: "s2", to: "t2", fs: "r", ts: "l", arrow: "both" },
+    { from: "s3", to: "t3", fs: "r", ts: "l", arrow: "both" },
+    { from: "s4", to: "t4", fs: "r", ts: "l", arrow: "both" },
+    { from: "s5", to: "t5", fs: "r", ts: "l", arrow: "both" },
+    { from: "s6", to: "t6", fs: "r", ts: "l", arrow: "both" },
+    { from: "s7", to: "t7", fs: "r", ts: "l", too: -45 },
+    { from: "a4", to: "score" },
+    { from: "s8", to: "score" },
+  ],
+  legend: ["bad", "good", "ai", "app", "dbt", "open", { line: "accent", label: "Act 4 step order" }, { line: "", label: "Call and response" }],
+});
+</script>
+</body>
+</html>

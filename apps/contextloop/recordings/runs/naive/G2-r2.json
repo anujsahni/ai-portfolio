@@ -1,0 +1,1009 @@
+{
+  "agent": "naive",
+  "question_id": "G2",
+  "question": "What is the 90-day on-time delivery rate across all of our strategic accounts?",
+  "model": "claude-haiku-5-5",
+  "effort": "high",
+  "started_at": "2026-11-11T20:13:02+00:00",
+  "steps": [
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check account tier values and how many active accounts exist per tier",
+        "sql": "SELECT tier_c, COUNT(*) AS n, SUM(CASE WHEN _fivetran_active THEN 1 ELSE 0 END) AS active_n, SUM(CASE WHEN is_deleted THEN 1 ELSE 0 END) AS deleted_n FROM salesforce.account GROUP BY tier_c ORDER BY n DESC"
+      },
+      "output": {
+        "columns": [
+          "tier_c",
+          "n",
+          "active_n",
+          "deleted_n"
+        ],
+        "rows": [
+          [
+            "Standard",
+            98,
+            95,
+            0
+          ],
+          [
+            "Strategic",
+            27,
+            26,
+            0
+          ],
+          [
+            "Prospect",
+            13,
+            13,
+            0
+          ]
+        ],
+        "row_count": 3,
+        "truncated": false
+      },
+      "seconds": 0.01,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Look at delivery table sample and date ranges",
+        "sql": "SELECT MIN(wadat) AS min_wadat, MAX(wadat) AS max_wadat, MIN(lfdat) AS min_lfdat, MAX(lfdat) AS max_lfdat, COUNT(*) AS n, SUM(CASE WHEN wadat_ist='00000000' THEN 1 ELSE 0 END) AS no_actual, SUM(CASE WHEN _fivetran_deleted THEN 1 ELSE 0 END) AS del FROM sap_s4.likp"
+      },
+      "output": {
+        "columns": [
+          "min_wadat",
+          "max_wadat",
+          "min_lfdat",
+          "max_lfdat",
+          "n",
+          "no_actual",
+          "del"
+        ],
+        "rows": [
+          [
+            "20250511",
+            "20261117",
+            "20250515",
+            "20261120",
+            9161,
+            375,
+            310
+          ]
+        ],
+        "row_count": 1,
+        "truncated": false
+      },
+      "seconds": 0.01,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check shipment status values and freshness of carrier data",
+        "sql": "SELECT status, COUNT(*) AS n, MAX(_fivetran_synced) AS last_synced, MAX(updated_at) AS last_updated FROM carrier_pg.shipment GROUP BY status"
+      },
+      "output": {
+        "columns": [
+          "status",
+          "n",
+          "last_synced",
+          "last_updated"
+        ],
+        "rows": [
+          [
+            "cancelled",
+            310,
+            "2026-11-11 16:13:29.657894+00:00",
+            "2026-11-06 16:46:57+00:00"
+          ],
+          [
+            "delivered",
+            8731,
+            "2026-11-11 16:13:29.657835+00:00",
+            "2026-11-06 16:27:40+00:00"
+          ],
+          [
+            "picked_up",
+            15,
+            "2026-11-11 16:13:29.657017+00:00",
+            "2026-11-06 10:49:57+00:00"
+          ],
+          [
+            "label_created",
+            25,
+            "2026-11-11 17:39:49.137636+00:00",
+            "2026-11-11 17:38:40.895340+00:00"
+          ],
+          [
+            "in_transit",
+            40,
+            "2026-11-11 18:28:27.464977+00:00",
+            "2026-11-11 18:28:24.495703+00:00"
+          ]
+        ],
+        "row_count": 5,
+        "truncated": false
+      },
+      "seconds": 0.01,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check whether Strategic accounts have multiple history versions and how they map to SAP customer numbers",
+        "sql": "SELECT id, name, sap_customer_number_c, tier_c, _fivetran_active, _fivetran_start, _fivetran_end, _fivetran_deleted FROM salesforce.account WHERE tier_c='Strategic' ORDER BY name, _fivetran_start"
+      },
+      "output": {
+        "columns": [
+          "id",
+          "name",
+          "sap_customer_number_c",
+          "tier_c",
+          "_fivetran_active",
+          "_fivetran_start",
+          "_fivetran_end",
+          "_fivetran_deleted"
+        ],
+        "rows": [
+          [
+            "001usVdcbubaV6K9ih",
+            "Dunwick Process Equipment SA",
+            "0000100021",
+            "Strategic",
+            true,
+            "2019-11-10 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "001RTWHCy9QOZgYtfy",
+            "Galbury Steelworks SA",
+            "0000100004",
+            "Strategic",
+            true,
+            "2022-09-01 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "001T6Wn0eXovaGLMVG",
+            "Halbrook Fluid Systems",
+            "0000100001",
+            "Strategic",
+            true,
+            "2022-12-19 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "001KHodrD6UyqZnaQR",
+            "Halbrook Fluid Systems GmbH",
+            null,
+            "Strategic",
+            true,
+            "2025-02-10 09:15:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "001g6Do98g9SRo6RPs",
+            "Harvale Food Processing Inc",
+            "0000100017",
+            "Strategic",
+            true,
+            "2022-01-30 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "001cWWUZbLBqBzKEe2",
+            "Jormark Paper Mills SA",
+            "0000100006",
+            "Strategic",
+            true,
+            "2021-05-08 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "001uZIL3lmdPJi6dMz",
+            "Kelridge Steelworks SA",
+            "0000100019",
+            "Strategic",
+            true,
+            "2023-09-11 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "001TlD8DEb2a4OHAFu",
+            "Marmark HVAC Inc",
+            "0000100008",
+            "Strategic",
+            true,
+            "2020-04-01 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "001xtf0eDWZ7g16pYH",
+            "Pellridge Process Equipment GmbH",
+            "0000100022",
+            "Strategic",
+            true,
+            "2019-05-23 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "001jyjQ3yYlKrgAPD9",
+            "Quenmere Paper Mills GmbH",
+            "0000100015",
+            "Strategic",
+            false,
+            "2022-02-19 10:00:00+00:00",
+            "2026-09-22 14:29:59+00:00",
+            false
+          ],
+          [
+            "001ePIqhOkiXF8oN5K",
+            "Quenton Food Processing GmbH",
+            "0000100018",
+            "Strategic",
+            true,
+            "2019-09-27 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "00173mQ9bhojG5YWvV",
+            "Ralmore Process Equipment Inc",
+            "0000100020",
+            "Strategic",
+            true,
+            "2021-12-05 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "001Mr9uzv7OnksPJDh",
+            "Ralwick Pharma Plants Ltd",
+            "0000100023",
+            "Strategic",
+            true,
+            "2021-01-14 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "001r9q4bWRxTPoZKYK",
+            "Sevholt Refining SA",
+            "0000100024",
+            "Strategic",
+            true,
+            "2023-01-09 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "001LYKqH2NcHcxlE2K",
+            "Sevland Utilities Inc",
+            "0000100007",
+            "Strategic",
+            true,
+            "2023-04-22 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "001xoPG2ALg7oLuJrw",
+            "Tamdale Food Processing Ltd",
+            "0000100014",
+            "Strategic",
+            true,
+            "2022-06-22 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "001bpSPP9I0DwIsbXO",
+            "Tamford Food Processing SA",
+            "0000100003",
+            "Strategic",
+            true,
+            "2021-08-16 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "00196WdD6KCNZ4yZVt",
+            "Tammore Food Processing BV",
+            "0000100027",
+            "Strategic",
+            true,
+            "2024-02-26 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "001aAVL3JudBxJLQKi",
+            "Tamridge Pharma Plants Inc",
+            "0000100012",
+            "Strategic",
+            true,
+            "2024-03-07 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "001IeA54qrzDv3P7kZ",
+            "Tamwick Mining Inc",
+            "0000100002",
+            "Strategic",
+            true,
+            "2019-03-08 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "001VBW81QSgOAH35Pb",
+            "Thalmark Marine Srl",
+            "0000100010",
+            "Strategic",
+            true,
+            "2026-09-22 14:30:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "001z9MQhfHInmTg8Qg",
+            "Velmere Pipeline Services Ltd",
+            "0000100011",
+            "Strategic",
+            true,
+            "2026-09-22 14:30:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "001fYsCllu8u6Vvqti",
+            "Vornland Chemicals SA",
+            "0000100026",
+            "Strategic",
+            true,
+            "2022-05-15 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "001oeP6Yy42qbLL6ni",
+            "Vornridge Water Works Ltd",
+            "0000100013",
+            "Strategic",
+            true,
+            "2019-10-04 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "001gFjTbqI8yil52V7",
+            "Vornwick Utilities Inc",
+            "0000100009",
+            "Strategic",
+            true,
+            "2026-09-22 14:30:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "001AgkEM3JeW9GzswP",
+            "Wesmore Energy Ltd",
+            "0000100005",
+            "Strategic",
+            true,
+            "2022-04-06 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "001tTFM0okFASwilZ0",
+            "Yarstead Process Equipment Inc",
+            "0000100025",
+            "Strategic",
+            true,
+            "2022-12-16 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ]
+        ],
+        "row_count": 27,
+        "truncated": false
+      },
+      "seconds": 0.02,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check how carrier shipments link to SAP deliveries",
+        "sql": "SELECT s.shipment_id, s.delivery_number, s.carrier_code, s.status, s.created_at, s.updated_at, l.vbeln, l.kunnr, l.wadat, l.wadat_ist, l.lfdat FROM carrier_pg.shipment s LEFT JOIN sap_s4.likp l ON l.vbeln = s.delivery_number ORDER BY s.created_at DESC LIMIT 15"
+      },
+      "output": {
+        "columns": [
+          "shipment_id",
+          "delivery_number",
+          "carrier_code",
+          "status",
+          "created_at",
+          "updated_at",
+          "vbeln",
+          "kunnr",
+          "wadat",
+          "wadat_ist",
+          "lfdat"
+        ],
+        "rows": [
+          [
+            509097,
+            "0080009097",
+            "VELX",
+            "label_created",
+            "2026-11-06 15:03:49+00:00",
+            "2026-11-06 15:03:49+00:00",
+            "0080009097",
+            "0000100030",
+            "20261108",
+            "00000000",
+            "20261111"
+          ],
+          [
+            509083,
+            "0080009083",
+            "ORBF",
+            "label_created",
+            "2026-11-06 12:43:10+00:00",
+            "2026-11-06 12:43:10+00:00",
+            "0080009083",
+            "0000100019",
+            "20261108",
+            "00000000",
+            "20261112"
+          ],
+          [
+            508949,
+            "0080008949",
+            "ORBF",
+            "label_created",
+            "2026-11-06 12:07:24+00:00",
+            "2026-11-06 12:07:24+00:00",
+            "0080008949",
+            "0000100003",
+            "20261108",
+            "00000000",
+            "20261111"
+          ],
+          [
+            508976,
+            "0080008976",
+            "NRTH",
+            "label_created",
+            "2026-11-06 11:45:56+00:00",
+            "2026-11-06 11:45:56+00:00",
+            "0080008976",
+            "0000100091",
+            "20261108",
+            "00000000",
+            "20261111"
+          ],
+          [
+            509114,
+            "0080009114",
+            "VELX",
+            "label_created",
+            "2026-11-06 11:28:41+00:00",
+            "2026-11-06 11:28:41+00:00",
+            "0080009114",
+            "0000100024",
+            "20261108",
+            "00000000",
+            "20261112"
+          ],
+          [
+            509111,
+            "0080009111",
+            "VELX",
+            "label_created",
+            "2026-11-06 11:22:16+00:00",
+            "2026-11-06 11:22:16+00:00",
+            "0080009111",
+            "0000100017",
+            "20261108",
+            "00000000",
+            "20261111"
+          ],
+          [
+            509119,
+            "0080009119",
+            "KSTL",
+            "label_created",
+            "2026-11-06 10:50:23+00:00",
+            "2026-11-06 10:50:23+00:00",
+            "0080009119",
+            "0000100017",
+            "20261108",
+            "00000000",
+            "20261111"
+          ],
+          [
+            508957,
+            "0080008957",
+            "VELX",
+            "cancelled",
+            "2026-11-06 10:25:15+00:00",
+            "2026-11-06 16:46:57+00:00",
+            "0080008957",
+            "0000100089",
+            "20261108",
+            "00000000",
+            "20261111"
+          ],
+          [
+            509059,
+            "0080009059",
+            "VELX",
+            "label_created",
+            "2026-11-06 09:58:16+00:00",
+            "2026-11-06 09:58:16+00:00",
+            "0080009059",
+            "0000100067",
+            "20261108",
+            "00000000",
+            "20261111"
+          ],
+          [
+            509118,
+            "0080009118",
+            "VELX",
+            "label_created",
+            "2026-11-06 09:52:37+00:00",
+            "2026-11-06 09:52:37+00:00",
+            "0080009118",
+            "0000100064",
+            "20261108",
+            "00000000",
+            "20261111"
+          ],
+          [
+            509037,
+            "0080009037",
+            "ORBF",
+            "label_created",
+            "2026-11-06 09:52:28+00:00",
+            "2026-11-06 09:52:28+00:00",
+            "0080009037",
+            "0000100088",
+            "20261108",
+            "00000000",
+            "20261111"
+          ],
+          [
+            509065,
+            "0080009065",
+            "NRTH",
+            "label_created",
+            "2026-11-06 09:25:43+00:00",
+            "2026-11-06 09:25:43+00:00",
+            "0080009065",
+            "0000100114",
+            "20261108",
+            "00000000",
+            "20261112"
+          ],
+          [
+            509117,
+            "0080009117",
+            "KSTL",
+            "label_created",
+            "2026-11-06 08:55:59+00:00",
+            "2026-11-06 08:55:59+00:00",
+            "0080009117",
+            "0000100053",
+            "20261108",
+            "00000000",
+            "20261111"
+          ],
+          [
+            509052,
+            "0080009052",
+            "ORBF",
+            "label_created",
+            "2026-11-06 08:30:19+00:00",
+            "2026-11-06 08:30:19+00:00",
+            "0080009052",
+            "0000100004",
+            "20261108",
+            "00000000",
+            "20261111"
+          ],
+          [
+            509121,
+            "0080009121",
+            "NRTH",
+            "label_created",
+            "2026-11-06 08:20:42+00:00",
+            "2026-11-11 17:38:40.895340+00:00",
+            "0080009121",
+            "0000100097",
+            "20261108",
+            "00000000",
+            "20261111"
+          ]
+        ],
+        "row_count": 15,
+        "truncated": false
+      },
+      "seconds": 0.02,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "See event types and whether delivered events exist per shipment",
+        "sql": "SELECT event_type, COUNT(*) AS n, COUNT(DISTINCT shipment_id) AS shipments, MIN(event_at) AS min_at, MAX(event_at) AS max_at, MAX(_fivetran_synced) AS last_synced FROM carrier_pg.shipment_event WHERE _fivetran_deleted = false GROUP BY event_type ORDER BY n DESC"
+      },
+      "output": {
+        "columns": [
+          "event_type",
+          "n",
+          "shipments",
+          "min_at",
+          "max_at",
+          "last_synced"
+        ],
+        "rows": [
+          [
+            "label_created",
+            9121,
+            9121,
+            "2025-05-09 09:18:15+00:00",
+            "2026-11-06 15:03:49+00:00",
+            "2026-11-11 16:13:31.998923+00:00"
+          ],
+          [
+            "picked_up",
+            8786,
+            8786,
+            "2025-05-11 07:29:59+00:00",
+            "2026-11-06 10:49:57+00:00",
+            "2026-11-11 16:13:31.998182+00:00"
+          ],
+          [
+            "in_transit",
+            8771,
+            8771,
+            "2025-05-12 23:56:56+00:00",
+            "2026-11-06 10:45:38+00:00",
+            "2026-11-11 16:13:31.998140+00:00"
+          ],
+          [
+            "out_for_delivery",
+            8731,
+            8731,
+            "2025-05-14 11:05:05+00:00",
+            "2026-11-06 13:27:40+00:00",
+            "2026-11-11 16:13:31.998837+00:00"
+          ],
+          [
+            "delivered",
+            8731,
+            8731,
+            "2025-05-14 14:05:05+00:00",
+            "2026-11-06 16:27:40+00:00",
+            "2026-11-11 16:13:31.999119+00:00"
+          ],
+          [
+            "cancelled",
+            310,
+            310,
+            "2025-05-20 10:08:09+00:00",
+            "2026-11-06 16:46:57+00:00",
+            "2026-11-11 16:13:31.999157+00:00"
+          ]
+        ],
+        "row_count": 6,
+        "truncated": false
+      },
+      "seconds": 0.03,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check SAP goods issue and delivery date coverage for the last 90 days (2026-08-08 to 2026-11-06)",
+        "sql": "SELECT COUNT(*) AS n, SUM(CASE WHEN wadat_ist='00000000' THEN 1 ELSE 0 END) AS no_gi, SUM(CASE WHEN try_strptime(lfdat,'%Y%m%d') < DATE '2026-11-06' THEN 1 ELSE 0 END) AS due_before_asof, SUM(CASE WHEN try_strptime(lfdat,'%Y%m%d') < DATE '2026-11-06' AND wadat_ist<>'00000000' THEN 1 ELSE 0 END) AS due_and_gi FROM sap_s4.likp WHERE _fivetran_deleted=false AND try_strptime(lfdat,'%Y%m%d') BETWEEN DATE '2026-08-08' AND DATE '2026-11-06'"
+      },
+      "output": {
+        "columns": [
+          "n",
+          "no_gi",
+          "due_before_asof",
+          "due_and_gi"
+        ],
+        "rows": [
+          [
+            1500,
+            3,
+            1481,
+            1479
+          ]
+        ],
+        "row_count": 1,
+        "truncated": false
+      },
+      "seconds": 0.01,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check key uniqueness across likp, kna_1 and shipment joins",
+        "sql": "SELECT 'likp_dup_vbeln' AS chk, COUNT(*) - COUNT(DISTINCT vbeln) AS v FROM sap_s4.likp WHERE _fivetran_deleted=false\nUNION ALL SELECT 'kna1_dup_kunnr', COUNT(*) - COUNT(DISTINCT kunnr) FROM sap_s4.kna_1 WHERE _fivetran_deleted=false\nUNION ALL SELECT 'shipment_dup_delivery', COUNT(*) - COUNT(DISTINCT delivery_number) FROM carrier_pg.shipment WHERE _fivetran_deleted=false\nUNION ALL SELECT 'shipments_no_sap_delivery', COUNT(*) FROM carrier_pg.shipment s WHERE NOT EXISTS (SELECT 1 FROM sap_s4.likp l WHERE l.vbeln=s.delivery_number)\nUNION ALL SELECT 'strategic_sap_no_kna1', COUNT(*) FROM salesforce.account a WHERE a.tier_c='Strategic' AND a._fivetran_active AND NOT EXISTS (SELECT 1 FROM sap_s4.kna_1 k WHERE k.kunnr=a.sap_customer_number_c)\nUNION ALL SELECT 'likp_kunnr_no_kna1', COUNT(*) FROM sap_s4.likp l WHERE NOT EXISTS (SELECT 1 FROM sap_s4.kna_1 k WHERE k.kunnr=l.kunnr)"
+      },
+      "output": {
+        "columns": [
+          "chk",
+          "v"
+        ],
+        "rows": [
+          [
+            "likp_dup_vbeln",
+            0
+          ],
+          [
+            "kna1_dup_kunnr",
+            0
+          ],
+          [
+            "shipment_dup_delivery",
+            0
+          ],
+          [
+            "shipments_no_sap_delivery",
+            0
+          ],
+          [
+            "strategic_sap_no_kna1",
+            1
+          ],
+          [
+            "likp_kunnr_no_kna1",
+            0
+          ]
+        ],
+        "row_count": 6,
+        "truncated": false
+      },
+      "seconds": 0.01,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Compute 90-day on-time rate for active strategic accounts: deliveries with promised date (lfdat) in the 90 days to 2026-11-05, on time if carrier delivered event date <= lfdat",
+        "sql": "WITH strat AS (\n  SELECT DISTINCT sap_customer_number_c AS kunnr, name FROM salesforce.account\n  WHERE tier_c='Strategic' AND _fivetran_active AND sap_customer_number_c IS NOT NULL\n),\nd AS (\n  SELECT l.vbeln, l.kunnr, try_strptime(l.lfdat,'%Y%m%d')::date AS promised, s.shipment_id, s.status,\n         (SELECT MIN(CAST(e.event_at AT TIME ZONE 'UTC' AS DATE)) FROM carrier_pg.shipment_event e WHERE e.shipment_id=s.shipment_id AND e.event_type='delivered' AND e._fivetran_deleted=false) AS delivered_on\n  FROM sap_s4.likp l\n  JOIN strat st ON st.kunnr = l.kunnr\n  LEFT JOIN carrier_pg.shipment s ON s.delivery_number = l.vbeln AND s._fivetran_deleted=false\n  WHERE l._fivetran_deleted=false\n    AND try_strptime(l.lfdat,'%Y%m%d') BETWEEN DATE '2026-08-08' AND DATE '2026-11-05'\n)\nSELECT COUNT(*) AS deliveries,\n  SUM(CASE WHEN delivered_on IS NOT NULL THEN 1 ELSE 0 END) AS delivered,\n  SUM(CASE WHEN delivered_on IS NOT NULL AND delivered_on <= promised THEN 1 ELSE 0 END) AS on_time,\n  SUM(CASE WHEN delivered_on IS NULL THEN 1 ELSE 0 END) AS not_delivered,\n  SUM(CASE WHEN status='cancelled' THEN 1 ELSE 0 END) AS cancelled,\n  SUM(CASE WHEN shipment_id IS NULL THEN 1 ELSE 0 END) AS no_shipment,\n  ROUND(100.0*SUM(CASE WHEN delivered_on IS NOT NULL AND delivered_on <= promised THEN 1 ELSE 0 END)/NULLIF(COUNT(*),0),1) AS pct_all_incl_undelivered,\n  ROUND(100.0*SUM(CASE WHEN delivered_on IS NOT NULL AND delivered_on <= promised THEN 1 ELSE 0 END)/NULLIF(SUM(CASE WHEN delivered_on IS NOT NULL THEN 1 ELSE 0 END),0),1) AS pct_of_delivered\nFROM d"
+      },
+      "output": {
+        "columns": [
+          "deliveries",
+          "delivered",
+          "on_time",
+          "not_delivered",
+          "cancelled",
+          "no_shipment",
+          "pct_all_incl_undelivered",
+          "pct_of_delivered"
+        ],
+        "rows": [
+          [
+            636,
+            633,
+            550,
+            3,
+            0,
+            0,
+            86.5,
+            86.9
+          ]
+        ],
+        "row_count": 1,
+        "truncated": false
+      },
+      "seconds": 0.02,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Inspect the 3 undelivered strategic deliveries and test sensitivity to cohort definition (delivery-date window vs promised-date window)",
+        "sql": "WITH strat AS (\n  SELECT DISTINCT sap_customer_number_c AS kunnr, name FROM salesforce.account\n  WHERE tier_c='Strategic' AND _fivetran_active AND sap_customer_number_c IS NOT NULL),\nd AS (\n  SELECT l.vbeln, st.name, l.wadat_ist, try_strptime(l.lfdat,'%Y%m%d')::date AS promised, s.status AS ship_status,\n    (SELECT MIN(CAST(e.event_at AT TIME ZONE 'UTC' AS DATE)) FROM carrier_pg.shipment_event e WHERE e.shipment_id=s.shipment_id AND e.event_type='delivered' AND e._fivetran_deleted=false) AS delivered_on\n  FROM sap_s4.likp l JOIN strat st ON st.kunnr=l.kunnr\n  LEFT JOIN carrier_pg.shipment s ON s.delivery_number=l.vbeln AND s._fivetran_deleted=false\n  WHERE l._fivetran_deleted=false)\nSELECT 'undelivered_in_window' AS view, vbeln, name, wadat_ist, promised, ship_status, delivered_on FROM d WHERE delivered_on IS NULL AND promised BETWEEN DATE '2026-08-08' AND DATE '2026-11-05'\nUNION ALL\nSELECT 'alt_cohort_delivered_in_window', COUNT(*)::VARCHAR, NULL, NULL, NULL, NULL, NULL FROM d WHERE delivered_on BETWEEN DATE '2026-08-08' AND DATE '2026-11-05'\nUNION ALL\nSELECT 'alt_cohort_on_time_pct', ROUND(100.0*SUM(CASE WHEN delivered_on<=promised THEN 1 ELSE 0 END)/COUNT(*),1)::VARCHAR, NULL, NULL, NULL, NULL, NULL FROM d WHERE delivered_on BETWEEN DATE '2026-08-08' AND DATE '2026-11-05'"
+      },
+      "output": {
+        "columns": [
+          "view",
+          "vbeln",
+          "name",
+          "wadat_ist",
+          "promised",
+          "ship_status",
+          "delivered_on"
+        ],
+        "rows": [
+          [
+            "undelivered_in_window",
+            "0080009053",
+            "Velmere Pipeline Services Ltd",
+            "00000000",
+            "2026-11-04",
+            "label_created",
+            null
+          ],
+          [
+            "undelivered_in_window",
+            "0080009074",
+            "Harvale Food Processing Inc",
+            "20261105",
+            "2026-11-03",
+            "in_transit",
+            null
+          ],
+          [
+            "undelivered_in_window",
+            "0080009016",
+            "Jormark Paper Mills SA",
+            "20261031",
+            "2026-11-03",
+            "in_transit",
+            null
+          ],
+          [
+            "alt_cohort_delivered_in_window",
+            "628",
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          [
+            "alt_cohort_on_time_pct",
+            "86.6",
+            null,
+            null,
+            null,
+            null,
+            null
+          ]
+        ],
+        "row_count": 5,
+        "truncated": false
+      },
+      "seconds": 0.04,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Sensitivity: on-time rate if only deliveries promised on/after the 2026-09-22 tier change are counted for the three recently promoted accounts",
+        "sql": "WITH strat AS (\n  SELECT DISTINCT sap_customer_number_c AS kunnr, name, _fivetran_start FROM salesforce.account\n  WHERE tier_c='Strategic' AND _fivetran_active AND sap_customer_number_c IS NOT NULL),\nd AS (\n  SELECT l.vbeln, st.name, st._fivetran_start AS tier_since, try_strptime(l.lfdat,'%Y%m%d')::date AS promised,\n    (SELECT MIN(CAST(e.event_at AT TIME ZONE 'UTC' AS DATE)) FROM carrier_pg.shipment_event e JOIN carrier_pg.shipment s2 ON s2.shipment_id=e.shipment_id WHERE s2.delivery_number=l.vbeln AND e.event_type='delivered' AND e._fivetran_deleted=false) AS delivered_on\n  FROM sap_s4.likp l JOIN strat st ON st.kunnr=l.kunnr\n  WHERE l._fivetran_deleted=false AND try_strptime(l.lfdat,'%Y%m%d') BETWEEN DATE '2026-08-08' AND DATE '2026-11-05')\nSELECT 'recent_promotions_only_after_tier_change' AS view, COUNT(*) AS deliveries,\n  ROUND(100.0*SUM(CASE WHEN delivered_on<=promised THEN 1 ELSE 0 END)/COUNT(*),1) AS on_time_pct_incl_undelivered_as_late\nFROM d WHERE NOT (name IN ('Thalmark Marine Srl','Velmere Pipeline Services Ltd','Vornwick Utilities Inc') AND promised < DATE '2026-09-22')\nUNION ALL\nSELECT 'recent_promotions_before_tier_change', COUNT(*), ROUND(100.0*SUM(CASE WHEN delivered_on<=promised THEN 1 ELSE 0 END)/COUNT(*),1)\nFROM d WHERE name IN ('Thalmark Marine Srl','Velmere Pipeline Services Ltd','Vornwick Utilities Inc') AND promised < DATE '2026-09-22'"
+      },
+      "output": {
+        "columns": [
+          "view",
+          "deliveries",
+          "on_time_pct_incl_undelivered_as_late"
+        ],
+        "rows": [
+          [
+            "recent_promotions_only_after_tier_change",
+            596,
+            86.2
+          ],
+          [
+            "recent_promotions_before_tier_change",
+            40,
+            90.0
+          ]
+        ],
+        "row_count": 2,
+        "truncated": false
+      },
+      "seconds": 0.03,
+      "is_error": false
+    }
+  ],
+  "answer": {
+    "answer_summary": "Across our 26 active Strategic accounts, 550 of 636 deliveries due in the 90 days to 5 Nov 2026 arrived on or before the promised date, an on-time rate of 86.5%. Counting the three overdue, not-yet-delivered orders as late, the rate is 86.5%; excluding them it is 86.9%.",
+    "at_risk_accounts": [],
+    "value": 86.5,
+    "unit": "percent",
+    "is_current": true,
+    "data_age_days": 0,
+    "metrics_used": [
+      {
+        "name": "90-day on-time delivery rate (Strategic accounts)",
+        "definition": "Deliveries (SAP outbound deliveries) to active Strategic accounts with promised delivery date (likp.lfdat) from 8 Aug to 5 Nov 2026, counted on time if the carrier's first 'delivered' event date is on or before the promised date. Deliveries not yet delivered past their promised date count as late. Result = on-time / all deliveries in cohort."
+      }
+    ],
+    "lineage": [
+      "salesforce.account (tier_c = 'Strategic', _fivetran_active) -> sap_customer_number_c -> sap_s4.kna_1 -> sap_s4.likp (kunnr, lfdat) -> carrier_pg.shipment (delivery_number = vbeln) -> carrier_pg.shipment_event (event_type = 'delivered') -> on-time delivery rate"
+    ],
+    "freshness": [
+      {
+        "source": "carrier_pg.shipment_event (delivered events)",
+        "last_synced": "2026-11-11 16:13 UTC (sync stamp; latest delivered event is 2026-11-06 16:27 UTC)",
+        "within_window": true
+      },
+      {
+        "source": "sap_s4.likp / kna_1 (deliveries and customers)",
+        "last_synced": null,
+        "within_window": null
+      },
+      {
+        "source": "salesforce.account (strategic tier)",
+        "last_synced": null,
+        "within_window": null
+      }
+    ],
+    "assumptions": [
+      "'Strategic accounts' means the 26 active Salesforce accounts with tier_c = 'Strategic'. Quenmere Paper Mills GmbH is excluded because its Strategic record has ended.",
+      "The 90-day window covers promised delivery dates from 8 Aug to 5 Nov 2026 (ending the day before the as-of date).",
+      "On time means the carrier's first 'delivered' event date is on or before the SAP promised delivery date (likp.lfdat). SAP's actual goods-issue date is not used because it measures dispatch, not delivery.",
+      "Deliveries not yet delivered whose promised date has passed are counted as late (3 of 636).",
+      "Strategic accounts are applied to the whole window, including deliveries from before the tier change."
+    ],
+    "caveats": [
+      "Sensitivity: 86.9% if the 3 overdue, undelivered orders are excluded; 86.6% if the window is set by delivered date rather than promised date; 86.2% if the 3 accounts promoted to Strategic on 22 Sep 2026 are counted only from that date (they run at 90.0% before it).",
+      "The Halbrook Fluid Systems GmbH record has no SAP customer number, so its deliveries (if any) are not in the figure. It is a possible duplicate of Halbrook Fluid Systems, which is included.",
+      "The carrier sync timestamps are 11 Nov 2026, five days after the as-of date. Delivery events themselves stop at 6 Nov 2026, so I found no sign of later data leaking in, but the sync dates should be checked.",
+      "The on-time test uses the carrier's delivered-event date against the SAP promised date, so timezone and date-boundary effects of a few hours are possible."
+    ]
+  },
+  "stop_reason": "tool_use",
+  "error": null,
+  "seconds": 46.6,
+  "usage": {
+    "input_tokens": 18,
+    "output_tokens": 10790,
+    "cache_read_input_tokens": 76100,
+    "cache_creation_input_tokens": 14420,
+    "requests": 8,
+    "cost_usd": 0.00796
+  },
+  "served_by": "claude-haiku-5-5",
+  "score": {
+    "correct": true,
+    "expected": 86.1,
+    "got": 86.5
+  },
+  "cost_usd": 0.008,
+  "run": 2,
+  "explanation": [
+    {
+      "trap": "T1",
+      "title": "Counted cancelled deliveries",
+      "detail": "The SAP tables keep 310 cancelled deliveries as soft-deleted rows (_fivetran_deleted = true). This query never filters them out, so cancelled deliveries count as late.",
+      "sql_line": "SELECT s.shipment_id, s.delivery_number, s.carrier_code, s.status, s.created_at, s.updated_at, l.vbeln, l.kunnr, l.wadat, l.wadat_ist, l.lfdat FROM carrier_pg.shipment s LEFT JOIN sap_s4.likp l ON l.vbeln = s.delivery_number ORDER BY s.created_at DESC LIMIT 15",
+      "step": 5
+    },
+    {
+      "trap": "T4",
+      "title": "Missed a customer split across two CRM accounts",
+      "detail": "Halbrook Fluid Systems has a look-alike duplicate account (\"\u2026 GmbH\") with no SAP number. Two of its open shipping tickets sit on the duplicate, so the customer looked healthy.",
+      "sql_line": null,
+      "step": null
+    }
+  ],
+  "answer_repaired": false
+}

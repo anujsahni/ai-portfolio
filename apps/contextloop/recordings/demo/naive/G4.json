@@ -1,0 +1,579 @@
+{
+  "agent": "naive",
+  "question_id": "G4",
+  "question": "How many strategic accounts do we have today?",
+  "model": "claude-haiku-5-5",
+  "effort": "high",
+  "started_at": "2026-11-11T20:17:37+00:00",
+  "steps": [
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check distinct tier values and account row states (history, deletes) before counting strategic accounts.",
+        "sql": "SELECT tier_c, _fivetran_active, is_deleted, _fivetran_deleted, COUNT(*) AS n, COUNT(DISTINCT id) AS distinct_ids FROM salesforce.account GROUP BY ALL ORDER BY ALL"
+      },
+      "output": {
+        "columns": [
+          "tier_c",
+          "_fivetran_active",
+          "is_deleted",
+          "_fivetran_deleted",
+          "n",
+          "distinct_ids"
+        ],
+        "rows": [
+          [
+            "Prospect",
+            true,
+            false,
+            false,
+            13,
+            13
+          ],
+          [
+            "Standard",
+            false,
+            false,
+            false,
+            3,
+            3
+          ],
+          [
+            "Standard",
+            true,
+            false,
+            false,
+            95,
+            95
+          ],
+          [
+            "Strategic",
+            false,
+            false,
+            false,
+            1,
+            1
+          ],
+          [
+            "Strategic",
+            true,
+            false,
+            false,
+            26,
+            26
+          ]
+        ],
+        "row_count": 5,
+        "truncated": false
+      },
+      "seconds": 0.03,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check freshness of the Salesforce account sync.",
+        "sql": "SELECT MAX(_fivetran_synced) AS last_synced, MAX(last_modified_date) AS last_modified FROM salesforce.account"
+      },
+      "output": {
+        "columns": [
+          "last_synced",
+          "last_modified"
+        ],
+        "rows": [
+          [
+            "2026-11-11 16:13:32+00:00",
+            "2026-09-22 14:30:00+00:00"
+          ]
+        ],
+        "row_count": 1,
+        "truncated": false
+      },
+      "seconds": 0.01,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "List Strategic rows including the inactive history row to confirm whether it duplicates an active account.",
+        "sql": "SELECT id, name, tier_c, _fivetran_active, _fivetran_start, _fivetran_end, last_modified_date, _fivetran_synced FROM salesforce.account WHERE tier_c = 'Strategic' ORDER BY _fivetran_active, name"
+      },
+      "output": {
+        "columns": [
+          "id",
+          "name",
+          "tier_c",
+          "_fivetran_active",
+          "_fivetran_start",
+          "_fivetran_end",
+          "last_modified_date",
+          "_fivetran_synced"
+        ],
+        "rows": [
+          [
+            "001jyjQ3yYlKrgAPD9",
+            "Quenmere Paper Mills GmbH",
+            "Strategic",
+            false,
+            "2022-02-19 10:00:00+00:00",
+            "2026-09-22 14:29:59+00:00",
+            "2022-02-19 10:00:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ],
+          [
+            "001usVdcbubaV6K9ih",
+            "Dunwick Process Equipment SA",
+            "Strategic",
+            true,
+            "2019-11-10 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            "2019-11-10 10:00:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ],
+          [
+            "001RTWHCy9QOZgYtfy",
+            "Galbury Steelworks SA",
+            "Strategic",
+            true,
+            "2022-09-01 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            "2022-09-01 10:00:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ],
+          [
+            "001T6Wn0eXovaGLMVG",
+            "Halbrook Fluid Systems",
+            "Strategic",
+            true,
+            "2022-12-19 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            "2022-12-19 10:00:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ],
+          [
+            "001KHodrD6UyqZnaQR",
+            "Halbrook Fluid Systems GmbH",
+            "Strategic",
+            true,
+            "2025-02-10 09:15:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            "2025-02-10 09:15:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ],
+          [
+            "001g6Do98g9SRo6RPs",
+            "Harvale Food Processing Inc",
+            "Strategic",
+            true,
+            "2022-01-30 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            "2022-01-30 10:00:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ],
+          [
+            "001cWWUZbLBqBzKEe2",
+            "Jormark Paper Mills SA",
+            "Strategic",
+            true,
+            "2021-05-08 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            "2021-05-08 10:00:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ],
+          [
+            "001uZIL3lmdPJi6dMz",
+            "Kelridge Steelworks SA",
+            "Strategic",
+            true,
+            "2023-09-11 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            "2023-09-11 10:00:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ],
+          [
+            "001TlD8DEb2a4OHAFu",
+            "Marmark HVAC Inc",
+            "Strategic",
+            true,
+            "2020-04-01 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            "2020-04-01 10:00:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ],
+          [
+            "001xtf0eDWZ7g16pYH",
+            "Pellridge Process Equipment GmbH",
+            "Strategic",
+            true,
+            "2019-05-23 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            "2019-05-23 10:00:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ],
+          [
+            "001ePIqhOkiXF8oN5K",
+            "Quenton Food Processing GmbH",
+            "Strategic",
+            true,
+            "2019-09-27 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            "2019-09-27 10:00:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ],
+          [
+            "00173mQ9bhojG5YWvV",
+            "Ralmore Process Equipment Inc",
+            "Strategic",
+            true,
+            "2021-12-05 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            "2021-12-05 10:00:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ],
+          [
+            "001Mr9uzv7OnksPJDh",
+            "Ralwick Pharma Plants Ltd",
+            "Strategic",
+            true,
+            "2021-01-14 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            "2021-01-14 10:00:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ],
+          [
+            "001r9q4bWRxTPoZKYK",
+            "Sevholt Refining SA",
+            "Strategic",
+            true,
+            "2023-01-09 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            "2023-01-09 10:00:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ],
+          [
+            "001LYKqH2NcHcxlE2K",
+            "Sevland Utilities Inc",
+            "Strategic",
+            true,
+            "2023-04-22 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            "2023-04-22 10:00:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ],
+          [
+            "001xoPG2ALg7oLuJrw",
+            "Tamdale Food Processing Ltd",
+            "Strategic",
+            true,
+            "2022-06-22 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            "2022-06-22 10:00:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ],
+          [
+            "001bpSPP9I0DwIsbXO",
+            "Tamford Food Processing SA",
+            "Strategic",
+            true,
+            "2021-08-16 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            "2021-08-16 10:00:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ],
+          [
+            "00196WdD6KCNZ4yZVt",
+            "Tammore Food Processing BV",
+            "Strategic",
+            true,
+            "2024-02-26 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            "2024-02-26 10:00:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ],
+          [
+            "001aAVL3JudBxJLQKi",
+            "Tamridge Pharma Plants Inc",
+            "Strategic",
+            true,
+            "2024-03-07 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            "2024-03-07 10:00:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ],
+          [
+            "001IeA54qrzDv3P7kZ",
+            "Tamwick Mining Inc",
+            "Strategic",
+            true,
+            "2019-03-08 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            "2019-03-08 10:00:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ],
+          [
+            "001VBW81QSgOAH35Pb",
+            "Thalmark Marine Srl",
+            "Strategic",
+            true,
+            "2026-09-22 14:30:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            "2026-09-22 14:30:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ],
+          [
+            "001z9MQhfHInmTg8Qg",
+            "Velmere Pipeline Services Ltd",
+            "Strategic",
+            true,
+            "2026-09-22 14:30:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            "2026-09-22 14:30:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ],
+          [
+            "001fYsCllu8u6Vvqti",
+            "Vornland Chemicals SA",
+            "Strategic",
+            true,
+            "2022-05-15 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            "2022-05-15 10:00:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ],
+          [
+            "001oeP6Yy42qbLL6ni",
+            "Vornridge Water Works Ltd",
+            "Strategic",
+            true,
+            "2019-10-04 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            "2019-10-04 10:00:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ],
+          [
+            "001gFjTbqI8yil52V7",
+            "Vornwick Utilities Inc",
+            "Strategic",
+            true,
+            "2026-09-22 14:30:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            "2026-09-22 14:30:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ],
+          [
+            "001AgkEM3JeW9GzswP",
+            "Wesmore Energy Ltd",
+            "Strategic",
+            true,
+            "2022-04-06 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            "2022-04-06 10:00:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ],
+          [
+            "001tTFM0okFASwilZ0",
+            "Yarstead Process Equipment Inc",
+            "Strategic",
+            true,
+            "2022-12-16 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            "2022-12-16 10:00:00+00:00",
+            "2026-11-11 16:13:32+00:00"
+          ]
+        ],
+        "row_count": 27,
+        "truncated": false
+      },
+      "seconds": 0.02,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check Quenmere's current active row and whether the two Halbrook accounts share a SAP customer number (possible duplicate).",
+        "sql": "SELECT id, name, tier_c, sap_customer_number_c, region_c, _fivetran_active, _fivetran_start, _fivetran_end, is_deleted FROM salesforce.account WHERE name ILIKE '%Quenmere%' OR name ILIKE '%Halbrook%' ORDER BY name, _fivetran_start"
+      },
+      "output": {
+        "columns": [
+          "id",
+          "name",
+          "tier_c",
+          "sap_customer_number_c",
+          "region_c",
+          "_fivetran_active",
+          "_fivetran_start",
+          "_fivetran_end",
+          "is_deleted"
+        ],
+        "rows": [
+          [
+            "001T6Wn0eXovaGLMVG",
+            "Halbrook Fluid Systems",
+            "Strategic",
+            "0000100001",
+            "EMEA",
+            true,
+            "2022-12-19 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "001KHodrD6UyqZnaQR",
+            "Halbrook Fluid Systems GmbH",
+            "Strategic",
+            null,
+            "EMEA",
+            true,
+            "2025-02-10 09:15:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "0017BeXlgg9DQ1OaAT",
+            "Quenmere HVAC Inc",
+            "Standard",
+            "0000100081",
+            "North America",
+            true,
+            "2019-12-29 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ],
+          [
+            "001jyjQ3yYlKrgAPD9",
+            "Quenmere Paper Mills GmbH",
+            "Strategic",
+            "0000100015",
+            "EMEA",
+            false,
+            "2022-02-19 10:00:00+00:00",
+            "2026-09-22 14:29:59+00:00",
+            false
+          ],
+          [
+            "001jyjQ3yYlKrgAPD9",
+            "Quenmere Paper Mills GmbH",
+            "Standard",
+            "0000100015",
+            "EMEA",
+            true,
+            "2026-09-22 14:30:00+00:00",
+            "9999-12-31 23:59:59+00:00",
+            false
+          ]
+        ],
+        "row_count": 5,
+        "truncated": false
+      },
+      "seconds": 0.01,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check whether the two Halbrook records are one customer in SAP (possible duplicate in the strategic count).",
+        "sql": "SELECT kunnr, name_1, land_1, ort_01, ktokd, _fivetran_deleted FROM sap_s4.kna_1 WHERE name_1 ILIKE '%Halbrook%' OR kunnr = '0000100001'"
+      },
+      "output": {
+        "columns": [
+          "kunnr",
+          "name_1",
+          "land_1",
+          "ort_01",
+          "ktokd",
+          "_fivetran_deleted"
+        ],
+        "rows": [
+          [
+            "0000100001",
+            "Halbrook Fluid Systems GmbH",
+            "DE",
+            "Duisburg",
+            "0001",
+            false
+          ]
+        ],
+        "row_count": 1,
+        "truncated": false
+      },
+      "seconds": 0.02,
+      "is_error": false
+    }
+  ],
+  "answer": {
+    "answer_summary": "Torvane has 26 active Strategic account records in Salesforce as of 6 Nov 2026. Two caveats: \"Halbrook Fluid Systems\" and \"Halbrook Fluid Systems GmbH\" look like one SAP customer (0000100001), so there may be 25 distinct strategic customers. Quenmere Paper Mills GmbH was moved from Strategic to Standard on 22 Sep 2026 and is excluded.",
+    "at_risk_accounts": [],
+    "value": 26,
+    "unit": "count",
+    "is_current": null,
+    "data_age_days": null,
+    "metrics_used": [
+      {
+        "name": "Active Strategic accounts",
+        "definition": "Count of salesforce.account rows with tier_c = 'Strategic' and _fivetran_active = true (current SCD2 version), excluding deleted rows. Historical (inactive) versions are not counted."
+      }
+    ],
+    "lineage": [
+      "salesforce.account -> active Strategic account count"
+    ],
+    "freshness": [
+      {
+        "source": "salesforce.account",
+        "last_synced": "2026-11-11 16:13:32 UTC",
+        "within_window": null
+      },
+      {
+        "source": "sap_s4.kna_1 (checked for Halbrook duplicate)",
+        "last_synced": null,
+        "within_window": null
+      }
+    ],
+    "assumptions": [
+      "'Strategic accounts' means Salesforce accounts with tier_c = 'Strategic'.",
+      "Only current SCD2 versions (_fivetran_active = true) are counted; the one inactive Strategic row (Quenmere Paper Mills GmbH, ended 22 Sep 2026) is excluded because its current version is Standard.",
+      "Account counts are records, not deduplicated customers. The two Halbrook records are counted separately here."
+    ],
+    "caveats": [
+      "Possible duplicate: 'Halbrook Fluid Systems GmbH' (SF id 001KHodrD6UyqZnaQR, no SAP customer number, created 2025-02-10) appears to be the same SAP customer 0000100001 as 'Halbrook Fluid Systems'. If merged, the count is 25 distinct strategic customers.",
+      "The Salesforce _fivetran_synced timestamp (11 Nov 2026) is later than the as-of date (6 Nov 2026), so sync recency could not be confirmed and data age is not computed.",
+      "Last-modified dates on the Strategic records are mostly 2019\u20132025, with a few from 22 Sep 2026."
+    ]
+  },
+  "stop_reason": "tool_use",
+  "error": null,
+  "seconds": 15.3,
+  "usage": {
+    "input_tokens": 12,
+    "output_tokens": 3155,
+    "cache_read_input_tokens": 23890,
+    "cache_creation_input_tokens": 9093,
+    "requests": 5,
+    "cost_usd": 0.002955
+  },
+  "served_by": "claude-haiku-5-5",
+  "score": {
+    "correct": false,
+    "expected": 25,
+    "got": 26.0
+  },
+  "cost_usd": 0.003,
+  "run": 1,
+  "explanation": [
+    {
+      "trap": "T4",
+      "title": "Missed a customer split across two CRM accounts",
+      "detail": "Halbrook Fluid Systems has a look-alike duplicate account (\"\u2026 GmbH\") with no SAP number. Two of its open shipping tickets sit on the duplicate, so the customer looked healthy.",
+      "sql_line": null,
+      "step": null
+    },
+    {
+      "trap": "T5",
+      "title": "Read every history row of the account tier",
+      "detail": "salesforce.account keeps one row per version of each account (history mode). Without filtering to _fivetran_active, accounts that changed tier appear twice, and Quenmere Paper Mills GmbH still looks Strategic.",
+      "sql_line": "SELECT MAX(_fivetran_synced) AS last_synced, MAX(last_modified_date) AS last_modified FROM salesforce.account",
+      "step": 2
+    }
+  ],
+  "answer_repaired": true,
+  "recorded": true
+}

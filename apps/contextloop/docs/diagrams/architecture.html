@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ContextLoop architecture</title>
+<link rel="stylesheet" href="diagram.css">
+<script src="diagram.js"></script>
+</head>
+<body>
+<div class="canvas"></div>
+<script>
+// Columns: x = 70, 360, 650, 940 (width 270). Centres: 205, 495, 785, 1075.
+const C = [70, 360, 650, 940], W = 270;
+draw({
+  width: 1280, height: 1320,
+  title: "ContextLoop · end-to-end architecture",
+  subtitle: "Sources → move (Fivetran) → transform and trust (dbt, Iceberg) → context (MCP) → activate. Everything runs in Docker on one laptop.",
+  groups: [
+    { x: 40, y: 80,  w: 1200, h: 130, label: "Source systems · synthetic", dash: true },
+    { x: 40, y: 240, w: 1200, h: 130, label: "Act 2 · Move · Fivetran", labelColor: "#3341B8" },
+    { x: 40, y: 400, w: 1200, h: 375, label: "Act 3 · Transform and trust · dbt", labelColor: "#B8432A" },
+    { x: 635, y: 540, w: 585, h: 215, label: "Open lakehouse · Apache Iceberg", dash: true, labelColor: "#0B7A70" },
+    { x: 40, y: 805, w: 1200, h: 175, label: "Act 4 · Context · MCP", labelColor: "#13734F" },
+    { x: 40, y: 1010, w: 555, h: 200, label: "Experience" },
+    { x: 625, y: 1010, w: 615, h: 200, label: "Act 5 · Activate · reverse ETL", labelColor: "#3341B8" },
+  ],
+  nodes: [
+    // Sources
+    { id: "pg",  x: C[0], y: 122, w: W, kind: "source", badge: "PG",  title: "Postgres", sub: "Carrier tracking events" },
+    { id: "sap", x: C[1], y: 122, w: W, kind: "source", badge: "SAP", title: "SAP S/4HANA extract", sub: "KNA1 · VBAK · LIKP · VBRK" },
+    { id: "sf",  x: C[2], y: 122, w: W, kind: "source", badge: "SF",  title: "Salesforce", sub: "Account · Opportunity · tier" },
+    { id: "zd",  x: C[3], y: 122, w: W, kind: "source", badge: "ZD",  title: "Zendesk", sub: "Support tickets · tags" },
+    // Move
+    { id: "sdk",  x: 215,  y: 282, w: W, kind: "fivetran", badge: "SDK", title: "Connector SDK", sub: "SAP + Postgres connectors" },
+    { id: "land", x: C[2], y: 282, w: W, kind: "fivetran", badge: "FT",  title: "Fivetran-shaped landing", sub: "<code>_fivetran_*</code> columns" },
+    { id: "log",  x: C[3], y: 282, w: W, kind: "fivetran", badge: "LOG", title: "Sync log", sub: "Freshness · MAR estimate" },
+    // Trust
+    { id: "mf",    x: C[0], y: 442, w: W, kind: "dbt",  badge: "MF",  title: "Semantic layer", sub: "MetricFlow metrics" },
+    { id: "dbt",   x: C[1], y: 442, w: W, kind: "dbt",  badge: "dbt", title: "dbt Core", sub: "Models · tests · contracts" },
+    { id: "duck",  x: C[2], y: 442, w: W, kind: "open", badge: "DD",  title: "DuckDB", sub: "Raw schemas · warehouse" },
+    { id: "trino", x: C[2], y: 588, w: W, kind: "open", badge: "TR",  title: "Trino", sub: "Second query engine" },
+    { id: "cat",   x: C[3], y: 588, w: W, kind: "open", badge: "IC",  title: "Iceberg REST catalog", sub: "Trusted marts" },
+    { id: "minio", x: C[3], y: 674, w: W, kind: "open", badge: "S3",  title: "RustFS", sub: "S3-compatible storage" },
+    // Context
+    { id: "mmcp", x: C[0], y: 850, w: W, kind: "app", badge: "MCP", title: "Metrics MCP server", sub: "Governed metric tools" },
+    { id: "dmcp", x: C[1], y: 850, w: W, kind: "dbt", badge: "MCP", title: "dbt MCP server", sub: "Models · lineage · docs" },
+    { id: "agent", x: C[2], y: 850, w: W, kind: "ai", badge: "C", title: "Agent · Claude", sub: "Same model in Acts 1 and 4" },
+    { id: "fmcp", x: C[3], y: 850, w: W, kind: "app", badge: "MCP", title: "Freshness MCP server", sub: "<code>check_freshness</code>" },
+    // Experience + activate
+    { id: "ui", x: 70, y: 1056, w: 495, h: 110, kind: "app", badge: "ST", title: "Streamlit app · 127.0.0.1:8501",
+      sub: "The five acts · architecture page · POV scorecard", body: "Act 1 naive answer and Act 4 governed answer side by side, scored against the hidden truth" },
+    { id: "re",    x: C[2], y: 1056, w: W, kind: "app", badge: "RE", title: "Reverse ETL sync", sub: "Diff-based sync" },
+    { id: "crm",   x: C[3], y: 1056, w: W, kind: "app", badge: "SF", title: "Mock Salesforce API", sub: "Audit log of every write" },
+    { id: "slack", x: C[3], y: 1136, w: W, kind: "ext", badge: "SL", title: "Slack", sub: "Optional incoming webhook" },
+  ],
+  edges: [
+    { from: "pg",  to: "sdk", too: -20, via: [[205, 225], [330, 225]] },
+    { from: "sap", to: "sdk", too: 20,  via: [[495, 225], [370, 225]] },
+    { from: "sf",  to: "land" },
+    { from: "zd",  to: "land", too: 40, via: [[1075, 225], [825, 225]] },
+    { from: "sdk", to: "land", fs: "r", ts: "l", label: "upserts · deletes · state" },
+    { from: "land", to: "log", fs: "r", ts: "l" },
+    { from: "land", to: "duck", label: "lands raw tables" },
+    { from: "duck", to: "dbt", fs: "l", ts: "r" },
+    { from: "dbt", to: "mf", fs: "l", ts: "r" },
+    { from: "dbt", to: "cat", fo: 50, via: [[545, 522], [1075, 522]], label: "publishes trusted marts", at: [820, 522] },
+    { from: "trino", to: "cat", fs: "r", ts: "l" },
+    { from: "cat", to: "minio", arrow: "none" },
+    { from: "mmcp", to: "mf", fs: "t", ts: "b", accent: true, label: "governed metric queries", at: [205, 690] },
+    { from: "dmcp", to: "dbt", fs: "t", ts: "b", fo: -30, too: -30, accent: true, label: "lineage · docs", at: [465, 690] },
+    { from: "fmcp", to: "log", fs: "r", ts: "r", via: [[1226, 882], [1226, 314]], accent: true, label: "timestamps", at: [1226, 470] },
+    { from: "agent", to: "dmcp", fs: "l", ts: "r", accent: true },
+    { from: "agent", to: "fmcp", fs: "r", ts: "l", accent: true },
+    { from: "agent", to: "mmcp", fs: "b", ts: "b", fo: -60, via: [[725, 952], [205, 952]], accent: true, label: "MCP tool calls", at: [465, 952] },
+    { from: "agent", to: "ui", fs: "b", ts: "t", fo: -20, too: 70, via: [[765, 995], [387, 995]], label: "cited answer + freshness", at: [575, 995] },
+    { from: "agent", to: "re", fs: "b", ts: "t", fo: 40, too: 40, label: "at-risk list", at: [825, 995] },
+    { from: "re", to: "crm", fs: "r", ts: "l" },
+    { from: "re", to: "slack", fs: "b", ts: "l" },
+    { from: "re", to: "ui", fs: "l", ts: "r", too: -23 },
+  ],
+  legend: ["source", "fivetran", "dbt", "open", "app", "ai", { line: "", label: "Data flow" }, { line: "accent", label: "Agent context (MCP)" }],
+});
+</script>
+</body>
+</html>

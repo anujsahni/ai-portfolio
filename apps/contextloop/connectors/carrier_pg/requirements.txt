@@ -1,0 +1,2 @@
+# No extra packages: the connector uses only the Python standard library and the Connector SDK.
+psycopg[binary]==3.3.8

@@ -1,0 +1,19 @@
+# ContextLoop app theme (colours from contextloop/ui/brand.py) and chrome. Read by `streamlit run` from /app.
+[theme]
+base = "light"
+primaryColor = "#4B5BDC"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F5F7FC"
+textColor = "#18203A"
+linkColor = "#4B5BDC"
+borderColor = "#E3E7F0"
+
+[theme.sidebar]
+backgroundColor = "#F5F7FC"
+
+[client]
+toolbarMode = "minimal"
+showErrorDetails = true
+
+[browser]
+gatherUsageStats = false

@@ -1,0 +1,564 @@
+{
+  "agent": "governed",
+  "question_id": "G2",
+  "question": "What is the 90-day on-time delivery rate across all of our strategic accounts?",
+  "model": "claude-haiku-5-5",
+  "effort": "high",
+  "started_at": "2026-11-11T20:14:21+00:00",
+  "steps": [
+    {
+      "tool": "list_metrics",
+      "input": {},
+      "output": {
+        "metrics": [
+          {
+            "name": "deliveries_90d",
+            "label": "Deliveries (90 days)",
+            "type": "simple",
+            "definition": "The number of non-cancelled deliveries whose requested delivery date falls in the 90 days ending on the as-of date."
+          },
+          {
+            "name": "on_time_deliveries_90d",
+            "label": "On-time deliveries (90 days)",
+            "type": "simple",
+            "definition": "Of the deliveries in the 90-day window, how many the carrier delivered on or before the date the customer asked for."
+          },
+          {
+            "name": "on_time_delivery_rate",
+            "label": "On-time delivery rate (90 days)",
+            "type": "ratio",
+            "definition": "The share of deliveries that arrived on or before the customer's requested date, over the last 90 days. \"Arrived\" is the carrier's delivered event, not a ship date; cancelled deliveries do not count; a delivery not yet delivered by its date is late."
+          },
+          {
+            "name": "late_deliveries",
+            "label": "Late deliveries (90 days)",
+            "type": "simple",
+            "definition": "Deliveries in the last 90 days that arrived after the requested date, or have not arrived although the date has passed."
+          },
+          {
+            "name": "net_revenue",
+            "label": "Net revenue (USD)",
+            "type": "simple",
+            "definition": "Invoiced revenue minus credit memos, converted to US dollars at the monthly average exchange rate of each billing month."
+          },
+          {
+            "name": "open_shipping_tickets",
+            "label": "Open shipping tickets",
+            "type": "simple",
+            "definition": "Open support tickets about shipping: tagged shipping, delivery, late_delivery or logistics, or with a subject that mentions late, delay, shipment, delivery or tracking. Tickets on a look-alike duplicate account count toward the real customer."
+          },
+          {
+            "name": "renewals_due_120d",
+            "label": "Renewals due in 120 days",
+            "type": "simple",
+            "definition": "Open renewal opportunities that close within 120 days of the as-of date."
+          },
+          {
+            "name": "account_risk_flag",
+            "label": "At-risk flag",
+            "type": "derived",
+            "definition": "1 when an account's on-time delivery rate is below 85% and it has two or more open shipping tickets or a renewal due in 120 days; otherwise 0. Combine with the strategic filter to get the at-risk strategic accounts."
+          }
+        ],
+        "dimensions": [
+          {
+            "name": "account__account_name",
+            "description": null
+          },
+          {
+            "name": "account__region",
+            "description": null
+          },
+          {
+            "name": "account__tier",
+            "description": "Tier at the end of the as-of date (today's tier)."
+          },
+          {
+            "name": "account__is_strategic",
+            "description": null
+          },
+          {
+            "name": "account",
+            "description": "entity: accounts"
+          },
+          {
+            "name": "delivery__requested_delivery_date (time; add __day, __month or __quarter)",
+            "description": null
+          },
+          {
+            "name": "delivery__tier_at_delivery",
+            "description": "The customer's tier on the requested delivery date (history mode), not today's tier."
+          },
+          {
+            "name": "delivery__is_in_90d_window",
+            "description": null
+          },
+          {
+            "name": "delivery__carrier_code",
+            "description": null
+          },
+          {
+            "name": "delivery",
+            "description": "entity: deliveries"
+          },
+          {
+            "name": "billing_document__billing_date (time; add __day, __month or __quarter)",
+            "description": null
+          },
+          {
+            "name": "billing_document__billing_quarter",
+            "description": null
+          },
+          {
+            "name": "billing_document__region",
+            "description": null
+          },
+          {
+            "name": "billing_document",
+            "description": "entity: revenue"
+          },
+          {
+            "name": "ticket__created_at (time; add __day, __month or __quarter)",
+            "description": null
+          },
+          {
+            "name": "ticket__status",
+            "description": null
+          },
+          {
+            "name": "ticket",
+            "description": "entity: tickets"
+          },
+          {
+            "name": "renewal__close_date (time; add __day, __month or __quarter)",
+            "description": null
+          },
+          {
+            "name": "renewal__stage",
+            "description": null
+          },
+          {
+            "name": "renewal",
+            "description": "entity: renewals"
+          }
+        ],
+        "filter_syntax": "{{ Dimension('account__is_strategic') }} = true   |   {{ Dimension('account__region') }} = 'EMEA'   |   {{ Dimension('billing_document__billing_quarter') }} = '2026-Q3'",
+        "notes": [
+          "Group by the entity `account` to get one row per customer, and `account__account_name` for its name.",
+          "`account__tier` is today's tier; `delivery__tier_at_delivery` is the tier in force on each delivery's date.",
+          "Delivery metrics already cover the 90 days ending on the as-of date (6 Nov 2026)."
+        ]
+      },
+      "seconds": 0.04,
+      "is_error": false
+    },
+    {
+      "tool": "check_freshness",
+      "input": {},
+      "output": {
+        "checked_at": "2026-11-11T20:14:22+00:00",
+        "window_hours": 24,
+        "sources": [
+          {
+            "source": "carrier_pg",
+            "name": "Carrier tracking Postgres (Connector SDK)",
+            "schema": "carrier_pg",
+            "simulated_landing": false,
+            "last_successful_sync": "2026-11-11T18:28:27.524601+00:00",
+            "age_hours": 1.8,
+            "age_days": 0.1,
+            "within_window": true,
+            "rows_changed_last_success": 3,
+            "latest_attempt": {
+              "at": "2026-11-11T18:28:27.524601+00:00",
+              "status": "SUCCESSFUL",
+              "message": null
+            }
+          },
+          {
+            "source": "salesforce",
+            "name": "Salesforce (simulated landing)",
+            "schema": "salesforce",
+            "simulated_landing": true,
+            "last_successful_sync": "2026-11-11T18:28:27+00:00",
+            "age_hours": 1.8,
+            "age_days": 0.1,
+            "within_window": true,
+            "rows_changed_last_success": 0,
+            "latest_attempt": {
+              "at": "2026-11-11T18:28:27+00:00",
+              "status": "SUCCESSFUL",
+              "message": null
+            }
+          },
+          {
+            "source": "sap_s4",
+            "name": "SAP S/4HANA (Connector SDK)",
+            "schema": "sap_s4",
+            "simulated_landing": false,
+            "last_successful_sync": "2026-11-11T18:28:25.974831+00:00",
+            "age_hours": 1.8,
+            "age_days": 0.1,
+            "within_window": true,
+            "rows_changed_last_success": 0,
+            "latest_attempt": {
+              "at": "2026-11-11T18:28:25.974831+00:00",
+              "status": "SUCCESSFUL",
+              "message": null
+            }
+          },
+          {
+            "source": "zendesk",
+            "name": "Zendesk (simulated landing)",
+            "schema": "zendesk",
+            "simulated_landing": true,
+            "last_successful_sync": "2026-11-09T19:47:33+00:00",
+            "age_hours": 48.4,
+            "age_days": 2.0,
+            "within_window": false,
+            "rows_changed_last_success": 0,
+            "latest_attempt": {
+              "at": "2026-11-11T19:47:33+00:00",
+              "status": "FAILURE",
+              "message": "Zendesk API rate limit exceeded (simulated scenario T6); retrying on the next schedule"
+            }
+          }
+        ],
+        "all_current": false,
+        "stale_sources": [
+          "zendesk"
+        ]
+      },
+      "seconds": 0.04,
+      "is_error": false
+    },
+    {
+      "tool": "query_metric",
+      "input": {
+        "metrics": [
+          "on_time_delivery_rate",
+          "deliveries_90d",
+          "on_time_deliveries_90d",
+          "late_deliveries"
+        ],
+        "where": "{{ Dimension('account__is_strategic') }} = true"
+      },
+      "output": {
+        "metrics": [
+          "on_time_delivery_rate",
+          "deliveries_90d",
+          "on_time_deliveries_90d",
+          "late_deliveries"
+        ],
+        "group_by": [],
+        "where": "{{ Dimension('account__is_strategic') }} = true",
+        "columns": [
+          "on_time_delivery_rate",
+          "deliveries_90d",
+          "on_time_deliveries_90d",
+          "late_deliveries"
+        ],
+        "rows": [
+          [
+            0.861244,
+            627,
+            540,
+            87
+          ]
+        ],
+        "row_count": 1,
+        "definitions": {
+          "deliveries_90d": "The number of non-cancelled deliveries whose requested delivery date falls in the 90 days ending on the as-of date.",
+          "on_time_deliveries_90d": "Of the deliveries in the 90-day window, how many the carrier delivered on or before the date the customer asked for.",
+          "on_time_delivery_rate": "The share of deliveries that arrived on or before the customer's requested date, over the last 90 days. \"Arrived\" is the carrier's delivered event, not a ship date; cancelled deliveries do not count; a delivery not yet delivered by its date is late.",
+          "late_deliveries": "Deliveries in the last 90 days that arrived after the requested date, or have not arrived although the date has passed."
+        },
+        "compiled_sql": "WITH sma_10001_cte AS (\n  SELECT\n    customer_id AS account\n    , case when is_in_90d_window then 1 else 0 end AS __deliveries_90d\n    , case when is_in_90d_window and is_on_time then 1 else 0 end AS __on_time_deliveries_90d\n    , case when is_in_90d_window and not is_on_time then 1 else 0 end AS __late_deliveries\n  FROM \"warehouse\".\"marts\".\"fct_delivery\" deliveries_src_10000\n)\n, rss_10001_cte AS (\n  SELECT\n    is_strategic\n    , customer_id AS account\n  FROM \"warehouse\".\"marts\".\"dim_account\" accounts_src_10000\n)\nSELECT\n  MAX(subq_10.on_time_delivery_rate) AS on_time_delivery_rate\n  , COALESCE(MAX(subq_19.deliveries_90d), 0) AS deliveries_90d\n  , COALESCE(MAX(subq_19.on_time_deliveries_90d), 0) AS on_time_deliveries_90d\n  , COALESCE(MAX(subq_19.late_deliveries), 0) AS late_deliveries\nFROM (\n  SELECT\n    CAST(COALESCE(__on_time_deliveries_90d, 0) AS DOUBLE) / CAST(NULLIF(COALESCE(__deliveries_90d, 0), 0) AS DOUBLE) AS on_time_delivery_rate\n  FROM (\n    SELECT\n      SUM(deliveries_90d) AS __deliveries_90d\n      , SUM(on_time_deliveries_90d) AS __on_time_deliveries_90d\n    FROM (\n      SELECT\n        rss_10001_cte.is_strategic AS account__is_strategic\n        , sma_10001_cte.__deliveries_90d AS deliveries_90d\n        , sma_10001_cte.__on_time_deliveries_90d AS on_time_deliveries_90d\n      FROM sma_10001_cte\n      LEFT OUTER JOIN\n        rss_10001_cte\n      ON\n        sma_10001_cte.account = rss_10001_cte.account\n    ) subq_5\n    WHERE account__is_strategic = true\n  ) subq_8\n) subq_10\nCROSS JOIN (\n  SELECT\n    COALESCE(__deliveries_90d, 0) AS deliveries_90d\n    , COALESCE(__on_time_deliveries_90d, 0) AS on_time_deliveries_90d\n    , COALESCE(__late_deliveries, 0) AS late_deliveries\n  FROM (\n    SELECT\n      SUM(deliveries_90d) AS __deliveries_90d\n      , SUM(on_time_deliveries_90d) AS __on_time_deliveries_90d\n      , SUM(late_deliveries) AS __late_deliveries\n    FROM (\n      SELECT\n        rss_10001_cte.is_strategic AS account__is_strategic\n        , sma_10001_cte.__deliveries_90d AS deliveries_90d\n        , sma_10001_cte.__on_time_deliveries_90d AS on_time_deliveries_90d\n        , sma_10001_cte.__late_deliveries AS late_deliveries\n      FROM sma_10001_cte\n      LEFT OUTER JOIN\n        rss_10001_cte\n      ON\n        sma_10001_cte.account = rss_10001_cte.account\n    ) subq_15\n    WHERE account__is_strategic = true\n  ) subq_18\n) subq_19\nLIMIT 100"
+      },
+      "seconds": 2.13,
+      "is_error": false
+    },
+    {
+      "tool": "query_metric",
+      "input": {
+        "metrics": [
+          "on_time_delivery_rate",
+          "deliveries_90d"
+        ]
+      },
+      "output": {
+        "metrics": [
+          "on_time_delivery_rate",
+          "deliveries_90d"
+        ],
+        "group_by": [],
+        "where": null,
+        "columns": [
+          "on_time_delivery_rate",
+          "deliveries_90d"
+        ],
+        "rows": [
+          [
+            0.886179,
+            1476
+          ]
+        ],
+        "row_count": 1,
+        "definitions": {
+          "deliveries_90d": "The number of non-cancelled deliveries whose requested delivery date falls in the 90 days ending on the as-of date.",
+          "on_time_delivery_rate": "The share of deliveries that arrived on or before the customer's requested date, over the last 90 days. \"Arrived\" is the carrier's delivered event, not a ship date; cancelled deliveries do not count; a delivery not yet delivered by its date is late."
+        },
+        "compiled_sql": "WITH sma_10001_cte AS (\n  SELECT\n    case when is_in_90d_window then 1 else 0 end AS __deliveries_90d\n    , case when is_in_90d_window and is_on_time then 1 else 0 end AS __on_time_deliveries_90d\n  FROM \"warehouse\".\"marts\".\"fct_delivery\" deliveries_src_10000\n)\nSELECT\n  MAX(subq_6.on_time_delivery_rate) AS on_time_delivery_rate\n  , COALESCE(MAX(subq_11.deliveries_90d), 0) AS deliveries_90d\nFROM (\n  SELECT\n    CAST(COALESCE(__on_time_deliveries_90d, 0) AS DOUBLE) / CAST(NULLIF(COALESCE(__deliveries_90d, 0), 0) AS DOUBLE) AS on_time_delivery_rate\n  FROM (\n    SELECT\n      SUM(__deliveries_90d) AS __deliveries_90d\n      , SUM(__on_time_deliveries_90d) AS __on_time_deliveries_90d\n    FROM sma_10001_cte\n  ) subq_4\n) subq_6\nCROSS JOIN (\n  SELECT\n    COALESCE(__deliveries_90d, 0) AS deliveries_90d\n  FROM (\n    SELECT\n      SUM(__deliveries_90d) AS __deliveries_90d\n    FROM sma_10001_cte\n  ) subq_10\n) subq_11\nLIMIT 100"
+      },
+      "seconds": 2.11,
+      "is_error": false
+    },
+    {
+      "tool": "dbt_get_lineage_dev",
+      "input": {
+        "unique_id": "model.contextloop.fct_delivery",
+        "depth": 3
+      },
+      "output": {
+        "model_id": "model.contextloop.fct_delivery",
+        "parents": [
+          {
+            "model_id": "model.contextloop.int_account_tier_history",
+            "parents": [
+              {
+                "model_id": "model.contextloop.int_account_identity",
+                "parents": [
+                  {
+                    "model_id": "model.contextloop.stg_salesforce__account_history",
+                    "parents": []
+                  }
+                ]
+              },
+              {
+                "model_id": "model.contextloop.stg_salesforce__account_history",
+                "parents": [
+                  {
+                    "model_id": "source.contextloop.salesforce.account",
+                    "parents": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "model_id": "model.contextloop.int_deliveries_enriched",
+            "parents": [
+              {
+                "model_id": "model.contextloop.int_delivery_actuals",
+                "parents": [
+                  {
+                    "model_id": "model.contextloop.stg_carrier__shipment_events",
+                    "parents": []
+                  },
+                  {
+                    "model_id": "model.contextloop.stg_carrier__shipments",
+                    "parents": []
+                  }
+                ]
+              },
+              {
+                "model_id": "model.contextloop.stg_sap__deliveries",
+                "parents": [
+                  {
+                    "model_id": "source.contextloop.sap_s4.likp",
+                    "parents": []
+                  }
+                ]
+              },
+              {
+                "model_id": "model.contextloop.stg_sap__delivery_items",
+                "parents": [
+                  {
+                    "model_id": "source.contextloop.sap_s4.lips",
+                    "parents": []
+                  }
+                ]
+              },
+              {
+                "model_id": "model.contextloop.stg_sap__sales_orders",
+                "parents": [
+                  {
+                    "model_id": "source.contextloop.sap_s4.vbak",
+                    "parents": []
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "children": [
+          {
+            "model_id": "exposure.contextloop.governed_agent",
+            "children": []
+          },
+          {
+            "model_id": "model.contextloop.account_risk",
+            "children": [
+              {
+                "model_id": "exposure.contextloop.activation_sync",
+                "children": []
+              },
+              {
+                "model_id": "test.contextloop.not_null_account_risk_customer_id.53de49adbc",
+                "children": []
+              },
+              {
+                "model_id": "test.contextloop.unique_account_risk_customer_id.592c69acea",
+                "children": []
+              }
+            ]
+          },
+          {
+            "model_id": "semantic_model.contextloop.deliveries",
+            "children": [
+              {
+                "model_id": "metric.contextloop.deliveries_90d",
+                "children": [
+                  {
+                    "model_id": "metric.contextloop.on_time_delivery_rate",
+                    "children": []
+                  },
+                  {
+                    "model_id": "saved_query.contextloop.at_risk_strategic_accounts",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "model_id": "metric.contextloop.late_deliveries",
+                "children": [
+                  {
+                    "model_id": "saved_query.contextloop.at_risk_strategic_accounts",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "model_id": "metric.contextloop.on_time_deliveries_90d",
+                "children": [
+                  {
+                    "model_id": "metric.contextloop.on_time_delivery_rate",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "model_id": "test.contextloop.accepted_values_fct_delivery_tier_at_delivery__Strategic__Standard.efaf430d44",
+            "children": []
+          },
+          {
+            "model_id": "test.contextloop.not_null_fct_delivery_customer_id.9da8f6e4f3",
+            "children": []
+          },
+          {
+            "model_id": "test.contextloop.not_null_fct_delivery_delivery_id.f55a113911",
+            "children": []
+          },
+          {
+            "model_id": "test.contextloop.not_null_fct_delivery_requested_delivery_date.56cfc6a9d8",
+            "children": []
+          },
+          {
+            "model_id": "test.contextloop.relationships_fct_delivery_customer_id__customer_id__ref_dim_account_.7dd3e60ed4",
+            "children": []
+          },
+          {
+            "model_id": "test.contextloop.unique_fct_delivery_delivery_id.d2a7b369a2",
+            "children": []
+          }
+        ]
+      },
+      "seconds": 1.99,
+      "is_error": false
+    }
+  ],
+  "answer": {
+    "answer_summary": "The 90-day on-time delivery rate across strategic accounts is 86.1% (540 of 627 deliveries arrived on or before the requested date; 87 were late). That is just above the 85% at-risk threshold and below the 88.6% rate across all accounts (1,476 deliveries).",
+    "at_risk_accounts": [],
+    "value": 86.1,
+    "unit": "percent",
+    "is_current": null,
+    "data_age_days": null,
+    "metrics_used": [
+      {
+        "name": "on_time_delivery_rate",
+        "definition": "The share of deliveries that arrived on or before the customer's requested date, over the last 90 days. \"Arrived\" is the carrier's delivered event, not a ship date; cancelled deliveries do not count; a delivery not yet delivered by its date is late."
+      },
+      {
+        "name": "deliveries_90d",
+        "definition": "The number of non-cancelled deliveries whose requested delivery date falls in the 90 days ending on the as-of date."
+      },
+      {
+        "name": "on_time_deliveries_90d",
+        "definition": "Of the deliveries in the 90-day window, how many the carrier delivered on or before the date the customer asked for."
+      },
+      {
+        "name": "late_deliveries",
+        "definition": "Deliveries in the last 90 days that arrived after the requested date, or have not arrived although the date has passed."
+      }
+    ],
+    "lineage": [
+      "carrier_pg.shipment_events and carrier_pg.shipments -> stg_carrier__shipment_events / stg_carrier__shipments -> int_delivery_actuals -> int_deliveries_enriched; sap_s4.likp / lips / vbak -> stg_sap__deliveries / stg_sap__delivery_items / stg_sap__sales_orders -> int_deliveries_enriched; salesforce.account -> stg_salesforce__account_history -> int_account_tier_history -> model.contextloop.fct_delivery -> semantic_model deliveries -> deliveries_90d and on_time_deliveries_90d -> on_time_delivery_rate (strategic filter via dim_account.is_strategic)"
+    ],
+    "freshness": [
+      {
+        "source": "carrier_pg (carrier tracking)",
+        "last_synced": "2026-11-11T18:28:27Z",
+        "within_window": true
+      },
+      {
+        "source": "sap_s4 (SAP S/4HANA)",
+        "last_synced": "2026-11-11T18:28:25Z",
+        "within_window": true
+      },
+      {
+        "source": "salesforce (simulated landing)",
+        "last_synced": "2026-11-11T18:28:27Z",
+        "within_window": true
+      },
+      {
+        "source": "zendesk (simulated landing)",
+        "last_synced": "2026-11-09T19:47:33Z",
+        "within_window": false
+      }
+    ],
+    "assumptions": [
+      "\"Strategic accounts\" means accounts where account__is_strategic = true in dim_account, as of today.",
+      "The 90-day window is the 90 days ending on the as-of date, 6 Nov 2026, as defined by the metric (window roughly 8 Aug to 6 Nov 2026).",
+      "The rate is the metric's own definition: deliveries are counted by requested date, and a delivery not yet delivered by its requested date counts as late.",
+      "Figures are unweighted by revenue; each delivery counts once."
+    ],
+    "caveats": [
+      "The 86.1% result is only 0.1 points above the 85% at-risk threshold; a few more late deliveries would put strategic accounts below it.",
+      "Zendesk is stale: its last successful sync was 9 Nov 2026 and it failed on 11 Nov (rate limit), so it is outside the 24-hour window. This does not affect the delivery rate, which depends on the carrier and SAP sources (both current), but it does affect open shipping ticket counts and any at-risk account view that uses tickets.",
+      "The freshness check ran on 11 Nov 2026, five days after the 6 Nov as-of date, so the source sync timing and the as-of date do not line up exactly."
+    ]
+  },
+  "stop_reason": "tool_use",
+  "error": null,
+  "seconds": 18.9,
+  "usage": {
+    "input_tokens": 10,
+    "output_tokens": 2824,
+    "cache_read_input_tokens": 24892,
+    "cache_creation_input_tokens": 13159,
+    "requests": 4,
+    "cost_usd": 0.003307
+  },
+  "served_by": "claude-haiku-5-5",
+  "score": {
+    "correct": true,
+    "expected": 86.1,
+    "got": 86.1
+  },
+  "cost_usd": 0.0033,
+  "run": 1,
+  "answer_repaired": false
+}

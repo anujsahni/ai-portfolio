@@ -1,0 +1,79 @@
+version: 2
+
+# Staging keeps _fivetran_deleted only so this test can prove deleted rows never get past staging (trap T1).
+models:
+  - name: stg_sap__customers
+    description: SAP customers (KNA1) with plain-English column names.
+    columns:
+      - name: customer_id
+        data_tests: [unique, not_null]
+      - name: _fivetran_deleted
+        data_tests: [no_deleted_rows]
+  - name: stg_sap__sales_orders
+    description: Sales order headers (VBAK); cancelled orders removed.
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+      - name: _fivetran_deleted
+        data_tests: [no_deleted_rows]
+  - name: stg_sap__sales_order_items
+    description: Sales order items (VBAP).
+    columns:
+      - name: _fivetran_deleted
+        data_tests: [no_deleted_rows]
+  - name: stg_sap__deliveries
+    description: Delivery headers (LIKP); cancelled deliveries removed.
+    columns:
+      - name: delivery_id
+        data_tests: [unique, not_null]
+      - name: _fivetran_deleted
+        data_tests: [no_deleted_rows]
+  - name: stg_sap__delivery_items
+    description: Delivery items (LIPS).
+    columns:
+      - name: _fivetran_deleted
+        data_tests: [no_deleted_rows]
+  - name: stg_sap__billing_documents
+    description: Billing documents (VBRK).
+    columns:
+      - name: billing_id
+        data_tests: [unique, not_null]
+      - name: _fivetran_deleted
+        data_tests: [no_deleted_rows]
+  - name: stg_sap__billing_items
+    description: Billing items (VBRP).
+  - name: stg_sap__exchange_rates
+    description: Exchange rates (TCURR) with GDATU un-inverted.
+  - name: stg_carrier__shipments
+    description: Carrier shipments.
+    columns:
+      - name: shipment_id
+        data_tests: [unique, not_null]
+  - name: stg_carrier__shipment_events
+    description: Carrier tracking events.
+    columns:
+      - name: event_id
+        data_tests: [unique, not_null]
+  - name: stg_salesforce__account_history
+    description: Every version of every Salesforce account (history mode).
+    columns:
+      - name: tier
+        data_tests:
+          - accepted_values:
+              arguments: {values: ["Strategic", "Standard", "Prospect"]}
+  - name: stg_salesforce__opportunities
+    description: Salesforce opportunities.
+    columns:
+      - name: opportunity_id
+        data_tests: [unique, not_null]
+  - name: stg_salesforce__users
+    description: Salesforce users.
+  - name: stg_zendesk__organizations
+    description: Zendesk organizations.
+  - name: stg_zendesk__tickets
+    description: Zendesk tickets.
+    columns:
+      - name: ticket_id
+        data_tests: [unique, not_null]
+  - name: stg_zendesk__ticket_tags
+    description: Zendesk ticket tags.

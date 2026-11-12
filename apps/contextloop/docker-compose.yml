@@ -1,0 +1,210 @@
+# ContextLoop: every component of the demo, on one private network.
+# Published ports (127.0.0.1 only): app 8501, RustFS console 9001, Trino 8080 (profile "lakehouse").
+# Credentials below are local demo values read from .env; nothing here is a real secret.
+# No bind mounts: code is baked into the image, state lives in named volumes, so only Docker is needed.
+name: contextloop
+
+x-app: &app
+  image: contextloop:dev
+  build: .
+  environment: &app-env
+    CONTEXTLOOP_MODE: ${CONTEXTLOOP_MODE:-replay}
+    CONTEXTLOOP_T6_STALE_ZENDESK: ${CONTEXTLOOP_T6_STALE_ZENDESK:-1}
+    CONTEXTLOOP_EVAL_RUNS: ${CONTEXTLOOP_EVAL_RUNS:-3}
+    CONTEXTLOOP_MODEL: ${CONTEXTLOOP_MODEL:-claude-opus-5-5}
+    CONTEXTLOOP_PITCH_URL: ${CONTEXTLOOP_PITCH_URL:-}
+    ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+    SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL:-}
+    PGHOST: postgres
+    PGPORT: "5432"
+    PGUSER: carrier
+    PGDATABASE: carrier
+    PGPASSWORD: ${POSTGRES_PASSWORD:-contextloop-demo}
+    S3_ENDPOINT: http://rustfs:9000
+    S3_ACCESS_KEY: ${S3_ACCESS_KEY:-contextloop}
+    S3_SECRET_KEY: ${S3_SECRET_KEY:-contextloop-demo-secret}
+    S3_REGION: us-east-1
+    ICEBERG_CATALOG_URI: http://iceberg-rest:8181
+    WAREHOUSE_PATH: /warehouse/warehouse.db
+    SERVING_PATH: /warehouse/serving.db
+    DBT_TARGET_PATH: /warehouse/dbt_target
+  volumes:
+    - warehouse:/warehouse
+    - data:/app/data/out
+  networks: [contextloop]
+
+x-job: &job
+  <<: *app
+  profiles: [jobs]
+  restart: "no"
+
+x-py-health: &py-health
+  interval: 5s
+  timeout: 5s
+  retries: 30
+  start_period: 10s
+
+services:
+  # ---------- pinned public images ----------
+  postgres:
+    image: postgres:17.11-alpine
+    environment:
+      POSTGRES_USER: carrier
+      POSTGRES_DB: carrier
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-contextloop-demo}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks: [contextloop]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U carrier -d carrier"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+
+  rustfs:
+    # S3-compatible object storage for the Iceberg data files (stands in for S3, ADLS or GCS).
+    image: rustfs/rustfs:1.0.4
+    environment:
+      RUSTFS_ACCESS_KEY: ${S3_ACCESS_KEY:-contextloop}
+      RUSTFS_SECRET_KEY: ${S3_SECRET_KEY:-contextloop-demo-secret}
+      RUSTFS_CONSOLE_ENABLE: "true"
+    volumes:
+      - lake:/data
+    ports:
+      - "127.0.0.1:9001:9001"
+    networks: [contextloop]
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:9000/health"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+
+  lake-init:
+    # One-off: creates the "lakehouse" bucket, then exits.
+    <<: *app
+    restart: "no"
+    command: ["python", "-m", "contextloop.cli", "lake-init"]
+    depends_on:
+      rustfs: {condition: service_healthy}
+
+  iceberg-rest:
+    image: apache/iceberg-rest-fixture:1.10.1
+    environment:
+      CATALOG_URI: jdbc:sqlite:/home/iceberg/iceberg_catalog.db
+      CATALOG_WAREHOUSE: s3://lakehouse/
+      CATALOG_IO__IMPL: org.apache.iceberg.aws.s3.S3FileIO
+      CATALOG_S3_ENDPOINT: http://rustfs:9000
+      CATALOG_S3_PATH__STYLE__ACCESS: "true"
+      AWS_ACCESS_KEY_ID: ${S3_ACCESS_KEY:-contextloop}
+      AWS_SECRET_ACCESS_KEY: ${S3_SECRET_KEY:-contextloop-demo-secret}
+      AWS_REGION: us-east-1
+    volumes:
+      - catalog:/home/iceberg
+    networks: [contextloop]
+    depends_on:
+      lake-init: {condition: service_completed_successfully}
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8181/v1/config"]
+      interval: 3s
+      timeout: 3s
+      retries: 40
+
+  trino:
+    # trinodb/trino:484 plus the Iceberg catalog file (docker/trino/Dockerfile).
+    image: contextloop-trino:484
+    build: docker/trino
+    profiles: [lakehouse]
+    environment:
+      S3_ACCESS_KEY: ${S3_ACCESS_KEY:-contextloop}
+      S3_SECRET_KEY: ${S3_SECRET_KEY:-contextloop-demo-secret}
+    ports:
+      - "127.0.0.1:8080:8080"
+    networks: [contextloop]
+    depends_on:
+      iceberg-rest: {condition: service_healthy}
+    healthcheck:
+      test: ["CMD-SHELL", "trino --execute 'SELECT 1' >/dev/null 2>&1"]
+      interval: 5s
+      timeout: 10s
+      retries: 40
+      start_period: 20s
+
+  # ---------- long-running services from the contextloop image ----------
+  mock-salesforce:
+    <<: *app
+    command: ["uvicorn", "contextloop.activation.mock_salesforce:app", "--host", "0.0.0.0", "--port", "8000"]
+    healthcheck:
+      <<: *py-health
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+
+  mcp-metrics:
+    <<: *app
+    command: ["python", "-m", "contextloop.mcp_servers.metrics"]
+    healthcheck:
+      <<: *py-health
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8101/health')"]
+
+  mcp-freshness:
+    <<: *app
+    command: ["python", "-m", "contextloop.mcp_servers.freshness"]
+    healthcheck:
+      <<: *py-health
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8102/health')"]
+
+  dbt-mcp:
+    <<: *app
+    command: ["python", "-m", "contextloop.mcp_servers.dbt_mcp_server"]
+    healthcheck:
+      <<: *py-health
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8103/health')"]
+
+  app:
+    <<: *app
+    command: ["streamlit", "run", "contextloop/ui/app.py", "--server.address=0.0.0.0", "--server.port=8501", "--server.headless=true", "--browser.gatherUsageStats=false"]
+    ports:
+      - "127.0.0.1:8501:8501"
+    depends_on:
+      mcp-metrics: {condition: service_healthy}
+      mcp-freshness: {condition: service_healthy}
+      dbt-mcp: {condition: service_healthy}
+      mock-salesforce: {condition: service_healthy}
+    healthcheck:
+      <<: *py-health
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8501/_stcore/health')"]
+
+  # ---------- one-off jobs: docker compose run --rm <job> ----------
+  datagen:
+    <<: *job
+    command: ["python", "-m", "contextloop.cli", "datagen"]
+    depends_on:
+      postgres: {condition: service_healthy}
+
+  sync:
+    <<: *job
+    command: ["python", "-m", "contextloop.cli", "sync"]
+    depends_on:
+      postgres: {condition: service_healthy}
+
+  build:
+    <<: *job
+    command: ["python", "-m", "contextloop.cli", "build"]
+    depends_on:
+      iceberg-rest: {condition: service_healthy}
+
+  eval:
+    <<: *job
+    command: ["python", "-m", "contextloop.cli", "eval"]
+
+  test:
+    <<: *job
+    command: ["pytest", "-q"]
+
+volumes:
+  warehouse:
+  data:
+  lake:
+  catalog:
+  pgdata:
+
+networks:
+  contextloop:

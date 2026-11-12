@@ -1,0 +1,586 @@
+{
+  "agent": "governed",
+  "question_id": "G6",
+  "question": "How many open shipping-related support tickets do our strategic accounts have in total?",
+  "model": "claude-haiku-5-5",
+  "effort": "high",
+  "started_at": "2026-11-11T20:24:03+00:00",
+  "steps": [
+    {
+      "tool": "list_metrics",
+      "input": {},
+      "output": {
+        "metrics": [
+          {
+            "name": "deliveries_90d",
+            "label": "Deliveries (90 days)",
+            "type": "simple",
+            "definition": "The number of non-cancelled deliveries whose requested delivery date falls in the 90 days ending on the as-of date."
+          },
+          {
+            "name": "on_time_deliveries_90d",
+            "label": "On-time deliveries (90 days)",
+            "type": "simple",
+            "definition": "Of the deliveries in the 90-day window, how many the carrier delivered on or before the date the customer asked for."
+          },
+          {
+            "name": "on_time_delivery_rate",
+            "label": "On-time delivery rate (90 days)",
+            "type": "ratio",
+            "definition": "The share of deliveries that arrived on or before the customer's requested date, over the last 90 days. \"Arrived\" is the carrier's delivered event, not a ship date; cancelled deliveries do not count; a delivery not yet delivered by its date is late."
+          },
+          {
+            "name": "late_deliveries",
+            "label": "Late deliveries (90 days)",
+            "type": "simple",
+            "definition": "Deliveries in the last 90 days that arrived after the requested date, or have not arrived although the date has passed."
+          },
+          {
+            "name": "net_revenue",
+            "label": "Net revenue (USD)",
+            "type": "simple",
+            "definition": "Invoiced revenue minus credit memos, converted to US dollars at the monthly average exchange rate of each billing month."
+          },
+          {
+            "name": "open_shipping_tickets",
+            "label": "Open shipping tickets",
+            "type": "simple",
+            "definition": "Open support tickets about shipping: tagged shipping, delivery, late_delivery or logistics, or with a subject that mentions late, delay, shipment, delivery or tracking. Tickets on a look-alike duplicate account count toward the real customer."
+          },
+          {
+            "name": "renewals_due_120d",
+            "label": "Renewals due in 120 days",
+            "type": "simple",
+            "definition": "Open renewal opportunities that close within 120 days of the as-of date."
+          },
+          {
+            "name": "account_risk_flag",
+            "label": "At-risk flag",
+            "type": "derived",
+            "definition": "1 when an account's on-time delivery rate is below 85% and it has two or more open shipping tickets or a renewal due in 120 days; otherwise 0. Combine with the strategic filter to get the at-risk strategic accounts."
+          }
+        ],
+        "dimensions": [
+          {
+            "name": "account__account_name",
+            "description": null
+          },
+          {
+            "name": "account__region",
+            "description": null
+          },
+          {
+            "name": "account__tier",
+            "description": "Tier at the end of the as-of date (today's tier)."
+          },
+          {
+            "name": "account__is_strategic",
+            "description": null
+          },
+          {
+            "name": "account",
+            "description": "entity: accounts"
+          },
+          {
+            "name": "delivery__requested_delivery_date (time; add __day, __month or __quarter)",
+            "description": null
+          },
+          {
+            "name": "delivery__tier_at_delivery",
+            "description": "The customer's tier on the requested delivery date (history mode), not today's tier."
+          },
+          {
+            "name": "delivery__is_in_90d_window",
+            "description": null
+          },
+          {
+            "name": "delivery__carrier_code",
+            "description": null
+          },
+          {
+            "name": "delivery",
+            "description": "entity: deliveries"
+          },
+          {
+            "name": "billing_document__billing_date (time; add __day, __month or __quarter)",
+            "description": null
+          },
+          {
+            "name": "billing_document__billing_quarter",
+            "description": null
+          },
+          {
+            "name": "billing_document__region",
+            "description": null
+          },
+          {
+            "name": "billing_document",
+            "description": "entity: revenue"
+          },
+          {
+            "name": "ticket__created_at (time; add __day, __month or __quarter)",
+            "description": null
+          },
+          {
+            "name": "ticket__status",
+            "description": null
+          },
+          {
+            "name": "ticket",
+            "description": "entity: tickets"
+          },
+          {
+            "name": "renewal__close_date (time; add __day, __month or __quarter)",
+            "description": null
+          },
+          {
+            "name": "renewal__stage",
+            "description": null
+          },
+          {
+            "name": "renewal",
+            "description": "entity: renewals"
+          }
+        ],
+        "filter_syntax": "{{ Dimension('account__is_strategic') }} = true   |   {{ Dimension('account__region') }} = 'EMEA'   |   {{ Dimension('billing_document__billing_quarter') }} = '2026-Q3'",
+        "notes": [
+          "Group by the entity `account` to get one row per customer, and `account__account_name` for its name.",
+          "`account__tier` is today's tier; `delivery__tier_at_delivery` is the tier in force on each delivery's date.",
+          "Delivery metrics already cover the 90 days ending on the as-of date (6 Nov 2026)."
+        ]
+      },
+      "seconds": 0.01,
+      "is_error": false
+    },
+    {
+      "tool": "check_freshness",
+      "input": {},
+      "output": {
+        "checked_at": "2026-11-11T20:24:04+00:00",
+        "window_hours": 24,
+        "sources": [
+          {
+            "source": "carrier_pg",
+            "name": "Carrier tracking Postgres (Connector SDK)",
+            "schema": "carrier_pg",
+            "simulated_landing": false,
+            "last_successful_sync": "2026-11-11T18:28:27.524601+00:00",
+            "age_hours": 1.9,
+            "age_days": 0.1,
+            "within_window": true,
+            "rows_changed_last_success": 3,
+            "latest_attempt": {
+              "at": "2026-11-11T18:28:27.524601+00:00",
+              "status": "SUCCESSFUL",
+              "message": null
+            }
+          },
+          {
+            "source": "salesforce",
+            "name": "Salesforce (simulated landing)",
+            "schema": "salesforce",
+            "simulated_landing": true,
+            "last_successful_sync": "2026-11-11T18:28:27+00:00",
+            "age_hours": 1.9,
+            "age_days": 0.1,
+            "within_window": true,
+            "rows_changed_last_success": 0,
+            "latest_attempt": {
+              "at": "2026-11-11T18:28:27+00:00",
+              "status": "SUCCESSFUL",
+              "message": null
+            }
+          },
+          {
+            "source": "sap_s4",
+            "name": "SAP S/4HANA (Connector SDK)",
+            "schema": "sap_s4",
+            "simulated_landing": false,
+            "last_successful_sync": "2026-11-11T18:28:25.974831+00:00",
+            "age_hours": 1.9,
+            "age_days": 0.1,
+            "within_window": true,
+            "rows_changed_last_success": 0,
+            "latest_attempt": {
+              "at": "2026-11-11T18:28:25.974831+00:00",
+              "status": "SUCCESSFUL",
+              "message": null
+            }
+          },
+          {
+            "source": "zendesk",
+            "name": "Zendesk (simulated landing)",
+            "schema": "zendesk",
+            "simulated_landing": true,
+            "last_successful_sync": "2026-11-09T19:47:33+00:00",
+            "age_hours": 48.6,
+            "age_days": 2.0,
+            "within_window": false,
+            "rows_changed_last_success": 0,
+            "latest_attempt": {
+              "at": "2026-11-11T19:47:33+00:00",
+              "status": "FAILURE",
+              "message": "Zendesk API rate limit exceeded (simulated scenario T6); retrying on the next schedule"
+            }
+          }
+        ],
+        "all_current": false,
+        "stale_sources": [
+          "zendesk"
+        ]
+      },
+      "seconds": 0.05,
+      "is_error": false
+    },
+    {
+      "tool": "query_metric",
+      "input": {
+        "metrics": [
+          "open_shipping_tickets"
+        ],
+        "where": "{{ Dimension('account__is_strategic') }} = true"
+      },
+      "output": {
+        "metrics": [
+          "open_shipping_tickets"
+        ],
+        "group_by": [],
+        "where": "{{ Dimension('account__is_strategic') }} = true",
+        "columns": [
+          "open_shipping_tickets"
+        ],
+        "rows": [
+          [
+            28
+          ]
+        ],
+        "row_count": 1,
+        "definitions": {
+          "open_shipping_tickets": "Open support tickets about shipping: tagged shipping, delivery, late_delivery or logistics, or with a subject that mentions late, delay, shipment, delivery or tracking. Tickets on a look-alike duplicate account count toward the real customer."
+        },
+        "compiled_sql": "SELECT\n  COALESCE(__open_shipping_tickets, 0) AS open_shipping_tickets\nFROM (\n  SELECT\n    SUM(open_shipping_tickets) AS __open_shipping_tickets\n  FROM (\n    SELECT\n      accounts_src_10000.is_strategic AS account__is_strategic\n      , subq_1.__open_shipping_tickets AS open_shipping_tickets\n    FROM (\n      SELECT\n        customer_id AS account\n        , case when is_open and is_shipping_related then 1 else 0 end AS __open_shipping_tickets\n      FROM \"warehouse\".\"marts\".\"fct_ticket\" tickets_src_10000\n    ) subq_1\n    LEFT OUTER JOIN\n      \"warehouse\".\"marts\".\"dim_account\" accounts_src_10000\n    ON\n      subq_1.account = accounts_src_10000.customer_id\n  ) subq_5\n  WHERE account__is_strategic = true\n) subq_8\nLIMIT 100"
+      },
+      "seconds": 2.11,
+      "is_error": false
+    },
+    {
+      "tool": "query_metric",
+      "input": {
+        "metrics": [
+          "open_shipping_tickets"
+        ],
+        "group_by": [
+          "account__account_name"
+        ],
+        "where": "{{ Dimension('account__is_strategic') }} = true"
+      },
+      "output": {
+        "metrics": [
+          "open_shipping_tickets"
+        ],
+        "group_by": [
+          "account__account_name"
+        ],
+        "where": "{{ Dimension('account__is_strategic') }} = true",
+        "columns": [
+          "account__account_name",
+          "open_shipping_tickets"
+        ],
+        "rows": [
+          [
+            "Pellridge Process Equipment GmbH",
+            0
+          ],
+          [
+            "Tamridge Pharma Plants Inc",
+            0
+          ],
+          [
+            "Sevland Utilities Inc",
+            1
+          ],
+          [
+            "Vornland Chemicals SA",
+            1
+          ],
+          [
+            "Halbrook Fluid Systems",
+            3
+          ],
+          [
+            "Kelridge Steelworks SA",
+            0
+          ],
+          [
+            "Wesmore Energy Ltd",
+            2
+          ],
+          [
+            "Sevholt Refining SA",
+            0
+          ],
+          [
+            "Dunwick Process Equipment SA",
+            0
+          ],
+          [
+            "Quenton Food Processing GmbH",
+            0
+          ],
+          [
+            "Ralwick Pharma Plants Ltd",
+            1
+          ],
+          [
+            "Yarstead Process Equipment Inc",
+            1
+          ],
+          [
+            "Tamford Food Processing SA",
+            2
+          ],
+          [
+            "Galbury Steelworks SA",
+            4
+          ],
+          [
+            "Harvale Food Processing Inc",
+            1
+          ],
+          [
+            "Marmark HVAC Inc",
+            0
+          ],
+          [
+            "Velmere Pipeline Services Ltd",
+            1
+          ],
+          [
+            "Vornwick Utilities Inc",
+            1
+          ],
+          [
+            "Tammore Food Processing BV",
+            0
+          ],
+          [
+            "Thalmark Marine Srl",
+            0
+          ],
+          [
+            "Tamwick Mining Inc",
+            3
+          ],
+          [
+            "Jormark Paper Mills SA",
+            3
+          ],
+          [
+            "Vornridge Water Works Ltd",
+            1
+          ],
+          [
+            "Tamdale Food Processing Ltd",
+            3
+          ],
+          [
+            "Ralmore Process Equipment Inc",
+            0
+          ]
+        ],
+        "row_count": 25,
+        "definitions": {
+          "open_shipping_tickets": "Open support tickets about shipping: tagged shipping, delivery, late_delivery or logistics, or with a subject that mentions late, delay, shipment, delivery or tracking. Tickets on a look-alike duplicate account count toward the real customer."
+        },
+        "compiled_sql": "SELECT\n  account__account_name\n  , COALESCE(__open_shipping_tickets, 0) AS open_shipping_tickets\nFROM (\n  SELECT\n    account__account_name\n    , SUM(open_shipping_tickets) AS __open_shipping_tickets\n  FROM (\n    SELECT\n      accounts_src_10000.account_name AS account__account_name\n      , accounts_src_10000.is_strategic AS account__is_strategic\n      , subq_1.__open_shipping_tickets AS open_shipping_tickets\n    FROM (\n      SELECT\n        customer_id AS account\n        , case when is_open and is_shipping_related then 1 else 0 end AS __open_shipping_tickets\n      FROM \"warehouse\".\"marts\".\"fct_ticket\" tickets_src_10000\n    ) subq_1\n    LEFT OUTER JOIN\n      \"warehouse\".\"marts\".\"dim_account\" accounts_src_10000\n    ON\n      subq_1.account = accounts_src_10000.customer_id\n  ) subq_5\n  WHERE account__is_strategic = true\n  GROUP BY\n    account__account_name\n) subq_8\nLIMIT 100"
+      },
+      "seconds": 2.21,
+      "is_error": false
+    },
+    {
+      "tool": "dbt_get_lineage_dev",
+      "input": {
+        "unique_id": "model.contextloop.fct_ticket",
+        "depth": 3
+      },
+      "output": {
+        "model_id": "model.contextloop.fct_ticket",
+        "parents": [
+          {
+            "model_id": "model.contextloop.int_account_identity",
+            "parents": [
+              {
+                "model_id": "model.contextloop.stg_salesforce__account_history",
+                "parents": [
+                  {
+                    "model_id": "source.contextloop.salesforce.account",
+                    "parents": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "model_id": "model.contextloop.stg_zendesk__organizations",
+            "parents": [
+              {
+                "model_id": "source.contextloop.zendesk.organization",
+                "parents": []
+              }
+            ]
+          },
+          {
+            "model_id": "model.contextloop.stg_zendesk__ticket_tags",
+            "parents": [
+              {
+                "model_id": "source.contextloop.zendesk.ticket_tag",
+                "parents": []
+              }
+            ]
+          },
+          {
+            "model_id": "model.contextloop.stg_zendesk__tickets",
+            "parents": [
+              {
+                "model_id": "source.contextloop.zendesk.ticket",
+                "parents": []
+              }
+            ]
+          }
+        ],
+        "children": [
+          {
+            "model_id": "exposure.contextloop.governed_agent",
+            "children": []
+          },
+          {
+            "model_id": "model.contextloop.account_risk",
+            "children": [
+              {
+                "model_id": "exposure.contextloop.activation_sync",
+                "children": []
+              },
+              {
+                "model_id": "test.contextloop.not_null_account_risk_customer_id.53de49adbc",
+                "children": []
+              },
+              {
+                "model_id": "test.contextloop.unique_account_risk_customer_id.592c69acea",
+                "children": []
+              }
+            ]
+          },
+          {
+            "model_id": "semantic_model.contextloop.tickets",
+            "children": [
+              {
+                "model_id": "metric.contextloop.open_shipping_tickets",
+                "children": [
+                  {
+                    "model_id": "metric.contextloop.account_risk_flag",
+                    "children": []
+                  },
+                  {
+                    "model_id": "saved_query.contextloop.at_risk_strategic_accounts",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "model_id": "test.contextloop.accepted_values_fct_ticket_status__new__open__pending__hold__solved__closed.49fa361bb4",
+            "children": []
+          },
+          {
+            "model_id": "test.contextloop.assert_every_ticket_has_a_customer",
+            "children": []
+          },
+          {
+            "model_id": "test.contextloop.not_null_fct_ticket_ticket_id.d34cfd76db",
+            "children": []
+          },
+          {
+            "model_id": "test.contextloop.relationships_fct_ticket_customer_id__customer_id__ref_dim_account_.4835bc8be3",
+            "children": []
+          },
+          {
+            "model_id": "test.contextloop.unique_fct_ticket_ticket_id.2e202ecdc0",
+            "children": []
+          }
+        ]
+      },
+      "seconds": 1.95,
+      "is_error": false
+    }
+  ],
+  "answer": {
+    "answer_summary": "Our strategic accounts have 28 open shipping-related support tickets in total, per the open_shipping_tickets metric. Halbrook Fluid Systems and Galbury Steelworks SA have the most (3 and 4, respectively). Zendesk, the source of these tickets, has not synced successfully since 9 Nov and is outside its 24-hour window, so the count may be out of date.",
+    "at_risk_accounts": [],
+    "value": 28,
+    "unit": "count",
+    "is_current": null,
+    "data_age_days": null,
+    "metrics_used": [
+      {
+        "name": "open_shipping_tickets",
+        "definition": "Open support tickets about shipping: tagged shipping, delivery, late_delivery or logistics, or with a subject that mentions late, delay, shipment, delivery or tracking. Tickets on a look-alike duplicate account count toward the real customer."
+      }
+    ],
+    "lineage": [
+      "zendesk.ticket / zendesk.ticket_tag / zendesk.organization / salesforce.account -> stg_zendesk__tickets / stg_zendesk__ticket_tags / stg_zendesk__organizations / int_account_identity -> fct_ticket -> semantic_model.tickets -> open_shipping_tickets (filtered to dim_account.is_strategic = true)"
+    ],
+    "freshness": [
+      {
+        "source": "zendesk",
+        "last_synced": "2026-11-09T19:47:33+00:00",
+        "within_window": false
+      },
+      {
+        "source": "salesforce",
+        "last_synced": "2026-11-11T18:28:27+00:00",
+        "within_window": true
+      },
+      {
+        "source": "carrier_pg",
+        "last_synced": "2026-11-11T18:28:27.524601+00:00",
+        "within_window": true
+      },
+      {
+        "source": "sap_s4",
+        "last_synced": "2026-11-11T18:28:25.974831+00:00",
+        "within_window": true
+      }
+    ],
+    "assumptions": [
+      "Strategic accounts are those with account__is_strategic = true in dim_account.",
+      "The count uses the open_shipping_tickets definition as written, including tickets on look-alike duplicate accounts, which count toward the real customer.",
+      "The count is as of the latest data loaded, not strictly as of 6 Nov 2026."
+    ],
+    "caveats": [
+      "Zendesk is stale: the last successful sync was 9 Nov 2026, the latest attempt (11 Nov) failed with an API rate limit, and the source is outside its 24-hour window. All 28 tickets come from Zendesk, so the true open count may differ from 28 until a successful sync.",
+      "The freshness check ran on 11 Nov 2026, after the 6 Nov as-of date, so the timestamps are later than the as-of date.",
+      "The 28 total includes tickets on look-alike duplicate accounts, as the metric definition requires."
+    ]
+  },
+  "stop_reason": "tool_use",
+  "error": null,
+  "seconds": 18.0,
+  "usage": {
+    "input_tokens": 10,
+    "output_tokens": 2433,
+    "cache_read_input_tokens": 29800,
+    "cache_creation_input_tokens": 5833,
+    "requests": 4,
+    "cost_usd": 0.002245
+  },
+  "served_by": "claude-haiku-5-5",
+  "score": {
+    "correct": true,
+    "expected": 28,
+    "got": 28.0
+  },
+  "cost_usd": 0.0022,
+  "run": 3,
+  "answer_repaired": false
+}

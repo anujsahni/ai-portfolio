@@ -1,0 +1,17 @@
+.git
+.env
+.env.*
+!.env.example
+data/out
+**/__pycache__
+**/*.pyc
+.pytest_cache
+.venv
+dbt/contextloop/target
+dbt/contextloop/logs
+connectors/*/files
+docs/images
+
+# Video is hosted on CloudFront (make publish-pitch); keep it out of the image
+*.mp4
+**/*.mp4

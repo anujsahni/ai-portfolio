@@ -1,0 +1,214 @@
+version: 2
+
+# The semantic layer: each number Northstar cares about is defined once, here, and every person or agent that asks for it gets
+# the same answer by the same rule. Definitions follow docs/demo/narrative.md.
+
+semantic_models:
+  - name: accounts
+    description: Northstar's customers, one row per SAP customer, with today's tier.
+    model: ref('dim_account')
+    entities:
+      - name: account
+        type: primary
+        expr: customer_id
+    dimensions:
+      - name: account_name
+        type: categorical
+      - name: region
+        type: categorical
+      - name: tier
+        description: Tier at the end of the as-of date (today's tier).
+        type: categorical
+      - name: is_strategic
+        type: categorical
+
+  - name: deliveries
+    description: Non-cancelled deliveries with the carrier's actual delivery time.
+    model: ref('fct_delivery')
+    defaults:
+      agg_time_dimension: requested_delivery_date
+    entities:
+      - name: delivery
+        type: primary
+        expr: delivery_id
+      - name: account
+        type: foreign
+        expr: customer_id
+    dimensions:
+      - name: requested_delivery_date
+        type: time
+        type_params:
+          time_granularity: day
+      - name: tier_at_delivery
+        description: The customer's tier on the requested delivery date (history mode), not today's tier.
+        type: categorical
+      - name: is_in_90d_window
+        type: categorical
+      - name: carrier_code
+        type: categorical
+    measures:
+      - name: deliveries_90d
+        description: Deliveries requested in the 90 days ending on the as-of date.
+        agg: sum
+        expr: case when is_in_90d_window then 1 else 0 end
+      - name: on_time_deliveries_90d
+        agg: sum
+        expr: case when is_in_90d_window and is_on_time then 1 else 0 end
+      - name: late_deliveries_90d
+        agg: sum
+        expr: case when is_in_90d_window and not is_on_time then 1 else 0 end
+
+  - name: revenue
+    description: Billing net of credit memos, in USD.
+    model: ref('fct_revenue')
+    defaults:
+      agg_time_dimension: billing_date
+    entities:
+      - name: billing_document
+        type: primary
+        expr: billing_id
+      - name: account
+        type: foreign
+        expr: customer_id
+    dimensions:
+      - name: billing_date
+        type: time
+        type_params:
+          time_granularity: day
+      - name: billing_quarter
+        type: categorical
+      - name: region
+        type: categorical
+    measures:
+      - name: net_revenue_usd
+        agg: sum
+        expr: amount_usd
+
+  - name: tickets
+    description: Support tickets attributed to customers.
+    model: ref('fct_ticket')
+    defaults:
+      agg_time_dimension: created_at
+    entities:
+      - name: ticket
+        type: primary
+        expr: ticket_id
+      - name: account
+        type: foreign
+        expr: customer_id
+    dimensions:
+      - name: created_at
+        type: time
+        type_params:
+          time_granularity: day
+      - name: status
+        type: categorical
+    measures:
+      - name: open_shipping_tickets
+        agg: sum
+        expr: case when is_open and is_shipping_related then 1 else 0 end
+
+  - name: renewals
+    description: Renewal opportunities.
+    model: ref('fct_renewal')
+    defaults:
+      agg_time_dimension: close_date
+    entities:
+      - name: renewal
+        type: primary
+        expr: opportunity_id
+      - name: account
+        type: foreign
+        expr: customer_id
+    dimensions:
+      - name: close_date
+        type: time
+        type_params:
+          time_granularity: day
+      - name: stage
+        type: categorical
+    measures:
+      - name: renewals_due_120d
+        agg: sum
+        expr: case when is_due_in_120d then 1 else 0 end
+
+metrics:
+  - name: deliveries_90d
+    label: Deliveries (90 days)
+    description: The number of non-cancelled deliveries whose requested delivery date falls in the 90 days ending on the as-of date.
+    type: simple
+    type_params:
+      measure: {name: deliveries_90d, fill_nulls_with: 0}
+
+  - name: on_time_deliveries_90d
+    label: On-time deliveries (90 days)
+    description: Of the deliveries in the 90-day window, how many the carrier delivered on or before the date the customer asked for.
+    type: simple
+    type_params:
+      measure: {name: on_time_deliveries_90d, fill_nulls_with: 0}
+
+  - name: on_time_delivery_rate
+    label: On-time delivery rate (90 days)
+    description: >
+      The share of deliveries that arrived on or before the customer's requested date, over the last 90 days. "Arrived" is the
+      carrier's delivered event, not a ship date; cancelled deliveries do not count; a delivery not yet delivered by its date is late.
+    type: ratio
+    type_params:
+      numerator: on_time_deliveries_90d
+      denominator: deliveries_90d
+
+  - name: late_deliveries
+    label: Late deliveries (90 days)
+    description: Deliveries in the last 90 days that arrived after the requested date, or have not arrived although the date has passed.
+    type: simple
+    type_params:
+      measure: {name: late_deliveries_90d, fill_nulls_with: 0}
+
+  - name: net_revenue
+    label: Net revenue (USD)
+    description: Invoiced revenue minus credit memos, converted to US dollars at the monthly average exchange rate of each billing month.
+    type: simple
+    type_params:
+      measure: {name: net_revenue_usd, fill_nulls_with: 0}
+
+  - name: open_shipping_tickets
+    label: Open shipping tickets
+    description: >
+      Open support tickets about shipping: tagged shipping, delivery, late_delivery or logistics, or with a subject that mentions
+      late, delay, shipment, delivery or tracking. Tickets on a look-alike duplicate account count toward the real customer.
+    type: simple
+    type_params:
+      measure: {name: open_shipping_tickets, fill_nulls_with: 0}
+
+  - name: renewals_due_120d
+    label: Renewals due in 120 days
+    description: Open renewal opportunities that close within 120 days of the as-of date.
+    type: simple
+    type_params:
+      measure: {name: renewals_due_120d, fill_nulls_with: 0}
+
+  - name: account_risk_flag
+    label: At-risk flag
+    description: >
+      1 when an account's on-time delivery rate is below 85% and it has two or more open shipping tickets or a renewal due in 120
+      days; otherwise 0. Combine with the strategic filter to get the at-risk strategic accounts.
+    type: derived
+    type_params:
+      expr: >
+        case when on_time_delivery_rate < 0.85 and (open_shipping_tickets >= 2 or renewals_due_120d > 0) then 1 else 0 end
+      metrics:
+        - name: on_time_delivery_rate
+        - name: open_shipping_tickets
+        - name: renewals_due_120d
+
+saved_queries:
+  - name: at_risk_strategic_accounts
+    label: At-risk strategic accounts (the COO's question)
+    description: Strategic accounts with their on-time rate, late deliveries, open shipping tickets, renewals due, and the risk flag.
+    query_params:
+      metrics: [on_time_delivery_rate, late_deliveries, deliveries_90d, open_shipping_tickets, renewals_due_120d, account_risk_flag]
+      group_by:
+        - "Entity('account')"
+        - "Dimension('account__account_name')"
+      where:
+        - "{{ Dimension('account__is_strategic') }} = true"

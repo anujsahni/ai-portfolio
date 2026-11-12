@@ -1,0 +1,81 @@
+# Northstar proof of value: the parts of the scorecard that are judgement, not data. Pass/fail and numbers are computed live.
+customer: Northstar Industrial (fictional)
+success_criteria:
+  - id: SC1
+    statement: The agent answers the COO's headline question correctly, with the exact at-risk accounts
+    check: governed_g1_correct
+    evidence: act4
+  - id: SC2
+    statement: On the six golden questions, the governed agent scores at least 5 of 6 and beats the raw-data baseline
+    check: golden_scores
+    evidence: act4
+  - id: SC3
+    statement: SAP deliveries replicate incrementally, keeping cancelled documents as soft deletes
+    check: sap_incremental_with_deletes
+    evidence: act2
+  - id: SC4
+    statement: A new SAP column flows through with no connector code change
+    check: schema_change_absorbed
+    evidence: act2
+  - id: SC5
+    statement: One definition of on-time delivery, used by BI and AI alike, tested on every build
+    check: one_definition
+    evidence: act3
+  - id: SC6
+    statement: The agent knows when data is stale and says so
+    check: stale_detected
+    evidence: act4
+  - id: SC7
+    statement: Trusted tables are stored once in an open format and read by more than one engine
+    check: open_format
+    evidence: act3
+  - id: SC8
+    statement: The answer reaches the CRM the account teams use, with an audit trail
+    check: activated
+    evidence: act5
+
+time_to_value:
+  - {phase: Foundation (Docker, story), days: 1}
+  - {phase: Move (SAP and Postgres connectors, SaaS landings, sync log), days: 1}
+  - {phase: Transform and Trust (dbt, MetricFlow, Iceberg), days: 1}
+  - {phase: Context (MCP servers, agents, evaluation), days: 1}
+  - {phase: Experience and Activate (app, architecture, reverse ETL), days: 1}
+
+cost_assumptions:
+  - MAR is ESTIMATED here as distinct primary keys changed per table per month, from the sources' change timestamps.
+  - Fivetran's billing rules differ (for example, initial syncs and some tables are free); real pricing comes from fivetran.com/pricing or the account team.
+  - Volumes are synthetic and roughly a tenth of a real mid-market manufacturer's; scale before quoting.
+
+specialists:
+  - specialty: SAP
+    workstream: SAP S/4HANA replication (Act 2)
+    found: Cancelled documents and goods-issue dates mislead anyone reading raw tables; history matters for tiers.
+    open_items: Choose native SAP connector vs hybrid deployment; confirm ODP extractors and change volumes.
+  - specialty: Database and application replication
+    workstream: Carrier Postgres, Salesforce, Zendesk (Act 2)
+    found: The actual delivery time lives only in the carrier database; Zendesk freshness drives the ticket signal.
+    open_items: Log-based CDC on the carrier database; sync frequency per source; private networking.
+  - specialty: Lakehouse and open table formats
+    workstream: Iceberg marts read by two engines (Act 3)
+    found: One copy of the trusted marts serves DuckDB and Trino identically.
+    open_items: Managed Data Lake Service destination (S3, ADLS or GCS) and the customer's query engines.
+  - specialty: Transformation
+    workstream: dbt models, tests, contracts, semantic layer (Act 3)
+    found: Each trap needs a named model and a test; contracts stop silent schema drift.
+    open_items: dbt platform jobs and CI; the hosted Semantic Layer; ownership of metric definitions.
+  - specialty: AI and context engineering
+    workstream: dbt MCP, metrics and freshness tools; evaluation (Act 4)
+    found: The same model goes from wrong to right when it gets governed definitions, lineage and freshness.
+    open_items: Golden-question set owned by the business; guardrails on untrusted text; cost per answer.
+  - specialty: Activation
+    workstream: Reverse ETL to the CRM and Slack (Act 5)
+    found: Diff-based syncs from the governed model keep the CRM trustworthy and auditable.
+    open_items: Fivetran Activations to the real Salesforce org; field ownership; AI-drafted text review.
+
+path_to_production:
+  - Connectivity and security review (PrivateLink or Private Service Connect, SSH tunnel or hybrid deployment)
+  - Fivetran native SAP, PostgreSQL, Salesforce and Zendesk connectors in the customer's account
+  - Managed Data Lake Service writing Iceberg to the customer's cloud storage
+  - dbt platform with scheduled jobs, CI and the Semantic Layer; dbt MCP server connected to it
+  - Fivetran Activations to Salesforce and Slack
+  - A business-owned golden-question set and an evaluation in CI before agents reach executives

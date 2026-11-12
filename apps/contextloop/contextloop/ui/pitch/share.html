@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ContextLoop · your AI agent is only as good as your data</title>
+<meta name="description" content="A narrated brief: the problem, the solution, and a walk through the ContextLoop architecture, act by act.">
+<meta property="og:title" content="ContextLoop · your AI agent is only as good as your data">
+<meta property="og:description" content="A narrated brief: the problem, the solution, and a walk through the architecture.">
+<meta property="og:image" content="{{BASE}}/pitch/contextloop-pitch-poster.jpg?v={{V}}">
+<meta property="og:type" content="video.other">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%234B5BDC'/%3E%3Cstop offset='1' stop-color='%2313B3A4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='15' fill='url(%23g)'/%3E%3Cpath d='M44.1 23.2 A15 15 0 1 0 44.1 40.8' fill='none' stroke='white' stroke-width='6.2' stroke-linecap='round'/%3E%3Ccircle cx='46.2' cy='32' r='4.6' fill='%23FF7A5C'/%3E%3C/svg%3E">
+<style>
+  :root { --ink: #eef1f8; --muted: #9aa4bd; --indigo: #7f8cff; }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; color: var(--ink); background: radial-gradient(120% 90% at 20% 0%, #10172d, #0b1020 60%);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  main { max-width: 1120px; margin: 0 auto; padding: 32px 24px 48px; }
+  header { display: flex; align-items: center; gap: 12px; font-size: 22px; font-weight: 700; letter-spacing: -.3px; }
+  header svg { width: 36px; height: 36px; }
+  header b { color: var(--indigo); font-weight: inherit; }
+  h1 { margin: 28px 0 8px; font-size: clamp(26px, 4vw, 40px); letter-spacing: -.8px; line-height: 1.15; }
+  p.lede { margin: 0 0 22px; color: var(--muted); font-size: 17px; line-height: 1.5; }
+  video { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 14px; background: #000; box-shadow: 0 24px 60px rgba(0, 0, 0, .45); }
+  ul { margin: 22px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 10px; }
+  li { padding: 8px 14px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, .1); background: rgba(255, 255, 255, .04); font-size: 14px; }
+  footer { margin-top: 28px; color: var(--muted); font-size: 13px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="m" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4B5BDC"/><stop offset="1" stop-color="#13B3A4"/></linearGradient></defs><rect width="64" height="64" rx="15" fill="url(#m)"/><path d="M44.1 23.2 A15 15 0 1 0 44.1 40.8" fill="none" stroke="#fff" stroke-width="6.2" stroke-linecap="round"/><circle cx="46.2" cy="32" r="4.6" fill="#FF7A5C"/></svg>
+    <span>Context<b>Loop</b></span>
+  </header>
+  <h1>Your AI agent is only as good as your data</h1>
+  <p class="lede">A {{MINUTES}}-minute narrated brief: the problem, the solution, and a walk through the architecture, act by act.</p>
+  <video controls playsinline preload="metadata" poster="/pitch/contextloop-pitch-poster.jpg?v={{V}}">
+    <source src="/pitch/contextloop-pitch.mp4?v={{V}}" type="video/mp4">
+    <track kind="captions" srclang="en" label="English" src="/pitch/contextloop-pitch.vtt?v={{V}}" default>
+    Your browser can't play this video. <a href="/pitch/contextloop-pitch.mp4?v={{V}}">Download it</a> instead.
+  </video>
+  <ul>
+    <li>The problem</li><li>The confident wrong answer</li><li>A trusted data foundation, in four layers</li>
+    <li>The architecture, act by act</li><li>Next step</li>
+  </ul>
+  <footer>Demo with synthetic data: Northstar Industrial and every account, order and ticket are fictional.</footer>
+</main>
+</body>
+</html>

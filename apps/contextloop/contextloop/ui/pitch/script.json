@@ -1,0 +1,406 @@
+{
+  "_about": "The ContextLoop pitch video, in beats. Each beat is one voiced line; 'cues' drive the architecture diagram at a fraction ('at') of the beat. Numbers come from reports/eval-2026-11-11.md and docs/demo/narrative.md. To use your own voice, record recordings/voiceover/<beat id>.wav and re-run make pitch-video.",
+  "scenes": [
+    {
+      "id": "open",
+      "chapter": null,
+      "beats": [
+        {
+          "id": "open-1",
+          "text": "This is ContextLoop: a working demonstration of why your AI agent is only as good as the data behind it."
+        },
+        {
+          "id": "open-2",
+          "text": "In the next few minutes: the problem, the solution, and how each layer of the architecture fits together.",
+          "pause_after": 0.4
+        }
+      ]
+    },
+    {
+      "id": "problem",
+      "chapter": "The problem",
+      "beats": [
+        {
+          "id": "problem-1",
+          "text": "Meet Northstar Industrial, a mid-market maker of valves, bearings and pumps, with about a hundred and twenty business customers."
+        },
+        {
+          "id": "problem-2",
+          "text": "Its data lives in four systems that don't agree with each other: SAP for orders and deliveries, Salesforce for accounts, Zendesk for support, and a Postgres carrier service that holds the real delivery times.",
+          "pause_after": 0.4
+        },
+        {
+          "id": "problem-3",
+          "text": "Now the chief operating officer asks the company's AI agent one question."
+        },
+        {
+          "id": "problem-4",
+          "text": "Which of our strategic accounts are at risk because of late shipments, and what should the account teams do this week?",
+          "pause_after": 0.5
+        },
+        {
+          "id": "problem-5",
+          "text": "Answering it correctly needs all four systems, one agreed definition of on time, one agreed definition of strategic, and data fresh enough to act on."
+        }
+      ]
+    },
+    {
+      "id": "wrong",
+      "chapter": "The problem",
+      "beats": [
+        {
+          "id": "wrong-1",
+          "text": "Give the agent raw SQL access, and it plans sixteen queries on its own, working out from scratch what the data means. It answers fluently, with invented precision. And it's wrong."
+        },
+        {
+          "id": "wrong-2",
+          "text": "It counts cancelled deliveries as late. It uses the planned ship date instead of the carrier's actual delivery. It adds euros to dollars, counts a duplicate account twice, and never notices the support data is two days old."
+        },
+        {
+          "id": "wrong-3",
+          "text": "Across six golden questions, it averages 2.7 out of 6, and nothing in the answer tells you so."
+        },
+        {
+          "id": "wrong-4",
+          "text": "A better prompt doesn't fix this. The model can't know what on time or strategic means at Northstar."
+        }
+      ]
+    },
+    {
+      "id": "solution",
+      "chapter": "The solution",
+      "beats": [
+        {
+          "id": "sol-1",
+          "text": "The fix is a trusted data foundation, built in four layers."
+        },
+        {
+          "id": "sol-2",
+          "text": "Move: Fivetran lands every source reliably and incrementally, with deletes and history kept."
+        },
+        {
+          "id": "sol-3",
+          "text": "Transform and trust: dbt models, tests and a semantic layer define each number once."
+        },
+        {
+          "id": "sol-4",
+          "text": "Context: MCP servers give the agent those definitions, the lineage, and how fresh the data is."
+        },
+        {
+          "id": "sol-5",
+          "text": "And activate: the answer flows back into the tools the account teams already use."
+        },
+        {
+          "id": "sol-6",
+          "text": "Same model, same question. With the foundation in place, the agent needs five calls instead of sixteen, and scores six out of six.",
+          "pause_after": 0.4
+        }
+      ]
+    },
+    {
+      "id": "stack",
+      "chapter": "The architecture",
+      "beats": [
+        {
+          "id": "stack-1",
+          "text": "Before we walk the diagram, here is what each technology does, and how this demo uses it. First, transform and trust."
+        },
+        {
+          "id": "stack-2",
+          "text": "DuckDB is the warehouse: one embedded database file holding the raw landed tables and every dbt model. It's where the naive agent went wrong in act one."
+        },
+        {
+          "id": "stack-3",
+          "text": "dbt Core builds the trusted data in layers. Staging cleans each raw table, intermediate models apply Northstar's business rules, and marts are the ready-to-use tables: twenty-seven tested models in all. Each trap is fixed in one named model and guarded by a test."
+        },
+        {
+          "id": "stack-4",
+          "text": "On top sits the semantic layer, MetricFlow. It defines eight metrics once, in YAML, and compiles the SQL for every query, so no one, human or agent, rewrites the logic."
+        },
+        {
+          "id": "stack-5",
+          "text": "After every build, the trusted marts are published as Apache Iceberg tables. Trino, a second engine, reads the same tables and returns the same rows as DuckDB.",
+          "pause_after": 0.4
+        },
+        {
+          "id": "stack-6",
+          "text": "Context. MCP, the Model Context Protocol, is an open standard for handing an agent tools. Three MCP servers run here, in private containers."
+        },
+        {
+          "id": "stack-7",
+          "text": "The official dbt MCP server explains models and lineage. The metrics server serves governed numbers, compiled by MetricFlow. And the freshness server reads the sync log and reports how old each source is."
+        },
+        {
+          "id": "stack-8",
+          "text": "Claude, the same model as in act one, reaches them through a small bridge, and never touches the raw tables.",
+          "pause_after": 0.4
+        },
+        {
+          "id": "stack-9",
+          "text": "Activate. A diff-based reverse ETL sync reads the account risk mart, previews the changes, and writes only what changed into Salesforce, with an audit log, then posts a summary to Slack. At a customer, Fivetran Activations does this job.",
+          "pause_after": 0.5
+        }
+      ]
+    },
+    {
+      "id": "arch",
+      "chapter": "The architecture",
+      "beats": [
+        {
+          "id": "arch-0",
+          "text": "Here is the architecture, left to right: four sources, then move, transform and trust, context, and activate, with the app underneath. Each act adds one layer, until the loop is complete.",
+          "cues": [
+            {
+              "at": 0,
+              "label": "The whole loop",
+              "step": 0,
+              "cam": "full"
+            }
+          ],
+          "pause_after": 0.6
+        },
+        {
+          "id": "arch-1",
+          "text": "Act one, the confident wrong answer. The agent reaches straight into the raw tables, shown by the dashed line, with no definitions and no idea how fresh the data is.",
+          "cues": [
+            {
+              "at": 0,
+              "label": "Act 1 · The confident wrong answer",
+              "step": 1,
+              "cam": "full"
+            }
+          ],
+          "pause_after": 0.3
+        },
+        {
+          "id": "arch-2a",
+          "text": "Act two, move. Fivetran Connector SDK connectors read SAP and the Postgres carrier database, with incremental syncs and checkpointed state.",
+          "cues": [
+            {
+              "at": 0,
+              "label": "Act 2 · Move",
+              "step": 2,
+              "cam": "focus"
+            },
+            {
+              "at": 0.35,
+              "card": "sdk",
+              "cam": "focus"
+            }
+          ]
+        },
+        {
+          "id": "arch-2b",
+          "text": "Every source lands the same way, with Fivetran's system columns. Deleted rows are flagged, not lost, and account tier keeps its history. A sync log records freshness and monthly active rows.",
+          "cues": [
+            {
+              "at": 0,
+              "card": "land",
+              "cam": "focus"
+            },
+            {
+              "at": 0.68,
+              "card": "log",
+              "cam": "focus"
+            }
+          ],
+          "pause_after": 0.3
+        },
+        {
+          "id": "arch-3a",
+          "text": "Act three, transform and trust. Staging, intermediate and mart models turn the raw tables into tested, contracted data, and every trap is handled in one named place.",
+          "cues": [
+            {
+              "at": 0,
+              "label": "Act 3 · Transform and trust",
+              "step": 3,
+              "cam": "focus"
+            },
+            {
+              "at": 0.3,
+              "card": "dbt",
+              "cam": "focus"
+            }
+          ]
+        },
+        {
+          "id": "arch-3b",
+          "text": "The semantic layer defines on-time delivery rate, net revenue and account risk once. The trusted tables are published as Apache Iceberg, and Trino reads exactly the same rows as DuckDB.",
+          "cues": [
+            {
+              "at": 0,
+              "card": "mf",
+              "cam": "focus"
+            },
+            {
+              "at": 0.52,
+              "card": "ice",
+              "cam": "focus"
+            }
+          ],
+          "pause_after": 0.3
+        },
+        {
+          "id": "arch-4a",
+          "text": "Act four, context. The same Claude agent now works through three MCP servers: the dbt MCP server for models and lineage, a metrics server for governed queries, and a freshness server for sync times.",
+          "cues": [
+            {
+              "at": 0,
+              "label": "Act 4 · Context",
+              "step": 4,
+              "cam": "focus"
+            },
+            {
+              "at": 0.25,
+              "card": "agent",
+              "cam": "focus"
+            }
+          ]
+        },
+        {
+          "id": "arch-4b",
+          "text": "So it uses Northstar's definitions, and says when the data is too old to trust. Here is that request, step by step.",
+          "cues": [
+            {
+              "at": 0,
+              "card": null,
+              "cam": "focus"
+            }
+          ]
+        },
+        {
+          "id": "flow-1",
+          "text": "The COO's question arrives from the app.",
+          "cues": [
+            {
+              "at": 0,
+              "label": "Act 4 · Request flow",
+              "step": 6,
+              "flow": 0,
+              "cam": "full"
+            }
+          ]
+        },
+        {
+          "id": "flow-2",
+          "text": "The agent lists its tools from the three MCP servers.",
+          "cues": [
+            {
+              "at": 0,
+              "flow": 1
+            }
+          ]
+        },
+        {
+          "id": "flow-3",
+          "text": "It reads the metric definitions, including exactly what strategic means.",
+          "cues": [
+            {
+              "at": 0,
+              "flow": 2
+            }
+          ]
+        },
+        {
+          "id": "flow-4",
+          "text": "It checks freshness, and learns that Zendesk is two days behind.",
+          "cues": [
+            {
+              "at": 0,
+              "flow": 3
+            }
+          ]
+        },
+        {
+          "id": "flow-5",
+          "text": "It queries the governed metric. MetricFlow compiles the SQL over the tested models.",
+          "cues": [
+            {
+              "at": 0,
+              "flow": 4
+            }
+          ]
+        },
+        {
+          "id": "flow-6",
+          "text": "It fetches the lineage of on-time delivery rate from dbt.",
+          "cues": [
+            {
+              "at": 0,
+              "flow": 5
+            }
+          ]
+        },
+        {
+          "id": "flow-7",
+          "text": "It writes the answer: accounts, drivers, next steps, the definitions it used, and a freshness warning.",
+          "cues": [
+            {
+              "at": 0,
+              "flow": 6
+            }
+          ]
+        },
+        {
+          "id": "flow-8",
+          "text": "And the app scores it against the hidden truth: exactly the nine at-risk accounts.",
+          "cues": [
+            {
+              "at": 0,
+              "flow": 7
+            }
+          ],
+          "pause_after": 0.4
+        },
+        {
+          "id": "arch-5",
+          "text": "Act five, activate. A diff-based reverse ETL sync writes the at-risk list and next steps into Salesforce, and posts a summary to Slack, where the account teams already work.",
+          "cues": [
+            {
+              "at": 0,
+              "label": "Act 5 · Activate",
+              "step": 5,
+              "cam": "focus"
+            },
+            {
+              "at": 0.25,
+              "card": "rev",
+              "cam": "focus"
+            }
+          ],
+          "pause_after": 0.3
+        },
+        {
+          "id": "arch-6",
+          "text": "All of this runs on one laptop, in Docker. At a customer, every box has a production equivalent: Fivetran's native SAP connectors or hybrid deployment, the customer's own warehouse, the dbt platform and its hosted Semantic Layer, Iceberg on the Managed Data Lake Service, and Fivetran Activations.",
+          "cues": [
+            {
+              "at": 0,
+              "label": "At a customer",
+              "view": "customer",
+              "step": 0,
+              "card": null,
+              "cam": "full"
+            }
+          ],
+          "pause_after": 0.6
+        }
+      ]
+    },
+    {
+      "id": "close",
+      "chapter": "Next step",
+      "beats": [
+        {
+          "id": "close-1",
+          "text": "Reliable movement, governed transformation, and shared definitions the agent can read. That's what turns a confident wrong answer into one you can act on."
+        },
+        {
+          "id": "close-2",
+          "text": "The next step is a scoped pilot against your own success criteria, with named owners. This is ContextLoop.",
+          "pause_after": 1.6
+        }
+      ]
+    }
+  ]
+}

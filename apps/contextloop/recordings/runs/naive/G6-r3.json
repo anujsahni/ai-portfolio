@@ -1,0 +1,3208 @@
+{
+  "agent": "naive",
+  "question_id": "G6",
+  "question": "How many open shipping-related support tickets do our strategic accounts have in total?",
+  "model": "claude-haiku-5-5",
+  "effort": "high",
+  "started_at": "2026-11-11T20:22:32+00:00",
+  "steps": [
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check tier values in Salesforce accounts and active record handling",
+        "sql": "SELECT tier_c, _fivetran_active, is_deleted, _fivetran_deleted, COUNT(*) AS n FROM salesforce.account GROUP BY ALL ORDER BY n DESC"
+      },
+      "output": {
+        "columns": [
+          "tier_c",
+          "_fivetran_active",
+          "is_deleted",
+          "_fivetran_deleted",
+          "n"
+        ],
+        "rows": [
+          [
+            "Standard",
+            true,
+            false,
+            false,
+            95
+          ],
+          [
+            "Strategic",
+            true,
+            false,
+            false,
+            26
+          ],
+          [
+            "Prospect",
+            true,
+            false,
+            false,
+            13
+          ],
+          [
+            "Standard",
+            false,
+            false,
+            false,
+            3
+          ],
+          [
+            "Strategic",
+            false,
+            false,
+            false,
+            1
+          ]
+        ],
+        "row_count": 5,
+        "truncated": false
+      },
+      "seconds": 0.01,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check Zendesk ticket status, type and priority values",
+        "sql": "SELECT status, type, priority, _fivetran_deleted, COUNT(*) AS n FROM zendesk.ticket GROUP BY ALL ORDER BY n DESC"
+      },
+      "output": {
+        "columns": [
+          "status",
+          "type",
+          "priority",
+          "_fivetran_deleted",
+          "n"
+        ],
+        "rows": [
+          [
+            "solved",
+            "incident",
+            "normal",
+            false,
+            213
+          ],
+          [
+            "closed",
+            "incident",
+            "normal",
+            false,
+            213
+          ],
+          [
+            "solved",
+            "problem",
+            "normal",
+            false,
+            208
+          ],
+          [
+            "closed",
+            "question",
+            "normal",
+            false,
+            195
+          ],
+          [
+            "solved",
+            "question",
+            "normal",
+            false,
+            182
+          ],
+          [
+            "closed",
+            "problem",
+            "normal",
+            false,
+            166
+          ],
+          [
+            "solved",
+            "incident",
+            "high",
+            false,
+            113
+          ],
+          [
+            "closed",
+            "incident",
+            "high",
+            false,
+            110
+          ],
+          [
+            "solved",
+            "incident",
+            "urgent",
+            false,
+            106
+          ],
+          [
+            "solved",
+            "question",
+            "low",
+            false,
+            106
+          ],
+          [
+            "solved",
+            "incident",
+            "low",
+            false,
+            101
+          ],
+          [
+            "solved",
+            "question",
+            "urgent",
+            false,
+            100
+          ],
+          [
+            "closed",
+            "problem",
+            "urgent",
+            false,
+            100
+          ],
+          [
+            "closed",
+            "problem",
+            "high",
+            false,
+            99
+          ],
+          [
+            "closed",
+            "incident",
+            "urgent",
+            false,
+            95
+          ],
+          [
+            "closed",
+            "problem",
+            "low",
+            false,
+            95
+          ],
+          [
+            "solved",
+            "problem",
+            "low",
+            false,
+            93
+          ],
+          [
+            "closed",
+            "question",
+            "low",
+            false,
+            90
+          ],
+          [
+            "solved",
+            "problem",
+            "urgent",
+            false,
+            88
+          ],
+          [
+            "closed",
+            "incident",
+            "low",
+            false,
+            88
+          ],
+          [
+            "closed",
+            "question",
+            "high",
+            false,
+            87
+          ],
+          [
+            "solved",
+            "question",
+            "high",
+            false,
+            87
+          ],
+          [
+            "solved",
+            "problem",
+            "high",
+            false,
+            74
+          ],
+          [
+            "closed",
+            "question",
+            "urgent",
+            false,
+            73
+          ],
+          [
+            "open",
+            "problem",
+            "normal",
+            false,
+            8
+          ],
+          [
+            "open",
+            "question",
+            "normal",
+            false,
+            6
+          ],
+          [
+            "open",
+            "incident",
+            "urgent",
+            false,
+            5
+          ],
+          [
+            "pending",
+            "question",
+            "low",
+            false,
+            5
+          ],
+          [
+            "pending",
+            "incident",
+            "normal",
+            false,
+            5
+          ],
+          [
+            "open",
+            "incident",
+            "high",
+            false,
+            5
+          ],
+          [
+            "pending",
+            "incident",
+            "urgent",
+            false,
+            5
+          ],
+          [
+            "open",
+            "incident",
+            "low",
+            false,
+            4
+          ],
+          [
+            "pending",
+            "problem",
+            "low",
+            false,
+            4
+          ],
+          [
+            "open",
+            "question",
+            "low",
+            false,
+            4
+          ],
+          [
+            "open",
+            "problem",
+            "low",
+            false,
+            4
+          ],
+          [
+            "open",
+            "incident",
+            "normal",
+            false,
+            4
+          ],
+          [
+            "hold",
+            "incident",
+            "low",
+            false,
+            3
+          ],
+          [
+            "pending",
+            "question",
+            "urgent",
+            false,
+            3
+          ],
+          [
+            "pending",
+            "problem",
+            "high",
+            false,
+            3
+          ],
+          [
+            "hold",
+            "incident",
+            "urgent",
+            false,
+            2
+          ],
+          [
+            "pending",
+            "incident",
+            "low",
+            false,
+            2
+          ],
+          [
+            "hold",
+            "incident",
+            "normal",
+            false,
+            2
+          ],
+          [
+            "hold",
+            "problem",
+            "low",
+            false,
+            2
+          ],
+          [
+            "pending",
+            "problem",
+            "normal",
+            false,
+            2
+          ],
+          [
+            "open",
+            "problem",
+            "high",
+            false,
+            2
+          ],
+          [
+            "pending",
+            "question",
+            "normal",
+            false,
+            2
+          ],
+          [
+            "new",
+            "incident",
+            "normal",
+            false,
+            2
+          ],
+          [
+            "open",
+            "problem",
+            "urgent",
+            false,
+            2
+          ],
+          [
+            "open",
+            "question",
+            "high",
+            false,
+            2
+          ],
+          [
+            "new",
+            "question",
+            "urgent",
+            false,
+            1
+          ],
+          [
+            "hold",
+            "problem",
+            "normal",
+            false,
+            1
+          ],
+          [
+            "new",
+            "incident",
+            "high",
+            false,
+            1
+          ],
+          [
+            "pending",
+            "incident",
+            "high",
+            false,
+            1
+          ],
+          [
+            "new",
+            "incident",
+            "low",
+            false,
+            1
+          ],
+          [
+            "hold",
+            "question",
+            "normal",
+            false,
+            1
+          ],
+          [
+            "new",
+            "problem",
+            "normal",
+            false,
+            1
+          ],
+          [
+            "open",
+            "question",
+            "urgent",
+            false,
+            1
+          ],
+          [
+            "new",
+            "question",
+            "high",
+            false,
+            1
+          ],
+          [
+            "hold",
+            "incident",
+            "high",
+            false,
+            1
+          ],
+          [
+            "pending",
+            "question",
+            "high",
+            false,
+            1
+          ],
+          [
+            "new",
+            "question",
+            "normal",
+            false,
+            1
+          ],
+          [
+            "hold",
+            "question",
+            "high",
+            false,
+            1
+          ]
+        ],
+        "row_count": 62,
+        "truncated": false
+      },
+      "seconds": 0.01,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "See which tags exist on tickets",
+        "sql": "SELECT tag, _fivetran_deleted, COUNT(*) AS n FROM zendesk.ticket_tag GROUP BY ALL ORDER BY n DESC LIMIT 100"
+      },
+      "output": {
+        "columns": [
+          "tag",
+          "_fivetran_deleted",
+          "n"
+        ],
+        "rows": [
+          [
+            "product_question",
+            false,
+            984
+          ],
+          [
+            "billing",
+            false,
+            489
+          ],
+          [
+            "shipping",
+            false,
+            425
+          ],
+          [
+            "returns",
+            false,
+            335
+          ],
+          [
+            "delivery",
+            false,
+            194
+          ],
+          [
+            "warranty",
+            false,
+            169
+          ],
+          [
+            "sales",
+            false,
+            162
+          ],
+          [
+            "logistics",
+            false,
+            151
+          ],
+          [
+            "late_delivery",
+            false,
+            65
+          ],
+          [
+            "urgent",
+            false,
+            41
+          ]
+        ],
+        "row_count": 10,
+        "truncated": false
+      },
+      "seconds": 0.01,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Inspect Zendesk organizations and how they might map to Salesforce accounts",
+        "sql": "SELECT o.id, o.name, o.external_id, o._fivetran_deleted, a.id AS sf_id, a.name AS sf_name, a.tier_c, a.sap_customer_number_c, a._fivetran_active FROM zendesk.organization o LEFT JOIN salesforce.account a ON (o.external_id = a.sap_customer_number_c OR lower(o.name)=lower(a.name)) ORDER BY o.id"
+      },
+      "output": {
+        "columns": [
+          "id",
+          "name",
+          "external_id",
+          "_fivetran_deleted",
+          "sf_id",
+          "sf_name",
+          "tier_c",
+          "sap_customer_number_c",
+          "_fivetran_active"
+        ],
+        "rows": [
+          [
+            360000000001,
+            "Halbrook Fluid Systems",
+            "001T6Wn0eXovaGLMVG",
+            false,
+            "001T6Wn0eXovaGLMVG",
+            "Halbrook Fluid Systems",
+            "Strategic",
+            "0000100001",
+            true
+          ],
+          [
+            360000000002,
+            "Tamwick Mining Inc",
+            "001IeA54qrzDv3P7kZ",
+            false,
+            "001IeA54qrzDv3P7kZ",
+            "Tamwick Mining Inc",
+            "Strategic",
+            "0000100002",
+            true
+          ],
+          [
+            360000000003,
+            "Tamford Food Processing SA",
+            "001bpSPP9I0DwIsbXO",
+            false,
+            "001bpSPP9I0DwIsbXO",
+            "Tamford Food Processing SA",
+            "Strategic",
+            "0000100003",
+            true
+          ],
+          [
+            360000000004,
+            "Galbury Steelworks SA",
+            "001RTWHCy9QOZgYtfy",
+            false,
+            "001RTWHCy9QOZgYtfy",
+            "Galbury Steelworks SA",
+            "Strategic",
+            "0000100004",
+            true
+          ],
+          [
+            360000000005,
+            "Wesmore Energy Ltd",
+            "001AgkEM3JeW9GzswP",
+            false,
+            "001AgkEM3JeW9GzswP",
+            "Wesmore Energy Ltd",
+            "Strategic",
+            "0000100005",
+            true
+          ],
+          [
+            360000000006,
+            "Jormark Paper Mills SA",
+            "001cWWUZbLBqBzKEe2",
+            false,
+            "001cWWUZbLBqBzKEe2",
+            "Jormark Paper Mills SA",
+            "Strategic",
+            "0000100006",
+            true
+          ],
+          [
+            360000000007,
+            "Sevland Utilities Inc",
+            "001LYKqH2NcHcxlE2K",
+            false,
+            "001LYKqH2NcHcxlE2K",
+            "Sevland Utilities Inc",
+            "Strategic",
+            "0000100007",
+            true
+          ],
+          [
+            360000000008,
+            "Marmark HVAC Inc",
+            "001TlD8DEb2a4OHAFu",
+            false,
+            "001TlD8DEb2a4OHAFu",
+            "Marmark HVAC Inc",
+            "Strategic",
+            "0000100008",
+            true
+          ],
+          [
+            360000000009,
+            "Vornwick Utilities Inc",
+            "001gFjTbqI8yil52V7",
+            false,
+            "001gFjTbqI8yil52V7",
+            "Vornwick Utilities Inc",
+            "Standard",
+            "0000100009",
+            false
+          ],
+          [
+            360000000009,
+            "Vornwick Utilities Inc",
+            "001gFjTbqI8yil52V7",
+            false,
+            "001gFjTbqI8yil52V7",
+            "Vornwick Utilities Inc",
+            "Strategic",
+            "0000100009",
+            true
+          ],
+          [
+            360000000010,
+            "Thalmark Marine Srl",
+            "001VBW81QSgOAH35Pb",
+            false,
+            "001VBW81QSgOAH35Pb",
+            "Thalmark Marine Srl",
+            "Standard",
+            "0000100010",
+            false
+          ],
+          [
+            360000000010,
+            "Thalmark Marine Srl",
+            "001VBW81QSgOAH35Pb",
+            false,
+            "001VBW81QSgOAH35Pb",
+            "Thalmark Marine Srl",
+            "Strategic",
+            "0000100010",
+            true
+          ],
+          [
+            360000000011,
+            "Velmere Pipeline Services Ltd",
+            "001z9MQhfHInmTg8Qg",
+            false,
+            "001z9MQhfHInmTg8Qg",
+            "Velmere Pipeline Services Ltd",
+            "Standard",
+            "0000100011",
+            false
+          ],
+          [
+            360000000011,
+            "Velmere Pipeline Services Ltd",
+            "001z9MQhfHInmTg8Qg",
+            false,
+            "001z9MQhfHInmTg8Qg",
+            "Velmere Pipeline Services Ltd",
+            "Strategic",
+            "0000100011",
+            true
+          ],
+          [
+            360000000012,
+            "Tamridge Pharma Plants Inc",
+            "001aAVL3JudBxJLQKi",
+            false,
+            "001aAVL3JudBxJLQKi",
+            "Tamridge Pharma Plants Inc",
+            "Strategic",
+            "0000100012",
+            true
+          ],
+          [
+            360000000013,
+            "Vornridge Water Works Ltd",
+            "001oeP6Yy42qbLL6ni",
+            false,
+            "001oeP6Yy42qbLL6ni",
+            "Vornridge Water Works Ltd",
+            "Strategic",
+            "0000100013",
+            true
+          ],
+          [
+            360000000014,
+            "Tamdale Food Processing Ltd",
+            "001xoPG2ALg7oLuJrw",
+            false,
+            "001xoPG2ALg7oLuJrw",
+            "Tamdale Food Processing Ltd",
+            "Strategic",
+            "0000100014",
+            true
+          ],
+          [
+            360000000015,
+            "Quenmere Paper Mills GmbH",
+            "001jyjQ3yYlKrgAPD9",
+            false,
+            "001jyjQ3yYlKrgAPD9",
+            "Quenmere Paper Mills GmbH",
+            "Strategic",
+            "0000100015",
+            false
+          ],
+          [
+            360000000015,
+            "Quenmere Paper Mills GmbH",
+            "001jyjQ3yYlKrgAPD9",
+            false,
+            "001jyjQ3yYlKrgAPD9",
+            "Quenmere Paper Mills GmbH",
+            "Standard",
+            "0000100015",
+            true
+          ],
+          [
+            360000000016,
+            "Corford Paper Mills Ltd",
+            "001k65qp2iatHcrxhT",
+            false,
+            "001k65qp2iatHcrxhT",
+            "Corford Paper Mills Ltd",
+            "Standard",
+            "0000100016",
+            true
+          ],
+          [
+            360000000017,
+            "Harvale Food Processing Inc",
+            "001g6Do98g9SRo6RPs",
+            false,
+            "001g6Do98g9SRo6RPs",
+            "Harvale Food Processing Inc",
+            "Strategic",
+            "0000100017",
+            true
+          ],
+          [
+            360000000018,
+            "Quenton Food Processing GmbH",
+            "001ePIqhOkiXF8oN5K",
+            false,
+            "001ePIqhOkiXF8oN5K",
+            "Quenton Food Processing GmbH",
+            "Strategic",
+            "0000100018",
+            true
+          ],
+          [
+            360000000019,
+            "Kelridge Steelworks SA",
+            "001uZIL3lmdPJi6dMz",
+            false,
+            "001uZIL3lmdPJi6dMz",
+            "Kelridge Steelworks SA",
+            "Strategic",
+            "0000100019",
+            true
+          ],
+          [
+            360000000020,
+            "Ralmore Process Equipment Inc",
+            "00173mQ9bhojG5YWvV",
+            false,
+            "00173mQ9bhojG5YWvV",
+            "Ralmore Process Equipment Inc",
+            "Strategic",
+            "0000100020",
+            true
+          ],
+          [
+            360000000021,
+            "Dunwick Process Equipment SA",
+            "001usVdcbubaV6K9ih",
+            false,
+            "001usVdcbubaV6K9ih",
+            "Dunwick Process Equipment SA",
+            "Strategic",
+            "0000100021",
+            true
+          ],
+          [
+            360000000022,
+            "Pellridge Process Equipment GmbH",
+            "001xtf0eDWZ7g16pYH",
+            false,
+            "001xtf0eDWZ7g16pYH",
+            "Pellridge Process Equipment GmbH",
+            "Strategic",
+            "0000100022",
+            true
+          ],
+          [
+            360000000023,
+            "Ralwick Pharma Plants Ltd",
+            "001Mr9uzv7OnksPJDh",
+            false,
+            "001Mr9uzv7OnksPJDh",
+            "Ralwick Pharma Plants Ltd",
+            "Strategic",
+            "0000100023",
+            true
+          ],
+          [
+            360000000024,
+            "Sevholt Refining SA",
+            "001r9q4bWRxTPoZKYK",
+            false,
+            "001r9q4bWRxTPoZKYK",
+            "Sevholt Refining SA",
+            "Strategic",
+            "0000100024",
+            true
+          ],
+          [
+            360000000025,
+            "Yarstead Process Equipment Inc",
+            "001tTFM0okFASwilZ0",
+            false,
+            "001tTFM0okFASwilZ0",
+            "Yarstead Process Equipment Inc",
+            "Strategic",
+            "0000100025",
+            true
+          ],
+          [
+            360000000026,
+            "Vornland Chemicals SA",
+            "001fYsCllu8u6Vvqti",
+            false,
+            "001fYsCllu8u6Vvqti",
+            "Vornland Chemicals SA",
+            "Strategic",
+            "0000100026",
+            true
+          ],
+          [
+            360000000027,
+            "Tammore Food Processing BV",
+            "00196WdD6KCNZ4yZVt",
+            false,
+            "00196WdD6KCNZ4yZVt",
+            "Tammore Food Processing BV",
+            "Strategic",
+            "0000100027",
+            true
+          ],
+          [
+            360000000028,
+            "Stavwick Pharma Plants Inc",
+            "001y2GiEeW5FyVYEWO",
+            false,
+            "001y2GiEeW5FyVYEWO",
+            "Stavwick Pharma Plants Inc",
+            "Standard",
+            "0000100028",
+            true
+          ],
+          [
+            360000000029,
+            "Galdale Energy Ltd",
+            "001urwYoPqVnbrwMOK",
+            false,
+            "001urwYoPqVnbrwMOK",
+            "Galdale Energy Ltd",
+            "Standard",
+            "0000100029",
+            true
+          ],
+          [
+            360000000030,
+            "Dunbrook Utilities Inc",
+            "001EgDhp3UJixHifIj",
+            false,
+            "001EgDhp3UJixHifIj",
+            "Dunbrook Utilities Inc",
+            "Standard",
+            "0000100030",
+            true
+          ],
+          [
+            360000000031,
+            "Thalland Mining Inc",
+            "001xE2SsxSGMAkGlbe",
+            false,
+            "001xE2SsxSGMAkGlbe",
+            "Thalland Mining Inc",
+            "Standard",
+            "0000100031",
+            true
+          ],
+          [
+            360000000032,
+            "Velridge Mining GmbH",
+            "001v7ZtwGp73uTVv4w",
+            false,
+            "001v7ZtwGp73uTVv4w",
+            "Velridge Mining GmbH",
+            "Standard",
+            "0000100032",
+            true
+          ],
+          [
+            360000000033,
+            "Yarmore Fluid Systems Inc",
+            "001qVa5cId4lJGRcpL",
+            false,
+            "001qVa5cId4lJGRcpL",
+            "Yarmore Fluid Systems Inc",
+            "Standard",
+            "0000100033",
+            true
+          ],
+          [
+            360000000034,
+            "Istwick HVAC SA",
+            "001aUW0wMRmk1rP2uD",
+            false,
+            "001aUW0wMRmk1rP2uD",
+            "Istwick HVAC SA",
+            "Standard",
+            "0000100034",
+            true
+          ],
+          [
+            360000000035,
+            "Neskmark Paper Mills Inc",
+            "001yWPwaet2hmy0KmZ",
+            false,
+            "001yWPwaet2hmy0KmZ",
+            "Neskmark Paper Mills Inc",
+            "Standard",
+            "0000100035",
+            true
+          ],
+          [
+            360000000036,
+            "Galdale Steelworks Inc",
+            "001i3JUNCpmOYCNeni",
+            false,
+            "001i3JUNCpmOYCNeni",
+            "Galdale Steelworks Inc",
+            "Standard",
+            "0000100036",
+            true
+          ],
+          [
+            360000000037,
+            "Tamland Refining Ltd",
+            "001mnv0gLnSCKjCZsu",
+            false,
+            "001mnv0gLnSCKjCZsu",
+            "Tamland Refining Ltd",
+            "Standard",
+            "0000100037",
+            true
+          ],
+          [
+            360000000038,
+            "Tammark Mining Inc",
+            "001YGlfcFqQ7k2mUPt",
+            false,
+            "001YGlfcFqQ7k2mUPt",
+            "Tammark Mining Inc",
+            "Standard",
+            "0000100038",
+            true
+          ],
+          [
+            360000000039,
+            "Ardbury HVAC Inc",
+            "00123ZwhacWJ2wuzdd",
+            false,
+            "00123ZwhacWJ2wuzdd",
+            "Ardbury HVAC Inc",
+            "Standard",
+            "0000100039",
+            true
+          ],
+          [
+            360000000040,
+            "Thaldale Pipeline Services Ltd",
+            "001Rjw7i4bLhNUHQuB",
+            false,
+            "001Rjw7i4bLhNUHQuB",
+            "Thaldale Pipeline Services Ltd",
+            "Standard",
+            "0000100040",
+            true
+          ],
+          [
+            360000000041,
+            "Tammark Water Works Inc",
+            "001Tlv61nYMIH36y7w",
+            false,
+            "001Tlv61nYMIH36y7w",
+            "Tammark Water Works Inc",
+            "Standard",
+            "0000100041",
+            true
+          ],
+          [
+            360000000042,
+            "Harholt Process Equipment Inc",
+            "0013weEqsV68QccINN",
+            false,
+            "0013weEqsV68QccINN",
+            "Harholt Process Equipment Inc",
+            "Standard",
+            "0000100042",
+            true
+          ],
+          [
+            360000000043,
+            "Jorton Paper Mills Srl",
+            "001aAzAOwAxHrcLMWB",
+            false,
+            "001aAzAOwAxHrcLMWB",
+            "Jorton Paper Mills Srl",
+            "Standard",
+            "0000100043",
+            true
+          ],
+          [
+            360000000044,
+            "Ebbland Fluid Systems GmbH",
+            "001REoWZHYfxs7Djju",
+            false,
+            "001REoWZHYfxs7Djju",
+            "Ebbland Fluid Systems GmbH",
+            "Standard",
+            "0000100044",
+            true
+          ],
+          [
+            360000000045,
+            "Yarridge Pharma Plants BV",
+            "0011OxcccFce5G4ODU",
+            false,
+            "0011OxcccFce5G4ODU",
+            "Yarridge Pharma Plants BV",
+            "Standard",
+            "0000100045",
+            true
+          ],
+          [
+            360000000046,
+            "Branbrook Pharma Plants Ltd",
+            "001ABZgGDtDbePA7v1",
+            false,
+            "001ABZgGDtDbePA7v1",
+            "Branbrook Pharma Plants Ltd",
+            "Standard",
+            "0000100046",
+            true
+          ],
+          [
+            360000000047,
+            "Quenbrook Pharma Plants Ltd",
+            "0014JErc9LsJNi0nFE",
+            false,
+            "0014JErc9LsJNi0nFE",
+            "Quenbrook Pharma Plants Ltd",
+            "Standard",
+            "0000100047",
+            true
+          ],
+          [
+            360000000048,
+            "Ebbholt Chemicals Inc",
+            "001OHw7Zhis8wKLs61",
+            false,
+            "001OHw7Zhis8wKLs61",
+            "Ebbholt Chemicals Inc",
+            "Standard",
+            "0000100048",
+            true
+          ],
+          [
+            360000000049,
+            "Brandale HVAC SA",
+            "0012WGV98G0WEGHE2m",
+            false,
+            "0012WGV98G0WEGHE2m",
+            "Brandale HVAC SA",
+            "Standard",
+            "0000100049",
+            true
+          ],
+          [
+            360000000050,
+            "Quenbury Marine GmbH",
+            "001bb3W3FqDyIzyke6",
+            false,
+            "001bb3W3FqDyIzyke6",
+            "Quenbury Marine GmbH",
+            "Standard",
+            "0000100050",
+            true
+          ],
+          [
+            360000000051,
+            "Velvale Food Processing Ltd",
+            "001VEskQydnx7dIncG",
+            false,
+            "001VEskQydnx7dIncG",
+            "Velvale Food Processing Ltd",
+            "Standard",
+            "0000100051",
+            true
+          ],
+          [
+            360000000052,
+            "Corland Mining GmbH",
+            "001wZkdnYgvxZgzCNP",
+            false,
+            "001wZkdnYgvxZgzCNP",
+            "Corland Mining GmbH",
+            "Standard",
+            "0000100052",
+            true
+          ],
+          [
+            360000000053,
+            "Harford Paper Mills Inc",
+            "001x6BUqF3EKmYrzUI",
+            false,
+            "001x6BUqF3EKmYrzUI",
+            "Harford Paper Mills Inc",
+            "Standard",
+            "0000100053",
+            true
+          ],
+          [
+            360000000054,
+            "Cormere Energy Inc",
+            "001oUQTSep5jYPPTN2",
+            false,
+            "001oUQTSep5jYPPTN2",
+            "Cormere Energy Inc",
+            "Standard",
+            "0000100054",
+            true
+          ],
+          [
+            360000000055,
+            "Galland Steelworks Inc",
+            "001rtJUUDpuXMRLlvn",
+            false,
+            "001rtJUUDpuXMRLlvn",
+            "Galland Steelworks Inc",
+            "Standard",
+            "0000100055",
+            true
+          ],
+          [
+            360000000056,
+            "Caltton Mining Inc",
+            "001XoY5MuOyzmcll2f",
+            false,
+            "001XoY5MuOyzmcll2f",
+            "Caltton Mining Inc",
+            "Standard",
+            "0000100056",
+            true
+          ],
+          [
+            360000000057,
+            "Velvale Steelworks Ltd",
+            "001VlXFwqAjKwy8wMQ",
+            false,
+            "001VlXFwqAjKwy8wMQ",
+            "Velvale Steelworks Ltd",
+            "Standard",
+            "0000100057",
+            true
+          ],
+          [
+            360000000058,
+            "Corwick Process Equipment Ltd",
+            "0010IUkW1mwZPTG07I",
+            false,
+            "0010IUkW1mwZPTG07I",
+            "Corwick Process Equipment Ltd",
+            "Standard",
+            "0000100058",
+            true
+          ],
+          [
+            360000000059,
+            "Branwick Marine BV",
+            "001MYGIm35zIbHRNaS",
+            false,
+            "001MYGIm35zIbHRNaS",
+            "Branwick Marine BV",
+            "Standard",
+            "0000100059",
+            true
+          ],
+          [
+            360000000060,
+            "Neskford Process Equipment Inc",
+            "0014RHhCYdQW47wUwn",
+            false,
+            "0014RHhCYdQW47wUwn",
+            "Neskford Process Equipment Inc",
+            "Standard",
+            "0000100060",
+            true
+          ],
+          [
+            360000000061,
+            "Ralhaven Process Equipment Inc",
+            "001zkrjrD1vZE0QeS7",
+            false,
+            "001zkrjrD1vZE0QeS7",
+            "Ralhaven Process Equipment Inc",
+            "Standard",
+            "0000100061",
+            true
+          ],
+          [
+            360000000062,
+            "Yarmore Utilities Inc",
+            "001hR4n39Y2EO9FIIu",
+            false,
+            "001hR4n39Y2EO9FIIu",
+            "Yarmore Utilities Inc",
+            "Standard",
+            "0000100062",
+            true
+          ],
+          [
+            360000000063,
+            "Wesmore Steelworks Inc",
+            "001wmac7k8F11k1koU",
+            false,
+            "001wmac7k8F11k1koU",
+            "Wesmore Steelworks Inc",
+            "Standard",
+            "0000100063",
+            true
+          ],
+          [
+            360000000064,
+            "Istmore Pharma Plants Inc",
+            "001iLfsfKlGHPzNCTs",
+            false,
+            "001iLfsfKlGHPzNCTs",
+            "Istmore Pharma Plants Inc",
+            "Standard",
+            "0000100064",
+            true
+          ],
+          [
+            360000000065,
+            "Velvale Utilities Inc",
+            "001gOwFfDZtYihToWq",
+            false,
+            "001gOwFfDZtYihToWq",
+            "Velvale Utilities Inc",
+            "Standard",
+            "0000100065",
+            true
+          ],
+          [
+            360000000066,
+            "Ebbton Water Works BV",
+            "001081evBiq3qWlThm",
+            false,
+            "001081evBiq3qWlThm",
+            "Ebbton Water Works BV",
+            "Standard",
+            "0000100066",
+            true
+          ],
+          [
+            360000000067,
+            "Ulvdale Refining Ltd",
+            "001uwoXkB04xg5iH0s",
+            false,
+            "001uwoXkB04xg5iH0s",
+            "Ulvdale Refining Ltd",
+            "Standard",
+            "0000100067",
+            true
+          ],
+          [
+            360000000068,
+            "Velstead Water Works Inc",
+            "00197J5EwxCEBN43vk",
+            false,
+            "00197J5EwxCEBN43vk",
+            "Velstead Water Works Inc",
+            "Standard",
+            "0000100068",
+            true
+          ],
+          [
+            360000000069,
+            "Ebbton Mining GmbH",
+            "0013DnY3bpn6mZyVUM",
+            false,
+            "0013DnY3bpn6mZyVUM",
+            "Ebbton Mining GmbH",
+            "Standard",
+            "0000100069",
+            true
+          ],
+          [
+            360000000070,
+            "Sevton Paper Mills Inc",
+            "001ELsXwqnKUHvDYbR",
+            false,
+            "001ELsXwqnKUHvDYbR",
+            "Sevton Paper Mills Inc",
+            "Standard",
+            "0000100070",
+            true
+          ],
+          [
+            360000000071,
+            "Ulvmark Chemicals Inc",
+            "001b6uOc2gnSqSOuYn",
+            false,
+            "001b6uOc2gnSqSOuYn",
+            "Ulvmark Chemicals Inc",
+            "Standard",
+            "0000100071",
+            true
+          ],
+          [
+            360000000072,
+            "Dunton Process Equipment Inc",
+            "001gBHbd4dmpuXQsT8",
+            false,
+            "001gBHbd4dmpuXQsT8",
+            "Dunton Process Equipment Inc",
+            "Standard",
+            "0000100072",
+            true
+          ],
+          [
+            360000000073,
+            "Rovford Marine SA",
+            "001Y7hkbtnZlegKq6J",
+            false,
+            "001Y7hkbtnZlegKq6J",
+            "Rovford Marine SA",
+            "Standard",
+            "0000100073",
+            true
+          ],
+          [
+            360000000074,
+            "Tamdale Water Works AB",
+            "001benC222dRIxl5zA",
+            false,
+            "001benC222dRIxl5zA",
+            "Tamdale Water Works AB",
+            "Standard",
+            "0000100074",
+            true
+          ],
+          [
+            360000000075,
+            "Ardland Chemicals Srl",
+            "001h0B5FLCvoT43Y4T",
+            false,
+            "001h0B5FLCvoT43Y4T",
+            "Ardland Chemicals Srl",
+            "Standard",
+            "0000100075",
+            true
+          ],
+          [
+            360000000076,
+            "Caltholt Process Equipment Inc",
+            "001hVdyeHWyAby9zFL",
+            false,
+            "001hVdyeHWyAby9zFL",
+            "Caltholt Process Equipment Inc",
+            "Standard",
+            "0000100076",
+            true
+          ],
+          [
+            360000000077,
+            "Harford Steelworks GmbH",
+            "0012Poa5jiRn1olRCP",
+            false,
+            "0012Poa5jiRn1olRCP",
+            "Harford Steelworks GmbH",
+            "Standard",
+            "0000100077",
+            true
+          ],
+          [
+            360000000078,
+            "Linmore Energy Inc",
+            "001foTDLTdz9SCs3w7",
+            false,
+            "001foTDLTdz9SCs3w7",
+            "Linmore Energy Inc",
+            "Standard",
+            "0000100078",
+            true
+          ],
+          [
+            360000000079,
+            "Tamton Fluid Systems SA",
+            "001N1IlKLAECE3m1R3",
+            false,
+            "001N1IlKLAECE3m1R3",
+            "Tamton Fluid Systems SA",
+            "Standard",
+            "0000100079",
+            true
+          ],
+          [
+            360000000080,
+            "Stavmore Mining Inc",
+            "001FD15pv3SmI8434t",
+            false,
+            "001FD15pv3SmI8434t",
+            "Stavmore Mining Inc",
+            "Standard",
+            "0000100080",
+            true
+          ],
+          [
+            360000000081,
+            "Quenmere HVAC Inc",
+            "0017BeXlgg9DQ1OaAT",
+            false,
+            "0017BeXlgg9DQ1OaAT",
+            "Quenmere HVAC Inc",
+            "Standard",
+            "0000100081",
+            true
+          ],
+          [
+            360000000082,
+            "Stavdale Food Processing SA",
+            "001tD7T8jVsRQnsVMC",
+            false,
+            "001tD7T8jVsRQnsVMC",
+            "Stavdale Food Processing SA",
+            "Standard",
+            "0000100082",
+            true
+          ],
+          [
+            360000000083,
+            "Tamstead HVAC Inc",
+            "001rkYG5yr9AcuQQsa",
+            false,
+            "001rkYG5yr9AcuQQsa",
+            "Tamstead HVAC Inc",
+            "Standard",
+            "0000100083",
+            true
+          ],
+          [
+            360000000084,
+            "Neskbury Process Equipment Inc",
+            "001QbpYylzbOudzIFp",
+            false,
+            "001QbpYylzbOudzIFp",
+            "Neskbury Process Equipment Inc",
+            "Standard",
+            "0000100084",
+            true
+          ],
+          [
+            360000000085,
+            "Hardale Utilities Ltd",
+            "001bbbExVjlLbYnkqW",
+            false,
+            "001bbbExVjlLbYnkqW",
+            "Hardale Utilities Ltd",
+            "Standard",
+            "0000100085",
+            true
+          ],
+          [
+            360000000086,
+            "Wesstead Mining Ltd",
+            "001qbgfKv5Pt0h0HIf",
+            false,
+            "001qbgfKv5Pt0h0HIf",
+            "Wesstead Mining Ltd",
+            "Standard",
+            "0000100086",
+            true
+          ],
+          [
+            360000000087,
+            "Rovbrook Water Works GmbH",
+            "001AUx60K6r9CCo9kl",
+            false,
+            "001AUx60K6r9CCo9kl",
+            "Rovbrook Water Works GmbH",
+            "Standard",
+            "0000100087",
+            true
+          ],
+          [
+            360000000088,
+            "Galridge Pipeline Services SA",
+            "001MLdYwH6rINbHE8c",
+            false,
+            "001MLdYwH6rINbHE8c",
+            "Galridge Pipeline Services SA",
+            "Standard",
+            "0000100088",
+            true
+          ],
+          [
+            360000000089,
+            "Dundale Refining Inc",
+            "0012jo2V1UNlqW9o46",
+            false,
+            "0012jo2V1UNlqW9o46",
+            "Dundale Refining Inc",
+            "Standard",
+            "0000100089",
+            true
+          ],
+          [
+            360000000090,
+            "Thalholt Water Works SA",
+            "001TU14KyLXYRKGG1K",
+            false,
+            "001TU14KyLXYRKGG1K",
+            "Thalholt Water Works SA",
+            "Standard",
+            "0000100090",
+            true
+          ],
+          [
+            360000000091,
+            "Vornmark Energy Ltd",
+            "001UJx6zeRjTPVExII",
+            false,
+            "001UJx6zeRjTPVExII",
+            "Vornmark Energy Ltd",
+            "Standard",
+            "0000100091",
+            true
+          ],
+          [
+            360000000092,
+            "Istland Steelworks GmbH",
+            "001DAuZiAKJTra3BW9",
+            false,
+            "001DAuZiAKJTra3BW9",
+            "Istland Steelworks GmbH",
+            "Standard",
+            "0000100092",
+            true
+          ],
+          [
+            360000000093,
+            "Ebbmark Fluid Systems GmbH",
+            "001LGmi5b500MTBX21",
+            false,
+            "001LGmi5b500MTBX21",
+            "Ebbmark Fluid Systems GmbH",
+            "Standard",
+            "0000100093",
+            true
+          ],
+          [
+            360000000094,
+            "Vornwick Food Processing AB",
+            "001GBsmoaWoMPqcdza",
+            false,
+            "001GBsmoaWoMPqcdza",
+            "Vornwick Food Processing AB",
+            "Standard",
+            "0000100094",
+            true
+          ],
+          [
+            360000000095,
+            "Velridge Process Equipment Srl",
+            "0013KR9nt908PhICPj",
+            false,
+            "0013KR9nt908PhICPj",
+            "Velridge Process Equipment Srl",
+            "Standard",
+            "0000100095",
+            true
+          ],
+          [
+            360000000096,
+            "Vornmark Water Works GmbH",
+            "0017D927hYyeDxpqru",
+            false,
+            "0017D927hYyeDxpqru",
+            "Vornmark Water Works GmbH",
+            "Standard",
+            "0000100096",
+            true
+          ]
+        ],
+        "row_count": 100,
+        "truncated": true
+      },
+      "seconds": 0.02,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "List all Salesforce accounts with tier and history flags",
+        "sql": "SELECT id, name, sap_customer_number_c, tier_c, region_c, _fivetran_active, is_deleted, _fivetran_start, _fivetran_end FROM salesforce.account WHERE tier_c='Strategic' OR _fivetran_active=false ORDER BY name, _fivetran_start"
+      },
+      "output": {
+        "columns": [
+          "id",
+          "name",
+          "sap_customer_number_c",
+          "tier_c",
+          "region_c",
+          "_fivetran_active",
+          "is_deleted",
+          "_fivetran_start",
+          "_fivetran_end"
+        ],
+        "rows": [
+          [
+            "001usVdcbubaV6K9ih",
+            "Dunwick Process Equipment SA",
+            "0000100021",
+            "Strategic",
+            "EMEA",
+            true,
+            false,
+            "2019-11-10 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00"
+          ],
+          [
+            "001RTWHCy9QOZgYtfy",
+            "Galbury Steelworks SA",
+            "0000100004",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "2022-09-01 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00"
+          ],
+          [
+            "001T6Wn0eXovaGLMVG",
+            "Halbrook Fluid Systems",
+            "0000100001",
+            "Strategic",
+            "EMEA",
+            true,
+            false,
+            "2022-12-19 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00"
+          ],
+          [
+            "001KHodrD6UyqZnaQR",
+            "Halbrook Fluid Systems GmbH",
+            null,
+            "Strategic",
+            "EMEA",
+            true,
+            false,
+            "2025-02-10 09:15:00+00:00",
+            "9999-12-31 23:59:59+00:00"
+          ],
+          [
+            "001g6Do98g9SRo6RPs",
+            "Harvale Food Processing Inc",
+            "0000100017",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "2022-01-30 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00"
+          ],
+          [
+            "001cWWUZbLBqBzKEe2",
+            "Jormark Paper Mills SA",
+            "0000100006",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "2021-05-08 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00"
+          ],
+          [
+            "001uZIL3lmdPJi6dMz",
+            "Kelridge Steelworks SA",
+            "0000100019",
+            "Strategic",
+            "EMEA",
+            true,
+            false,
+            "2023-09-11 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00"
+          ],
+          [
+            "001TlD8DEb2a4OHAFu",
+            "Marmark HVAC Inc",
+            "0000100008",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "2020-04-01 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00"
+          ],
+          [
+            "001xtf0eDWZ7g16pYH",
+            "Pellridge Process Equipment GmbH",
+            "0000100022",
+            "Strategic",
+            "EMEA",
+            true,
+            false,
+            "2019-05-23 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00"
+          ],
+          [
+            "001jyjQ3yYlKrgAPD9",
+            "Quenmere Paper Mills GmbH",
+            "0000100015",
+            "Strategic",
+            "EMEA",
+            false,
+            false,
+            "2022-02-19 10:00:00+00:00",
+            "2026-09-22 14:29:59+00:00"
+          ],
+          [
+            "001ePIqhOkiXF8oN5K",
+            "Quenton Food Processing GmbH",
+            "0000100018",
+            "Strategic",
+            "EMEA",
+            true,
+            false,
+            "2019-09-27 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00"
+          ],
+          [
+            "00173mQ9bhojG5YWvV",
+            "Ralmore Process Equipment Inc",
+            "0000100020",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "2021-12-05 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00"
+          ],
+          [
+            "001Mr9uzv7OnksPJDh",
+            "Ralwick Pharma Plants Ltd",
+            "0000100023",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "2021-01-14 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00"
+          ],
+          [
+            "001r9q4bWRxTPoZKYK",
+            "Sevholt Refining SA",
+            "0000100024",
+            "Strategic",
+            "EMEA",
+            true,
+            false,
+            "2023-01-09 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00"
+          ],
+          [
+            "001LYKqH2NcHcxlE2K",
+            "Sevland Utilities Inc",
+            "0000100007",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "2023-04-22 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00"
+          ],
+          [
+            "001xoPG2ALg7oLuJrw",
+            "Tamdale Food Processing Ltd",
+            "0000100014",
+            "Strategic",
+            "EMEA",
+            true,
+            false,
+            "2022-06-22 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00"
+          ],
+          [
+            "001bpSPP9I0DwIsbXO",
+            "Tamford Food Processing SA",
+            "0000100003",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "2021-08-16 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00"
+          ],
+          [
+            "00196WdD6KCNZ4yZVt",
+            "Tammore Food Processing BV",
+            "0000100027",
+            "Strategic",
+            "EMEA",
+            true,
+            false,
+            "2024-02-26 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00"
+          ],
+          [
+            "001aAVL3JudBxJLQKi",
+            "Tamridge Pharma Plants Inc",
+            "0000100012",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "2024-03-07 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00"
+          ],
+          [
+            "001IeA54qrzDv3P7kZ",
+            "Tamwick Mining Inc",
+            "0000100002",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "2019-03-08 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00"
+          ],
+          [
+            "001VBW81QSgOAH35Pb",
+            "Thalmark Marine Srl",
+            "0000100010",
+            "Standard",
+            "EMEA",
+            false,
+            false,
+            "2023-04-30 10:00:00+00:00",
+            "2026-09-22 14:29:59+00:00"
+          ],
+          [
+            "001VBW81QSgOAH35Pb",
+            "Thalmark Marine Srl",
+            "0000100010",
+            "Strategic",
+            "EMEA",
+            true,
+            false,
+            "2026-09-22 14:30:00+00:00",
+            "9999-12-31 23:59:59+00:00"
+          ],
+          [
+            "001z9MQhfHInmTg8Qg",
+            "Velmere Pipeline Services Ltd",
+            "0000100011",
+            "Standard",
+            "North America",
+            false,
+            false,
+            "2019-02-04 10:00:00+00:00",
+            "2026-09-22 14:29:59+00:00"
+          ],
+          [
+            "001z9MQhfHInmTg8Qg",
+            "Velmere Pipeline Services Ltd",
+            "0000100011",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "2026-09-22 14:30:00+00:00",
+            "9999-12-31 23:59:59+00:00"
+          ],
+          [
+            "001fYsCllu8u6Vvqti",
+            "Vornland Chemicals SA",
+            "0000100026",
+            "Strategic",
+            "EMEA",
+            true,
+            false,
+            "2022-05-15 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00"
+          ],
+          [
+            "001oeP6Yy42qbLL6ni",
+            "Vornridge Water Works Ltd",
+            "0000100013",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "2019-10-04 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00"
+          ],
+          [
+            "001gFjTbqI8yil52V7",
+            "Vornwick Utilities Inc",
+            "0000100009",
+            "Standard",
+            "North America",
+            false,
+            false,
+            "2023-01-25 10:00:00+00:00",
+            "2026-09-22 14:29:59+00:00"
+          ],
+          [
+            "001gFjTbqI8yil52V7",
+            "Vornwick Utilities Inc",
+            "0000100009",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "2026-09-22 14:30:00+00:00",
+            "9999-12-31 23:59:59+00:00"
+          ],
+          [
+            "001AgkEM3JeW9GzswP",
+            "Wesmore Energy Ltd",
+            "0000100005",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "2022-04-06 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00"
+          ],
+          [
+            "001tTFM0okFASwilZ0",
+            "Yarstead Process Equipment Inc",
+            "0000100025",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "2022-12-16 10:00:00+00:00",
+            "9999-12-31 23:59:59+00:00"
+          ]
+        ],
+        "row_count": 30,
+        "truncated": false
+      },
+      "seconds": 0.01,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Pull open tickets for current Strategic accounts with tags and subjects",
+        "sql": "WITH strat AS (SELECT DISTINCT id, name, sap_customer_number_c FROM salesforce.account WHERE tier_c='Strategic' AND _fivetran_active=true AND _fivetran_deleted=false),\norg AS (SELECT o.id AS org_id, o.external_id, s.name, s.sap_customer_number_c FROM zendesk.organization o JOIN strat s ON o.external_id=s.id WHERE o._fivetran_deleted=false)\nSELECT org.name, t.id, t.status, t.priority, t.type, t.subject, t.created_at, string_agg(tt.tag, ',') AS tags\nFROM zendesk.ticket t JOIN org ON t.organization_id=org.org_id\nLEFT JOIN zendesk.ticket_tag tt ON tt.ticket_id=t.id AND tt._fivetran_deleted=false\nWHERE t._fivetran_deleted=false AND t.status IN ('new','open','pending','hold')\nGROUP BY ALL ORDER BY org.name, t.id"
+      },
+      "output": {
+        "columns": [
+          "name",
+          "id",
+          "status",
+          "priority",
+          "type",
+          "subject",
+          "created_at",
+          "tags"
+        ],
+        "rows": [
+          [
+            "Galbury Steelworks SA",
+            102837,
+            "open",
+            "normal",
+            "question",
+            "Delivery for order 0010006602 still missing",
+            "2026-10-14 14:34:54+00:00",
+            "shipping,urgent"
+          ],
+          [
+            "Galbury Steelworks SA",
+            102956,
+            "pending",
+            "urgent",
+            "question",
+            "Delay on bearings for line 8396",
+            "2026-10-31 09:33:15+00:00",
+            null
+          ],
+          [
+            "Galbury Steelworks SA",
+            102966,
+            "open",
+            "normal",
+            "question",
+            "Order 0010003309 not received yet",
+            "2026-11-01 11:41:20+00:00",
+            "shipping"
+          ],
+          [
+            "Galbury Steelworks SA",
+            102969,
+            "pending",
+            "high",
+            "question",
+            "Credit note request for order 0010004729",
+            "2026-11-01 17:52:53+00:00",
+            "billing"
+          ],
+          [
+            "Galbury Steelworks SA",
+            102979,
+            "new",
+            "low",
+            "incident",
+            "Order 0010000850 arrived late",
+            "2026-11-02 17:40:31+00:00",
+            "delivery"
+          ],
+          [
+            "Halbrook Fluid Systems",
+            102823,
+            "pending",
+            "low",
+            "problem",
+            "Order 0010002553 arrived late",
+            "2026-10-12 08:25:19+00:00",
+            "shipping,urgent"
+          ],
+          [
+            "Halbrook Fluid Systems GmbH",
+            102936,
+            "pending",
+            "low",
+            "question",
+            "Late delivery on order 0010006784",
+            "2026-10-28 11:25:52+00:00",
+            "logistics"
+          ],
+          [
+            "Halbrook Fluid Systems GmbH",
+            102977,
+            "open",
+            "urgent",
+            "incident",
+            "Order 0010007869 arrived late",
+            "2026-11-02 16:31:20+00:00",
+            "shipping"
+          ],
+          [
+            "Harvale Food Processing Inc",
+            102845,
+            "new",
+            "high",
+            "incident",
+            "Tracking not updating for TRK1655940522",
+            "2026-10-15 13:51:25+00:00",
+            "logistics"
+          ],
+          [
+            "Harvale Food Processing Inc",
+            102850,
+            "open",
+            "high",
+            "incident",
+            "Need certificate of conformity for PMP-3010",
+            "2026-10-16 07:22:42+00:00",
+            "product_question"
+          ],
+          [
+            "Harvale Food Processing Inc",
+            102894,
+            "open",
+            "high",
+            "question",
+            "Need certificate of conformity for BRG-2030",
+            "2026-10-22 08:05:57+00:00",
+            "product_question"
+          ],
+          [
+            "Harvale Food Processing Inc",
+            102914,
+            "open",
+            "low",
+            "question",
+            "Manual for SPR-4030 missing pages",
+            "2026-10-25 08:49:00+00:00",
+            "product_question"
+          ],
+          [
+            "Harvale Food Processing Inc",
+            102963,
+            "open",
+            "normal",
+            "problem",
+            "Invoice 4159 shows the wrong PO number",
+            "2026-11-01 09:03:10+00:00",
+            "billing"
+          ],
+          [
+            "Jormark Paper Mills SA",
+            102917,
+            "open",
+            "normal",
+            "problem",
+            "Has 0010008811 left your warehouse?",
+            "2026-10-25 11:46:11+00:00",
+            "delivery"
+          ],
+          [
+            "Jormark Paper Mills SA",
+            102929,
+            "hold",
+            "low",
+            "problem",
+            "Delay on bearings for line 8407",
+            "2026-10-27 14:09:50+00:00",
+            "shipping"
+          ],
+          [
+            "Jormark Paper Mills SA",
+            102930,
+            "pending",
+            "normal",
+            "incident",
+            "Order 0010003556 arrived late",
+            "2026-10-27 17:15:30+00:00",
+            "logistics"
+          ],
+          [
+            "Jormark Paper Mills SA",
+            102950,
+            "pending",
+            "low",
+            "question",
+            "Change of billing address",
+            "2026-10-30 16:13:22+00:00",
+            "billing"
+          ],
+          [
+            "Jormark Paper Mills SA",
+            102981,
+            "open",
+            "high",
+            "incident",
+            "Bearing BRG-2010 running hot after install",
+            "2026-11-03 12:04:07+00:00",
+            "product_question"
+          ],
+          [
+            "Quenton Food Processing GmbH",
+            102864,
+            "pending",
+            "normal",
+            "problem",
+            "Spare parts quote request",
+            "2026-10-18 12:02:43+00:00",
+            "product_question"
+          ],
+          [
+            "Quenton Food Processing GmbH",
+            102872,
+            "open",
+            "normal",
+            "problem",
+            "Manual for VLV-1010 missing pages",
+            "2026-10-18 15:45:49+00:00",
+            "product_question"
+          ],
+          [
+            "Quenton Food Processing GmbH",
+            102891,
+            "pending",
+            "high",
+            "problem",
+            "Warranty claim for VLV-1010",
+            "2026-10-21 13:51:56+00:00",
+            "returns,warranty"
+          ],
+          [
+            "Quenton Food Processing GmbH",
+            102934,
+            "open",
+            "low",
+            "question",
+            "Request for pump curve data sheet",
+            "2026-10-28 10:12:14+00:00",
+            "product_question"
+          ],
+          [
+            "Ralmore Process Equipment Inc",
+            102927,
+            "open",
+            "normal",
+            "question",
+            "Seal kit compatibility question",
+            "2026-10-26 10:38:52+00:00",
+            "product_question"
+          ],
+          [
+            "Ralwick Pharma Plants Ltd",
+            102847,
+            "pending",
+            "normal",
+            "incident",
+            "Manual for PMP-3000 missing pages",
+            "2026-10-15 15:59:38+00:00",
+            "product_question"
+          ],
+          [
+            "Ralwick Pharma Plants Ltd",
+            102855,
+            "hold",
+            "normal",
+            "incident",
+            "Delivery for order 0010006301 still missing",
+            "2026-10-17 10:24:19+00:00",
+            "logistics"
+          ],
+          [
+            "Sevland Utilities Inc",
+            102884,
+            "open",
+            "urgent",
+            "incident",
+            "Seal kit compatibility question",
+            "2026-10-20 09:16:44+00:00",
+            "product_question"
+          ],
+          [
+            "Sevland Utilities Inc",
+            102892,
+            "open",
+            "low",
+            "incident",
+            "Order 0010004676 arrived late",
+            "2026-10-21 16:26:15+00:00",
+            "shipping"
+          ],
+          [
+            "Tamdale Food Processing Ltd",
+            102877,
+            "pending",
+            "normal",
+            "question",
+            "Need certificate of conformity for SPR-4010",
+            "2026-10-19 13:07:53+00:00",
+            "product_question"
+          ],
+          [
+            "Tamdale Food Processing Ltd",
+            102887,
+            "open",
+            "low",
+            "incident",
+            "Tracking not updating for TRK8073519476",
+            "2026-10-20 13:57:56+00:00",
+            null
+          ],
+          [
+            "Tamdale Food Processing Ltd",
+            102915,
+            "hold",
+            "low",
+            "problem",
+            "Tracking not updating for TRK7229295575",
+            "2026-10-25 10:32:43+00:00",
+            "shipping"
+          ],
+          [
+            "Tamdale Food Processing Ltd",
+            102955,
+            "hold",
+            "high",
+            "incident",
+            "Order 0010002676 not received yet",
+            "2026-10-31 08:14:08+00:00",
+            "shipping"
+          ],
+          [
+            "Tamdale Food Processing Ltd",
+            102968,
+            "open",
+            "high",
+            "problem",
+            "Seal kit compatibility question",
+            "2026-11-01 16:11:18+00:00",
+            "product_question"
+          ],
+          [
+            "Tamford Food Processing SA",
+            102909,
+            "open",
+            "low",
+            "problem",
+            "Order 0010005071 not received yet",
+            "2026-10-24 11:04:21+00:00",
+            "shipping"
+          ],
+          [
+            "Tamford Food Processing SA",
+            102926,
+            "open",
+            "normal",
+            "problem",
+            "Order 0010005601 arrived late",
+            "2026-10-26 08:53:03+00:00",
+            "shipping"
+          ],
+          [
+            "Tamridge Pharma Plants Inc",
+            102918,
+            "open",
+            "high",
+            "problem",
+            "Spare parts quote request",
+            "2026-10-25 13:25:46+00:00",
+            "product_question"
+          ],
+          [
+            "Tamridge Pharma Plants Inc",
+            102932,
+            "open",
+            "normal",
+            "problem",
+            "Request for pump curve data sheet",
+            "2026-10-28 08:40:37+00:00",
+            "product_question"
+          ],
+          [
+            "Tamwick Mining Inc",
+            102854,
+            "open",
+            "high",
+            "incident",
+            "Delay on bearings for line 1227",
+            "2026-10-17 09:24:28+00:00",
+            "delivery"
+          ],
+          [
+            "Tamwick Mining Inc",
+            102886,
+            "new",
+            "normal",
+            "question",
+            "Order 0010002384 arrived late",
+            "2026-10-20 11:43:16+00:00",
+            "delivery"
+          ],
+          [
+            "Tamwick Mining Inc",
+            102959,
+            "pending",
+            "high",
+            "incident",
+            "Late delivery on order 0010007141",
+            "2026-10-31 10:41:51+00:00",
+            "shipping"
+          ],
+          [
+            "Velmere Pipeline Services Ltd",
+            102913,
+            "pending",
+            "urgent",
+            "question",
+            "Tracking not updating for TRK9061412715",
+            "2026-10-24 16:49:05+00:00",
+            null
+          ],
+          [
+            "Vornland Chemicals SA",
+            102949,
+            "open",
+            "high",
+            "question",
+            "Late delivery on order 0010002236",
+            "2026-10-30 15:21:05+00:00",
+            null
+          ],
+          [
+            "Vornridge Water Works Ltd",
+            102944,
+            "open",
+            "low",
+            "problem",
+            "Tracking not updating for TRK8633730121",
+            "2026-10-29 13:57:57+00:00",
+            "delivery"
+          ],
+          [
+            "Vornwick Utilities Inc",
+            102851,
+            "pending",
+            "urgent",
+            "incident",
+            "Warranty claim for SPR-4010",
+            "2026-10-16 07:23:17+00:00",
+            "returns,warranty"
+          ],
+          [
+            "Vornwick Utilities Inc",
+            102875,
+            "open",
+            "normal",
+            "question",
+            "Credit note request for order 0010004964",
+            "2026-10-19 09:27:52+00:00",
+            "billing"
+          ],
+          [
+            "Vornwick Utilities Inc",
+            102916,
+            "hold",
+            "high",
+            "question",
+            "Delivery for order 0010003651 still missing",
+            "2026-10-25 11:03:08+00:00",
+            null
+          ],
+          [
+            "Vornwick Utilities Inc",
+            102951,
+            "pending",
+            "low",
+            "problem",
+            "Change of billing address",
+            "2026-10-30 16:55:30+00:00",
+            "billing"
+          ],
+          [
+            "Wesmore Energy Ltd",
+            102870,
+            "open",
+            "normal",
+            "incident",
+            "Has 0010005979 left your warehouse?",
+            "2026-10-18 15:09:13+00:00",
+            "shipping"
+          ],
+          [
+            "Wesmore Energy Ltd",
+            102958,
+            "open",
+            "low",
+            "incident",
+            "Warranty claim for SPR-4030",
+            "2026-10-31 10:05:26+00:00",
+            "returns,warranty"
+          ],
+          [
+            "Wesmore Energy Ltd",
+            102978,
+            "open",
+            "low",
+            "problem",
+            "Shipment TRK1211859787 delayed again",
+            "2026-11-02 17:28:21+00:00",
+            "delivery"
+          ],
+          [
+            "Yarstead Process Equipment Inc",
+            102865,
+            "pending",
+            "normal",
+            "incident",
+            "Delay on bearings for line 6410",
+            "2026-10-18 12:37:05+00:00",
+            "logistics"
+          ]
+        ],
+        "row_count": 50,
+        "truncated": false
+      },
+      "seconds": 0.02,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check Zendesk organizations for duplicates and unmatched orgs",
+        "sql": "SELECT COUNT(*) AS orgs, COUNT(DISTINCT external_id) AS ext_ids, COUNT(DISTINCT name) AS names, SUM(CASE WHEN external_id IS NULL THEN 1 ELSE 0 END) AS null_ext, SUM(CASE WHEN _fivetran_deleted THEN 1 ELSE 0 END) AS deleted FROM zendesk.organization"
+      },
+      "output": {
+        "columns": [
+          "orgs",
+          "ext_ids",
+          "names",
+          "null_ext",
+          "deleted"
+        ],
+        "rows": [
+          [
+            121,
+            121,
+            121,
+            0,
+            0
+          ]
+        ],
+        "row_count": 1,
+        "truncated": false
+      },
+      "seconds": 0.01,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Count open shipping-related tickets for current Strategic accounts using tags OR subject keywords, to cross-check the manual count",
+        "sql": "WITH strat AS (SELECT DISTINCT id, name FROM salesforce.account WHERE tier_c='Strategic' AND _fivetran_active=true AND _fivetran_deleted=false),\norg AS (SELECT o.id AS org_id, s.name, s.id AS sf_id FROM zendesk.organization o JOIN strat s ON o.external_id=s.id WHERE o._fivetran_deleted=false),\nt AS (SELECT t.id, t.status, t.subject, org.name AS account, org.sf_id,\n  (SELECT string_agg(tag, ',') FROM zendesk.ticket_tag tt WHERE tt.ticket_id=t.id AND tt._fivetran_deleted=false) AS tags\n  FROM zendesk.ticket t JOIN org ON t.organization_id=org.org_id WHERE t._fivetran_deleted=false AND t.status IN ('new','open','pending','hold'))\nSELECT COUNT(*) AS open_tickets_all,\n SUM(CASE WHEN (tags LIKE '%shipping%' OR tags LIKE '%delivery%' OR tags LIKE '%logistics%' OR tags LIKE '%late_delivery%' OR lower(subject) SIMILAR TO '%(late|delay|tracking|delivery|not received|left your warehouse|still missing)%') THEN 1 ELSE 0 END) AS shipping_related,\n SUM(CASE WHEN (tags LIKE '%shipping%' OR tags LIKE '%delivery%' OR tags LIKE '%logistics%' OR tags LIKE '%late_delivery%') THEN 1 ELSE 0 END) AS tag_only,\n SUM(CASE WHEN status='open' AND (tags LIKE '%shipping%' OR tags LIKE '%delivery%' OR tags LIKE '%logistics%' OR tags LIKE '%late_delivery%' OR lower(subject) SIMILAR TO '%(late|delay|tracking|delivery|not received|left your warehouse|still missing)%') THEN 1 ELSE 0 END) AS status_open_only,\n SUM(CASE WHEN account LIKE 'Halbrook Fluid Systems GmbH%' AND (tags LIKE '%shipping%' OR tags LIKE '%delivery%' OR tags LIKE '%logistics%' OR lower(subject) SIMILAR TO '%(late|delay|tracking|delivery|not received|left your warehouse|still missing)%') THEN 1 ELSE 0 END) AS halbrook_gmbh_shipping,\n COUNT(DISTINCT sf_id) AS accounts_with_open\nFROM t"
+      },
+      "output": {
+        "columns": [
+          "open_tickets_all",
+          "shipping_related",
+          "tag_only",
+          "status_open_only",
+          "halbrook_gmbh_shipping",
+          "accounts_with_open"
+        ],
+        "rows": [
+          [
+            50,
+            23,
+            23,
+            11,
+            2,
+            19
+          ]
+        ],
+        "row_count": 1,
+        "truncated": false
+      },
+      "seconds": 0.04,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Recheck subject-keyword matching for untagged open tickets of Strategic accounts using ILIKE",
+        "sql": "WITH strat AS (SELECT DISTINCT id, name FROM salesforce.account WHERE tier_c='Strategic' AND _fivetran_active=true AND _fivetran_deleted=false),\norg AS (SELECT o.id AS org_id, s.name, s.id AS sf_id FROM zendesk.organization o JOIN strat s ON o.external_id=s.id WHERE o._fivetran_deleted=false),\nt AS (SELECT t.id, t.status, t.subject, org.name AS account,\n  (SELECT string_agg(tag, ',') FROM zendesk.ticket_tag tt WHERE tt.ticket_id=t.id AND tt._fivetran_deleted=false) AS tags\n  FROM zendesk.ticket t JOIN org ON t.organization_id=org.org_id WHERE t._fivetran_deleted=false AND t.status IN ('new','open','pending','hold'))\nSELECT id, status, subject, COALESCE(tags,'') AS tags,\n (subject ILIKE '%late%' OR subject ILIKE '%delay%' OR subject ILIKE '%tracking%' OR subject ILIKE '%delivery%' OR subject ILIKE '%not received%' OR subject ILIKE '%left your warehouse%' OR subject ILIKE '%still missing%') AS subj_match,\n (COALESCE(tags,'') ILIKE '%shipping%' OR COALESCE(tags,'') ILIKE '%delivery%' OR COALESCE(tags,'') ILIKE '%logistics%') AS tag_match\nFROM t ORDER BY subj_match DESC, tag_match DESC, id"
+      },
+      "output": {
+        "columns": [
+          "id",
+          "status",
+          "subject",
+          "tags",
+          "subj_match",
+          "tag_match"
+        ],
+        "rows": [
+          [
+            102823,
+            "pending",
+            "Order 0010002553 arrived late",
+            "shipping,urgent",
+            true,
+            true
+          ],
+          [
+            102837,
+            "open",
+            "Delivery for order 0010006602 still missing",
+            "shipping,urgent",
+            true,
+            true
+          ],
+          [
+            102845,
+            "new",
+            "Tracking not updating for TRK1655940522",
+            "logistics",
+            true,
+            true
+          ],
+          [
+            102854,
+            "open",
+            "Delay on bearings for line 1227",
+            "delivery",
+            true,
+            true
+          ],
+          [
+            102855,
+            "hold",
+            "Delivery for order 0010006301 still missing",
+            "logistics",
+            true,
+            true
+          ],
+          [
+            102865,
+            "pending",
+            "Delay on bearings for line 6410",
+            "logistics",
+            true,
+            true
+          ],
+          [
+            102870,
+            "open",
+            "Has 0010005979 left your warehouse?",
+            "shipping",
+            true,
+            true
+          ],
+          [
+            102886,
+            "new",
+            "Order 0010002384 arrived late",
+            "delivery",
+            true,
+            true
+          ],
+          [
+            102892,
+            "open",
+            "Order 0010004676 arrived late",
+            "shipping",
+            true,
+            true
+          ],
+          [
+            102909,
+            "open",
+            "Order 0010005071 not received yet",
+            "shipping",
+            true,
+            true
+          ],
+          [
+            102915,
+            "hold",
+            "Tracking not updating for TRK7229295575",
+            "shipping",
+            true,
+            true
+          ],
+          [
+            102917,
+            "open",
+            "Has 0010008811 left your warehouse?",
+            "delivery",
+            true,
+            true
+          ],
+          [
+            102926,
+            "open",
+            "Order 0010005601 arrived late",
+            "shipping",
+            true,
+            true
+          ],
+          [
+            102929,
+            "hold",
+            "Delay on bearings for line 8407",
+            "shipping",
+            true,
+            true
+          ],
+          [
+            102930,
+            "pending",
+            "Order 0010003556 arrived late",
+            "logistics",
+            true,
+            true
+          ],
+          [
+            102936,
+            "pending",
+            "Late delivery on order 0010006784",
+            "logistics",
+            true,
+            true
+          ],
+          [
+            102944,
+            "open",
+            "Tracking not updating for TRK8633730121",
+            "delivery",
+            true,
+            true
+          ],
+          [
+            102955,
+            "hold",
+            "Order 0010002676 not received yet",
+            "shipping",
+            true,
+            true
+          ],
+          [
+            102959,
+            "pending",
+            "Late delivery on order 0010007141",
+            "shipping",
+            true,
+            true
+          ],
+          [
+            102966,
+            "open",
+            "Order 0010003309 not received yet",
+            "shipping",
+            true,
+            true
+          ],
+          [
+            102977,
+            "open",
+            "Order 0010007869 arrived late",
+            "shipping",
+            true,
+            true
+          ],
+          [
+            102978,
+            "open",
+            "Shipment TRK1211859787 delayed again",
+            "delivery",
+            true,
+            true
+          ],
+          [
+            102979,
+            "new",
+            "Order 0010000850 arrived late",
+            "delivery",
+            true,
+            true
+          ],
+          [
+            102887,
+            "open",
+            "Tracking not updating for TRK8073519476",
+            "",
+            true,
+            false
+          ],
+          [
+            102913,
+            "pending",
+            "Tracking not updating for TRK9061412715",
+            "",
+            true,
+            false
+          ],
+          [
+            102916,
+            "hold",
+            "Delivery for order 0010003651 still missing",
+            "",
+            true,
+            false
+          ],
+          [
+            102949,
+            "open",
+            "Late delivery on order 0010002236",
+            "",
+            true,
+            false
+          ],
+          [
+            102956,
+            "pending",
+            "Delay on bearings for line 8396",
+            "",
+            true,
+            false
+          ],
+          [
+            102847,
+            "pending",
+            "Manual for PMP-3000 missing pages",
+            "product_question",
+            false,
+            false
+          ],
+          [
+            102850,
+            "open",
+            "Need certificate of conformity for PMP-3010",
+            "product_question",
+            false,
+            false
+          ],
+          [
+            102851,
+            "pending",
+            "Warranty claim for SPR-4010",
+            "returns,warranty",
+            false,
+            false
+          ],
+          [
+            102864,
+            "pending",
+            "Spare parts quote request",
+            "product_question",
+            false,
+            false
+          ],
+          [
+            102872,
+            "open",
+            "Manual for VLV-1010 missing pages",
+            "product_question",
+            false,
+            false
+          ],
+          [
+            102875,
+            "open",
+            "Credit note request for order 0010004964",
+            "billing",
+            false,
+            false
+          ],
+          [
+            102877,
+            "pending",
+            "Need certificate of conformity for SPR-4010",
+            "product_question",
+            false,
+            false
+          ],
+          [
+            102884,
+            "open",
+            "Seal kit compatibility question",
+            "product_question",
+            false,
+            false
+          ],
+          [
+            102891,
+            "pending",
+            "Warranty claim for VLV-1010",
+            "returns,warranty",
+            false,
+            false
+          ],
+          [
+            102894,
+            "open",
+            "Need certificate of conformity for BRG-2030",
+            "product_question",
+            false,
+            false
+          ],
+          [
+            102914,
+            "open",
+            "Manual for SPR-4030 missing pages",
+            "product_question",
+            false,
+            false
+          ],
+          [
+            102918,
+            "open",
+            "Spare parts quote request",
+            "product_question",
+            false,
+            false
+          ],
+          [
+            102927,
+            "open",
+            "Seal kit compatibility question",
+            "product_question",
+            false,
+            false
+          ],
+          [
+            102932,
+            "open",
+            "Request for pump curve data sheet",
+            "product_question",
+            false,
+            false
+          ],
+          [
+            102934,
+            "open",
+            "Request for pump curve data sheet",
+            "product_question",
+            false,
+            false
+          ],
+          [
+            102950,
+            "pending",
+            "Change of billing address",
+            "billing",
+            false,
+            false
+          ],
+          [
+            102951,
+            "pending",
+            "Change of billing address",
+            "billing",
+            false,
+            false
+          ],
+          [
+            102958,
+            "open",
+            "Warranty claim for SPR-4030",
+            "returns,warranty",
+            false,
+            false
+          ],
+          [
+            102963,
+            "open",
+            "Invoice 4159 shows the wrong PO number",
+            "billing",
+            false,
+            false
+          ],
+          [
+            102968,
+            "open",
+            "Seal kit compatibility question",
+            "product_question",
+            false,
+            false
+          ],
+          [
+            102969,
+            "pending",
+            "Credit note request for order 0010004729",
+            "billing",
+            false,
+            false
+          ],
+          [
+            102981,
+            "open",
+            "Bearing BRG-2010 running hot after install",
+            "product_question",
+            false,
+            false
+          ]
+        ],
+        "row_count": 50,
+        "truncated": false
+      },
+      "seconds": 0.03,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check how recently the Zendesk ticket, tag and Salesforce account tables were synced",
+        "sql": "SELECT 'zendesk.ticket' AS src, MAX(_fivetran_synced) AS last_synced, MAX(updated_at) AS max_business_ts FROM zendesk.ticket UNION ALL SELECT 'zendesk.ticket_tag', MAX(_fivetran_synced), NULL FROM zendesk.ticket_tag UNION ALL SELECT 'salesforce.account', MAX(_fivetran_synced), MAX(last_modified_date) FROM salesforce.account"
+      },
+      "output": {
+        "columns": [
+          "src",
+          "last_synced",
+          "max_business_ts"
+        ],
+        "rows": [
+          [
+            "zendesk.ticket",
+            "2026-11-09 19:47:33+00:00",
+            "2026-11-03 18:00:00+00:00"
+          ],
+          [
+            "zendesk.ticket_tag",
+            "2026-11-09 19:47:33+00:00",
+            null
+          ],
+          [
+            "salesforce.account",
+            "2026-11-11 16:13:32+00:00",
+            "2026-09-22 14:30:00+00:00"
+          ]
+        ],
+        "row_count": 3,
+        "truncated": false
+      },
+      "seconds": 0.02,
+      "is_error": false
+    }
+  ],
+  "answer": {
+    "answer_summary": "Our current Strategic accounts have 28 open shipping-related support tickets in total, across 16 accounts. \"Open\" means Zendesk status new, open, pending or hold; only 13 of the 28 are in status \"open\" itself. Halbrook Fluid Systems GmbH contributes 2 of the 28 and may be a duplicate account, so the total could be 26 if it is removed.",
+    "at_risk_accounts": [],
+    "value": 28,
+    "unit": "count",
+    "is_current": null,
+    "data_age_days": 3,
+    "metrics_used": [
+      {
+        "name": "Strategic account",
+        "definition": "salesforce.account rows with tier_c = 'Strategic', _fivetran_active = true and not deleted (26 rows); accounts linked to Zendesk organizations via external_id = Salesforce account id"
+      },
+      {
+        "name": "Open ticket",
+        "definition": "zendesk.ticket with status in ('new','open','pending','hold') and not deleted"
+      },
+      {
+        "name": "Shipping-related ticket",
+        "definition": "open ticket carrying a shipping, delivery, logistics or late_delivery tag, OR whose subject mentions late, delay, tracking, delivery, not received, left your warehouse or still missing"
+      }
+    ],
+    "lineage": [
+      "salesforce.account -> current Strategic account list (active, tier_c = Strategic)",
+      "zendesk.organization (external_id = Salesforce account id) -> account to organization map",
+      "zendesk.ticket + zendesk.ticket_tag -> open shipping-related tickets",
+      "Count of open shipping-related tickets for Strategic accounts = 28"
+    ],
+    "freshness": [
+      {
+        "source": "zendesk.ticket / zendesk.ticket_tag",
+        "last_synced": "2026-11-09 19:47:33 UTC",
+        "within_window": null
+      },
+      {
+        "source": "salesforce.account",
+        "last_synced": "2026-11-11 16:13:32 UTC",
+        "within_window": null
+      }
+    ],
+    "assumptions": [
+      "Strategic accounts are the 26 active Salesforce records with tier_c = 'Strategic' as of 6 Nov 2026. Thalmark Marine, Velmere Pipeline and Vornwick Utilities were promoted to Strategic on 2026-09-22 and are included. Quenmere Paper Mills was demoted and is excluded.",
+      "'Open' includes Zendesk statuses pending and hold as well as new and open, because all four are unresolved. Solved and closed tickets are excluded.",
+      "Shipping-related means a shipping, delivery, logistics or late_delivery tag, or a subject about late/delayed/missing/untracked orders. Tags are incomplete: 5 of the 28 have no tag and were included on subject alone.",
+      "'Delay on bearings for line 8396' (102956) is counted as shipping-related because the subject describes a delivery delay. It is the only one of the 28 with no tag that is less clear-cut; excluding it gives 27.",
+      "Halbrook Fluid Systems GmbH (Salesforce 001KHodrD6UyqZnaQR) has no SAP customer number and is treated as a separate account because it has its own Zendesk organization. It may be a duplicate of Halbrook Fluid Systems."
+    ],
+    "caveats": [
+      "If only status 'open' counts (excluding pending and hold), the total is 13, not 28.",
+      "If Halbrook Fluid Systems GmbH is a duplicate of Halbrook Fluid Systems, the total falls to 26.",
+      "Sync timestamps in Zendesk and Salesforce (9 and 11 Nov 2026) are later than the 6 Nov as-of date, so the sync clock may be off. The most recent ticket update is 3 Nov 2026, so data_age_days of 3 reflects that update, not a confirmed sync time. Whether the data is current is therefore unconfirmed (is_current left null).",
+      "Tag coverage is incomplete, so the subject-keyword rule is needed. Ticket subjects are free text and could be misclassified.",
+      "The question asked only for the total, so no at-risk account list was produced."
+    ]
+  },
+  "stop_reason": "tool_use",
+  "error": null,
+  "seconds": 53.3,
+  "usage": {
+    "input_tokens": 16,
+    "output_tokens": 11944,
+    "cache_read_input_tokens": 110173,
+    "cache_creation_input_tokens": 28468,
+    "requests": 7,
+    "cost_usd": 0.010635
+  },
+  "served_by": "claude-haiku-5-5",
+  "score": {
+    "correct": true,
+    "expected": 28,
+    "got": 28.0
+  },
+  "cost_usd": 0.0106,
+  "run": 3,
+  "explanation": [
+    {
+      "trap": "T4",
+      "title": "Missed a customer split across two CRM accounts",
+      "detail": "Halbrook Fluid Systems has a look-alike duplicate account (\"\u2026 GmbH\") with no SAP number. Two of its open shipping tickets sit on the duplicate, so the customer looked healthy.",
+      "sql_line": null,
+      "step": null
+    },
+    {
+      "trap": "T5",
+      "title": "Read every history row of the account tier",
+      "detail": "salesforce.account keeps one row per version of each account (history mode). Without filtering to _fivetran_active, accounts that changed tier appear twice, and Quenmere Paper Mills GmbH still looks Strategic.",
+      "sql_line": "SELECT 'zendesk.ticket' AS src, MAX(_fivetran_synced) AS last_synced, MAX(updated_at) AS max_business_ts FROM zendesk.ticket UNION ALL SELECT 'zendesk.ticket_tag', MAX(_fivetran_synced), NULL FROM zendesk.ticket_tag UNION ALL SELECT 'salesforce.account', MAX(_fivetran_synced), MAX(last_modified_date) FROM salesforce.account",
+      "step": 10
+    }
+  ],
+  "answer_repaired": false
+}

@@ -1,0 +1,12 @@
+{
+  "_about": "Plain-English meaning of the SAP S/4HANA fields in the ContextLoop extract. Shown in the app; used by nothing else.",
+  "KNA1": {"_table": "Customer master", "MANDT": "Client", "KUNNR": "Customer number", "NAME1": "Customer name", "LAND1": "Country key", "ORT01": "City", "TELF1": "Telephone", "KTOKD": "Customer account group", "ERDAT": "Created on"},
+  "VBAK": {"_table": "Sales order header", "VBELN": "Sales order number", "ERDAT": "Created on", "ERZET": "Created at (time)", "AUART": "Order type", "VKORG": "Sales organization", "KUNNR": "Sold-to customer", "NETWR": "Net order value", "WAERK": "Document currency", "VDATU": "Requested delivery date"},
+  "VBAP": {"_table": "Sales order item", "VBELN": "Sales order number", "POSNR": "Item number", "MATNR": "Material number", "ARKTX": "Item description", "KWMENG": "Order quantity", "NETWR": "Net item value", "WAERK": "Currency", "ERDAT": "Created on"},
+  "LIKP": {"_table": "Delivery header", "VBELN": "Delivery number", "KUNNR": "Ship-to customer", "VSTEL": "Shipping point", "ERDAT": "Created on", "WADAT": "Planned goods issue date", "WADAT_IST": "Actual goods issue date (00000000 = not yet shipped)", "LFDAT": "Planned delivery date", "ZZ_CARRIER_ID": "Carrier ID (custom field added in batch 2)"},
+  "LIPS": {"_table": "Delivery item", "VBELN": "Delivery number", "POSNR": "Item number", "MATNR": "Material number", "LFIMG": "Delivered quantity", "VGBEL": "Reference document (sales order)", "VGPOS": "Reference item", "ERDAT": "Created on"},
+  "VBRK": {"_table": "Billing document header", "VBELN": "Billing document number", "FKART": "Billing type (F2 invoice, G2 credit memo)", "FKDAT": "Billing date", "KUNAG": "Sold-to customer", "NETWR": "Net value (positive for both types)", "WAERK": "Document currency", "ERDAT": "Created on"},
+  "VBRP": {"_table": "Billing document item", "VBELN": "Billing document number", "POSNR": "Item number", "MATNR": "Material number", "NETWR": "Net item value", "VGBEL": "Reference document (delivery or invoice)", "AUBEL": "Sales order", "ERDAT": "Created on"},
+  "TCURR": {"_table": "Exchange rates", "KURST": "Rate type (M = monthly average)", "FCURR": "From currency", "TCURR": "To currency", "GDATU": "Valid from, stored inverted (99999999 - YYYYMMDD)", "UKURS": "Exchange rate"},
+  "_change_columns": {"AEDAT": "Changed on (extraction change date)", "AEZET": "Changed at (time)", "ODQ_CHANGEMODE": "Change mode from the extraction queue: C create, U update, D delete"}
+}

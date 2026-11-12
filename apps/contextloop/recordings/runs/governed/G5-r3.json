@@ -1,0 +1,305 @@
+{
+  "agent": "governed",
+  "question_id": "G5",
+  "question": "Is our support ticket data current enough to act on today?",
+  "model": "claude-haiku-5-5",
+  "effort": "high",
+  "started_at": "2026-11-11T20:20:32+00:00",
+  "steps": [
+    {
+      "tool": "check_freshness",
+      "input": {},
+      "output": {
+        "checked_at": "2026-11-11T20:20:33+00:00",
+        "window_hours": 24,
+        "sources": [
+          {
+            "source": "carrier_pg",
+            "name": "Carrier tracking Postgres (Connector SDK)",
+            "schema": "carrier_pg",
+            "simulated_landing": false,
+            "last_successful_sync": "2026-11-11T18:28:27.524601+00:00",
+            "age_hours": 1.9,
+            "age_days": 0.1,
+            "within_window": true,
+            "rows_changed_last_success": 3,
+            "latest_attempt": {
+              "at": "2026-11-11T18:28:27.524601+00:00",
+              "status": "SUCCESSFUL",
+              "message": null
+            }
+          },
+          {
+            "source": "salesforce",
+            "name": "Salesforce (simulated landing)",
+            "schema": "salesforce",
+            "simulated_landing": true,
+            "last_successful_sync": "2026-11-11T18:28:27+00:00",
+            "age_hours": 1.9,
+            "age_days": 0.1,
+            "within_window": true,
+            "rows_changed_last_success": 0,
+            "latest_attempt": {
+              "at": "2026-11-11T18:28:27+00:00",
+              "status": "SUCCESSFUL",
+              "message": null
+            }
+          },
+          {
+            "source": "sap_s4",
+            "name": "SAP S/4HANA (Connector SDK)",
+            "schema": "sap_s4",
+            "simulated_landing": false,
+            "last_successful_sync": "2026-11-11T18:28:25.974831+00:00",
+            "age_hours": 1.9,
+            "age_days": 0.1,
+            "within_window": true,
+            "rows_changed_last_success": 0,
+            "latest_attempt": {
+              "at": "2026-11-11T18:28:25.974831+00:00",
+              "status": "SUCCESSFUL",
+              "message": null
+            }
+          },
+          {
+            "source": "zendesk",
+            "name": "Zendesk (simulated landing)",
+            "schema": "zendesk",
+            "simulated_landing": true,
+            "last_successful_sync": "2026-11-09T19:47:33+00:00",
+            "age_hours": 48.6,
+            "age_days": 2.0,
+            "within_window": false,
+            "rows_changed_last_success": 0,
+            "latest_attempt": {
+              "at": "2026-11-11T19:47:33+00:00",
+              "status": "FAILURE",
+              "message": "Zendesk API rate limit exceeded (simulated scenario T6); retrying on the next schedule"
+            }
+          }
+        ],
+        "all_current": false,
+        "stale_sources": [
+          "zendesk"
+        ]
+      },
+      "seconds": 0.05,
+      "is_error": false
+    },
+    {
+      "tool": "list_metrics",
+      "input": {},
+      "output": {
+        "metrics": [
+          {
+            "name": "deliveries_90d",
+            "label": "Deliveries (90 days)",
+            "type": "simple",
+            "definition": "The number of non-cancelled deliveries whose requested delivery date falls in the 90 days ending on the as-of date."
+          },
+          {
+            "name": "on_time_deliveries_90d",
+            "label": "On-time deliveries (90 days)",
+            "type": "simple",
+            "definition": "Of the deliveries in the 90-day window, how many the carrier delivered on or before the date the customer asked for."
+          },
+          {
+            "name": "on_time_delivery_rate",
+            "label": "On-time delivery rate (90 days)",
+            "type": "ratio",
+            "definition": "The share of deliveries that arrived on or before the customer's requested date, over the last 90 days. \"Arrived\" is the carrier's delivered event, not a ship date; cancelled deliveries do not count; a delivery not yet delivered by its date is late."
+          },
+          {
+            "name": "late_deliveries",
+            "label": "Late deliveries (90 days)",
+            "type": "simple",
+            "definition": "Deliveries in the last 90 days that arrived after the requested date, or have not arrived although the date has passed."
+          },
+          {
+            "name": "net_revenue",
+            "label": "Net revenue (USD)",
+            "type": "simple",
+            "definition": "Invoiced revenue minus credit memos, converted to US dollars at the monthly average exchange rate of each billing month."
+          },
+          {
+            "name": "open_shipping_tickets",
+            "label": "Open shipping tickets",
+            "type": "simple",
+            "definition": "Open support tickets about shipping: tagged shipping, delivery, late_delivery or logistics, or with a subject that mentions late, delay, shipment, delivery or tracking. Tickets on a look-alike duplicate account count toward the real customer."
+          },
+          {
+            "name": "renewals_due_120d",
+            "label": "Renewals due in 120 days",
+            "type": "simple",
+            "definition": "Open renewal opportunities that close within 120 days of the as-of date."
+          },
+          {
+            "name": "account_risk_flag",
+            "label": "At-risk flag",
+            "type": "derived",
+            "definition": "1 when an account's on-time delivery rate is below 85% and it has two or more open shipping tickets or a renewal due in 120 days; otherwise 0. Combine with the strategic filter to get the at-risk strategic accounts."
+          }
+        ],
+        "dimensions": [
+          {
+            "name": "account__account_name",
+            "description": null
+          },
+          {
+            "name": "account__region",
+            "description": null
+          },
+          {
+            "name": "account__tier",
+            "description": "Tier at the end of the as-of date (today's tier)."
+          },
+          {
+            "name": "account__is_strategic",
+            "description": null
+          },
+          {
+            "name": "account",
+            "description": "entity: accounts"
+          },
+          {
+            "name": "delivery__requested_delivery_date (time; add __day, __month or __quarter)",
+            "description": null
+          },
+          {
+            "name": "delivery__tier_at_delivery",
+            "description": "The customer's tier on the requested delivery date (history mode), not today's tier."
+          },
+          {
+            "name": "delivery__is_in_90d_window",
+            "description": null
+          },
+          {
+            "name": "delivery__carrier_code",
+            "description": null
+          },
+          {
+            "name": "delivery",
+            "description": "entity: deliveries"
+          },
+          {
+            "name": "billing_document__billing_date (time; add __day, __month or __quarter)",
+            "description": null
+          },
+          {
+            "name": "billing_document__billing_quarter",
+            "description": null
+          },
+          {
+            "name": "billing_document__region",
+            "description": null
+          },
+          {
+            "name": "billing_document",
+            "description": "entity: revenue"
+          },
+          {
+            "name": "ticket__created_at (time; add __day, __month or __quarter)",
+            "description": null
+          },
+          {
+            "name": "ticket__status",
+            "description": null
+          },
+          {
+            "name": "ticket",
+            "description": "entity: tickets"
+          },
+          {
+            "name": "renewal__close_date (time; add __day, __month or __quarter)",
+            "description": null
+          },
+          {
+            "name": "renewal__stage",
+            "description": null
+          },
+          {
+            "name": "renewal",
+            "description": "entity: renewals"
+          }
+        ],
+        "filter_syntax": "{{ Dimension('account__is_strategic') }} = true   |   {{ Dimension('account__region') }} = 'EMEA'   |   {{ Dimension('billing_document__billing_quarter') }} = '2026-Q3'",
+        "notes": [
+          "Group by the entity `account` to get one row per customer, and `account__account_name` for its name.",
+          "`account__tier` is today's tier; `delivery__tier_at_delivery` is the tier in force on each delivery's date.",
+          "Delivery metrics already cover the 90 days ending on the as-of date (6 Nov 2026)."
+        ]
+      },
+      "seconds": 0.01,
+      "is_error": false
+    }
+  ],
+  "answer": {
+    "answer_summary": "No. Zendesk, the source for support tickets, has not synced successfully since 9 Nov 2026 19:47 UTC. Its latest attempt on 11 Nov failed with an API rate limit, so it is outside the 24-hour window and open shipping ticket counts should not be used to act today. Delivery and other sources synced within the window. The Zendesk feed needs to sync successfully before ticket-based figures are used.",
+    "at_risk_accounts": [],
+    "value": null,
+    "unit": null,
+    "is_current": false,
+    "data_age_days": 2.0,
+    "metrics_used": [
+      {
+        "name": "open_shipping_tickets",
+        "definition": "Open support tickets about shipping: tagged shipping, delivery, late_delivery or logistics, or with a subject that mentions late, delay, shipment, delivery or tracking. Tickets on a look-alike duplicate account count toward the real customer."
+      }
+    ],
+    "lineage": [],
+    "freshness": [
+      {
+        "source": "zendesk (simulated landing)",
+        "last_synced": "2026-11-09T19:47:33+00:00",
+        "within_window": false
+      },
+      {
+        "source": "carrier_pg (Connector SDK)",
+        "last_synced": "2026-11-11T18:28:27.524601+00:00",
+        "within_window": true
+      },
+      {
+        "source": "salesforce (simulated landing)",
+        "last_synced": "2026-11-11T18:28:27+00:00",
+        "within_window": true
+      },
+      {
+        "source": "sap_s4 (Connector SDK)",
+        "last_synced": "2026-11-11T18:28:25.974831+00:00",
+        "within_window": true
+      }
+    ],
+    "assumptions": [
+      "I used the check_freshness output as the source of truth for sync status.",
+      "The data_age_days value of 2.0 is measured from the Zendesk last successful sync to the check time (11 Nov 2026 20:20 UTC), as reported by the tool.",
+      "Zendesk is treated as the source of support tickets, as the freshness tool labels it."
+    ],
+    "caveats": [
+      "Date inconsistency: the as-of date is Friday 6 Nov 2026, but the freshness check is timestamped 11 Nov 2026 and the Zendesk sync on 9 Nov is after the as-of date. I could not reconcile this from the tools. Either the system clock or the source timestamps are off. Please confirm the real sync date before relying on the age figure.",
+      "The Zendesk source is labelled 'simulated landing' by the freshness tool, so its status may not reflect a live connector.",
+      "I did not query open_shipping_tickets or account_risk_flag, so I have no ticket counts or at-risk account list to report. Any figures from those metrics would rest on the stale Zendesk data.",
+      "Metrics that depend on Zendesk are open_shipping_tickets and account_risk_flag, which uses open shipping tickets as one of its inputs. Delivery metrics (on_time_delivery_rate, late_deliveries) come from carrier_pg and are within the window, so they are not affected by this issue.",
+      "The freshness tool records a rate-limit failure and says it will retry on the next schedule. I cannot confirm when the next successful sync will happen."
+    ]
+  },
+  "stop_reason": "tool_use",
+  "error": null,
+  "seconds": 11.7,
+  "usage": {
+    "input_tokens": 6,
+    "output_tokens": 2548,
+    "cache_read_input_tokens": 11366,
+    "cache_creation_input_tokens": 2466,
+    "requests": 2,
+    "cost_usd": 0.001696
+  },
+  "served_by": "claude-haiku-5-5",
+  "score": {
+    "correct": true,
+    "expected": false,
+    "got": false
+  },
+  "cost_usd": 0.0017,
+  "run": 3,
+  "answer_repaired": false
+}

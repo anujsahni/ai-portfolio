@@ -1,0 +1,431 @@
+{
+  "agent": "naive",
+  "question_id": "G5",
+  "question": "Is our support ticket data current enough to act on today?",
+  "model": "claude-haiku-5-5",
+  "effort": "high",
+  "started_at": "2026-11-11T20:19:25+00:00",
+  "steps": [
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check the latest sync and latest record timestamps for the Zendesk ticket tables against the as-of date.",
+        "sql": "SELECT 'zendesk.ticket' AS src, MAX(_fivetran_synced) AS last_synced, MAX(updated_at) AS max_updated_at, MAX(created_at) AS max_created_at, COUNT(*) AS row_count, SUM(CASE WHEN _fivetran_deleted THEN 1 ELSE 0 END) AS deleted_rows FROM zendesk.ticket\nUNION ALL\nSELECT 'zendesk.ticket_tag', MAX(_fivetran_synced), NULL, NULL, COUNT(*), SUM(CASE WHEN _fivetran_deleted THEN 1 ELSE 0 END) FROM zendesk.ticket_tag\nUNION ALL\nSELECT 'zendesk.organization', MAX(_fivetran_synced), NULL, MAX(created_at), COUNT(*), SUM(CASE WHEN _fivetran_deleted THEN 1 ELSE 0 END) FROM zendesk.organization"
+      },
+      "output": {
+        "columns": [
+          "src",
+          "last_synced",
+          "max_updated_at",
+          "max_created_at",
+          "row_count",
+          "deleted_rows"
+        ],
+        "rows": [
+          [
+            "zendesk.ticket",
+            "2026-11-09 19:47:33+00:00",
+            "2026-11-03 18:00:00+00:00",
+            "2026-11-03 16:33:19+00:00",
+            2983,
+            0
+          ],
+          [
+            "zendesk.ticket_tag",
+            "2026-11-09 19:47:33+00:00",
+            null,
+            null,
+            3015,
+            0
+          ],
+          [
+            "zendesk.organization",
+            "2026-11-09 19:47:33+00:00",
+            null,
+            "2025-02-10 09:15:00+00:00",
+            121,
+            0
+          ]
+        ],
+        "row_count": 3,
+        "truncated": false
+      },
+      "seconds": 0.02,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check ticket volume by day over the last 30 days to see whether recent tickets are landing, and confirm the current date in the database.",
+        "sql": "SELECT CAST(created_at AS DATE) AS created_day, COUNT(*) AS tickets, MAX(_fivetran_synced) AS synced_max FROM zendesk.ticket WHERE created_at >= TIMESTAMPTZ '2026-10-01 00:00:00+00' GROUP BY 1 ORDER BY 1 DESC LIMIT 100"
+      },
+      "output": {
+        "columns": [
+          "created_day",
+          "tickets",
+          "synced_max"
+        ],
+        "rows": [
+          [
+            "2026-11-03",
+            3,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-11-02",
+            11,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-11-01",
+            8,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-31",
+            9,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-30",
+            5,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-29",
+            6,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-28",
+            11,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-27",
+            2,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-26",
+            6,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-25",
+            9,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-24",
+            6,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-23",
+            7,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-22",
+            7,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-21",
+            4,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-20",
+            9,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-19",
+            7,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-18",
+            15,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-17",
+            5,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-16",
+            4,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-15",
+            11,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-14",
+            3,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-13",
+            4,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-12",
+            10,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-11",
+            8,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-10",
+            7,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-09",
+            5,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-08",
+            13,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-07",
+            9,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-06",
+            3,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-05",
+            6,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-04",
+            4,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-03",
+            9,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-02",
+            8,
+            "2026-11-09 19:47:33+00:00"
+          ],
+          [
+            "2026-10-01",
+            3,
+            "2026-11-09 19:47:33+00:00"
+          ]
+        ],
+        "row_count": 34,
+        "truncated": false
+      },
+      "seconds": 0.01,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Look at the distribution of sync timestamps in the ticket table and whether any ticket timestamps are after the as-of date.",
+        "sql": "SELECT COUNT(*) AS n, MIN(_fivetran_synced) AS min_synced, MAX(_fivetran_synced) AS max_synced, COUNT(DISTINCT CAST(_fivetran_synced AS DATE)) AS distinct_sync_days, MAX(created_at) AS max_created, MAX(updated_at) AS max_updated, SUM(CASE WHEN created_at > TIMESTAMPTZ '2026-11-06 23:59:59+00' THEN 1 ELSE 0 END) AS created_after_asof, SUM(CASE WHEN updated_at > TIMESTAMPTZ '2026-11-06 23:59:59+00' THEN 1 ELSE 0 END) AS updated_after_asof, SUM(CASE WHEN _fivetran_synced > TIMESTAMPTZ '2026-11-06 23:59:59+00' THEN 1 ELSE 0 END) AS synced_after_asof FROM zendesk.ticket"
+      },
+      "output": {
+        "columns": [
+          "n",
+          "min_synced",
+          "max_synced",
+          "distinct_sync_days",
+          "max_created",
+          "max_updated",
+          "created_after_asof",
+          "updated_after_asof",
+          "synced_after_asof"
+        ],
+        "rows": [
+          [
+            2983,
+            "2026-11-09 19:47:33+00:00",
+            "2026-11-09 19:47:33+00:00",
+            1,
+            "2026-11-03 16:33:19+00:00",
+            "2026-11-03 18:00:00+00:00",
+            0,
+            0,
+            2983
+          ]
+        ],
+        "row_count": 1,
+        "truncated": false
+      },
+      "seconds": 0.02,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Compare freshness of the other systems (carrier, SAP, Salesforce) to see whether the sync stamps are uniformly ahead of the as-of date.",
+        "sql": "SELECT 'carrier_pg.shipment' AS src, MAX(_fivetran_synced) AS last_synced, MAX(updated_at) AS max_business_ts FROM carrier_pg.shipment\nUNION ALL SELECT 'carrier_pg.shipment_event', MAX(_fivetran_synced), MAX(event_at) FROM carrier_pg.shipment_event\nUNION ALL SELECT 'sap_s4.likp', MAX(_fivetran_synced), NULL FROM sap_s4.likp\nUNION ALL SELECT 'sap_s4.vbak', MAX(_fivetran_synced), NULL FROM sap_s4.vbak\nUNION ALL SELECT 'salesforce.account', MAX(_fivetran_synced), MAX(last_modified_date) FROM salesforce.account\nUNION ALL SELECT 'salesforce.opportunity', MAX(_fivetran_synced), MAX(last_modified_date) FROM salesforce.opportunity"
+      },
+      "output": {
+        "columns": [
+          "src",
+          "last_synced",
+          "max_business_ts"
+        ],
+        "rows": [
+          [
+            "carrier_pg.shipment",
+            "2026-11-11 18:28:27.464977+00:00",
+            "2026-11-11 18:28:24.495703+00:00"
+          ],
+          [
+            "carrier_pg.shipment_event",
+            "2026-11-11 16:13:31.999157+00:00",
+            "2026-11-06 16:46:57+00:00"
+          ],
+          [
+            "sap_s4.likp",
+            "2026-11-11 16:13:40.235207+00:00",
+            null
+          ],
+          [
+            "sap_s4.vbak",
+            "2026-11-11 16:13:21.469157+00:00",
+            null
+          ],
+          [
+            "salesforce.account",
+            "2026-11-11 16:13:32+00:00",
+            "2026-09-22 14:30:00+00:00"
+          ],
+          [
+            "salesforce.opportunity",
+            "2026-11-11 16:13:32+00:00",
+            "2026-11-03 09:00:00+00:00"
+          ]
+        ],
+        "row_count": 6,
+        "truncated": false
+      },
+      "seconds": 0.01,
+      "is_error": false
+    }
+  ],
+  "answer": {
+    "answer_summary": "No. The support ticket data is not current enough to act on today. The newest ticket was created 3 Nov 2026 and nothing has been created or updated since, even though the prior month averaged about 7 tickets a day, so the Zendesk feed appears to have stopped. The sync timestamps say the data was loaded on 9 Nov, which is after today's date, so they cannot be trusted to confirm freshness.",
+    "at_risk_accounts": [],
+    "value": null,
+    "unit": null,
+    "is_current": false,
+    "data_age_days": 3,
+    "metrics_used": [
+      {
+        "name": "Latest ticket activity",
+        "definition": "MAX(created_at) and MAX(updated_at) on zendesk.ticket, compared with the as-of date of 6 Nov 2026"
+      },
+      {
+        "name": "Daily ticket volume",
+        "definition": "Count of zendesk.ticket rows by created date, 1 Oct to 3 Nov 2026 (234 tickets over 34 days, about 6.9 per day)"
+      },
+      {
+        "name": "Sync timestamp",
+        "definition": "MAX(_fivetran_synced) on zendesk.ticket, used only as a secondary check"
+      }
+    ],
+    "lineage": [
+      "zendesk.ticket -> ticket volume and recency checks (no downstream model identified)",
+      "zendesk.ticket_tag and zendesk.organization checked for sync recency only"
+    ],
+    "freshness": [
+      {
+        "source": "zendesk.ticket (latest business timestamp: created 2026-11-03 16:33 UTC, updated 2026-11-03 18:00 UTC)",
+        "last_synced": "2026-11-09 19:47 UTC (recorded sync stamp, after the as-of date)",
+        "within_window": false
+      },
+      {
+        "source": "zendesk.ticket_tag and zendesk.organization",
+        "last_synced": "2026-11-09 19:47 UTC (recorded sync stamp, after the as-of date)",
+        "within_window": null
+      },
+      {
+        "source": "carrier_pg, sap_s4 and salesforce tables (for comparison only)",
+        "last_synced": "2026-11-11 16:13 to 18:28 UTC (recorded sync stamps, after the as-of date)",
+        "within_window": null
+      }
+    ],
+    "assumptions": [
+      "The as-of date of 6 Nov 2026 is correct. Today's date is treated as 6 Nov, so the 9 Nov and 11 Nov sync stamps are read as impossible, not as real loads.",
+      "Zero tickets on 4 and 5 Nov (Wednesday and Thursday) are not normal, given the roughly 7 tickets per day average for October.",
+      "Ticket created and updated timestamps are the more reliable freshness signal, because the sync stamps are dated after the as-of date."
+    ],
+    "caveats": [
+      "The sync stamps are dated 9 Nov for Zendesk and 11 Nov for the other systems, which is after today's date. Either the warehouse clock is wrong or the timestamps are unreliable. I could not verify when the load actually ran.",
+      "There may be no real tickets for 4 to 6 Nov. Support volume could have dropped sharply, but a three-day gap against a steady baseline is much more likely to be a feed problem. The source system (Zendesk) should be checked directly.",
+      "Only 3 tickets were created on 3 Nov, and the last one was at 16:33 UTC, so that day may be partial in the feed too.",
+      "I did not check whether the carrier, SAP or Salesforce feeds have a similar gap, because my question was about support tickets only."
+    ]
+  },
+  "stop_reason": "tool_use",
+  "error": null,
+  "seconds": 19.9,
+  "usage": {
+    "input_tokens": 8,
+    "output_tokens": 4833,
+    "cache_read_input_tokens": 12457,
+    "cache_creation_input_tokens": 3918,
+    "requests": 3,
+    "cost_usd": 0.003032
+  },
+  "served_by": "claude-haiku-5-5",
+  "score": {
+    "correct": true,
+    "expected": false,
+    "got": false
+  },
+  "cost_usd": 0.003,
+  "run": 2,
+  "explanation": [
+    {
+      "trap": "T1",
+      "title": "Counted cancelled deliveries",
+      "detail": "The SAP tables keep 310 cancelled deliveries as soft-deleted rows (_fivetran_deleted = true). This query never filters them out, so cancelled deliveries count as late.",
+      "sql_line": "UNION ALL SELECT 'sap_s4.likp', MAX(_fivetran_synced), NULL FROM sap_s4.likp",
+      "step": 4
+    },
+    {
+      "trap": "T4",
+      "title": "Missed a customer split across two CRM accounts",
+      "detail": "Halbrook Fluid Systems has a look-alike duplicate account (\"\u2026 GmbH\") with no SAP number. Two of its open shipping tickets sit on the duplicate, so the customer looked healthy.",
+      "sql_line": null,
+      "step": null
+    },
+    {
+      "trap": "T5",
+      "title": "Read every history row of the account tier",
+      "detail": "salesforce.account keeps one row per version of each account (history mode). Without filtering to _fivetran_active, accounts that changed tier appear twice, and Quenmere Paper Mills GmbH still looks Strategic.",
+      "sql_line": "UNION ALL SELECT 'salesforce.account', MAX(_fivetran_synced), MAX(last_modified_date) FROM salesforce.account",
+      "step": 4
+    }
+  ],
+  "answer_repaired": false
+}

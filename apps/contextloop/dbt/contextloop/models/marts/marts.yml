@@ -1,0 +1,329 @@
+version: 2
+
+models:
+  - name: dim_account
+    description: One row per real Northstar customer (an SAP customer), with its Salesforce account of record and its tier at the end of the as-of date.
+    config:
+      contract: {enforced: true}
+    columns:
+      - name: customer_id
+        description: SAP customer number (KNA1.KUNNR); the key every fact table uses.
+        data_type: varchar
+        constraints: [{type: not_null}]
+        data_tests: [unique, not_null]
+      - name: account_name
+        description: The customer's name as the account teams know it (the Salesforce account of record).
+        data_type: varchar
+        data_tests: [not_null]
+      - name: sap_customer_name
+        description: The legal name in SAP (KNA1.NAME1).
+        data_type: varchar
+      - name: salesforce_account_id
+        description: ID of the Salesforce account mapped to this customer by SAP customer number.
+        data_type: varchar
+        data_tests: [unique, not_null]
+      - name: country_code
+        description: Two-letter country code from SAP (KNA1.LAND1).
+        data_type: varchar
+      - name: region
+        description: North America (US, CA, MX) or EMEA (every other country).
+        data_type: varchar
+        data_tests:
+          - accepted_values:
+              arguments: {values: ["North America", "EMEA"]}
+      - name: tier
+        description: Account tier at the end of the as-of date, from Salesforce history mode.
+        data_type: varchar
+        data_tests:
+          - accepted_values:
+              arguments: {values: ["Strategic", "Standard"]}
+      - name: is_strategic
+        description: True when the tier at the end of the as-of date is Strategic.
+        data_type: boolean
+      - name: account_owner
+        description: Name of the Salesforce account owner.
+        data_type: varchar
+      - name: customer_since
+        description: Date the customer was created in SAP.
+        data_type: date
+
+  - name: fct_delivery
+    description: >
+      One row per non-cancelled delivery, with the requested delivery date (VBAK.VDATU), SAP's goods-issue dates, the carrier's
+      actual delivery time, and whether it arrived on time. Cancelled deliveries are excluded (trap T1); "on time" uses the
+      carrier's delivered event, not a ship date (trap T2).
+    config:
+      contract: {enforced: true}
+    columns:
+      - name: delivery_id
+        description: SAP delivery number (LIKP.VBELN).
+        data_type: varchar
+        constraints: [{type: not_null}]
+        data_tests: [unique, not_null]
+      - name: customer_id
+        description: SAP customer the delivery went to.
+        data_type: varchar
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_account'), field: customer_id}
+      - name: order_id
+        description: Sales order the delivery fulfils (LIPS.VGBEL).
+        data_type: varchar
+      - name: requested_delivery_date
+        description: The date the customer asked for (VBAK.VDATU); the promise on-time is measured against.
+        data_type: date
+        data_tests: [not_null]
+      - name: planned_goods_issue_date
+        description: Planned ship date from the warehouse (LIKP.WADAT). Not a delivery date.
+        data_type: date
+      - name: actual_goods_issue_date
+        description: Actual ship date (LIKP.WADAT_IST), null if not shipped yet. Not a delivery date.
+        data_type: date
+      - name: delivered_at
+        description: When the carrier delivered it (the `delivered` tracking event), null if not delivered yet.
+        data_type: timestamp with time zone
+      - name: is_delivered
+        description: True when the carrier has a delivered event.
+        data_type: boolean
+      - name: is_on_time
+        description: True when delivered on or before the requested delivery date. Not delivered by then counts as late.
+        data_type: boolean
+      - name: is_late
+        description: The opposite of is_on_time.
+        data_type: boolean
+      - name: days_late
+        description: Days after the requested date that it was delivered (or, if still not delivered, days as of the as-of date); 0 if on time.
+        data_type: integer
+      - name: carrier_code
+        description: Carrier that shipped it.
+        data_type: varchar
+      - name: tier_at_delivery
+        description: The customer's tier at the end of the requested delivery date (history mode, trap T5).
+        data_type: varchar
+        data_tests:
+          - accepted_values:
+              arguments: {values: ["Strategic", "Standard"]}
+      - name: is_in_90d_window
+        description: True when the requested delivery date falls in the 90 days ending on the as-of date.
+        data_type: boolean
+
+  - name: fct_revenue
+    description: Billing documents net of credit memos, converted to USD at the monthly average rate of the billing month (trap T3).
+    config:
+      contract: {enforced: true}
+    columns:
+      - name: billing_id
+        description: SAP billing document number (VBRK.VBELN).
+        data_type: varchar
+        constraints: [{type: not_null}]
+        data_tests: [unique, not_null]
+      - name: customer_id
+        description: SAP customer billed.
+        data_type: varchar
+        data_tests:
+          - relationships:
+              arguments: {to: ref('dim_account'), field: customer_id}
+      - name: billing_date
+        description: Billing date (VBRK.FKDAT).
+        data_type: date
+      - name: billing_type
+        description: F2 invoice or G2 credit memo.
+        data_type: varchar
+        data_tests:
+          - accepted_values:
+              arguments: {values: ["F2", "G2"]}
+      - name: is_credit_memo
+        description: True for credit memos, which reduce revenue.
+        data_type: boolean
+      - name: document_currency
+        description: Currency of the SAP document (USD or EUR).
+        data_type: varchar
+      - name: amount_document_currency
+        description: Signed amount in the document currency (credit memos negative).
+        data_type: decimal(18,2)
+      - name: usd_rate
+        description: Rate used to convert to USD (1 for USD documents).
+        data_type: double
+      - name: amount_usd
+        description: Signed amount in USD. This is the column every revenue number uses.
+        data_type: decimal(18,2)
+        data_tests: [not_null]
+      - name: reporting_currency
+        description: Always USD.
+        data_type: varchar
+        data_tests:
+          - accepted_values:
+              arguments: {values: ["USD"]}
+      - name: region
+        description: Region of the billed customer.
+        data_type: varchar
+      - name: billing_quarter
+        description: Calendar quarter of the billing date, for example 2026-Q3.
+        data_type: varchar
+
+  - name: fct_ticket
+    description: >
+      One row per support ticket, attributed to a customer through identity resolution, so tickets filed against the look-alike
+      duplicate account count toward the real customer (trap T4).
+    config:
+      contract: {enforced: true}
+    columns:
+      - name: ticket_id
+        description: Zendesk ticket ID.
+        data_type: bigint
+        constraints: [{type: not_null}]
+        data_tests: [unique, not_null]
+      - name: customer_id
+        description: SAP customer the ticket belongs to.
+        data_type: varchar
+        data_tests:
+          - relationships:
+              arguments: {to: ref('dim_account'), field: customer_id}
+      - name: salesforce_account_id
+        description: Salesforce account the Zendesk organization points to (may be the duplicate).
+        data_type: varchar
+      - name: created_at
+        description: When the ticket was created.
+        data_type: timestamp with time zone
+      - name: updated_at
+        description: When the ticket last changed.
+        data_type: timestamp with time zone
+      - name: status
+        description: Zendesk status.
+        data_type: varchar
+        data_tests:
+          - accepted_values:
+              arguments: {values: ["new", "open", "pending", "hold", "solved", "closed"]}
+      - name: is_open
+        description: True for new, open, pending and on-hold tickets.
+        data_type: boolean
+      - name: priority
+        description: Zendesk priority.
+        data_type: varchar
+      - name: subject
+        description: Ticket subject.
+        data_type: varchar
+      - name: tags
+        description: Comma-separated tags.
+        data_type: varchar
+      - name: is_shipping_related
+        description: True when a tag is shipping, delivery, late_delivery or logistics, or the subject mentions late, delay, shipment, delivery or tracking.
+        data_type: boolean
+
+  - name: fct_renewal
+    description: Renewal opportunities per customer, with whether each is open and due within 120 days of the as-of date.
+    config:
+      contract: {enforced: true}
+    columns:
+      - name: opportunity_id
+        description: Salesforce opportunity ID.
+        data_type: varchar
+        constraints: [{type: not_null}]
+        data_tests: [unique, not_null]
+      - name: customer_id
+        description: SAP customer the renewal belongs to.
+        data_type: varchar
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_account'), field: customer_id}
+      - name: close_date
+        description: Expected or actual close date.
+        data_type: date
+      - name: amount_usd
+        description: Annual contract value in USD.
+        data_type: double
+      - name: stage
+        description: Salesforce stage.
+        data_type: varchar
+      - name: is_open
+        description: True while the renewal is not closed.
+        data_type: boolean
+      - name: is_won
+        description: True when closed won.
+        data_type: boolean
+      - name: days_to_close
+        description: Days from the as-of date to the close date (negative if in the past).
+        data_type: integer
+      - name: is_due_in_120d
+        description: Open and closing between the as-of date and 120 days after it.
+        data_type: boolean
+
+  - name: account_risk
+    description: >
+      One row per customer with the at-risk definition applied: strategic, 90-day on-time rate below 85%, and either 2 or more open
+      shipping-related tickets or an open renewal due in 120 days. Includes the drivers and the recommended next step.
+    config:
+      contract: {enforced: true}
+    columns:
+      - name: customer_id
+        description: SAP customer number.
+        data_type: varchar
+        constraints: [{type: not_null}]
+        data_tests: [unique, not_null]
+      - name: account_name
+        description: Customer name as the account teams know it.
+        data_type: varchar
+      - name: salesforce_account_id
+        description: Salesforce account of record (where activation writes).
+        data_type: varchar
+      - name: region
+        description: North America or EMEA.
+        data_type: varchar
+      - name: tier
+        description: Tier at the end of the as-of date.
+        data_type: varchar
+      - name: is_strategic
+        description: True for strategic accounts.
+        data_type: boolean
+      - name: account_owner
+        description: Salesforce account owner.
+        data_type: varchar
+      - name: deliveries_90d
+        description: Non-cancelled deliveries requested in the last 90 days.
+        data_type: integer
+      - name: late_deliveries_90d
+        description: Of those, how many were late.
+        data_type: integer
+      - name: on_time_rate_90d
+        description: On-time deliveries divided by all deliveries in the window (0 to 1).
+        data_type: double
+      - name: open_shipping_tickets
+        description: Open shipping-related support tickets.
+        data_type: integer
+      - name: renewal_close_date
+        description: Close date of an open renewal due in 120 days, if any.
+        data_type: date
+      - name: is_at_risk
+        description: True when the at-risk definition is met.
+        data_type: boolean
+      - name: next_step
+        description: The recommended next step from the playbook.
+        data_type: varchar
+      - name: as_of_date
+        description: The date the definitions were evaluated at.
+        data_type: date
+
+exposures:
+  - name: governed_agent
+    label: Governed agent (Act 4)
+    type: application
+    maturity: medium
+    description: The Claude agent that answers the COO's question through the dbt MCP server, the metrics tool and the freshness tool.
+    owner: {name: ContextLoop demo, email: demo@example.com}
+    depends_on:
+      - ref('dim_account')
+      - ref('fct_delivery')
+      - ref('fct_revenue')
+      - ref('fct_ticket')
+      - ref('fct_renewal')
+
+  - name: activation_sync
+    label: Reverse ETL to the CRM (Act 5)
+    type: application
+    maturity: medium
+    description: Syncs the at-risk list and next steps to the (mock) Salesforce and posts a summary to Slack.
+    owner: {name: ContextLoop demo, email: demo@example.com}
+    depends_on:
+      - ref('account_risk')

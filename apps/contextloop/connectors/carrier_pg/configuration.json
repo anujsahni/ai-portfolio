@@ -1,0 +1,7 @@
+{
+  "host": "postgres",
+  "port": "5432",
+  "database": "carrier",
+  "user": "carrier",
+  "password": "<supplied at run time from PGPASSWORD; never stored here>"
+}

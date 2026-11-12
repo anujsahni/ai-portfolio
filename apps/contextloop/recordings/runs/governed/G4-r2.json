@@ -1,0 +1,514 @@
+{
+  "agent": "governed",
+  "question_id": "G4",
+  "question": "How many strategic accounts do we have today?",
+  "model": "claude-haiku-5-5",
+  "effort": "high",
+  "started_at": "2026-11-11T20:18:34+00:00",
+  "steps": [
+    {
+      "tool": "list_metrics",
+      "input": {},
+      "output": {
+        "metrics": [
+          {
+            "name": "deliveries_90d",
+            "label": "Deliveries (90 days)",
+            "type": "simple",
+            "definition": "The number of non-cancelled deliveries whose requested delivery date falls in the 90 days ending on the as-of date."
+          },
+          {
+            "name": "on_time_deliveries_90d",
+            "label": "On-time deliveries (90 days)",
+            "type": "simple",
+            "definition": "Of the deliveries in the 90-day window, how many the carrier delivered on or before the date the customer asked for."
+          },
+          {
+            "name": "on_time_delivery_rate",
+            "label": "On-time delivery rate (90 days)",
+            "type": "ratio",
+            "definition": "The share of deliveries that arrived on or before the customer's requested date, over the last 90 days. \"Arrived\" is the carrier's delivered event, not a ship date; cancelled deliveries do not count; a delivery not yet delivered by its date is late."
+          },
+          {
+            "name": "late_deliveries",
+            "label": "Late deliveries (90 days)",
+            "type": "simple",
+            "definition": "Deliveries in the last 90 days that arrived after the requested date, or have not arrived although the date has passed."
+          },
+          {
+            "name": "net_revenue",
+            "label": "Net revenue (USD)",
+            "type": "simple",
+            "definition": "Invoiced revenue minus credit memos, converted to US dollars at the monthly average exchange rate of each billing month."
+          },
+          {
+            "name": "open_shipping_tickets",
+            "label": "Open shipping tickets",
+            "type": "simple",
+            "definition": "Open support tickets about shipping: tagged shipping, delivery, late_delivery or logistics, or with a subject that mentions late, delay, shipment, delivery or tracking. Tickets on a look-alike duplicate account count toward the real customer."
+          },
+          {
+            "name": "renewals_due_120d",
+            "label": "Renewals due in 120 days",
+            "type": "simple",
+            "definition": "Open renewal opportunities that close within 120 days of the as-of date."
+          },
+          {
+            "name": "account_risk_flag",
+            "label": "At-risk flag",
+            "type": "derived",
+            "definition": "1 when an account's on-time delivery rate is below 85% and it has two or more open shipping tickets or a renewal due in 120 days; otherwise 0. Combine with the strategic filter to get the at-risk strategic accounts."
+          }
+        ],
+        "dimensions": [
+          {
+            "name": "account__account_name",
+            "description": null
+          },
+          {
+            "name": "account__region",
+            "description": null
+          },
+          {
+            "name": "account__tier",
+            "description": "Tier at the end of the as-of date (today's tier)."
+          },
+          {
+            "name": "account__is_strategic",
+            "description": null
+          },
+          {
+            "name": "account",
+            "description": "entity: accounts"
+          },
+          {
+            "name": "delivery__requested_delivery_date (time; add __day, __month or __quarter)",
+            "description": null
+          },
+          {
+            "name": "delivery__tier_at_delivery",
+            "description": "The customer's tier on the requested delivery date (history mode), not today's tier."
+          },
+          {
+            "name": "delivery__is_in_90d_window",
+            "description": null
+          },
+          {
+            "name": "delivery__carrier_code",
+            "description": null
+          },
+          {
+            "name": "delivery",
+            "description": "entity: deliveries"
+          },
+          {
+            "name": "billing_document__billing_date (time; add __day, __month or __quarter)",
+            "description": null
+          },
+          {
+            "name": "billing_document__billing_quarter",
+            "description": null
+          },
+          {
+            "name": "billing_document__region",
+            "description": null
+          },
+          {
+            "name": "billing_document",
+            "description": "entity: revenue"
+          },
+          {
+            "name": "ticket__created_at (time; add __day, __month or __quarter)",
+            "description": null
+          },
+          {
+            "name": "ticket__status",
+            "description": null
+          },
+          {
+            "name": "ticket",
+            "description": "entity: tickets"
+          },
+          {
+            "name": "renewal__close_date (time; add __day, __month or __quarter)",
+            "description": null
+          },
+          {
+            "name": "renewal__stage",
+            "description": null
+          },
+          {
+            "name": "renewal",
+            "description": "entity: renewals"
+          }
+        ],
+        "filter_syntax": "{{ Dimension('account__is_strategic') }} = true   |   {{ Dimension('account__region') }} = 'EMEA'   |   {{ Dimension('billing_document__billing_quarter') }} = '2026-Q3'",
+        "notes": [
+          "Group by the entity `account` to get one row per customer, and `account__account_name` for its name.",
+          "`account__tier` is today's tier; `delivery__tier_at_delivery` is the tier in force on each delivery's date.",
+          "Delivery metrics already cover the 90 days ending on the as-of date (6 Nov 2026)."
+        ]
+      },
+      "seconds": 0.03,
+      "is_error": false
+    },
+    {
+      "tool": "check_freshness",
+      "input": {},
+      "output": {
+        "checked_at": "2026-11-11T20:18:35+00:00",
+        "window_hours": 24,
+        "sources": [
+          {
+            "source": "carrier_pg",
+            "name": "Carrier tracking Postgres (Connector SDK)",
+            "schema": "carrier_pg",
+            "simulated_landing": false,
+            "last_successful_sync": "2026-11-11T18:28:27.524601+00:00",
+            "age_hours": 1.8,
+            "age_days": 0.1,
+            "within_window": true,
+            "rows_changed_last_success": 3,
+            "latest_attempt": {
+              "at": "2026-11-11T18:28:27.524601+00:00",
+              "status": "SUCCESSFUL",
+              "message": null
+            }
+          },
+          {
+            "source": "salesforce",
+            "name": "Salesforce (simulated landing)",
+            "schema": "salesforce",
+            "simulated_landing": true,
+            "last_successful_sync": "2026-11-11T18:28:27+00:00",
+            "age_hours": 1.8,
+            "age_days": 0.1,
+            "within_window": true,
+            "rows_changed_last_success": 0,
+            "latest_attempt": {
+              "at": "2026-11-11T18:28:27+00:00",
+              "status": "SUCCESSFUL",
+              "message": null
+            }
+          },
+          {
+            "source": "sap_s4",
+            "name": "SAP S/4HANA (Connector SDK)",
+            "schema": "sap_s4",
+            "simulated_landing": false,
+            "last_successful_sync": "2026-11-11T18:28:25.974831+00:00",
+            "age_hours": 1.8,
+            "age_days": 0.1,
+            "within_window": true,
+            "rows_changed_last_success": 0,
+            "latest_attempt": {
+              "at": "2026-11-11T18:28:25.974831+00:00",
+              "status": "SUCCESSFUL",
+              "message": null
+            }
+          },
+          {
+            "source": "zendesk",
+            "name": "Zendesk (simulated landing)",
+            "schema": "zendesk",
+            "simulated_landing": true,
+            "last_successful_sync": "2026-11-09T19:47:33+00:00",
+            "age_hours": 48.5,
+            "age_days": 2.0,
+            "within_window": false,
+            "rows_changed_last_success": 0,
+            "latest_attempt": {
+              "at": "2026-11-11T19:47:33+00:00",
+              "status": "FAILURE",
+              "message": "Zendesk API rate limit exceeded (simulated scenario T6); retrying on the next schedule"
+            }
+          }
+        ],
+        "all_current": false,
+        "stale_sources": [
+          "zendesk"
+        ]
+      },
+      "seconds": 0.04,
+      "is_error": false
+    },
+    {
+      "tool": "query_metric",
+      "input": {
+        "metrics": [
+          "account_risk_flag"
+        ],
+        "group_by": [
+          "account",
+          "account__account_name",
+          "account__region",
+          "account__tier"
+        ],
+        "where": "{{ Dimension('account__is_strategic') }} = true",
+        "limit": 500
+      },
+      "output": {
+        "metrics": [
+          "account_risk_flag"
+        ],
+        "group_by": [
+          "account",
+          "account__account_name",
+          "account__region",
+          "account__tier"
+        ],
+        "where": "{{ Dimension('account__is_strategic') }} = true",
+        "columns": [
+          "account",
+          "account__account_name",
+          "account__region",
+          "account__tier",
+          "account_risk_flag"
+        ],
+        "rows": [
+          [
+            "0000100025",
+            "Yarstead Process Equipment Inc",
+            "North America",
+            "Strategic",
+            0
+          ],
+          [
+            "0000100004",
+            "Galbury Steelworks SA",
+            "North America",
+            "Strategic",
+            1
+          ],
+          [
+            "0000100024",
+            "Sevholt Refining SA",
+            "EMEA",
+            "Strategic",
+            0
+          ],
+          [
+            "0000100001",
+            "Halbrook Fluid Systems",
+            "EMEA",
+            "Strategic",
+            1
+          ],
+          [
+            "0000100005",
+            "Wesmore Energy Ltd",
+            "North America",
+            "Strategic",
+            1
+          ],
+          [
+            "0000100013",
+            "Vornridge Water Works Ltd",
+            "North America",
+            "Strategic",
+            0
+          ],
+          [
+            "0000100011",
+            "Velmere Pipeline Services Ltd",
+            "North America",
+            "Strategic",
+            0
+          ],
+          [
+            "0000100026",
+            "Vornland Chemicals SA",
+            "EMEA",
+            "Strategic",
+            0
+          ],
+          [
+            "0000100022",
+            "Pellridge Process Equipment GmbH",
+            "EMEA",
+            "Strategic",
+            0
+          ],
+          [
+            "0000100006",
+            "Jormark Paper Mills SA",
+            "North America",
+            "Strategic",
+            1
+          ],
+          [
+            "0000100019",
+            "Kelridge Steelworks SA",
+            "EMEA",
+            "Strategic",
+            0
+          ],
+          [
+            "0000100007",
+            "Sevland Utilities Inc",
+            "North America",
+            "Strategic",
+            1
+          ],
+          [
+            "0000100021",
+            "Dunwick Process Equipment SA",
+            "EMEA",
+            "Strategic",
+            0
+          ],
+          [
+            "0000100014",
+            "Tamdale Food Processing Ltd",
+            "EMEA",
+            "Strategic",
+            0
+          ],
+          [
+            "0000100002",
+            "Tamwick Mining Inc",
+            "North America",
+            "Strategic",
+            1
+          ],
+          [
+            "0000100003",
+            "Tamford Food Processing SA",
+            "North America",
+            "Strategic",
+            1
+          ],
+          [
+            "0000100018",
+            "Quenton Food Processing GmbH",
+            "EMEA",
+            "Strategic",
+            0
+          ],
+          [
+            "0000100008",
+            "Marmark HVAC Inc",
+            "North America",
+            "Strategic",
+            1
+          ],
+          [
+            "0000100020",
+            "Ralmore Process Equipment Inc",
+            "North America",
+            "Strategic",
+            0
+          ],
+          [
+            "0000100017",
+            "Harvale Food Processing Inc",
+            "North America",
+            "Strategic",
+            0
+          ],
+          [
+            "0000100012",
+            "Tamridge Pharma Plants Inc",
+            "North America",
+            "Strategic",
+            0
+          ],
+          [
+            "0000100027",
+            "Tammore Food Processing BV",
+            "EMEA",
+            "Strategic",
+            0
+          ],
+          [
+            "0000100010",
+            "Thalmark Marine Srl",
+            "EMEA",
+            "Strategic",
+            0
+          ],
+          [
+            "0000100023",
+            "Ralwick Pharma Plants Ltd",
+            "North America",
+            "Strategic",
+            0
+          ],
+          [
+            "0000100009",
+            "Vornwick Utilities Inc",
+            "North America",
+            "Strategic",
+            1
+          ]
+        ],
+        "row_count": 25,
+        "definitions": {
+          "account_risk_flag": "1 when an account's on-time delivery rate is below 85% and it has two or more open shipping tickets or a renewal due in 120 days; otherwise 0. Combine with the strategic filter to get the at-risk strategic accounts."
+        },
+        "compiled_sql": "WITH rss_10001_cte AS (\n  SELECT\n    account_name\n    , region\n    , tier\n    , is_strategic\n    , customer_id AS account\n  FROM \"warehouse\".\"marts\".\"dim_account\" accounts_src_10000\n)\nSELECT\n  account AS account\n  , account__account_name AS account__account_name\n  , account__region AS account__region\n  , account__tier AS account__tier\n  , case when on_time_delivery_rate < 0.85 and (open_shipping_tickets >= 2 or renewals_due_120d > 0) then 1 else 0 end AS account_risk_flag\nFROM (\n  SELECT\n    COALESCE(subq_10.account, subq_20.account, subq_30.account) AS account\n    , COALESCE(subq_10.account__account_name, subq_20.account__account_name, subq_30.account__account_name) AS account__account_name\n    , COALESCE(subq_10.account__region, subq_20.account__region, subq_30.account__region) AS account__region\n    , COALESCE(subq_10.account__tier, subq_20.account__tier, subq_30.account__tier) AS account__tier\n    , MAX(subq_10.on_time_delivery_rate) AS on_time_delivery_rate\n    , COALESCE(MAX(subq_20.open_shipping_tickets), 0) AS open_shipping_tickets\n    , COALESCE(MAX(subq_30.renewals_due_120d), 0) AS renewals_due_120d\n  FROM (\n    SELECT\n      account\n      , account__account_name\n      , account__region\n      , account__tier\n      , CAST(COALESCE(__on_time_deliveries_90d, 0) AS DOUBLE) / CAST(NULLIF(COALESCE(__deliveries_90d, 0), 0) AS DOUBLE) AS on_time_delivery_rate\n    FROM (\n      SELECT\n        account\n        , account__account_name\n        , account__region\n        , account__tier\n        , SUM(deliveries_90d) AS __deliveries_90d\n        , SUM(on_time_deliveries_90d) AS __on_time_deliveries_90d\n      FROM (\n        SELECT\n          subq_1.account AS account\n          , rss_10001_cte.account_name AS account__account_name\n          , rss_10001_cte.region AS account__region\n          , rss_10001_cte.tier AS account__tier\n          , rss_10001_cte.is_strategic AS account__is_strategic\n          , subq_1.__deliveries_90d AS deliveries_90d\n          , subq_1.__on_time_deliveries_90d AS on_time_deliveries_90d\n        FROM (\n          SELECT\n            customer_id AS account\n            , case when is_in_90d_window then 1 else 0 end AS __deliveries_90d\n            , case when is_in_90d_window and is_on_time then 1 else 0 end AS __on_time_deliveries_90d\n          FROM \"warehouse\".\"marts\".\"fct_delivery\" deliveries_src_10000\n        ) subq_1\n        LEFT OUTER JOIN\n          rss_10001_cte\n        ON\n          subq_1.account = rss_10001_cte.account\n      ) subq_5\n      WHERE account__is_strategic = true\n      GROUP BY\n        account\n        , account__account_name\n        , account__region\n        , account__tier\n    ) subq_8\n  ) subq_10\n  FULL OUTER JOIN (\n    SELECT\n      account\n      , account__account_name\n      , account__region\n      , account__tier\n      , COALESCE(__open_shipping_tickets, 0) AS open_shipping_tickets\n    FROM (\n      SELECT\n        account\n        , account__account_name\n        , account__region\n        , account__tier\n        , SUM(open_shipping_tickets) AS __open_shipping_tickets\n      FROM (\n        SELECT\n          subq_12.account AS account\n          , rss_10001_cte.account_name AS account__account_name\n          , rss_10001_cte.region AS account__region\n          , rss_10001_cte.tier AS account__tier\n          , rss_10001_cte.is_strategic AS account__is_strategic\n          , subq_12.__open_shipping_tickets AS open_shipping_tickets\n        FROM (\n          SELECT\n            customer_id AS account\n            , case when is_open and is_shipping_related then 1 else 0 end AS __open_shipping_tickets\n          FROM \"warehouse\".\"marts\".\"fct_ticket\" tickets_src_10000\n        ) subq_12\n        LEFT OUTER JOIN\n          rss_10001_cte\n        ON\n          subq_12.account = rss_10001_cte.account\n      ) subq_16\n      WHERE account__is_strategic = true\n      GROUP BY\n        account\n        , account__account_name\n        , account__region\n        , account__tier\n    ) subq_19\n  ) subq_20\n  ON\n    (\n      subq_10.account__account_name = subq_20.account__account_name\n    ) AND (\n      subq_10.account__region = subq_20.account__region\n    ) AND (\n      subq_10.account__tier = subq_20.account__tier\n    ) AND (\n      subq_10.account = subq_20.account\n    )\n  FULL OUTER JOIN (\n    SELECT\n      account\n      , account__account_name\n      , account__region\n      , account__tier\n      , COALESCE(__renewals_due_120d, 0) AS renewals_due_120d\n    FROM (\n      SELECT\n        account\n        , account__account_name\n        , account__region\n        , account__tier\n        , SUM(renewals_due_120d) AS __renewals_due_120d\n      FROM (\n        SELECT\n          subq_22.account AS account\n          , rss_10001_cte.account_name AS account__account_name\n          , rss_10001_cte.region AS account__region\n          , rss_10001_cte.tier AS account__tier\n          , rss_10001_cte.is_strategic AS account__is_strategic\n          , subq_22.__renewals_due_120d AS renewals_due_120d\n        FROM (\n          SELECT\n            customer_id AS account\n            , case when is_due_in_120d then 1 else 0 end AS __renewals_due_120d\n          FROM \"warehouse\".\"marts\".\"fct_renewal\" renewals_src_10000\n        ) subq_22\n        LEFT OUTER JOIN\n          rss_10001_cte\n        ON\n          subq_22.account = rss_10001_cte.account\n      ) subq_26\n      WHERE account__is_strategic = true\n      GROUP BY\n        account\n        , account__account_name\n        , account__region\n        , account__tier\n    ) subq_29\n  ) subq_30\n  ON\n    (\n      COALESCE(subq_10.account__account_name, subq_20.account__account_name) = subq_30.account__account_name\n    ) AND (\n      COALESCE(subq_10.account__region, subq_20.account__region) = subq_30.account__region\n    ) AND (\n      COALESCE(subq_10.account__tier, subq_20.account__tier) = subq_30.account__tier\n    ) AND (\n      COALESCE(subq_10.account, subq_20.account) = subq_30.account\n    )\n  GROUP BY\n    COALESCE(subq_10.account, subq_20.account, subq_30.account)\n    , COALESCE(subq_10.account__account_name, subq_20.account__account_name, subq_30.account__account_name)\n    , COALESCE(subq_10.account__region, subq_20.account__region, subq_30.account__region)\n    , COALESCE(subq_10.account__tier, subq_20.account__tier, subq_30.account__tier)\n) subq_31\nLIMIT 200"
+      },
+      "seconds": 2.1,
+      "is_error": false
+    }
+  ],
+  "answer": {
+    "answer_summary": "Torvane has 25 strategic accounts as of 6 November 2026 (count of distinct account IDs flagged strategic in the account dimension). The count does not depend on the stale Zendesk feed, but any ticket-based figures would.",
+    "at_risk_accounts": [],
+    "value": 25,
+    "unit": "count",
+    "is_current": true,
+    "data_age_days": 0.1,
+    "metrics_used": [
+      {
+        "name": "account_risk_flag",
+        "definition": "1 when an account's on-time delivery rate is below 85% and it has two or more open shipping tickets or a renewal due in 120 days; otherwise 0. Combine with the strategic filter to get the at-risk strategic accounts."
+      }
+    ],
+    "lineage": [
+      "warehouse.marts.dim_account (account__is_strategic) -> account_risk_flag (grouped by account, filtered to account__is_strategic = true)"
+    ],
+    "freshness": [
+      {
+        "source": "salesforce",
+        "last_synced": "2026-11-11T18:28:27+00:00",
+        "within_window": true
+      },
+      {
+        "source": "zendesk",
+        "last_synced": "2026-11-09T19:47:33+00:00",
+        "within_window": false
+      }
+    ],
+    "assumptions": [
+      "'Strategic' means accounts with is_strategic = true in the governed account dimension (dim_account), as of today.",
+      "Each row returned by the query is one distinct account ID; the 25 rows have 25 different account names, so I found no duplicate strategic accounts.",
+      "The as-of date is 6 November 2026, as instructed."
+    ],
+    "caveats": [
+      "Zendesk last synced successfully on 9 Nov 2026 and its latest attempt failed (API rate limit), so it is outside the 24-hour window. The strategic account count does not use Zendesk, so it is not affected. Open shipping ticket counts and at-risk flags do depend on Zendesk and may be understated until it syncs.",
+      "The freshness check was stamped 11 Nov 2026, after the 6 Nov as-of date, so the 'age' figures are measured from 11 Nov. I have not reconciled this timing gap.",
+      "Account IDs 0000100015 and 0000100016 do not appear in the strategic list. I did not check whether they exist as non-strategic accounts."
+    ]
+  },
+  "stop_reason": "tool_use",
+  "error": null,
+  "seconds": 15.4,
+  "usage": {
+    "input_tokens": 8,
+    "output_tokens": 2747,
+    "cache_read_input_tokens": 19462,
+    "cache_creation_input_tokens": 6819,
+    "requests": 3,
+    "cost_usd": 0.002421
+  },
+  "served_by": "claude-haiku-5-5",
+  "score": {
+    "correct": true,
+    "expected": 25,
+    "got": 25.0
+  },
+  "cost_usd": 0.0024,
+  "run": 2,
+  "answer_repaired": false
+}

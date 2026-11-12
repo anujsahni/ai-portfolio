@@ -1,0 +1,666 @@
+{
+  "agent": "naive",
+  "question_id": "G2",
+  "question": "What is the 90-day on-time delivery rate across all of our strategic accounts?",
+  "model": "claude-haiku-5-5",
+  "effort": "high",
+  "started_at": "2026-11-11T20:13:48+00:00",
+  "steps": [
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check account tier values and how many active accounts are in each tier",
+        "sql": "SELECT tier_c, COUNT(*) AS n, SUM(CASE WHEN _fivetran_active THEN 1 ELSE 0 END) AS active_n, SUM(CASE WHEN is_deleted THEN 1 ELSE 0 END) AS deleted_n FROM salesforce.account GROUP BY tier_c ORDER BY n DESC"
+      },
+      "output": {
+        "columns": [
+          "tier_c",
+          "n",
+          "active_n",
+          "deleted_n"
+        ],
+        "rows": [
+          [
+            "Standard",
+            98,
+            95,
+            0
+          ],
+          [
+            "Strategic",
+            27,
+            26,
+            0
+          ],
+          [
+            "Prospect",
+            13,
+            13,
+            0
+          ]
+        ],
+        "row_count": 3,
+        "truncated": false
+      },
+      "seconds": 0.02,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check shipment status values and date ranges",
+        "sql": "SELECT status, COUNT(*) AS n, MIN(created_at) AS min_created, MAX(created_at) AS max_created, MAX(_fivetran_synced) AS last_synced FROM carrier_pg.shipment GROUP BY status ORDER BY n DESC"
+      },
+      "output": {
+        "columns": [
+          "status",
+          "n",
+          "min_created",
+          "max_created",
+          "last_synced"
+        ],
+        "rows": [
+          [
+            "delivered",
+            8731,
+            "2025-05-09 09:18:15+00:00",
+            "2026-11-03 12:34:56+00:00",
+            "2026-11-11 16:13:29.657835+00:00"
+          ],
+          [
+            "cancelled",
+            310,
+            "2025-05-19 14:19:42+00:00",
+            "2026-11-06 10:25:15+00:00",
+            "2026-11-11 16:13:29.657894+00:00"
+          ],
+          [
+            "in_transit",
+            40,
+            "2026-10-29 11:54:54+00:00",
+            "2026-11-04 13:08:53+00:00",
+            "2026-11-11 18:28:27.464977+00:00"
+          ],
+          [
+            "label_created",
+            25,
+            "2026-10-30 15:47:33+00:00",
+            "2026-11-06 15:03:49+00:00",
+            "2026-11-11 17:39:49.137636+00:00"
+          ],
+          [
+            "picked_up",
+            15,
+            "2026-11-01 08:25:22+00:00",
+            "2026-11-05 10:54:26+00:00",
+            "2026-11-11 16:13:29.657017+00:00"
+          ]
+        ],
+        "row_count": 5,
+        "truncated": false
+      },
+      "seconds": 0.02,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check event types in shipment events",
+        "sql": "SELECT event_type, COUNT(*) AS n, MAX(event_at) AS last_event, MAX(_fivetran_synced) AS last_synced FROM carrier_pg.shipment_event GROUP BY event_type ORDER BY n DESC"
+      },
+      "output": {
+        "columns": [
+          "event_type",
+          "n",
+          "last_event",
+          "last_synced"
+        ],
+        "rows": [
+          [
+            "label_created",
+            9121,
+            "2026-11-06 15:03:49+00:00",
+            "2026-11-11 16:13:31.998923+00:00"
+          ],
+          [
+            "picked_up",
+            8786,
+            "2026-11-06 10:49:57+00:00",
+            "2026-11-11 16:13:31.998182+00:00"
+          ],
+          [
+            "in_transit",
+            8771,
+            "2026-11-06 10:45:38+00:00",
+            "2026-11-11 16:13:31.998140+00:00"
+          ],
+          [
+            "delivered",
+            8731,
+            "2026-11-06 16:27:40+00:00",
+            "2026-11-11 16:13:31.999119+00:00"
+          ],
+          [
+            "out_for_delivery",
+            8731,
+            "2026-11-06 13:27:40+00:00",
+            "2026-11-11 16:13:31.998837+00:00"
+          ],
+          [
+            "cancelled",
+            310,
+            "2026-11-06 16:46:57+00:00",
+            "2026-11-11 16:13:31.999157+00:00"
+          ]
+        ],
+        "row_count": 6,
+        "truncated": false
+      },
+      "seconds": 0.01,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check SAP delivery header date fields and how they are populated",
+        "sql": "SELECT COUNT(*) AS n, SUM(CASE WHEN wadat_ist='00000000' THEN 1 ELSE 0 END) AS no_actual_gi, SUM(CASE WHEN lfdat='00000000' THEN 1 ELSE 0 END) AS no_lfdat, SUM(CASE WHEN wadat='00000000' THEN 1 ELSE 0 END) AS no_wadat, MIN(erdat) AS min_erdat, MAX(erdat) AS max_erdat, MAX(_fivetran_synced) AS last_synced, SUM(CASE WHEN zz_carrier_id IS NULL THEN 1 ELSE 0 END) AS null_carrier FROM sap_s4.likp WHERE _fivetran_deleted = false"
+      },
+      "output": {
+        "columns": [
+          "n",
+          "no_actual_gi",
+          "no_lfdat",
+          "no_wadat",
+          "min_erdat",
+          "max_erdat",
+          "last_synced",
+          "null_carrier"
+        ],
+        "rows": [
+          [
+            8851,
+            65,
+            0,
+            0,
+            "20250509",
+            "20261107",
+            "2026-11-11 16:13:40.235207+00:00",
+            8786
+          ]
+        ],
+        "row_count": 1,
+        "truncated": false
+      },
+      "seconds": 0.01,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check join coverage: carrier shipments to SAP deliveries, and SAP customers to Salesforce strategic accounts",
+        "sql": "SELECT\n (SELECT COUNT(*) FROM carrier_pg.shipment s WHERE s._fivetran_deleted=false) AS shipments,\n (SELECT COUNT(*) FROM carrier_pg.shipment s WHERE s._fivetran_deleted=false AND s.delivery_number IN (SELECT vbeln FROM sap_s4.likp WHERE _fivetran_deleted=false)) AS ship_matched_likp,\n (SELECT COUNT(DISTINCT delivery_number) FROM carrier_pg.shipment WHERE _fivetran_deleted=false) AS distinct_deliv,\n (SELECT COUNT(*) FROM salesforce.account WHERE tier_c='Strategic' AND _fivetran_active) AS strat_active,\n (SELECT COUNT(DISTINCT a.id) FROM salesforce.account a JOIN sap_s4.kna_1 k ON k.kunnr=a.sap_customer_number_c WHERE a.tier_c='Strategic' AND a._fivetran_active AND k._fivetran_deleted=false) AS strat_matched_kna1,\n (SELECT COUNT(*) FROM salesforce.account WHERE tier_c='Strategic' AND _fivetran_active AND sap_customer_number_c IS NULL) AS strat_no_sap_id\""
+      },
+      "output": {
+        "columns": [
+          "shipments",
+          "ship_matched_likp",
+          "distinct_deliv",
+          "strat_active",
+          "strat_matched_kna1",
+          "strat_no_sap_id"
+        ],
+        "rows": [
+          [
+            9121,
+            8811,
+            9121,
+            26,
+            25,
+            1
+          ]
+        ],
+        "row_count": 1,
+        "truncated": false,
+        "auto_fixed": [
+          "removed a stray trailing double quote"
+        ]
+      },
+      "seconds": 0.03,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Look at sample joined rows to understand the date fields and event timing",
+        "sql": "SELECT s.shipment_id, s.delivery_number, s.status, s.created_at, l.kunnr, l.erdat, l.lfdat, l.wadat, l.wadat_ist, l.zz_carrier_id, s.carrier_code,\n (SELECT MIN(event_at) FROM carrier_pg.shipment_event e WHERE e.shipment_id=s.shipment_id AND e.event_type='picked_up') AS picked_up_at,\n (SELECT MIN(event_at) FROM carrier_pg.shipment_event e WHERE e.shipment_id=s.shipment_id AND e.event_type='delivered') AS delivered_at\nFROM carrier_pg.shipment s JOIN sap_s4.likp l ON l.vbeln=s.delivery_number AND l._fivetran_deleted=false\nWHERE s._fivetran_deleted=false AND s.status='delivered' ORDER BY s.created_at DESC LIMIT 15\""
+      },
+      "output": {
+        "columns": [
+          "shipment_id",
+          "delivery_number",
+          "status",
+          "created_at",
+          "kunnr",
+          "erdat",
+          "lfdat",
+          "wadat",
+          "wadat_ist",
+          "zz_carrier_id",
+          "carrier_code",
+          "picked_up_at",
+          "delivered_at"
+        ],
+        "rows": [
+          [
+            509027,
+            "0080009027",
+            "delivered",
+            "2026-11-03 12:34:56+00:00",
+            "0000100119",
+            "20261103",
+            "20261108",
+            "20261105",
+            "20261104",
+            null,
+            "ORBF",
+            "2026-11-04 10:57:55+00:00",
+            "2026-11-06 12:12:34+00:00"
+          ],
+          [
+            508934,
+            "0080008934",
+            "delivered",
+            "2026-11-02 10:09:03+00:00",
+            "0000100006",
+            "20261102",
+            "20261107",
+            "20261104",
+            "20261104",
+            null,
+            "VELX",
+            "2026-11-04 09:35:05+00:00",
+            "2026-11-06 11:02:51+00:00"
+          ],
+          [
+            509108,
+            "0080009108",
+            "delivered",
+            "2026-11-02 08:32:45+00:00",
+            "0000100017",
+            "20261102",
+            "20261107",
+            "20261104",
+            "20261103",
+            null,
+            "KSTL",
+            "2026-11-03 08:08:09+00:00",
+            "2026-11-06 12:28:10+00:00"
+          ],
+          [
+            509004,
+            "0080009004",
+            "delivered",
+            "2026-11-01 15:11:22+00:00",
+            "0000100003",
+            "20261101",
+            "20261106",
+            "20261103",
+            "20261102",
+            null,
+            "VELX",
+            "2026-11-02 08:19:12+00:00",
+            "2026-11-05 13:27:22+00:00"
+          ],
+          [
+            509000,
+            "0080009000",
+            "delivered",
+            "2026-11-01 14:35:20+00:00",
+            "0000100107",
+            "20261101",
+            "20261107",
+            "20261103",
+            "20261103",
+            null,
+            "NRTH",
+            "2026-11-03 07:52:36+00:00",
+            "2026-11-06 10:11:27+00:00"
+          ],
+          [
+            509100,
+            "0080009100",
+            "delivered",
+            "2026-11-01 13:32:39+00:00",
+            "0000100001",
+            "20261101",
+            "20261107",
+            "20261103",
+            "20261102",
+            null,
+            "VELX",
+            "2026-11-02 10:12:35+00:00",
+            "2026-11-06 11:06:42+00:00"
+          ],
+          [
+            509019,
+            "0080009019",
+            "delivered",
+            "2026-11-01 13:06:39+00:00",
+            "0000100012",
+            "20261101",
+            "20261106",
+            "20261103",
+            "20261103",
+            null,
+            "ORBF",
+            "2026-11-03 09:21:23+00:00",
+            "2026-11-06 11:23:49+00:00"
+          ],
+          [
+            509063,
+            "0080009063",
+            "delivered",
+            "2026-11-01 13:01:15+00:00",
+            "0000100101",
+            "20261101",
+            "20261106",
+            "20261103",
+            "20261103",
+            null,
+            "ORBF",
+            "2026-11-03 07:22:27+00:00",
+            "2026-11-06 16:27:40+00:00"
+          ],
+          [
+            509024,
+            "0080009024",
+            "delivered",
+            "2026-11-01 12:10:22+00:00",
+            "0000100048",
+            "20261101",
+            "20261106",
+            "20261103",
+            "20261103",
+            null,
+            "VELX",
+            "2026-11-03 07:27:05+00:00",
+            "2026-11-05 12:16:18+00:00"
+          ],
+          [
+            509025,
+            "0080009025",
+            "delivered",
+            "2026-11-01 11:02:35+00:00",
+            "0000100079",
+            "20261101",
+            "20261106",
+            "20261103",
+            "20261103",
+            null,
+            "ORBF",
+            "2026-11-03 10:39:15+00:00",
+            "2026-11-05 16:36:36+00:00"
+          ],
+          [
+            508940,
+            "0080008940",
+            "delivered",
+            "2026-11-01 09:27:27+00:00",
+            "0000100026",
+            "20261101",
+            "20261107",
+            "20261103",
+            "20261102",
+            null,
+            "ORBF",
+            "2026-11-02 07:59:04+00:00",
+            "2026-11-06 15:10:32+00:00"
+          ],
+          [
+            509073,
+            "0080009073",
+            "delivered",
+            "2026-11-01 08:38:16+00:00",
+            "0000100009",
+            "20261101",
+            "20261106",
+            "20261103",
+            "20261102",
+            null,
+            "KSTL",
+            "2026-11-02 07:46:10+00:00",
+            "2026-11-04 14:51:40+00:00"
+          ],
+          [
+            509046,
+            "0080009046",
+            "delivered",
+            "2026-11-01 08:20:53+00:00",
+            "0000100041",
+            "20261101",
+            "20261106",
+            "20261103",
+            "20261103",
+            null,
+            "NRTH",
+            "2026-11-03 07:08:09+00:00",
+            "2026-11-06 15:15:21+00:00"
+          ],
+          [
+            508989,
+            "0080008989",
+            "delivered",
+            "2026-10-31 13:49:13+00:00",
+            "0000100057",
+            "20261031",
+            "20261106",
+            "20261102",
+            "20261102",
+            null,
+            "NRTH",
+            "2026-11-02 10:05:40+00:00",
+            "2026-11-06 13:45:44+00:00"
+          ],
+          [
+            509071,
+            "0080009071",
+            "delivered",
+            "2026-10-31 12:58:53+00:00",
+            "0000100080",
+            "20261031",
+            "20261105",
+            "20261102",
+            "20261102",
+            null,
+            "KSTL",
+            "2026-11-02 10:49:47+00:00",
+            "2026-11-04 09:46:52+00:00"
+          ]
+        ],
+        "row_count": 15,
+        "truncated": false,
+        "auto_fixed": [
+          "removed a stray trailing double quote"
+        ]
+      },
+      "seconds": 0.02,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check for duplicate keys that could double count deliveries or customers",
+        "sql": "SELECT\n (SELECT COUNT(*) - COUNT(DISTINCT vbeln) FROM sap_s4.likp WHERE _fivetran_deleted=false) AS dup_likp,\n (SELECT COUNT(*) - COUNT(DISTINCT kunnr) FROM sap_s4.kna_1 WHERE _fivetran_deleted=false) AS dup_kna1,\n (SELECT COUNT(*) - COUNT(DISTINCT (shipment_id, event_type)) FROM carrier_pg.shipment_event WHERE _fivetran_deleted=false) AS dup_events,\n (SELECT COUNT(*) - COUNT(DISTINCT sap_customer_number_c) FROM salesforce.account WHERE tier_c='Strategic' AND _fivetran_active) AS dup_sf_strat,\n (SELECT COUNT(*) FROM salesforce.account WHERE tier_c='Strategic' AND _fivetran_active AND sap_customer_number_c IS NULL) AS strat_null_sap,\n (SELECT STRING_AGG(name || ' | ' || COALESCE(sap_customer_number_c,'NULL') || ' | ' || _fivetran_end::VARCHAR, '; ') FROM salesforce.account WHERE tier_c='Strategic' AND _fivetran_active AND (sap_customer_number_c IS NULL OR sap_customer_number_c NOT IN (SELECT kunnr FROM sap_s4.kna_1 WHERE _fivetran_deleted=false))) AS unmatched_strat\""
+      },
+      "output": {
+        "columns": [
+          "dup_likp",
+          "dup_kna1",
+          "dup_events",
+          "dup_sf_strat",
+          "strat_null_sap",
+          "unmatched_strat"
+        ],
+        "rows": [
+          [
+            0,
+            0,
+            0,
+            1,
+            1,
+            "Halbrook Fluid Systems GmbH | NULL | 9999-12-31 23:59:59+00"
+          ]
+        ],
+        "row_count": 1,
+        "truncated": false,
+        "auto_fixed": [
+          "removed a stray trailing double quote"
+        ]
+      },
+      "seconds": 0.03,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Compute 90-day on-time rate for delivered shipments to active Strategic accounts, comparing carrier delivered date to SAP planned delivery date",
+        "sql": "WITH strat AS (\n  SELECT DISTINCT sap_customer_number_c AS kunnr, name FROM salesforce.account\n  WHERE tier_c='Strategic' AND _fivetran_active AND is_deleted=false AND sap_customer_number_c IS NOT NULL),\nd AS (\n  SELECT s.shipment_id, s.delivery_number, st.name, l.lfdat, l.wadat_ist,\n    CAST(strptime(l.lfdat,'%Y%m%d') AS DATE) AS planned,\n    CAST((SELECT MIN(e.event_at) FROM carrier_pg.shipment_event e WHERE e.shipment_id=s.shipment_id AND e.event_type='delivered' AND e._fivetran_deleted=false) AT TIME ZONE 'UTC' AS DATE) AS delivered_day\n  FROM carrier_pg.shipment s\n  JOIN sap_s4.likp l ON l.vbeln=s.delivery_number AND l._fivetran_deleted=false\n  JOIN strat st ON st.kunnr=l.kunnr\n  WHERE s._fivetran_deleted=false AND s.status='delivered'\n    AND try_strptime(l.lfdat,'%Y%m%d') BETWEEN DATE '2026-08-08' AND DATE '2026-11-06')\nSELECT COUNT(*) AS delivered_shipments,\n  SUM(CASE WHEN delivered_day IS NULL THEN 1 ELSE 0 END) AS no_delivered_event,\n  SUM(CASE WHEN delivered_day <= planned THEN 1 ELSE 0 END) AS on_time,\n  ROUND(100.0*SUM(CASE WHEN delivered_day <= planned THEN 1 ELSE 0 END)/COUNT(*),1) AS on_time_pct,\n  COUNT(DISTINCT name) AS accounts\nFROM d\""
+      },
+      "output": {
+        "columns": [
+          "delivered_shipments",
+          "no_delivered_event",
+          "on_time",
+          "on_time_pct",
+          "accounts"
+        ],
+        "rows": [
+          [
+            640,
+            0,
+            557,
+            87.0,
+            25
+          ]
+        ],
+        "row_count": 1,
+        "truncated": false,
+        "auto_fixed": [
+          "removed a stray trailing double quote"
+        ]
+      },
+      "seconds": 0.03,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Sensitivity: alternative on-time definitions and inclusion of undelivered shipments past planned date",
+        "sql": "WITH strat AS (\n  SELECT DISTINCT sap_customer_number_c AS kunnr, name FROM salesforce.account\n  WHERE tier_c='Strategic' AND _fivetran_active AND is_deleted=false AND sap_customer_number_c IS NOT NULL),\nbase AS (\n  SELECT s.shipment_id, s.status, l.lfdat, l.wadat_ist,\n    CAST(strptime(l.lfdat,'%Y%m%d') AS DATE) AS planned,\n    CAST(strptime(NULLIF(l.wadat_ist,'00000000'),'%Y%m%d') AS DATE) AS gi_day,\n    CAST((SELECT MIN(e.event_at) FROM carrier_pg.shipment_event e WHERE e.shipment_id=s.shipment_id AND e.event_type='delivered' AND e._fivetran_deleted=false) AT TIME ZONE 'UTC' AS DATE) AS delivered_day\n  FROM carrier_pg.shipment s\n  JOIN sap_s4.likp l ON l.vbeln=s.delivery_number AND l._fivetran_deleted=false\n  JOIN strat st ON st.kunnr=l.kunnr\n  WHERE s._fivetran_deleted=false AND s.status <> 'cancelled'\n    AND try_strptime(l.lfdat,'%Y%m%d') BETWEEN DATE '2026-08-08' AND DATE '2026-11-06')\nSELECT\n  ROUND(100.0*SUM(CASE WHEN status='delivered' AND delivered_day<=planned THEN 1 ELSE 0 END)/SUM(CASE WHEN status='delivered' THEN 1 ELSE 0 END),1) AS carrier_delivered_basis,\n  ROUND(100.0*SUM(CASE WHEN status='delivered' AND gi_day<=planned THEN 1 ELSE 0 END)/NULLIF(SUM(CASE WHEN status='delivered' AND gi_day IS NOT NULL THEN 1 ELSE 0 END),0),1) AS goods_issue_basis,\n  ROUND(100.0*SUM(CASE WHEN status='delivered' AND delivered_day<=planned THEN 1 ELSE 0 END)/COUNT(*),1) AS incl_open_as_late_denominator,\n  SUM(CASE WHEN status<>'delivered' THEN 1 ELSE 0 END) AS open_not_delivered,\n  SUM(CASE WHEN status<>'delivered' AND planned < DATE '2026-11-06' THEN 1 ELSE 0 END) AS open_past_planned\nFROM base\""
+      },
+      "output": {
+        "columns": [
+          "carrier_delivered_basis",
+          "goods_issue_basis",
+          "incl_open_as_late_denominator",
+          "open_not_delivered",
+          "open_past_planned"
+        ],
+        "rows": [
+          [
+            87.0,
+            97.7,
+            86.5,
+            4,
+            3
+          ]
+        ],
+        "row_count": 1,
+        "truncated": false,
+        "auto_fixed": [
+          "removed a stray trailing double quote"
+        ]
+      },
+      "seconds": 0.03,
+      "is_error": false
+    }
+  ],
+  "answer": {
+    "answer_summary": "Over the 90 days from 8 Aug to 6 Nov 2026, 87.0% of delivered shipments to our 25 matched active Strategic accounts reached the customer by the planned delivery date (557 of 640). Using the SAP goods-issue date instead of the carrier delivery date would give 97.7%, so the gap sits in carrier transit, not in the warehouse.",
+    "at_risk_accounts": [],
+    "value": 87.0,
+    "unit": "percent",
+    "is_current": null,
+    "data_age_days": null,
+    "metrics_used": [
+      {
+        "name": "On-time delivery rate (90-day, Strategic accounts)",
+        "definition": "Count of delivered carrier shipments whose SAP delivery's planned date (likp.lfdat) falls between 2026-08-08 and 2026-11-06, where the first 'delivered' carrier event date is on or before the planned date, divided by all such delivered shipments. Limited to active Salesforce accounts with tier 'Strategic' that match an SAP customer number."
+      }
+    ],
+    "lineage": [
+      "carrier_pg.shipment + carrier_pg.shipment_event -> delivered date per shipment",
+      "sap_s4.likp (lfdat planned date, kunnr customer) joined on delivery_number = vbeln",
+      "salesforce.account (tier_c = 'Strategic', _fivetran_active) joined on sap_customer_number_c = kunnr -> on_time_delivery_rate"
+    ],
+    "freshness": [
+      {
+        "source": "carrier_pg.shipment / shipment_event",
+        "last_synced": "2026-11-11 16:13 UTC (sync timestamps)",
+        "within_window": null
+      },
+      {
+        "source": "sap_s4.likp",
+        "last_synced": "2026-11-11 16:13 UTC (sync timestamps)",
+        "within_window": null
+      },
+      {
+        "source": "salesforce.account",
+        "last_synced": "not checked",
+        "within_window": null
+      }
+    ],
+    "assumptions": [
+      "'Strategic accounts' means Salesforce accounts with tier_c = 'Strategic' that are active (_fivetran_active = true, not deleted). That is 26 accounts; 25 match an SAP customer and are included.",
+      "'On time' means the carrier's first 'delivered' event falls on or before the SAP planned delivery date (likp.lfdat). The carrier table holds no promised date, so the SAP planned date is the only commitment available.",
+      "The 90-day window is by planned delivery date, 8 Aug to 6 Nov 2026 inclusive. Cancelled shipments are excluded.",
+      "Halbrook Fluid Systems GmbH is a Strategic account with no SAP customer number, so it is not in the calculation."
+    ],
+    "caveats": [
+      "Open shipments (4 not yet delivered in the window, 3 already past their planned date) are excluded from the headline. Counting those 3 as late gives 86.5%.",
+      "Strategic accounts with 'Strategic' tier are 26 active; Halbrook Fluid Systems GmbH (no SAP customer number) cannot be measured, so the rate covers 25 of 26.",
+      "The sync timestamps on the SAP and carrier tables are 11 Nov 2026, five days after the 6 Nov as-of date. I could not confirm that data is current as of 6 Nov, so treat the figure as an estimate until the sync dates are checked.",
+      "The goods-issue basis (97.7%) measures warehouse dispatch against the planned date, not customer delivery. It is shown only to locate the gap.",
+      "The result is one aggregate figure. I have not broken it down by account, carrier or region, and did not verify whether the planned date is the customer's contractual date."
+    ]
+  },
+  "stop_reason": "tool_use",
+  "error": null,
+  "seconds": 32.3,
+  "usage": {
+    "input_tokens": 14,
+    "output_tokens": 7954,
+    "cache_read_input_tokens": 43342,
+    "cache_creation_input_tokens": 9566,
+    "requests": 6,
+    "cost_usd": 0.005607
+  },
+  "served_by": "claude-haiku-5-5",
+  "score": {
+    "correct": false,
+    "expected": 86.1,
+    "got": 87.0
+  },
+  "cost_usd": 0.0056,
+  "run": 3,
+  "explanation": [
+    {
+      "trap": "T4",
+      "title": "Missed a customer split across two CRM accounts",
+      "detail": "Halbrook Fluid Systems has a look-alike duplicate account (\"\u2026 GmbH\") with no SAP number. Two of its open shipping tickets sit on the duplicate, so the customer looked healthy.",
+      "sql_line": null,
+      "step": null
+    }
+  ],
+  "answer_repaired": false
+}

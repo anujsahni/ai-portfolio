@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ContextLoop containers</title>
+<link rel="stylesheet" href="diagram.css">
+<script src="diagram.js"></script>
+</head>
+<body>
+<div class="canvas"></div>
+<script>
+draw({
+  width: 1280, height: 980, legendH: 56,
+  title: "ContextLoop · containers on one laptop",
+  subtitle: "One docker-compose.yml. One contextloop image runs every job and service; the rest are pinned public images. Only three ports are published, on 127.0.0.1.",
+  groups: [
+    { x: 40,  y: 196, w: 1200, h: 690, label: "Docker Compose · one private network" },
+    { id: "svc", x: 70, y: 250, w: 680, h: 280, label: "Long-running · contextloop image", labelColor: "#13734F" },
+    { x: 780, y: 250, w: 430, h: 410, label: "Long-running · pinned public images", labelColor: "#0B7A70" },
+    { id: "jobs", x: 70, y: 560, w: 680, h: 130, label: "One-off jobs · docker compose run --rm", labelColor: "#13734F", dash: true },
+    { x: 70, y: 730, w: 1140, h: 130, label: "Named volumes" },
+  ],
+  nodes: [
+    { id: "browser", x: 515, y: 84, w: 250, kind: "ext", badge: "◉", title: "Laptop browser", sub: "Presenter and audience" },
+
+    { id: "app",  x: 100, y: 300, w: 300, kind: "app", badge: "ST", mono: true, title: "app", sub: "Streamlit + the agent" },
+    { id: "mock", x: 420, y: 300, w: 300, kind: "app", badge: "SF", mono: true, title: "mock-salesforce", sub: "REST API + audit log (Act 5)" },
+    { id: "dmcp", x: 100, y: 420, w: 195, kind: "app", mono: true, title: "dbt-mcp", sub: "Models · lineage" },
+    { id: "mmcp", x: 312, y: 420, w: 195, kind: "app", mono: true, title: "mcp-metrics", sub: "MetricFlow tools" },
+    { id: "fmcp", x: 524, y: 420, w: 196, kind: "app", mono: true, title: "mcp-freshness", sub: "Sync-log tool" },
+
+    { id: "trino", x: 810, y: 300, w: 370, kind: "open", badge: "TR", mono: true, dash: true, title: "trino", sub: "Optional profile <code>lakehouse</code>" },
+    { id: "ice",   x: 810, y: 390, w: 370, kind: "open", badge: "IC", mono: true, title: "iceberg-rest", sub: "Iceberg REST catalog" },
+    { id: "minio", x: 810, y: 480, w: 370, kind: "open", badge: "S3", mono: true, title: "rustfs", sub: "Object storage for Iceberg files" },
+    { id: "pg",    x: 810, y: 570, w: 370, kind: "open", badge: "PG", mono: true, title: "postgres", sub: "Carrier source · seeded and read by jobs" },
+
+    { id: "datagen", x: 90,  y: 605, w: 150, kind: "app", mono: true, title: "datagen", sub: "make data" },
+    { id: "sync",    x: 255, y: 605, w: 150, kind: "app", mono: true, title: "sync", sub: "make sync" },
+    { id: "eval",    x: 420, y: 605, w: 150, kind: "app", mono: true, title: "eval", sub: "make eval" },
+    { id: "build",   x: 585, y: 605, w: 150, kind: "app", mono: true, title: "build", sub: "make build" },
+
+    { id: "wh",   x: 100, y: 770, w: 320, kind: "volume", badge: "V", mono: true, title: "warehouse", sub: "DuckDB file + sync log" },
+    { id: "lake", x: 470, y: 770, w: 320, kind: "volume", badge: "V", mono: true, title: "lake", sub: "RustFS data" },
+    { id: "pgd",  x: 825, y: 770, w: 340, kind: "volume", badge: "V", mono: true, title: "pgdata", sub: "Postgres data" },
+  ],
+  edges: [
+    { from: "browser", to: "app", fs: "l", ts: "t", label: "127.0.0.1:8501", at: [370, 116] },
+    { from: "browser", to: "trino", fs: "r", ts: "t", fo: 12, label: "127.0.0.1:8080", at: [890, 128] },
+    { from: "browser", to: "minio", fs: "r", ts: "r", fo: -12, via: [[1226, 104], [1226, 512]], label: ":9001 console", at: [1226, 300] },
+
+    { from: "app", to: "dmcp", fo: -52.5 },
+    { from: "app", to: "mmcp", via: [[250, 392], [409.5, 392]] },
+    { from: "app", to: "fmcp", fo: 50, via: [[300, 377], [622, 377]], label: "MCP over HTTP", at: [520, 377] },
+    { from: "app", to: "mock", fs: "r", ts: "l" },
+
+    { from: "trino", to: "ice" },
+    { from: "ice", to: "minio" },
+    { from: "pg", to: "pgd", arrow: "none" },
+    { from: "minio", to: "lake", fs: "l", ts: "t", via: [[776, 512], [776, 712], [630, 712]] },
+
+    { from: "jobs", to: "pg", fs: "r", ts: "l", fo: -23, },
+    { from: "build", to: "ice", fs: "t", ts: "l", via: [[660, 545], [762, 545], [762, 422]], label: "publish", at: [705, 545] },
+    { from: "jobs", to: "wh", fo: -150, too: 0, label: "write", at: [260, 712] },
+    { from: "svc", to: "wh", fs: "l", ts: "l", via: [[54, 390], [54, 802]], dash: true, label: "read-only", at: [54, 650] },
+  ],
+  legend: ["app", "open", "volume", "ext", { line: "", label: "Calls and writes" }, { line: "dash", label: "Read-only (DuckDB has one writer)" }],
+});
+</script>
+</body>
+</html>

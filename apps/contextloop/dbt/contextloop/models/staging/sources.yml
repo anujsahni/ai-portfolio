@@ -1,0 +1,84 @@
+version: 2
+
+# Raw tables as Fivetran lands them. Freshness uses Fivetran's _fivetran_synced column:
+# warn when a source is more than a day behind, error at two days (trap T6 makes Zendesk fail this).
+sources:
+  - name: sap_s4
+    description: SAP S/4HANA extract landed by the Connector SDK connector (connectors/sap_s4). Synthetic data.
+    schema: sap_s4
+    config:
+      loaded_at_field: _fivetran_synced
+      freshness:
+        warn_after: {count: 1, period: day}
+        error_after: {count: 2, period: day}
+    tables:
+      - name: kna_1
+        description: Customer master (KNA1). Fivetran naming separates letters from digits, so NAME1 lands as name_1.
+      - name: vbak
+        description: Sales order headers.
+      - name: vbap
+        description: Sales order items.
+      - name: likp
+        description: Delivery headers. Cancelled deliveries are soft-deleted (_fivetran_deleted).
+      - name: lips
+        description: Delivery items; VGBEL links each delivery to its sales order.
+      - name: vbrk
+        description: Billing documents (F2 invoices, G2 credit memos).
+      - name: vbrp
+        description: Billing items.
+      - name: tcurr
+        description: Exchange rates; GDATU is stored inverted (99999999 - YYYYMMDD).
+
+  - name: carrier_pg
+    description: Carrier tracking database (Postgres) landed by the Connector SDK connector (connectors/carrier_pg).
+    schema: carrier_pg
+    config:
+      loaded_at_field: _fivetran_synced
+      freshness:
+        warn_after: {count: 1, period: day}
+        error_after: {count: 2, period: day}
+    tables:
+      - name: shipment
+        description: One shipment per SAP delivery.
+      - name: shipment_event
+        description: Tracking events; the `delivered` event holds the actual delivery time.
+
+  - name: salesforce
+    description: Salesforce CRM in Fivetran's layout (simulated landing). `account` uses history mode.
+    schema: salesforce
+    config:
+      loaded_at_field: _fivetran_synced
+      freshness:
+        warn_after: {count: 1, period: day}
+        error_after: {count: 2, period: day}
+    tables:
+      - name: account
+        description: One row per version of each account (history mode).
+      - name: opportunity
+        description: Renewal and expansion opportunities.
+      - name: user
+        description: Account owners.
+
+  - name: zendesk
+    description: Zendesk support in Fivetran's layout (simulated landing).
+    schema: zendesk
+    config:
+      loaded_at_field: _fivetran_synced
+      freshness:
+        warn_after: {count: 1, period: day}
+        error_after: {count: 2, period: day}
+    tables:
+      - name: organization
+        description: Customer organizations; external_id is the Salesforce account ID.
+      - name: ticket
+        description: Support tickets.
+      - name: ticket_tag
+        description: One row per ticket and tag.
+
+  - name: fivetran_log
+    description: The sync log, modelled on Fivetran's Platform Connector.
+    schema: fivetran_log
+    tables:
+      - name: connection
+      - name: sync_log
+      - name: incremental_mar

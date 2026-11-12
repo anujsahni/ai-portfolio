@@ -1,0 +1,6 @@
+# Lint settings for ContextLoop (connectors, package and tests).
+line-length = 150
+target-version = "py312"
+
+[lint]
+select = ["E", "F", "W", "B"]

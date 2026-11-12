@@ -1,0 +1,2941 @@
+{
+  "agent": "naive",
+  "question_id": "G1",
+  "question": "Which of our strategic accounts are at risk because of late shipments, and what should the account teams do this week?",
+  "model": "claude-haiku-5-5",
+  "effort": "high",
+  "started_at": "2026-11-11T20:07:52+00:00",
+  "steps": [
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check account tier values and counts in Salesforce (current records only)",
+        "sql": "SELECT tier_c, COUNT(*) AS n, SUM(CASE WHEN is_deleted THEN 1 ELSE 0 END) AS deleted, SUM(CASE WHEN _fivetran_active THEN 1 ELSE 0 END) AS active_rows FROM salesforce.account GROUP BY tier_c ORDER BY n DESC"
+      },
+      "output": {
+        "columns": [
+          "tier_c",
+          "n",
+          "deleted",
+          "active_rows"
+        ],
+        "rows": [
+          [
+            "Standard",
+            98,
+            0,
+            95
+          ],
+          [
+            "Strategic",
+            27,
+            0,
+            26
+          ],
+          [
+            "Prospect",
+            13,
+            0,
+            13
+          ]
+        ],
+        "row_count": 3,
+        "truncated": false
+      },
+      "seconds": 0.02,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check carrier shipment status values and freshness",
+        "sql": "SELECT status, COUNT(*) n, MAX(_fivetran_synced) last_sync, MAX(updated_at) last_update, SUM(CASE WHEN _fivetran_deleted THEN 1 ELSE 0 END) del FROM carrier_pg.shipment GROUP BY status ORDER BY n DESC"
+      },
+      "output": {
+        "columns": [
+          "status",
+          "n",
+          "last_sync",
+          "last_update",
+          "del"
+        ],
+        "rows": [
+          [
+            "delivered",
+            8731,
+            "2026-11-11 16:13:29.657835+00:00",
+            "2026-11-06 16:27:40+00:00",
+            0
+          ],
+          [
+            "cancelled",
+            310,
+            "2026-11-11 16:13:29.657894+00:00",
+            "2026-11-06 16:46:57+00:00",
+            0
+          ],
+          [
+            "in_transit",
+            40,
+            "2026-11-11 18:28:27.464977+00:00",
+            "2026-11-11 18:28:24.495703+00:00",
+            0
+          ],
+          [
+            "label_created",
+            25,
+            "2026-11-11 17:39:49.137636+00:00",
+            "2026-11-11 17:38:40.895340+00:00",
+            0
+          ],
+          [
+            "picked_up",
+            15,
+            "2026-11-11 16:13:29.657017+00:00",
+            "2026-11-06 10:49:57+00:00",
+            0
+          ]
+        ],
+        "row_count": 5,
+        "truncated": false
+      },
+      "seconds": 0.02,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check Zendesk ticket types, statuses and tags for shipping-related issues",
+        "sql": "SELECT tag, COUNT(*) n FROM zendesk.ticket_tag WHERE NOT _fivetran_deleted GROUP BY tag ORDER BY n DESC LIMIT 50"
+      },
+      "output": {
+        "columns": [
+          "tag",
+          "n"
+        ],
+        "rows": [
+          [
+            "product_question",
+            984
+          ],
+          [
+            "billing",
+            489
+          ],
+          [
+            "shipping",
+            425
+          ],
+          [
+            "returns",
+            335
+          ],
+          [
+            "delivery",
+            194
+          ],
+          [
+            "warranty",
+            169
+          ],
+          [
+            "sales",
+            162
+          ],
+          [
+            "logistics",
+            151
+          ],
+          [
+            "late_delivery",
+            65
+          ],
+          [
+            "urgent",
+            41
+          ]
+        ],
+        "row_count": 10,
+        "truncated": false
+      },
+      "seconds": 0.01,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check SAP delivery header dates and carrier field freshness",
+        "sql": "SELECT COUNT(*) n, MAX(_fivetran_synced) last_sync, MIN(wadat) min_wadat, MAX(wadat) max_wadat, SUM(CASE WHEN try_strptime(wadat_ist,'%Y%m%d') IS NULL THEN 1 ELSE 0 END) no_actual, SUM(CASE WHEN try_strptime(lfdat,'%Y%m%d') IS NULL THEN 1 ELSE 0 END) no_promised FROM sap_s4.likp WHERE NOT _fivetran_deleted"
+      },
+      "output": {
+        "columns": [
+          "n",
+          "last_sync",
+          "min_wadat",
+          "max_wadat",
+          "no_actual",
+          "no_promised"
+        ],
+        "rows": [
+          [
+            8851,
+            "2026-11-11 16:13:40.235207+00:00",
+            "20250511",
+            "20261117",
+            65,
+            0
+          ]
+        ],
+        "row_count": 1,
+        "truncated": false
+      },
+      "seconds": 0.01,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check Salesforce SAP customer number linkage to SAP customer master",
+        "sql": "SELECT a.id, a.name, a.sap_customer_number_c, a.tier_c, a.region_c, a._fivetran_active, a.is_deleted, k.kunnr, k.name_1, k._fivetran_deleted FROM salesforce.account a LEFT JOIN sap_s4.kna_1 k ON k.kunnr = a.sap_customer_number_c WHERE a.tier_c='Strategic' ORDER BY a.name"
+      },
+      "output": {
+        "columns": [
+          "id",
+          "name",
+          "sap_customer_number_c",
+          "tier_c",
+          "region_c",
+          "_fivetran_active",
+          "is_deleted",
+          "kunnr",
+          "name_1",
+          "_fivetran_deleted"
+        ],
+        "rows": [
+          [
+            "001usVdcbubaV6K9ih",
+            "Dunwick Process Equipment SA",
+            "0000100021",
+            "Strategic",
+            "EMEA",
+            true,
+            false,
+            "0000100021",
+            "Dunwick Process Equipment SA",
+            false
+          ],
+          [
+            "001RTWHCy9QOZgYtfy",
+            "Galbury Steelworks SA",
+            "0000100004",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "0000100004",
+            "Galbury Steelworks SA",
+            false
+          ],
+          [
+            "001T6Wn0eXovaGLMVG",
+            "Halbrook Fluid Systems",
+            "0000100001",
+            "Strategic",
+            "EMEA",
+            true,
+            false,
+            "0000100001",
+            "Halbrook Fluid Systems GmbH",
+            false
+          ],
+          [
+            "001KHodrD6UyqZnaQR",
+            "Halbrook Fluid Systems GmbH",
+            null,
+            "Strategic",
+            "EMEA",
+            true,
+            false,
+            null,
+            null,
+            null
+          ],
+          [
+            "001g6Do98g9SRo6RPs",
+            "Harvale Food Processing Inc",
+            "0000100017",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "0000100017",
+            "Harvale Food Processing Inc",
+            false
+          ],
+          [
+            "001cWWUZbLBqBzKEe2",
+            "Jormark Paper Mills SA",
+            "0000100006",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "0000100006",
+            "Jormark Paper Mills SA",
+            false
+          ],
+          [
+            "001uZIL3lmdPJi6dMz",
+            "Kelridge Steelworks SA",
+            "0000100019",
+            "Strategic",
+            "EMEA",
+            true,
+            false,
+            "0000100019",
+            "Kelridge Steelworks SA",
+            false
+          ],
+          [
+            "001TlD8DEb2a4OHAFu",
+            "Marmark HVAC Inc",
+            "0000100008",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "0000100008",
+            "Marmark HVAC Inc",
+            false
+          ],
+          [
+            "001xtf0eDWZ7g16pYH",
+            "Pellridge Process Equipment GmbH",
+            "0000100022",
+            "Strategic",
+            "EMEA",
+            true,
+            false,
+            "0000100022",
+            "Pellridge Process Equipment GmbH",
+            false
+          ],
+          [
+            "001jyjQ3yYlKrgAPD9",
+            "Quenmere Paper Mills GmbH",
+            "0000100015",
+            "Strategic",
+            "EMEA",
+            false,
+            false,
+            "0000100015",
+            "Quenmere Paper Mills GmbH",
+            false
+          ],
+          [
+            "001ePIqhOkiXF8oN5K",
+            "Quenton Food Processing GmbH",
+            "0000100018",
+            "Strategic",
+            "EMEA",
+            true,
+            false,
+            "0000100018",
+            "Quenton Food Processing GmbH",
+            false
+          ],
+          [
+            "00173mQ9bhojG5YWvV",
+            "Ralmore Process Equipment Inc",
+            "0000100020",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "0000100020",
+            "Ralmore Process Equipment Inc",
+            false
+          ],
+          [
+            "001Mr9uzv7OnksPJDh",
+            "Ralwick Pharma Plants Ltd",
+            "0000100023",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "0000100023",
+            "Ralwick Pharma Plants Ltd",
+            false
+          ],
+          [
+            "001r9q4bWRxTPoZKYK",
+            "Sevholt Refining SA",
+            "0000100024",
+            "Strategic",
+            "EMEA",
+            true,
+            false,
+            "0000100024",
+            "Sevholt Refining SA",
+            false
+          ],
+          [
+            "001LYKqH2NcHcxlE2K",
+            "Sevland Utilities Inc",
+            "0000100007",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "0000100007",
+            "Sevland Utilities Inc",
+            false
+          ],
+          [
+            "001xoPG2ALg7oLuJrw",
+            "Tamdale Food Processing Ltd",
+            "0000100014",
+            "Strategic",
+            "EMEA",
+            true,
+            false,
+            "0000100014",
+            "Tamdale Food Processing Ltd",
+            false
+          ],
+          [
+            "001bpSPP9I0DwIsbXO",
+            "Tamford Food Processing SA",
+            "0000100003",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "0000100003",
+            "Tamford Food Processing SA",
+            false
+          ],
+          [
+            "00196WdD6KCNZ4yZVt",
+            "Tammore Food Processing BV",
+            "0000100027",
+            "Strategic",
+            "EMEA",
+            true,
+            false,
+            "0000100027",
+            "Tammore Food Processing BV",
+            false
+          ],
+          [
+            "001aAVL3JudBxJLQKi",
+            "Tamridge Pharma Plants Inc",
+            "0000100012",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "0000100012",
+            "Tamridge Pharma Plants Inc",
+            false
+          ],
+          [
+            "001IeA54qrzDv3P7kZ",
+            "Tamwick Mining Inc",
+            "0000100002",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "0000100002",
+            "Tamwick Mining Inc",
+            false
+          ],
+          [
+            "001VBW81QSgOAH35Pb",
+            "Thalmark Marine Srl",
+            "0000100010",
+            "Strategic",
+            "EMEA",
+            true,
+            false,
+            "0000100010",
+            "Thalmark Marine Srl",
+            false
+          ],
+          [
+            "001z9MQhfHInmTg8Qg",
+            "Velmere Pipeline Services Ltd",
+            "0000100011",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "0000100011",
+            "Velmere Pipeline Services Ltd",
+            false
+          ],
+          [
+            "001fYsCllu8u6Vvqti",
+            "Vornland Chemicals SA",
+            "0000100026",
+            "Strategic",
+            "EMEA",
+            true,
+            false,
+            "0000100026",
+            "Vornland Chemicals SA",
+            false
+          ],
+          [
+            "001oeP6Yy42qbLL6ni",
+            "Vornridge Water Works Ltd",
+            "0000100013",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "0000100013",
+            "Vornridge Water Works Ltd",
+            false
+          ],
+          [
+            "001gFjTbqI8yil52V7",
+            "Vornwick Utilities Inc",
+            "0000100009",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "0000100009",
+            "Vornwick Utilities Inc",
+            false
+          ],
+          [
+            "001AgkEM3JeW9GzswP",
+            "Wesmore Energy Ltd",
+            "0000100005",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "0000100005",
+            "Wesmore Energy Ltd",
+            false
+          ],
+          [
+            "001tTFM0okFASwilZ0",
+            "Yarstead Process Equipment Inc",
+            "0000100025",
+            "Strategic",
+            "North America",
+            true,
+            false,
+            "0000100025",
+            "Yarstead Process Equipment Inc",
+            false
+          ]
+        ],
+        "row_count": 27,
+        "truncated": false
+      },
+      "seconds": 0.02,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Look at sample delivery rows to understand promised vs actual dates",
+        "sql": "SELECT vbeln, kunnr, vstel, erdat, wadat, wadat_ist, lfdat, zz_carrier_id, _fivetran_synced FROM sap_s4.likp WHERE NOT _fivetran_deleted ORDER BY vbeln DESC LIMIT 30"
+      },
+      "output": {
+        "columns": [
+          "vbeln",
+          "kunnr",
+          "vstel",
+          "erdat",
+          "wadat",
+          "wadat_ist",
+          "lfdat",
+          "zz_carrier_id",
+          "_fivetran_synced"
+        ],
+        "rows": [
+          [
+            "0080009161",
+            "0000100025",
+            "1000",
+            "20261107",
+            "20261109",
+            "00000000",
+            "20261112",
+            "NRTH",
+            "2026-11-11 16:13:40.234183+00:00"
+          ],
+          [
+            "0080009160",
+            "0000100019",
+            "2000",
+            "20261107",
+            "20261110",
+            "00000000",
+            "20261114",
+            "ORBF",
+            "2026-11-11 16:13:40.233781+00:00"
+          ],
+          [
+            "0080009159",
+            "0000100014",
+            "2000",
+            "20261107",
+            "20261114",
+            "00000000",
+            "20261118",
+            "ORBF",
+            "2026-11-11 16:13:40.233341+00:00"
+          ],
+          [
+            "0080009158",
+            "0000100013",
+            "1000",
+            "20261107",
+            "20261110",
+            "00000000",
+            "20261113",
+            "VELX",
+            "2026-11-11 16:13:40.232900+00:00"
+          ],
+          [
+            "0080009157",
+            "0000100104",
+            "1000",
+            "20261107",
+            "20261109",
+            "00000000",
+            "20261112",
+            "NRTH",
+            "2026-11-11 16:13:40.234007+00:00"
+          ],
+          [
+            "0080009156",
+            "0000100084",
+            "1000",
+            "20261107",
+            "20261111",
+            "00000000",
+            "20261114",
+            "ORBF",
+            "2026-11-11 16:13:40.233971+00:00"
+          ],
+          [
+            "0080009155",
+            "0000100065",
+            "1000",
+            "20261107",
+            "20261110",
+            "00000000",
+            "20261113",
+            "KSTL",
+            "2026-11-11 16:13:40.233518+00:00"
+          ],
+          [
+            "0080009154",
+            "0000100039",
+            "1000",
+            "20261107",
+            "20261117",
+            "00000000",
+            "20261120",
+            "NRTH",
+            "2026-11-11 16:13:40.233104+00:00"
+          ],
+          [
+            "0080009153",
+            "0000100019",
+            "2000",
+            "20261107",
+            "20261114",
+            "00000000",
+            "20261118",
+            "VELX",
+            "2026-11-11 16:13:40.234218+00:00"
+          ],
+          [
+            "0080009152",
+            "0000100019",
+            "2000",
+            "20261107",
+            "20261112",
+            "00000000",
+            "20261116",
+            "KSTL",
+            "2026-11-11 16:13:40.233816+00:00"
+          ],
+          [
+            "0080009151",
+            "0000100015",
+            "2000",
+            "20261107",
+            "20261114",
+            "00000000",
+            "20261118",
+            "NRTH",
+            "2026-11-11 16:13:40.233376+00:00"
+          ],
+          [
+            "0080009150",
+            "0000100014",
+            "2000",
+            "20261107",
+            "20261113",
+            "00000000",
+            "20261117",
+            "NRTH",
+            "2026-11-11 16:13:40.232943+00:00"
+          ],
+          [
+            "0080009149",
+            "0000100001",
+            "2000",
+            "20261107",
+            "20261116",
+            "00000000",
+            "20261120",
+            "VELX",
+            "2026-11-11 16:13:40.234042+00:00"
+          ],
+          [
+            "0080009148",
+            "0000100114",
+            "2000",
+            "20261107",
+            "20261109",
+            "00000000",
+            "20261113",
+            "VELX",
+            "2026-11-11 16:13:40.233635+00:00"
+          ],
+          [
+            "0080009147",
+            "0000100069",
+            "2000",
+            "20261107",
+            "20261114",
+            "00000000",
+            "20261118",
+            "VELX",
+            "2026-11-11 16:13:40.233554+00:00"
+          ],
+          [
+            "0080009146",
+            "0000100046",
+            "2000",
+            "20261107",
+            "20261113",
+            "00000000",
+            "20261117",
+            "ORBF",
+            "2026-11-11 16:13:40.233140+00:00"
+          ],
+          [
+            "0080009145",
+            "0000100026",
+            "2000",
+            "20261107",
+            "20261115",
+            "00000000",
+            "20261119",
+            "ORBF",
+            "2026-11-11 16:13:40.234253+00:00"
+          ],
+          [
+            "0080009144",
+            "0000100103",
+            "1000",
+            "20261107",
+            "20261110",
+            "00000000",
+            "20261113",
+            "ORBF",
+            "2026-11-11 16:13:40.233852+00:00"
+          ],
+          [
+            "0080009143",
+            "0000100102",
+            "2000",
+            "20261107",
+            "20261113",
+            "00000000",
+            "20261117",
+            "KSTL",
+            "2026-11-11 16:13:40.233412+00:00"
+          ],
+          [
+            "0080009142",
+            "0000100081",
+            "1000",
+            "20261107",
+            "20261114",
+            "00000000",
+            "20261117",
+            "ORBF",
+            "2026-11-11 16:13:40.232982+00:00"
+          ],
+          [
+            "0080009141",
+            "0000100075",
+            "2000",
+            "20261107",
+            "20261109",
+            "00000000",
+            "20261113",
+            "KSTL",
+            "2026-11-11 16:13:40.234078+00:00"
+          ],
+          [
+            "0080009140",
+            "0000100068",
+            "1000",
+            "20261107",
+            "20261111",
+            "00000000",
+            "20261114",
+            "NRTH",
+            "2026-11-11 16:13:40.233674+00:00"
+          ],
+          [
+            "0080009139",
+            "0000100025",
+            "1000",
+            "20261107",
+            "20261110",
+            "00000000",
+            "20261113",
+            "NRTH",
+            "2026-11-11 16:13:40.233596+00:00"
+          ],
+          [
+            "0080009138",
+            "0000100020",
+            "1000",
+            "20261107",
+            "20261109",
+            "00000000",
+            "20261112",
+            "VELX",
+            "2026-11-11 16:13:40.233186+00:00"
+          ],
+          [
+            "0080009137",
+            "0000100002",
+            "1000",
+            "20261107",
+            "20261115",
+            "00000000",
+            "20261118",
+            "KSTL",
+            "2026-11-11 16:13:40.234288+00:00"
+          ],
+          [
+            "0080009136",
+            "0000100112",
+            "1000",
+            "20261107",
+            "20261109",
+            "00000000",
+            "20261112",
+            "NRTH",
+            "2026-11-11 16:13:40.233901+00:00"
+          ],
+          [
+            "0080009135",
+            "0000100100",
+            "1000",
+            "20261107",
+            "20261114",
+            "00000000",
+            "20261117",
+            "NRTH",
+            "2026-11-11 16:13:40.233447+00:00"
+          ],
+          [
+            "0080009134",
+            "0000100091",
+            "1000",
+            "20261107",
+            "20261109",
+            "00000000",
+            "20261112",
+            "NRTH",
+            "2026-11-11 16:13:40.233023+00:00"
+          ],
+          [
+            "0080009133",
+            "0000100024",
+            "2000",
+            "20261107",
+            "20261113",
+            "00000000",
+            "20261117",
+            "VELX",
+            "2026-11-11 16:13:40.234112+00:00"
+          ],
+          [
+            "0080009132",
+            "0000100005",
+            "1000",
+            "20261107",
+            "20261112",
+            "00000000",
+            "20261115",
+            "KSTL",
+            "2026-11-11 16:13:40.233711+00:00"
+          ]
+        ],
+        "row_count": 30,
+        "truncated": false
+      },
+      "seconds": 0.02,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check carrier event types and how shipments link to SAP delivery numbers",
+        "sql": "SELECT e.event_type, COUNT(*) n, MIN(e.event_at) mn, MAX(e.event_at) mx, MAX(e._fivetran_synced) synced FROM carrier_pg.shipment_event e WHERE NOT e._fivetran_deleted GROUP BY e.event_type ORDER BY n DESC"
+      },
+      "output": {
+        "columns": [
+          "event_type",
+          "n",
+          "mn",
+          "mx",
+          "synced"
+        ],
+        "rows": [
+          [
+            "label_created",
+            9121,
+            "2025-05-09 09:18:15+00:00",
+            "2026-11-06 15:03:49+00:00",
+            "2026-11-11 16:13:31.998923+00:00"
+          ],
+          [
+            "picked_up",
+            8786,
+            "2025-05-11 07:29:59+00:00",
+            "2026-11-06 10:49:57+00:00",
+            "2026-11-11 16:13:31.998182+00:00"
+          ],
+          [
+            "in_transit",
+            8771,
+            "2025-05-12 23:56:56+00:00",
+            "2026-11-06 10:45:38+00:00",
+            "2026-11-11 16:13:31.998140+00:00"
+          ],
+          [
+            "delivered",
+            8731,
+            "2025-05-14 14:05:05+00:00",
+            "2026-11-06 16:27:40+00:00",
+            "2026-11-11 16:13:31.999119+00:00"
+          ],
+          [
+            "out_for_delivery",
+            8731,
+            "2025-05-14 11:05:05+00:00",
+            "2026-11-06 13:27:40+00:00",
+            "2026-11-11 16:13:31.998837+00:00"
+          ],
+          [
+            "cancelled",
+            310,
+            "2025-05-20 10:08:09+00:00",
+            "2026-11-06 16:46:57+00:00",
+            "2026-11-11 16:13:31.999157+00:00"
+          ]
+        ],
+        "row_count": 6,
+        "truncated": false
+      },
+      "seconds": 0.01,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check shipment table linkage to SAP deliveries and carrier codes",
+        "sql": "SELECT s.carrier_code, s.status, COUNT(*) n, COUNT(l.vbeln) matched_to_sap, COUNT(DISTINCT s.delivery_number) distinct_deliv FROM carrier_pg.shipment s LEFT JOIN sap_s4.likp l ON l.vbeln = s.delivery_number WHERE NOT s._fivetran_deleted GROUP BY 1,2 ORDER BY 1,2"
+      },
+      "output": {
+        "columns": [
+          "carrier_code",
+          "status",
+          "n",
+          "matched_to_sap",
+          "distinct_deliv"
+        ],
+        "rows": [
+          [
+            "KSTL",
+            "cancelled",
+            85,
+            85,
+            85
+          ],
+          [
+            "KSTL",
+            "delivered",
+            2203,
+            2203,
+            2203
+          ],
+          [
+            "KSTL",
+            "in_transit",
+            14,
+            14,
+            14
+          ],
+          [
+            "KSTL",
+            "label_created",
+            2,
+            2,
+            2
+          ],
+          [
+            "KSTL",
+            "picked_up",
+            5,
+            5,
+            5
+          ],
+          [
+            "NRTH",
+            "cancelled",
+            66,
+            66,
+            66
+          ],
+          [
+            "NRTH",
+            "delivered",
+            2176,
+            2176,
+            2176
+          ],
+          [
+            "NRTH",
+            "in_transit",
+            9,
+            9,
+            9
+          ],
+          [
+            "NRTH",
+            "label_created",
+            8,
+            8,
+            8
+          ],
+          [
+            "NRTH",
+            "picked_up",
+            3,
+            3,
+            3
+          ],
+          [
+            "ORBF",
+            "cancelled",
+            74,
+            74,
+            74
+          ],
+          [
+            "ORBF",
+            "delivered",
+            2144,
+            2144,
+            2144
+          ],
+          [
+            "ORBF",
+            "in_transit",
+            7,
+            7,
+            7
+          ],
+          [
+            "ORBF",
+            "label_created",
+            6,
+            6,
+            6
+          ],
+          [
+            "ORBF",
+            "picked_up",
+            3,
+            3,
+            3
+          ],
+          [
+            "VELX",
+            "cancelled",
+            85,
+            85,
+            85
+          ],
+          [
+            "VELX",
+            "delivered",
+            2208,
+            2208,
+            2208
+          ],
+          [
+            "VELX",
+            "in_transit",
+            10,
+            10,
+            10
+          ],
+          [
+            "VELX",
+            "label_created",
+            9,
+            9,
+            9
+          ],
+          [
+            "VELX",
+            "picked_up",
+            4,
+            4,
+            4
+          ]
+        ],
+        "row_count": 20,
+        "truncated": false
+      },
+      "seconds": 0.01,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Compare carrier delivered timestamp vs SAP promised date and SAP actual goods issue, by month",
+        "sql": "WITH d AS (\n SELECT s.delivery_number, l.kunnr, l.lfdat, l.wadat_ist, l.wadat,\n   CAST(e.event_at AS DATE) AS deliv_date,\n   try_strptime(l.lfdat,'%Y%m%d')::DATE AS promised,\n   try_strptime(l.wadat_ist,'%Y%m%d')::DATE AS gi_actual\n FROM carrier_pg.shipment s\n JOIN carrier_pg.shipment_event e ON e.shipment_id = s.shipment_id AND e.event_type='delivered' AND NOT e._fivetran_deleted\n JOIN sap_s4.likp l ON l.vbeln = s.delivery_number AND NOT l._fivetran_deleted\n WHERE s.status='delivered' AND NOT s._fivetran_deleted)\nSELECT strftime(promised,'%Y-%m') ym, COUNT(*) n,\n ROUND(100.0*AVG(CASE WHEN deliv_date <= promised THEN 1 ELSE 0 END),1) pct_ontime_carrier,\n ROUND(100.0*AVG(CASE WHEN gi_actual <= promised THEN 1 ELSE 0 END),1) pct_ontime_gi,\n SUM(CASE WHEN gi_actual IS NULL THEN 1 ELSE 0 END) no_gi\nFROM d GROUP BY 1 ORDER BY 1 DESC LIMIT 18"
+      },
+      "output": {
+        "columns": [
+          "ym",
+          "n",
+          "pct_ontime_carrier",
+          "pct_ontime_gi",
+          "no_gi"
+        ],
+        "rows": [
+          [
+            "2026-11",
+            104,
+            98.1,
+            100.0,
+            0
+          ],
+          [
+            "2026-10",
+            504,
+            88.1,
+            97.8,
+            0
+          ],
+          [
+            "2026-09",
+            505,
+            88.7,
+            97.4,
+            0
+          ],
+          [
+            "2026-08",
+            490,
+            90.0,
+            98.8,
+            0
+          ],
+          [
+            "2026-07",
+            560,
+            91.8,
+            97.9,
+            0
+          ],
+          [
+            "2026-06",
+            497,
+            93.4,
+            98.2,
+            0
+          ],
+          [
+            "2026-05",
+            522,
+            93.5,
+            98.5,
+            0
+          ],
+          [
+            "2026-04",
+            514,
+            92.4,
+            99.2,
+            0
+          ],
+          [
+            "2026-03",
+            498,
+            93.6,
+            98.8,
+            0
+          ],
+          [
+            "2026-02",
+            453,
+            92.5,
+            99.1,
+            0
+          ],
+          [
+            "2026-01",
+            505,
+            92.9,
+            99.0,
+            0
+          ],
+          [
+            "2025-12",
+            473,
+            92.6,
+            98.3,
+            0
+          ],
+          [
+            "2025-11",
+            498,
+            92.6,
+            98.8,
+            0
+          ],
+          [
+            "2025-10",
+            551,
+            94.2,
+            98.7,
+            0
+          ],
+          [
+            "2025-09",
+            447,
+            91.9,
+            98.4,
+            0
+          ],
+          [
+            "2025-08",
+            482,
+            93.6,
+            98.3,
+            0
+          ],
+          [
+            "2025-07",
+            477,
+            93.7,
+            99.0,
+            0
+          ],
+          [
+            "2025-06",
+            487,
+            93.4,
+            98.6,
+            0
+          ]
+        ],
+        "row_count": 18,
+        "truncated": false
+      },
+      "seconds": 0.03,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Per strategic account: on-time rate and late delivery count over last 90 days (promised date window), plus open past-due shipments",
+        "sql": "WITH strat AS (SELECT name, sap_customer_number_c kunnr, region_c FROM salesforce.account WHERE tier_c='Strategic' AND NOT is_deleted AND sap_customer_number_c IS NOT NULL),\ndl AS (\n SELECT l.kunnr, l.vbeln, l.zz_carrier_id, try_strptime(l.lfdat,'%Y%m%d')::DATE promised, s.status,\n   (SELECT MIN(CAST(e.event_at AS DATE)) FROM carrier_pg.shipment_event e WHERE e.shipment_id=s.shipment_id AND e.event_type='delivered' AND NOT e._fivetran_deleted) deliv\n FROM sap_s4.likp l\n LEFT JOIN carrier_pg.shipment s ON s.delivery_number = l.vbeln AND NOT s._fivetran_deleted\n WHERE NOT l._fivetran_deleted)\nSELECT st.name, st.region_c,\n COUNT(*) FILTER (WHERE d.deliv IS NOT NULL AND d.promised BETWEEN DATE '2026-08-08' AND DATE '2026-11-06') delivered_90d,\n COUNT(*) FILTER (WHERE d.deliv > d.promised AND d.promised BETWEEN DATE '2026-08-08' AND DATE '2026-11-06') late_90d,\n ROUND(100.0*COUNT(*) FILTER (WHERE d.deliv <= d.promised AND d.promised BETWEEN DATE '2026-08-08' AND DATE '2026-11-06') / NULLIF(COUNT(*) FILTER (WHERE d.deliv IS NOT NULL AND d.promised BETWEEN DATE '2026-08-08' AND DATE '2026-11-06'),0),1) ontime_pct_90d,\n COUNT(*) FILTER (WHERE d.status IN ('label_created','picked_up','in_transit') AND d.promised < DATE '2026-11-06') open_past_promise\nFROM strat st LEFT JOIN dl d ON d.kunnr = st.kunnr\nGROUP BY 1,2 ORDER BY ontime_pct_90d ASC NULLS LAST"
+      },
+      "output": {
+        "columns": [
+          "name",
+          "region_c",
+          "delivered_90d",
+          "late_90d",
+          "ontime_pct_90d",
+          "open_past_promise"
+        ],
+        "rows": [
+          [
+            "Tamwick Mining Inc",
+            "North America",
+            26,
+            10,
+            61.5,
+            0
+          ],
+          [
+            "Quenmere Paper Mills GmbH",
+            "EMEA",
+            19,
+            6,
+            68.4,
+            0
+          ],
+          [
+            "Tamford Food Processing SA",
+            "North America",
+            29,
+            9,
+            69.0,
+            0
+          ],
+          [
+            "Galbury Steelworks SA",
+            "North America",
+            23,
+            6,
+            73.9,
+            0
+          ],
+          [
+            "Sevland Utilities Inc",
+            "North America",
+            31,
+            8,
+            74.2,
+            0
+          ],
+          [
+            "Wesmore Energy Ltd",
+            "North America",
+            30,
+            7,
+            76.7,
+            0
+          ],
+          [
+            "Halbrook Fluid Systems",
+            "EMEA",
+            26,
+            6,
+            76.9,
+            0
+          ],
+          [
+            "Vornridge Water Works Ltd",
+            "North America",
+            27,
+            6,
+            77.8,
+            0
+          ],
+          [
+            "Vornwick Utilities Inc",
+            "North America",
+            19,
+            4,
+            78.9,
+            0
+          ],
+          [
+            "Marmark HVAC Inc",
+            "North America",
+            27,
+            5,
+            81.5,
+            0
+          ],
+          [
+            "Jormark Paper Mills SA",
+            "North America",
+            19,
+            3,
+            84.2,
+            1
+          ],
+          [
+            "Sevholt Refining SA",
+            "EMEA",
+            33,
+            3,
+            90.9,
+            0
+          ],
+          [
+            "Yarstead Process Equipment Inc",
+            "North America",
+            23,
+            2,
+            91.3,
+            0
+          ],
+          [
+            "Tamridge Pharma Plants Inc",
+            "North America",
+            24,
+            2,
+            91.7,
+            0
+          ],
+          [
+            "Ralwick Pharma Plants Ltd",
+            "North America",
+            25,
+            2,
+            92.0,
+            0
+          ],
+          [
+            "Vornland Chemicals SA",
+            "EMEA",
+            26,
+            2,
+            92.3,
+            0
+          ],
+          [
+            "Thalmark Marine Srl",
+            "EMEA",
+            26,
+            2,
+            92.3,
+            0
+          ],
+          [
+            "Tammore Food Processing BV",
+            "EMEA",
+            19,
+            1,
+            94.7,
+            0
+          ],
+          [
+            "Dunwick Process Equipment SA",
+            "EMEA",
+            21,
+            1,
+            95.2,
+            0
+          ],
+          [
+            "Tamdale Food Processing Ltd",
+            "EMEA",
+            24,
+            1,
+            95.8,
+            0
+          ],
+          [
+            "Pellridge Process Equipment GmbH",
+            "EMEA",
+            26,
+            1,
+            96.2,
+            0
+          ],
+          [
+            "Kelridge Steelworks SA",
+            "EMEA",
+            26,
+            1,
+            96.2,
+            0
+          ],
+          [
+            "Harvale Food Processing Inc",
+            "North America",
+            26,
+            1,
+            96.2,
+            1
+          ],
+          [
+            "Velmere Pipeline Services Ltd",
+            "North America",
+            33,
+            0,
+            100.0,
+            1
+          ],
+          [
+            "Quenton Food Processing GmbH",
+            "EMEA",
+            31,
+            0,
+            100.0,
+            0
+          ],
+          [
+            "Ralmore Process Equipment Inc",
+            "North America",
+            20,
+            0,
+            100.0,
+            0
+          ]
+        ],
+        "row_count": 26,
+        "truncated": false
+      },
+      "seconds": 0.02,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check how Zendesk organizations map to Salesforce accounts",
+        "sql": "SELECT o.id, o.name, o.external_id, COUNT(t.id) tickets FROM zendesk.organization o LEFT JOIN zendesk.ticket t ON t.organization_id=o.id AND NOT t._fivetran_deleted WHERE NOT o._fivetran_deleted GROUP BY 1,2,3 ORDER BY tickets DESC LIMIT 60"
+      },
+      "output": {
+        "columns": [
+          "id",
+          "name",
+          "external_id",
+          "tickets"
+        ],
+        "rows": [
+          [
+            360000000004,
+            "Galbury Steelworks SA",
+            "001RTWHCy9QOZgYtfy",
+            55
+          ],
+          [
+            360000000014,
+            "Tamdale Food Processing Ltd",
+            "001xoPG2ALg7oLuJrw",
+            54
+          ],
+          [
+            360000000006,
+            "Jormark Paper Mills SA",
+            "001cWWUZbLBqBzKEe2",
+            54
+          ],
+          [
+            360000000015,
+            "Quenmere Paper Mills GmbH",
+            "001jyjQ3yYlKrgAPD9",
+            54
+          ],
+          [
+            360000000002,
+            "Tamwick Mining Inc",
+            "001IeA54qrzDv3P7kZ",
+            54
+          ],
+          [
+            360000000003,
+            "Tamford Food Processing SA",
+            "001bpSPP9I0DwIsbXO",
+            53
+          ],
+          [
+            360000000005,
+            "Wesmore Energy Ltd",
+            "001AgkEM3JeW9GzswP",
+            53
+          ],
+          [
+            360000000011,
+            "Velmere Pipeline Services Ltd",
+            "001z9MQhfHInmTg8Qg",
+            52
+          ],
+          [
+            360000000026,
+            "Vornland Chemicals SA",
+            "001fYsCllu8u6Vvqti",
+            52
+          ],
+          [
+            360000000007,
+            "Sevland Utilities Inc",
+            "001LYKqH2NcHcxlE2K",
+            52
+          ],
+          [
+            360000000017,
+            "Harvale Food Processing Inc",
+            "001g6Do98g9SRo6RPs",
+            52
+          ],
+          [
+            360000000009,
+            "Vornwick Utilities Inc",
+            "001gFjTbqI8yil52V7",
+            52
+          ],
+          [
+            360000000023,
+            "Ralwick Pharma Plants Ltd",
+            "001Mr9uzv7OnksPJDh",
+            52
+          ],
+          [
+            360000000013,
+            "Vornridge Water Works Ltd",
+            "001oeP6Yy42qbLL6ni",
+            52
+          ],
+          [
+            360000000001,
+            "Halbrook Fluid Systems",
+            "001T6Wn0eXovaGLMVG",
+            52
+          ],
+          [
+            360000000025,
+            "Yarstead Process Equipment Inc",
+            "001tTFM0okFASwilZ0",
+            52
+          ],
+          [
+            360000000022,
+            "Pellridge Process Equipment GmbH",
+            "001xtf0eDWZ7g16pYH",
+            51
+          ],
+          [
+            360000000024,
+            "Sevholt Refining SA",
+            "001r9q4bWRxTPoZKYK",
+            51
+          ],
+          [
+            360000000018,
+            "Quenton Food Processing GmbH",
+            "001ePIqhOkiXF8oN5K",
+            51
+          ],
+          [
+            360000000019,
+            "Kelridge Steelworks SA",
+            "001uZIL3lmdPJi6dMz",
+            51
+          ],
+          [
+            360000000012,
+            "Tamridge Pharma Plants Inc",
+            "001aAVL3JudBxJLQKi",
+            51
+          ],
+          [
+            360000000021,
+            "Dunwick Process Equipment SA",
+            "001usVdcbubaV6K9ih",
+            51
+          ],
+          [
+            360000000020,
+            "Ralmore Process Equipment Inc",
+            "00173mQ9bhojG5YWvV",
+            51
+          ],
+          [
+            360000000008,
+            "Marmark HVAC Inc",
+            "001TlD8DEb2a4OHAFu",
+            51
+          ],
+          [
+            360000000027,
+            "Tammore Food Processing BV",
+            "00196WdD6KCNZ4yZVt",
+            51
+          ],
+          [
+            360000000010,
+            "Thalmark Marine Srl",
+            "001VBW81QSgOAH35Pb",
+            51
+          ],
+          [
+            360000000016,
+            "Corford Paper Mills Ltd",
+            "001k65qp2iatHcrxhT",
+            19
+          ],
+          [
+            360000000048,
+            "Ebbholt Chemicals Inc",
+            "001OHw7Zhis8wKLs61",
+            18
+          ],
+          [
+            360000000049,
+            "Brandale HVAC SA",
+            "0012WGV98G0WEGHE2m",
+            18
+          ],
+          [
+            360000000030,
+            "Dunbrook Utilities Inc",
+            "001EgDhp3UJixHifIj",
+            18
+          ],
+          [
+            360000000053,
+            "Harford Paper Mills Inc",
+            "001x6BUqF3EKmYrzUI",
+            18
+          ],
+          [
+            360000000072,
+            "Dunton Process Equipment Inc",
+            "001gBHbd4dmpuXQsT8",
+            18
+          ],
+          [
+            360000000064,
+            "Istmore Pharma Plants Inc",
+            "001iLfsfKlGHPzNCTs",
+            18
+          ],
+          [
+            360000000116,
+            "Ulvridge Food Processing Inc",
+            "001muomHchHJHE3RJa",
+            18
+          ],
+          [
+            360000000102,
+            "Mardale Energy AB",
+            "001XwLYlUA7psfzB9w",
+            18
+          ],
+          [
+            360000000088,
+            "Galridge Pipeline Services SA",
+            "001MLdYwH6rINbHE8c",
+            18
+          ],
+          [
+            360000000095,
+            "Velridge Process Equipment Srl",
+            "0013KR9nt908PhICPj",
+            18
+          ],
+          [
+            360000000111,
+            "Fenbury Pharma Plants Inc",
+            "0013hkitqHymnFTXRa",
+            18
+          ],
+          [
+            360000000077,
+            "Harford Steelworks GmbH",
+            "0012Poa5jiRn1olRCP",
+            18
+          ],
+          [
+            360000000097,
+            "Stavmere Steelworks Inc",
+            "001O1aRpKLl8xjAWJf",
+            18
+          ],
+          [
+            360000000032,
+            "Velridge Mining GmbH",
+            "001v7ZtwGp73uTVv4w",
+            18
+          ],
+          [
+            360000000109,
+            "Velbrook Refining GmbH",
+            "001XuX06BrJDPYJNdm",
+            18
+          ],
+          [
+            360000000086,
+            "Wesstead Mining Ltd",
+            "001qbgfKv5Pt0h0HIf",
+            18
+          ],
+          [
+            360000000112,
+            "Fendale Pharma Plants Inc",
+            "0011MFs0Wy0p9WIChW",
+            18
+          ],
+          [
+            360000000079,
+            "Tamton Fluid Systems SA",
+            "001N1IlKLAECE3m1R3",
+            18
+          ],
+          [
+            360000000117,
+            "Quenbury Fluid Systems Inc",
+            "00171oqiIa2vr37Czj",
+            18
+          ],
+          [
+            360000000065,
+            "Velvale Utilities Inc",
+            "001gOwFfDZtYihToWq",
+            18
+          ],
+          [
+            360000000037,
+            "Tamland Refining Ltd",
+            "001mnv0gLnSCKjCZsu",
+            18
+          ],
+          [
+            360000000039,
+            "Ardbury HVAC Inc",
+            "00123ZwhacWJ2wuzdd",
+            18
+          ],
+          [
+            360000000082,
+            "Stavdale Food Processing SA",
+            "001tD7T8jVsRQnsVMC",
+            18
+          ],
+          [
+            360000000031,
+            "Thalland Mining Inc",
+            "001xE2SsxSGMAkGlbe",
+            18
+          ],
+          [
+            360000000098,
+            "Dunbrook HVAC Ltd",
+            "001X1pk6DQrBktSsDu",
+            18
+          ],
+          [
+            360000000074,
+            "Tamdale Water Works AB",
+            "001benC222dRIxl5zA",
+            18
+          ],
+          [
+            360000000104,
+            "Istton Marine Inc",
+            "0011TU4ZQuubhgfEZA",
+            17
+          ],
+          [
+            360000000089,
+            "Dundale Refining Inc",
+            "0012jo2V1UNlqW9o46",
+            17
+          ],
+          [
+            360000000033,
+            "Yarmore Fluid Systems Inc",
+            "001qVa5cId4lJGRcpL",
+            17
+          ],
+          [
+            360000000028,
+            "Stavwick Pharma Plants Inc",
+            "001y2GiEeW5FyVYEWO",
+            17
+          ],
+          [
+            360000000073,
+            "Rovford Marine SA",
+            "001Y7hkbtnZlegKq6J",
+            17
+          ],
+          [
+            360000000046,
+            "Branbrook Pharma Plants Ltd",
+            "001ABZgGDtDbePA7v1",
+            17
+          ],
+          [
+            360000000055,
+            "Galland Steelworks Inc",
+            "001rtJUUDpuXMRLlvn",
+            17
+          ]
+        ],
+        "row_count": 60,
+        "truncated": false
+      },
+      "seconds": 0.03,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check late-delivery rate by carrier and month to see if the October drop is concentrated",
+        "sql": "WITH d AS (\n SELECT l.zz_carrier_id carrier, try_strptime(l.lfdat,'%Y%m%d')::DATE promised, (SELECT MIN(CAST(e.event_at AS DATE)) FROM carrier_pg.shipment_event e WHERE e.shipment_id=s.shipment_id AND e.event_type='delivered' AND NOT e._fivetran_deleted) deliv\n FROM carrier_pg.shipment s JOIN sap_s4.likp l ON l.vbeln=s.delivery_number AND NOT l._fivetran_deleted WHERE s.status='delivered' AND NOT s._fivetran_deleted)\nSELECT carrier, strftime(promised,'%Y-%m') ym, COUNT(*) n, ROUND(100.0*AVG(CASE WHEN deliv<=promised THEN 1 ELSE 0 END),1) ontime\nFROM d WHERE promised >= DATE '2026-06-01' AND deliv IS NOT NULL GROUP BY 1,2 ORDER BY 2 DESC,1"
+      },
+      "output": {
+        "columns": [
+          "carrier",
+          "ym",
+          "n",
+          "ontime"
+        ],
+        "rows": [
+          [
+            null,
+            "2026-11",
+            104,
+            98.1
+          ],
+          [
+            null,
+            "2026-10",
+            504,
+            88.1
+          ],
+          [
+            null,
+            "2026-09",
+            505,
+            88.7
+          ],
+          [
+            null,
+            "2026-08",
+            490,
+            90.0
+          ],
+          [
+            null,
+            "2026-07",
+            560,
+            91.8
+          ],
+          [
+            null,
+            "2026-06",
+            497,
+            93.4
+          ]
+        ],
+        "row_count": 6,
+        "truncated": false
+      },
+      "seconds": 0.02,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Late-delivery rate by carrier (from carrier system) and month",
+        "sql": "WITH d AS (\n SELECT s.carrier_code carrier, try_strptime(l.lfdat,'%Y%m%d')::DATE promised, (SELECT MIN(CAST(e.event_at AS DATE)) FROM carrier_pg.shipment_event e WHERE e.shipment_id=s.shipment_id AND e.event_type='delivered' AND NOT e._fivetran_deleted) deliv\n FROM carrier_pg.shipment s JOIN sap_s4.likp l ON l.vbeln=s.delivery_number AND NOT l._fivetran_deleted WHERE s.status='delivered' AND NOT s._fivetran_deleted)\nSELECT carrier, strftime(promised,'%Y-%m') ym, COUNT(*) n, ROUND(100.0*AVG(CASE WHEN deliv<=promised THEN 1 ELSE 0 END),1) ontime\nFROM d WHERE promised >= DATE '2026-06-01' AND deliv IS NOT NULL GROUP BY 1,2 ORDER BY 2 DESC,1"
+      },
+      "output": {
+        "columns": [
+          "carrier",
+          "ym",
+          "n",
+          "ontime"
+        ],
+        "rows": [
+          [
+            "KSTL",
+            "2026-11",
+            22,
+            100.0
+          ],
+          [
+            "NRTH",
+            "2026-11",
+            24,
+            91.7
+          ],
+          [
+            "ORBF",
+            "2026-11",
+            26,
+            100.0
+          ],
+          [
+            "VELX",
+            "2026-11",
+            32,
+            100.0
+          ],
+          [
+            "KSTL",
+            "2026-10",
+            134,
+            93.3
+          ],
+          [
+            "NRTH",
+            "2026-10",
+            124,
+            89.5
+          ],
+          [
+            "ORBF",
+            "2026-10",
+            121,
+            87.6
+          ],
+          [
+            "VELX",
+            "2026-10",
+            125,
+            81.6
+          ],
+          [
+            "KSTL",
+            "2026-09",
+            126,
+            86.5
+          ],
+          [
+            "NRTH",
+            "2026-09",
+            125,
+            85.6
+          ],
+          [
+            "ORBF",
+            "2026-09",
+            122,
+            95.1
+          ],
+          [
+            "VELX",
+            "2026-09",
+            132,
+            87.9
+          ],
+          [
+            "KSTL",
+            "2026-08",
+            128,
+            92.2
+          ],
+          [
+            "NRTH",
+            "2026-08",
+            105,
+            91.4
+          ],
+          [
+            "ORBF",
+            "2026-08",
+            142,
+            89.4
+          ],
+          [
+            "VELX",
+            "2026-08",
+            115,
+            87.0
+          ],
+          [
+            "KSTL",
+            "2026-07",
+            130,
+            92.3
+          ],
+          [
+            "NRTH",
+            "2026-07",
+            142,
+            91.5
+          ],
+          [
+            "ORBF",
+            "2026-07",
+            141,
+            90.1
+          ],
+          [
+            "VELX",
+            "2026-07",
+            147,
+            93.2
+          ],
+          [
+            "KSTL",
+            "2026-06",
+            129,
+            96.1
+          ],
+          [
+            "NRTH",
+            "2026-06",
+            127,
+            93.7
+          ],
+          [
+            "ORBF",
+            "2026-06",
+            127,
+            93.7
+          ],
+          [
+            "VELX",
+            "2026-06",
+            114,
+            89.5
+          ]
+        ],
+        "row_count": 24,
+        "truncated": false
+      },
+      "seconds": 0.01,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Count open shipping/late tickets per strategic account in Zendesk, with ticket subjects and tags",
+        "sql": "SELECT a.name, t.id, t.created_at::DATE created, t.status, t.priority, t.type, t.subject, STRING_AGG(tg.tag, ',') tags\nFROM zendesk.ticket t\nJOIN zendesk.organization o ON o.id=t.organization_id\nJOIN salesforce.account a ON a.id=o.external_id AND a.tier_c='Strategic'\nLEFT JOIN zendesk.ticket_tag tg ON tg.ticket_id=t.id AND NOT tg._fivetran_deleted\nWHERE NOT t._fivetran_deleted AND t.status IN ('new','open','pending','hold') \nGROUP BY ALL ORDER BY a.name, t.created_at"
+      },
+      "output": {
+        "error": "BinderException: Binder Error: column \"created_at\" must appear in the GROUP BY clause or must be part of an aggregate function.\nGROUP BY ALL will only group entries in the SELECT list. Add it to the SELECT list or GROUP BY this entry explicitly.\n\nLINE 7: GROUP BY ALL ORDER BY a.name, t.created_at\n                                      ^",
+        "columns_of_tables_used": {
+          "salesforce.account": "id text, name text, sap_customer_number_c text, tier_c text, region_c text, billing_country text, owner_id text, industry text, is_deleted bool, created_date timestamptz, last_modified_date timestamptz, _fivetran_start timestamptz, _fivetran_end timestamptz, _fivetran_active bool, _fivetran_synced timestamptz, _fivetran_deleted bool",
+          "zendesk.organization": "id int, name text, external_id text, created_at timestamptz, _fivetran_synced timestamptz, _fivetran_deleted bool",
+          "zendesk.ticket": "id int, created_at timestamptz, updated_at timestamptz, subject text, status text, priority text, type text, organization_id int, requester_id int, _fivetran_synced timestamptz, _fivetran_deleted bool",
+          "zendesk.ticket_tag": "ticket_id int, tag text, _fivetran_synced timestamptz, _fivetran_deleted bool"
+        }
+      },
+      "seconds": 0.65,
+      "is_error": true
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "List open Zendesk tickets for strategic accounts with subjects and tags (tags aggregated separately)",
+        "sql": "SELECT a.name, t.id, CAST(t.created_at AS DATE) created, t.status, t.priority, t.type, t.subject,\n (SELECT STRING_AGG(tg.tag, ',') FROM zendesk.ticket_tag tg WHERE tg.ticket_id=t.id AND NOT tg._fivetran_deleted) tags\nFROM zendesk.ticket t\nJOIN zendesk.organization o ON o.id=t.organization_id\nJOIN salesforce.account a ON a.id=o.external_id AND a.tier_c='Strategic'\nWHERE NOT t._fivetran_deleted AND t.status IN ('new','open','pending','hold')\nORDER BY a.name, t.created_at"
+      },
+      "output": {
+        "columns": [
+          "name",
+          "id",
+          "created",
+          "status",
+          "priority",
+          "type",
+          "subject",
+          "tags"
+        ],
+        "rows": [
+          [
+            "Galbury Steelworks SA",
+            102837,
+            "2026-10-14",
+            "open",
+            "normal",
+            "question",
+            "Delivery for order 0010006602 still missing",
+            "shipping,urgent"
+          ],
+          [
+            "Galbury Steelworks SA",
+            102956,
+            "2026-10-31",
+            "pending",
+            "urgent",
+            "question",
+            "Delay on bearings for line 8396",
+            null
+          ],
+          [
+            "Galbury Steelworks SA",
+            102966,
+            "2026-11-01",
+            "open",
+            "normal",
+            "question",
+            "Order 0010003309 not received yet",
+            "shipping"
+          ],
+          [
+            "Galbury Steelworks SA",
+            102969,
+            "2026-11-01",
+            "pending",
+            "high",
+            "question",
+            "Credit note request for order 0010004729",
+            "billing"
+          ],
+          [
+            "Galbury Steelworks SA",
+            102979,
+            "2026-11-02",
+            "new",
+            "low",
+            "incident",
+            "Order 0010000850 arrived late",
+            "delivery"
+          ],
+          [
+            "Halbrook Fluid Systems",
+            102823,
+            "2026-10-12",
+            "pending",
+            "low",
+            "problem",
+            "Order 0010002553 arrived late",
+            "shipping,urgent"
+          ],
+          [
+            "Halbrook Fluid Systems GmbH",
+            102936,
+            "2026-10-28",
+            "pending",
+            "low",
+            "question",
+            "Late delivery on order 0010006784",
+            "logistics"
+          ],
+          [
+            "Halbrook Fluid Systems GmbH",
+            102977,
+            "2026-11-02",
+            "open",
+            "urgent",
+            "incident",
+            "Order 0010007869 arrived late",
+            "shipping"
+          ],
+          [
+            "Harvale Food Processing Inc",
+            102845,
+            "2026-10-15",
+            "new",
+            "high",
+            "incident",
+            "Tracking not updating for TRK1655940522",
+            "logistics"
+          ],
+          [
+            "Harvale Food Processing Inc",
+            102850,
+            "2026-10-16",
+            "open",
+            "high",
+            "incident",
+            "Need certificate of conformity for PMP-3010",
+            "product_question"
+          ],
+          [
+            "Harvale Food Processing Inc",
+            102894,
+            "2026-10-22",
+            "open",
+            "high",
+            "question",
+            "Need certificate of conformity for BRG-2030",
+            "product_question"
+          ],
+          [
+            "Harvale Food Processing Inc",
+            102914,
+            "2026-10-25",
+            "open",
+            "low",
+            "question",
+            "Manual for SPR-4030 missing pages",
+            "product_question"
+          ],
+          [
+            "Harvale Food Processing Inc",
+            102963,
+            "2026-11-01",
+            "open",
+            "normal",
+            "problem",
+            "Invoice 4159 shows the wrong PO number",
+            "billing"
+          ],
+          [
+            "Jormark Paper Mills SA",
+            102917,
+            "2026-10-25",
+            "open",
+            "normal",
+            "problem",
+            "Has 0010008811 left your warehouse?",
+            "delivery"
+          ],
+          [
+            "Jormark Paper Mills SA",
+            102929,
+            "2026-10-27",
+            "hold",
+            "low",
+            "problem",
+            "Delay on bearings for line 8407",
+            "shipping"
+          ],
+          [
+            "Jormark Paper Mills SA",
+            102930,
+            "2026-10-27",
+            "pending",
+            "normal",
+            "incident",
+            "Order 0010003556 arrived late",
+            "logistics"
+          ],
+          [
+            "Jormark Paper Mills SA",
+            102950,
+            "2026-10-30",
+            "pending",
+            "low",
+            "question",
+            "Change of billing address",
+            "billing"
+          ],
+          [
+            "Jormark Paper Mills SA",
+            102981,
+            "2026-11-03",
+            "open",
+            "high",
+            "incident",
+            "Bearing BRG-2010 running hot after install",
+            "product_question"
+          ],
+          [
+            "Quenmere Paper Mills GmbH",
+            102839,
+            "2026-10-15",
+            "open",
+            "normal",
+            "problem",
+            "Where is my order 0010001338?",
+            "shipping"
+          ],
+          [
+            "Quenmere Paper Mills GmbH",
+            102840,
+            "2026-10-15",
+            "pending",
+            "low",
+            "incident",
+            "Request for pump curve data sheet",
+            "product_question"
+          ],
+          [
+            "Quenmere Paper Mills GmbH",
+            102899,
+            "2026-10-22",
+            "hold",
+            "normal",
+            "incident",
+            "Late delivery on order 0010001475",
+            "shipping"
+          ],
+          [
+            "Quenmere Paper Mills GmbH",
+            102954,
+            "2026-10-31",
+            "pending",
+            "urgent",
+            "incident",
+            "Tracking not updating for TRK2708517431",
+            null
+          ],
+          [
+            "Quenton Food Processing GmbH",
+            102864,
+            "2026-10-18",
+            "pending",
+            "normal",
+            "problem",
+            "Spare parts quote request",
+            "product_question"
+          ],
+          [
+            "Quenton Food Processing GmbH",
+            102872,
+            "2026-10-18",
+            "open",
+            "normal",
+            "problem",
+            "Manual for VLV-1010 missing pages",
+            "product_question"
+          ],
+          [
+            "Quenton Food Processing GmbH",
+            102891,
+            "2026-10-21",
+            "pending",
+            "high",
+            "problem",
+            "Warranty claim for VLV-1010",
+            "returns,warranty"
+          ],
+          [
+            "Quenton Food Processing GmbH",
+            102934,
+            "2026-10-28",
+            "open",
+            "low",
+            "question",
+            "Request for pump curve data sheet",
+            "product_question"
+          ],
+          [
+            "Ralmore Process Equipment Inc",
+            102927,
+            "2026-10-26",
+            "open",
+            "normal",
+            "question",
+            "Seal kit compatibility question",
+            "product_question"
+          ],
+          [
+            "Ralwick Pharma Plants Ltd",
+            102847,
+            "2026-10-15",
+            "pending",
+            "normal",
+            "incident",
+            "Manual for PMP-3000 missing pages",
+            "product_question"
+          ],
+          [
+            "Ralwick Pharma Plants Ltd",
+            102855,
+            "2026-10-17",
+            "hold",
+            "normal",
+            "incident",
+            "Delivery for order 0010006301 still missing",
+            "logistics"
+          ],
+          [
+            "Sevland Utilities Inc",
+            102884,
+            "2026-10-20",
+            "open",
+            "urgent",
+            "incident",
+            "Seal kit compatibility question",
+            "product_question"
+          ],
+          [
+            "Sevland Utilities Inc",
+            102892,
+            "2026-10-21",
+            "open",
+            "low",
+            "incident",
+            "Order 0010004676 arrived late",
+            "shipping"
+          ],
+          [
+            "Tamdale Food Processing Ltd",
+            102877,
+            "2026-10-19",
+            "pending",
+            "normal",
+            "question",
+            "Need certificate of conformity for SPR-4010",
+            "product_question"
+          ],
+          [
+            "Tamdale Food Processing Ltd",
+            102887,
+            "2026-10-20",
+            "open",
+            "low",
+            "incident",
+            "Tracking not updating for TRK8073519476",
+            null
+          ],
+          [
+            "Tamdale Food Processing Ltd",
+            102915,
+            "2026-10-25",
+            "hold",
+            "low",
+            "problem",
+            "Tracking not updating for TRK7229295575",
+            "shipping"
+          ],
+          [
+            "Tamdale Food Processing Ltd",
+            102955,
+            "2026-10-31",
+            "hold",
+            "high",
+            "incident",
+            "Order 0010002676 not received yet",
+            "shipping"
+          ],
+          [
+            "Tamdale Food Processing Ltd",
+            102968,
+            "2026-11-01",
+            "open",
+            "high",
+            "problem",
+            "Seal kit compatibility question",
+            "product_question"
+          ],
+          [
+            "Tamford Food Processing SA",
+            102909,
+            "2026-10-24",
+            "open",
+            "low",
+            "problem",
+            "Order 0010005071 not received yet",
+            "shipping"
+          ],
+          [
+            "Tamford Food Processing SA",
+            102926,
+            "2026-10-26",
+            "open",
+            "normal",
+            "problem",
+            "Order 0010005601 arrived late",
+            "shipping"
+          ],
+          [
+            "Tamridge Pharma Plants Inc",
+            102918,
+            "2026-10-25",
+            "open",
+            "high",
+            "problem",
+            "Spare parts quote request",
+            "product_question"
+          ],
+          [
+            "Tamridge Pharma Plants Inc",
+            102932,
+            "2026-10-28",
+            "open",
+            "normal",
+            "problem",
+            "Request for pump curve data sheet",
+            "product_question"
+          ],
+          [
+            "Tamwick Mining Inc",
+            102854,
+            "2026-10-17",
+            "open",
+            "high",
+            "incident",
+            "Delay on bearings for line 1227",
+            "delivery"
+          ],
+          [
+            "Tamwick Mining Inc",
+            102886,
+            "2026-10-20",
+            "new",
+            "normal",
+            "question",
+            "Order 0010002384 arrived late",
+            "delivery"
+          ],
+          [
+            "Tamwick Mining Inc",
+            102959,
+            "2026-10-31",
+            "pending",
+            "high",
+            "incident",
+            "Late delivery on order 0010007141",
+            "shipping"
+          ],
+          [
+            "Velmere Pipeline Services Ltd",
+            102913,
+            "2026-10-24",
+            "pending",
+            "urgent",
+            "question",
+            "Tracking not updating for TRK9061412715",
+            null
+          ],
+          [
+            "Vornland Chemicals SA",
+            102949,
+            "2026-10-30",
+            "open",
+            "high",
+            "question",
+            "Late delivery on order 0010002236",
+            null
+          ],
+          [
+            "Vornridge Water Works Ltd",
+            102944,
+            "2026-10-29",
+            "open",
+            "low",
+            "problem",
+            "Tracking not updating for TRK8633730121",
+            "delivery"
+          ],
+          [
+            "Vornwick Utilities Inc",
+            102851,
+            "2026-10-16",
+            "pending",
+            "urgent",
+            "incident",
+            "Warranty claim for SPR-4010",
+            "returns,warranty"
+          ],
+          [
+            "Vornwick Utilities Inc",
+            102875,
+            "2026-10-19",
+            "open",
+            "normal",
+            "question",
+            "Credit note request for order 0010004964",
+            "billing"
+          ],
+          [
+            "Vornwick Utilities Inc",
+            102916,
+            "2026-10-25",
+            "hold",
+            "high",
+            "question",
+            "Delivery for order 0010003651 still missing",
+            null
+          ],
+          [
+            "Vornwick Utilities Inc",
+            102951,
+            "2026-10-30",
+            "pending",
+            "low",
+            "problem",
+            "Change of billing address",
+            "billing"
+          ],
+          [
+            "Wesmore Energy Ltd",
+            102870,
+            "2026-10-18",
+            "open",
+            "normal",
+            "incident",
+            "Has 0010005979 left your warehouse?",
+            "shipping"
+          ],
+          [
+            "Wesmore Energy Ltd",
+            102958,
+            "2026-10-31",
+            "open",
+            "low",
+            "incident",
+            "Warranty claim for SPR-4030",
+            "returns,warranty"
+          ],
+          [
+            "Wesmore Energy Ltd",
+            102978,
+            "2026-11-02",
+            "open",
+            "low",
+            "problem",
+            "Shipment TRK1211859787 delayed again",
+            "delivery"
+          ],
+          [
+            "Yarstead Process Equipment Inc",
+            102865,
+            "2026-10-18",
+            "pending",
+            "normal",
+            "incident",
+            "Delay on bearings for line 6410",
+            "logistics"
+          ]
+        ],
+        "row_count": 54,
+        "truncated": false
+      },
+      "seconds": 0.01,
+      "is_error": false
+    },
+    {
+      "tool": "run_sql",
+      "input": {
+        "purpose": "Check Zendesk status values overall",
+        "sql": "SELECT status, COUNT(*) n, MAX(updated_at) last_upd FROM zendesk.ticket WHERE NOT _fivetran_deleted GROUP BY status ORDER BY n DESC"
+      },
+      "output": {
+        "error": "Tool budget of 15 calls used up. Submit your answer now."
+      },
+      "seconds": 0.0,
+      "is_error": true
+    }
+  ],
+  "answer": {
+    "answer_summary": "Eleven strategic accounts are below 85% on-time delivery over the last 90 days (promised dates 8 Aug to 6 Nov 2026). The most urgent are Tamwick Mining (61.5%), Quenmere Paper Mills (68.4%), Tamford Food Processing (69.0%) and Galbury Steelworks (73.9%), and each has open shipping tickets. I could not pull renewal close dates before the query budget ran out, so those need checking in Salesforce before the account teams call.",
+    "at_risk_accounts": [
+      {
+        "account_name": "Tamwick Mining Inc",
+        "on_time_rate": 0.615,
+        "late_deliveries": 10,
+        "open_shipping_tickets": 3,
+        "renewal_close_date": null,
+        "drivers": "Lowest on-time rate of the strategic accounts (10 of 26 delivered orders late). Open tickets: bearings delay on line 1227 (high, open), order 0010002384 arrived late (new), late delivery on order 0010007141 (high, pending).",
+        "next_step": "Escalate this week: get a confirmed delivery date for each open order from logistics, name an owner, and call the customer's plant contact. Pull the renewal date from Salesforce."
+      },
+      {
+        "account_name": "Quenmere Paper Mills GmbH",
+        "on_time_rate": 0.684,
+        "late_deliveries": 6,
+        "open_shipping_tickets": 3,
+        "renewal_close_date": null,
+        "drivers": "6 of 19 orders late. Open tickets: 'Where is my order 0010001338?' (open), late delivery on order 0010001475 (on hold), tracking not updating for TRK2708517431 (urgent, pending). Salesforce shows this account as inactive (_fivetran_active = false).",
+        "next_step": "Confirm the account's status in Salesforce first, since it is flagged inactive. If it is still a strategic account, trace the two missing orders and fix the tracking gap, then call the customer."
+      },
+      {
+        "account_name": "Tamford Food Processing SA",
+        "on_time_rate": 0.69,
+        "late_deliveries": 9,
+        "open_shipping_tickets": 2,
+        "renewal_close_date": null,
+        "drivers": "9 of 29 orders late. Open tickets: order 0010005071 not received yet (open), order 0010005601 arrived late (open).",
+        "next_step": "Get proof of delivery or a new ETA for both open orders this week, and review the North America carrier lanes this account uses."
+      },
+      {
+        "account_name": "Galbury Steelworks SA",
+        "on_time_rate": 0.739,
+        "late_deliveries": 6,
+        "open_shipping_tickets": 4,
+        "renewal_close_date": null,
+        "drivers": "6 of 23 orders late. Open shipping tickets: order 0010006602 still missing (urgent, open), bearings delay on line 8396 (urgent, pending), order 0010003309 not received (open), order 0010000850 arrived late (new). A credit note request is also open.",
+        "next_step": "Highest open-ticket load of the group. Assign one account owner, resolve the missing-order cases first, and give the customer a written recovery plan."
+      },
+      {
+        "account_name": "Sevland Utilities Inc",
+        "on_time_rate": 0.742,
+        "late_deliveries": 8,
+        "open_shipping_tickets": 1,
+        "renewal_close_date": null,
+        "drivers": "8 of 31 orders late. Open: order 0010004676 arrived late (open). A seal-kit product question is also open, but it is not a shipping issue.",
+        "next_step": "Close the open late-order case with a root cause and confirm on-time delivery for the next two orders."
+      },
+      {
+        "account_name": "Wesmore Energy Ltd",
+        "on_time_rate": 0.767,
+        "late_deliveries": 7,
+        "open_shipping_tickets": 2,
+        "renewal_close_date": null,
+        "drivers": "7 of 30 orders late. Open: order 0010005979 'has it left your warehouse?' (open), shipment TRK1211859787 delayed again (open).",
+        "next_step": "Check warehouse release status for order 0010005979 and send the customer a firm delivery date for TRK1211859787."
+      },
+      {
+        "account_name": "Halbrook Fluid Systems",
+        "on_time_rate": 0.769,
+        "late_deliveries": 6,
+        "open_shipping_tickets": 3,
+        "renewal_close_date": null,
+        "drivers": "6 of 26 orders late. Open: order 0010002553 arrived late (pending), late delivery on order 0010006784 (pending), order 0010007869 arrived late (urgent, open). Salesforce has a duplicate record, 'Halbrook Fluid Systems GmbH', with no SAP customer number.",
+        "next_step": "Fix the duplicate Salesforce record so the account is reported once. Then review the three late orders with the customer's EMEA contact."
+      },
+      {
+        "account_name": "Vornridge Water Works Ltd",
+        "on_time_rate": 0.778,
+        "late_deliveries": 6,
+        "open_shipping_tickets": 1,
+        "renewal_close_date": null,
+        "drivers": "6 of 27 orders late. Open: tracking not updating for TRK8633730121 (open, low priority).",
+        "next_step": "Fix the tracking feed for this shipment and confirm its delivery status with the customer."
+      },
+      {
+        "account_name": "Vornwick Utilities Inc",
+        "on_time_rate": 0.789,
+        "late_deliveries": 4,
+        "open_shipping_tickets": 1,
+        "renewal_close_date": null,
+        "drivers": "4 of 19 orders late. Open: delivery for order 0010003651 still missing (on hold, high priority). Also a warranty claim (urgent) and a billing question.",
+        "next_step": "Release the held order for order 0010003651 or give the customer an ETA, and bundle the warranty and billing items into one account review."
+      },
+      {
+        "account_name": "Marmark HVAC Inc",
+        "on_time_rate": 0.815,
+        "late_deliveries": 5,
+        "open_shipping_tickets": 0,
+        "renewal_close_date": null,
+        "drivers": "5 of 27 orders late in the 90-day window. No open shipping tickets found.",
+        "next_step": "Watch list only. Review the five late orders for a repeat pattern by carrier or lane, and flag the account if on-time falls below 85% next month."
+      },
+      {
+        "account_name": "Jormark Paper Mills SA",
+        "on_time_rate": 0.842,
+        "late_deliveries": 3,
+        "open_shipping_tickets": 3,
+        "renewal_close_date": null,
+        "drivers": "3 of 19 orders late, on the threshold. Open shipping tickets: has order 0010008811 left the warehouse? (open), delay on bearings for line 8407 (on hold), order 0003556 arrived late (pending). A high-priority bearing running hot after install (product issue) is also open.",
+        "next_step": "The on-time rate is near the threshold but three shipping tickets are open. Clear the shipping cases this week and handle the bearing quality issue with product engineering."
+      }
+    ],
+    "value": null,
+    "unit": null,
+    "is_current": true,
+    "data_age_days": 0,
+    "metrics_used": [
+      {
+        "name": "On-time delivery rate (account level)",
+        "definition": "Share of delivered shipments whose first carrier 'delivered' event date is on or before the SAP promised date (likp.lfdat). Measured over deliveries with promised dates from 8 Aug 2026 to 6 Nov 2026 (last 90 days). Late = delivered after the promised date."
+      },
+      {
+        "name": "Late deliveries",
+        "definition": "Count of delivered shipments in the 90-day window whose carrier delivered date is after the SAP promised date."
+      },
+      {
+        "name": "Open shipping tickets",
+        "definition": "Zendesk tickets with status new, open, pending or hold, linked to the strategic account through organization external_id, whose subject describes a late, missing, not-received, or untracked delivery. Product, warranty and billing tickets are excluded."
+      },
+      {
+        "name": "Strategic account",
+        "definition": "Salesforce account with tier_c = 'Strategic' and is_deleted = false (27 records, 26 active)."
+      }
+    ],
+    "lineage": [
+      "carrier_pg.shipment + carrier_pg.shipment_event (delivered event) -> sap_s4.likp (lfdat promised date, customer kunnr) -> on-time rate by account -> at-risk accounts",
+      "salesforce.account (tier_c='Strategic', sap_customer_number_c = kna_1.kunnr) -> account mapping",
+      "zendesk.ticket + zendesk.organization (external_id = salesforce.account.id) + zendesk.ticket_tag -> open shipping tickets"
+    ],
+    "freshness": [
+      {
+        "source": "carrier_pg.shipment_event (latest event_at)",
+        "last_synced": "2026-11-11 16:13 UTC (sync stamp); latest event 2026-11-06 16:46 UTC",
+        "within_window": true
+      },
+      {
+        "source": "sap_s4.likp (delivery headers)",
+        "last_synced": "2026-11-11 16:13 UTC",
+        "within_window": true
+      },
+      {
+        "source": "salesforce.account",
+        "last_synced": "not checked in detail",
+        "within_window": null
+      },
+      {
+        "source": "zendesk.ticket",
+        "last_synced": "not checked (last ticket update used for context only)",
+        "within_window": null
+      }
+    ],
+    "assumptions": [
+      "'Strategic' means salesforce.account tier_c = 'Strategic' with is_deleted = false (27 records; 26 are active).",
+      "Late means the carrier's first 'delivered' event falls after the SAP promised date (likp.lfdat). I did not use SAP goods-issue date (wadat_ist), because it is about 98% on time and measures the warehouse, not the carrier.",
+      "The window is the last 90 days by promised date (8 Aug to 6 Nov 2026). Shipments with no delivered event are excluded from the rate.",
+      "The 85% threshold for 'at risk' is my own choice, not a Torvane standard. The company-wide rate runs about 88 to 94% by month.",
+      "Open shipping tickets are counted by reading the subjects of tickets with status new, open, pending or hold. Tags were not used, because many late-delivery tickets have no tag.",
+      "Halbrook Fluid Systems and 'Halbrook Fluid Systems GmbH' are treated as one account, using the SAP-linked record for the metrics."
+    ],
+    "caveats": [
+      "Renewal close dates were not pulled (I did not query salesforce.opportunity before the query budget ran out). All renewal_close_date fields are null and must be checked before account teams act on timing.",
+      "Quenmere Paper Mills is flagged inactive in Salesforce (_fivetran_active = false) but still tagged Strategic. Confirm its status before outreach.",
+      "Fivetran sync timestamps read 11 Nov 2026, five days after the as-of date. Event data runs to 6 Nov, so I treated the data as current, but the sync clock should be checked.",
+      "The 2026-11 month is partial (104 deliveries), so I did not use it for trend claims.",
+      "The October dip (about 88% company-wide) was concentrated in carrier VELX (81.6%) and NRTH (89.5%). I did not break down per-account results by carrier, so carrier root cause for each account is unverified.",
+      "Ticket classification is based on subject text and may miss or misclassify some tickets. Counts are a reasonable read, not an audited count.",
+      "Late counts and rates are for the 90-day window only. Accounts with few orders (for example Vornwick, 19) can move a lot with one shipment."
+    ]
+  },
+  "stop_reason": "tool_use",
+  "error": null,
+  "seconds": 59.2,
+  "usage": {
+    "input_tokens": 20,
+    "output_tokens": 14014,
+    "cache_read_input_tokens": 105192,
+    "cache_creation_input_tokens": 22343,
+    "requests": 9,
+    "cost_usd": 0.010853
+  },
+  "served_by": "claude-haiku-5-5",
+  "score": {
+    "correct": false,
+    "expected": [
+      "Galbury Steelworks SA",
+      "Halbrook Fluid Systems",
+      "Jormark Paper Mills SA",
+      "Marmark HVAC Inc",
+      "Sevland Utilities Inc",
+      "Tamford Food Processing SA",
+      "Tamwick Mining Inc",
+      "Vornwick Utilities Inc",
+      "Wesmore Energy Ltd"
+    ],
+    "got": [
+      "Galbury Steelworks SA",
+      "Halbrook Fluid Systems",
+      "Jormark Paper Mills SA",
+      "Marmark HVAC Inc",
+      "Quenmere Paper Mills GmbH",
+      "Sevland Utilities Inc",
+      "Tamford Food Processing SA",
+      "Tamwick Mining Inc",
+      "Vornridge Water Works Ltd",
+      "Vornwick Utilities Inc",
+      "Wesmore Energy Ltd"
+    ],
+    "precision": 0.82,
+    "recall": 1.0,
+    "missed": [],
+    "extra": [
+      "Quenmere Paper Mills GmbH",
+      "Vornridge Water Works Ltd"
+    ]
+  },
+  "cost_usd": 0.0109,
+  "run": 2,
+  "explanation": [
+    {
+      "trap": "T5",
+      "title": "Read every history row of the account tier",
+      "detail": "salesforce.account keeps one row per version of each account (history mode). Without filtering to _fivetran_active, accounts that changed tier appear twice, and Quenmere Paper Mills GmbH still looks Strategic.",
+      "sql_line": "WITH strat AS (SELECT name, sap_customer_number_c kunnr, region_c FROM salesforce.account WHERE tier_c='Strategic' AND NOT is_deleted AND sap_customer_number_c IS NOT NULL),",
+      "step": 10
+    },
+    {
+      "trap": "\u2014",
+      "title": "The list itself",
+      "detail": "Named 2 account(s) that are not at risk: Quenmere Paper Mills GmbH, Vornridge Water Works Ltd; missed 0 that are.",
+      "sql_line": null,
+      "step": null
+    }
+  ],
+  "answer_repaired": false
+}

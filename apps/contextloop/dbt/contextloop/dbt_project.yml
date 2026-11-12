@@ -1,0 +1,30 @@
+name: contextloop
+version: "1.0.0"
+config-version: 2
+profile: contextloop
+
+model-paths: ["models"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+analysis-paths: ["analyses"]
+clean-targets: ["target", "logs"]
+
+vars:
+  as_of_date: "2026-11-06"     # the reporting date every definition is evaluated at (docs/demo/narrative.md)
+  window_days: 90
+  risk_threshold: 0.85
+  renewal_days: 120
+  min_open_shipping_tickets: 2
+  break_trap: ""               # make break TRAP=T1|T4 removes one trap's handling so a named test fails
+
+models:
+  contextloop:
+    staging:
+      +schema: staging
+      +materialized: view
+    intermediate:
+      +schema: intermediate
+      +materialized: view
+    marts:
+      +schema: marts
+      +materialized: table

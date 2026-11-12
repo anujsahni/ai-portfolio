@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: int_exchange_rates_monthly
+    description: "Trap T3: one EUR to USD monthly average rate per month."
+    columns:
+      - name: rate_month
+        data_tests: [unique, not_null]
+  - name: int_account_identity
+    description: "Trap T4: maps each Salesforce account to its SAP customer, merging look-alike duplicates by normalised name."
+    columns:
+      - name: salesforce_account_id
+        data_tests: [unique, not_null]
+  - name: int_account_tier_history
+    description: "Trap T5: each customer's tier over time, from history mode."
+  - name: int_delivery_actuals
+    description: "Trap T2: the carrier's actual delivery time per delivery."
+    columns:
+      - name: delivery_id
+        data_tests: [unique]
+  - name: int_deliveries_enriched
+    description: Non-cancelled deliveries with requested date, actual delivery time and on-time flag.

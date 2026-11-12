@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ContextLoop · pitch</title>
+<!-- The pitch video stage: 1920 x 1080, every visual a function of time (window.__render(t)), so scripts/render_pitch_video.py
+     can capture it frame by frame. Open it in a browser with ?play to preview in real time (no audio). -->
+<link rel="stylesheet" href="pitch.css">
+</head>
+<body>
+<div id="stage">
+  <div class="bg"><div class="glow g1"></div><div class="glow g2"></div><div class="grid"></div></div>
+
+  <!-- persistent chrome -->
+  <div class="chrome" id="chrome">
+    <div class="brand"><svg viewBox="0 0 64 64"><defs><linearGradient id="m1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4B5BDC"/><stop offset="1" stop-color="#13B3A4"/></linearGradient></defs><rect width="64" height="64" rx="15" fill="url(#m1)"/><path d="M44.1 23.2 A15 15 0 1 0 44.1 40.8" fill="none" stroke="#fff" stroke-width="6.2" stroke-linecap="round"/><circle cx="46.2" cy="32" r="4.6" fill="#FF7A5C"/></svg><span>Context<b>Loop</b></span></div>
+    <div class="chapters" id="chapters"></div>
+  </div>
+  <div class="progress"><i id="bar"></i></div>
+
+  <!-- 1 · open -->
+  <section class="scene" data-scene="open">
+    <div class="center">
+      <svg class="mark" viewBox="0 0 64 64"><defs><linearGradient id="m2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4B5BDC"/><stop offset="1" stop-color="#13B3A4"/></linearGradient></defs><rect width="64" height="64" rx="15" fill="url(#m2)"/><path d="M44.1 23.2 A15 15 0 1 0 44.1 40.8" fill="none" stroke="#fff" stroke-width="6.2" stroke-linecap="round"/><circle cx="46.2" cy="32" r="4.6" fill="#FF7A5C"/></svg>
+      <h1 class="word">Context<b>Loop</b></h1>
+      <p class="tag">Your AI agent is only as good as your data.</p>
+      <div class="agenda" data-at="open-2">
+        <span data-at="open-2" data-frac="0.32">The problem</span><i data-at="open-2" data-frac="0.38"></i>
+        <span data-at="open-2" data-frac="0.42">The solution</span><i data-at="open-2" data-frac="0.52"></i>
+        <span data-at="open-2" data-frac="0.6">The architecture</span>
+      </div>
+      <p class="stack" data-at="open-2" data-frac="0.7">Fivetran · dbt · Semantic layer · MCP · Claude · Reverse ETL</p>
+    </div>
+  </section>
+
+  <!-- 2 · problem -->
+  <section class="scene" data-scene="problem">
+    <div class="pane" data-at="problem-1" data-out="problem-3">
+      <div class="eyebrow">01 · The problem</div>
+      <h2>Northstar Industrial</h2>
+      <p class="lede">A mid-market maker of industrial valves, bearings and pumps · about 120 business customers · North America and Europe</p>
+      <div class="systems">
+        <div class="sys" data-at="problem-2" data-frac="0.22"><div class="sic s-sap">SAP</div><h3>SAP S/4HANA</h3><p class="what">Orders, deliveries, billing</p><p class="why">Cryptic tables (VBAK, LIKP), two currencies, cancelled orders still present</p></div>
+        <div class="sys" data-at="problem-2" data-frac="0.36"><div class="sic s-sf">SF</div><h3>Salesforce</h3><p class="what">Accounts, tiers, renewals</p><p class="why">IDs don't match SAP, a look-alike duplicate, tiers change mid-quarter</p></div>
+        <div class="sys" data-at="problem-2" data-frac="0.5"><div class="sic s-zd">ZD</div><h3>Zendesk</h3><p class="what">Support tickets</p><p class="why">Free text, shipping complaints tagged inconsistently</p></div>
+        <div class="sys" data-at="problem-2" data-frac="0.64"><div class="sic s-pg">PG</div><h3>Carrier tracking</h3><p class="what">Postgres shipment events</p><p class="why">The <em>actual</em> delivery time lives only here</p></div>
+      </div>
+    </div>
+    <div class="pane" data-at="problem-3">
+      <div class="eyebrow">01 · The problem</div>
+      <div class="who" data-at="problem-3" data-frac="0.25"><span class="avatar">COO</span><span>The chief operating officer asks the AI agent</span></div>
+      <blockquote class="quote" data-at="problem-4">“Which of our <mark>strategic accounts</mark> are at risk because of <mark>late shipments</mark>, and what should the account teams do this week?”</blockquote>
+      <div class="needs">
+        <span data-at="problem-5" data-frac="0.12">All four systems</span>
+        <span data-at="problem-5" data-frac="0.3">One definition of <b>on time</b></span>
+        <span data-at="problem-5" data-frac="0.52">One definition of <b>strategic</b></span>
+        <span data-at="problem-5" data-frac="0.75">Data fresh enough to act on</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · the confident wrong answer -->
+  <section class="scene" data-scene="wrong">
+    <div class="pane" data-at="wrong-1">
+      <div class="eyebrow rose">01 · The problem · Act 1</div>
+      <h2>The confident wrong answer</h2>
+      <div class="cols">
+        <div class="answer" data-at="wrong-1" data-frac="0.15">
+          <div class="ahead"><span class="aic">C</span>Agent · raw SQL access only</div>
+          <div class="aline"><span>Strategic accounts at risk</span><b class="bad">11 accounts</b><s>truth: 9</s></div>
+          <div class="aline"><span>90-day on-time delivery rate</span><b class="bad">87.0%</b><s>truth: 86.1%</s></div>
+          <div class="aline"><span>Strategic accounts today</span><b class="bad">26</b><s>truth: 25</s></div>
+          <div class="afoot">Fluent, precise and wrong · examples from the recorded runs</div>
+        </div>
+        <div class="traps">
+          <div class="trap" data-at="wrong-2" data-frac="0.0"><i>T1</i>Counted cancelled deliveries as late</div>
+          <div class="trap" data-at="wrong-2" data-frac="0.18"><i>T2</i>Used the planned ship date, not the carrier's delivery</div>
+          <div class="trap" data-at="wrong-2" data-frac="0.48"><i>T3</i>Added euros to dollars</div>
+          <div class="trap" data-at="wrong-2" data-frac="0.6"><i>T4</i>Counted a duplicate account twice</div>
+          <div class="trap" data-at="wrong-2" data-frac="0.76"><i>T6</i>Didn't notice support data was two days old</div>
+        </div>
+      </div>
+      <div class="scoreline" data-at="wrong-3">
+        <div class="big rose">2.7<small> / 6</small></div><div class="sl">average score on six golden questions<br><span>naive agent · 3 runs · nothing in the answer warns you</span></div>
+        <div class="prompt" data-at="wrong-4">A better prompt doesn't fix this.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · the solution -->
+  <section class="scene" data-scene="solution">
+    <div class="pane" data-at="sol-1">
+      <div class="eyebrow">02 · The solution</div>
+      <h2>A trusted data foundation, in four layers</h2>
+      <div class="layers">
+        <div class="layer l-move" data-at="sol-2"><div class="ln">1</div><h3>Move</h3><div class="by">Fivetran</div><ul><li>Every source, incrementally</li><li>Deletes flagged, not lost</li><li>History on fields that change</li></ul></div>
+        <div class="arrow" data-at="sol-3"></div>
+        <div class="layer l-trust" data-at="sol-3"><div class="ln">2</div><h3>Transform &amp; trust</h3><div class="by">dbt · semantic layer · Iceberg</div><ul><li>Tested, contracted models</li><li>Each metric defined once</li><li>Open tables, any engine</li></ul></div>
+        <div class="arrow" data-at="sol-4"></div>
+        <div class="layer l-ctx" data-at="sol-4"><div class="ln">3</div><h3>Context</h3><div class="by">MCP servers · Claude</div><ul><li>Governed metric queries</li><li>Lineage and docs</li><li>Freshness checks</li></ul></div>
+        <div class="arrow" data-at="sol-5"></div>
+        <div class="layer l-act" data-at="sol-5"><div class="ln">4</div><h3>Activate</h3><div class="by">Reverse ETL</div><ul><li>Risk list into Salesforce</li><li>Summary to Slack</li><li>Diff-based, audited</li></ul></div>
+      </div>
+      <div class="compare" data-at="sol-6">
+        <div class="crow"><span>Raw SQL agent</span><div class="track"><i class="cbar rose-bg" data-at="sol-6" data-grow="0.45"></i></div><b class="rose">2.7</b></div>
+        <div class="crow"><span>With the foundation</span><div class="track"><i class="cbar mint-bg" data-at="sol-6" data-frac="0.45" data-grow="1"></i></div><b class="mint">6.0</b></div>
+        <div class="cnote">Same model · same six questions · average of 3 runs · out of 6</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · under the hood: what each technology does and how this demo uses it, one pane per layer -->
+  <section class="scene" data-scene="stack">
+    <div class="pane" data-at="stack-1" data-out="stack-6">
+      <div class="eyebrow">03 · The architecture · under the hood</div>
+      <h2 class="stackh"><span class="dot d-trust"></span>Transform &amp; trust</h2>
+      <div class="flow" data-at="stack-1" data-frac="0.55"><span>Fivetran-landed raw tables</span><i></i><span>dbt build · models + tests</span><i></i><span>Marts in DuckDB</span><i></i><span>Semantic layer metrics</span><i></i><span>Iceberg snapshot</span><i></i><span>DuckDB · Trino</span></div>
+      <div class="techs t5 k-trust">
+        <div class="tech" data-at="stack-2" data-frac="0.05"><div class="tic">DD</div><h3>DuckDB</h3><div class="role">Warehouse</div><p class="is">An embedded analytical database in one file. No server to run.</p><div class="use"><b>In this demo</b>Holds the raw landed tables and every dbt model. Act 1's agent queries the raw schemas here; services read a read-only copy.</div></div>
+        <div class="tech" data-at="stack-3" data-frac="0.05"><div class="tic">dbt</div><h3>dbt Core</h3><div class="role">Transformation</div><p class="is">SQL models with tests, contracts, docs and lineage, run as code.</p><div class="use"><b>In this demo</b>27 models: staging → intermediate → marts. Each trap is fixed in a named model, such as <code>int_delivery_actuals</code>, and guarded by a test.</div></div>
+        <div class="tech" data-at="stack-4" data-frac="0.05"><div class="tic">MF</div><h3>Semantic layer</h3><div class="role">MetricFlow</div><p class="is">Metrics defined once in YAML. The SQL is generated, never hand-written.</p><div class="use"><b>In this demo</b>8 metrics, such as <code>on_time_delivery_rate</code> and <code>net_revenue</code>. Every number the agent reports is compiled here.</div></div>
+        <div class="tech" data-at="stack-5" data-frac="0.0"><div class="tic">IC</div><h3>Apache Iceberg</h3><div class="role">Open table format</div><p class="is">Parquet files plus metadata and snapshots, in a catalog any engine can read.</p><div class="use"><b>In this demo</b>PyIceberg publishes the 6 marts to <code>northstar.marts</code> after every build: REST catalog, files in RustFS (S3).</div></div>
+        <div class="tech" data-at="stack-5" data-frac="0.45"><div class="tic">TR</div><h3>Trino</h3><div class="role">Second engine</div><p class="is">A distributed SQL engine that queries Iceberg through its connector.</p><div class="use"><b>In this demo</b>Runs the at-risk query on the same Iceberg table as DuckDB and returns identical rows: store once, read anywhere.</div></div>
+      </div>
+    </div>
+    <div class="pane" data-at="stack-6" data-out="stack-9">
+      <div class="eyebrow">03 · The architecture · under the hood</div>
+      <h2 class="stackh"><span class="dot d-ctx"></span>Context · MCP</h2>
+      <div class="flow" data-at="stack-6" data-frac="0.55"><span>COO's question</span><i></i><span>list_metrics</span><i></i><span>check_freshness</span><i></i><span>query_metric</span><i></i><span>lineage</span><i></i><span>Answer + definitions + freshness warning</span></div>
+      <div class="techs t5 k-ctx">
+        <div class="tech" data-at="stack-6" data-frac="0.2"><div class="tic">MCP</div><h3>MCP</h3><div class="role">Model Context Protocol</div><p class="is">An open standard for giving an agent tools and context through one interface.</p><div class="use"><b>In this demo</b>Three MCP servers in private containers, over streamable HTTP. The agent sees only their tools.</div></div>
+        <div class="tech" data-at="stack-7" data-frac="0.0"><div class="tic">dbt</div><h3>dbt MCP server</h3><div class="role">Meaning · lineage</div><p class="is">The official <code>dbt-mcp</code> server from dbt Labs.</p><div class="use"><b>In this demo</b>Read-only tools only: <code>list</code>, <code>get_node_details_dev</code>, <code>get_lineage_dev</code>, from the latest build's manifest.</div></div>
+        <div class="tech" data-at="stack-7" data-frac="0.3"><div class="tic">M</div><h3>Metrics server</h3><div class="role">Governed numbers</div><p class="is">A small MCP server over the semantic layer.</p><div class="use"><b>In this demo</b><code>list_metrics</code> returns the definitions; <code>query_metric</code> has MetricFlow compile the SQL and returns it with the rows.</div></div>
+        <div class="tech" data-at="stack-7" data-frac="0.62"><div class="tic">F</div><h3>Freshness server</h3><div class="role">Data age</div><p class="is">A small MCP server over the Fivetran sync log.</p><div class="use"><b>In this demo</b><code>check_freshness</code>: last sync, age and errors per source. It finds Zendesk two days behind its 24-hour window.</div></div>
+        <div class="tech" data-at="stack-8" data-frac="0.05"><div class="tic">C</div><h3>Claude</h3><div class="role">The agent</div><p class="is">The same model as Act 1. Only its context changes.</p><div class="use"><b>In this demo</b>A small bridge (the Python MCP client) hands the servers' tools to Claude's tool use. No raw-table access.</div></div>
+      </div>
+    </div>
+    <div class="pane" data-at="stack-9">
+      <div class="eyebrow">03 · The architecture · under the hood</div>
+      <h2 class="stackh"><span class="dot d-act"></span>Activate</h2>
+      <div class="flow" data-at="stack-9" data-frac="0.08"><span>marts.account_risk</span><i></i><span>Diff against the CRM</span><i></i><span>Dry run</span><i></i><span>Write only the changes</span><i></i><span>Salesforce · Slack</span></div>
+      <div class="techs t4 k-act">
+        <div class="tech" data-at="stack-9" data-frac="0.1"><div class="tic">RE</div><h3>Reverse ETL sync</h3><div class="role">Diff-based</div><p class="is">Pushes governed data from the warehouse back into business tools.</p><div class="use"><b>In this demo</b>Reads <code>marts.account_risk</code>, compares four risk fields with the CRM, previews, then writes only the changes. A re-run changes nothing.</div></div>
+        <div class="tech" data-at="stack-9" data-frac="0.4"><div class="tic">SF</div><h3>Mock Salesforce</h3><div class="role">CRM target</div><p class="is">A small FastAPI stand-in for a Salesforce org.</p><div class="use"><b>In this demo</b>Each at-risk account gets <code>Delivery_Risk__c</code>, its drivers and a <code>Next_Step__c</code>; every write lands in an audit log.</div></div>
+        <div class="tech" data-at="stack-9" data-frac="0.62"><div class="tic">SL</div><h3>Slack</h3><div class="role">Team alert</div><p class="is">An incoming webhook to the account team's channel.</p><div class="use"><b>In this demo</b>One summary of the at-risk list. With no webhook set, Act 5 shows a preview and makes no network call.</div></div>
+        <div class="tech" data-at="stack-9" data-frac="0.82"><div class="tic">FT</div><h3>Fivetran Activations</h3><div class="role">At a customer</div><p class="is">Managed, audited syncs from governed models to CRM, Slack and other tools.</p><div class="use"><b>In production</b>Replaces the custom sync code. The source of truth stays the same: the dbt mart.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · the architecture walkthrough (drives the real architecture page) -->
+  <section class="scene" data-scene="arch">
+    <div class="archhead"><div class="eyebrow">03 · The architecture</div><div class="actlabel" id="actlabel"></div></div>
+    <div class="archcap" id="archcap"></div>
+    <div class="viewport" id="viewport"><div class="cam" id="cam"><iframe id="arch" src="../architecture/index.html?embed=1" scrolling="no"></iframe></div></div>
+  </section>
+
+  <!-- 7 · close -->
+  <section class="scene" data-scene="close">
+    <div class="center">
+      <div class="eyebrow">04 · Next step</div>
+      <div class="takeaways">
+        <span data-at="close-1" data-frac="0.0">Reliable movement</span>
+        <span data-at="close-1" data-frac="0.12">Governed transformation</span>
+        <span data-at="close-1" data-frac="0.26">Shared definitions the agent can read</span>
+      </div>
+      <h2 class="closeline" data-at="close-1" data-frac="0.5">From a confident wrong answer<br>to one you can <b>act on</b>.</h2>
+      <div class="pilot" data-at="close-2"><b>Next:</b> a scoped pilot against your own success criteria, with named owners.</div>
+      <div class="endmark" data-at="close-2" data-frac="0.75"><svg viewBox="0 0 64 64"><defs><linearGradient id="m3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4B5BDC"/><stop offset="1" stop-color="#13B3A4"/></linearGradient></defs><rect width="64" height="64" rx="15" fill="url(#m3)"/><path d="M44.1 23.2 A15 15 0 1 0 44.1 40.8" fill="none" stroke="#fff" stroke-width="6.2" stroke-linecap="round"/><circle cx="46.2" cy="32" r="4.6" fill="#FF7A5C"/></svg><span>Context<b>Loop</b></span></div>
+      <p class="disclaimer" data-at="close-2" data-frac="0.75">Demo with synthetic data · Northstar Industrial is fictional</p>
+    </div>
+  </section>
+
+  <div class="fade" id="fade"></div>
+</div>
+<script src="pitch.js"></script>
+</body>
+</html>
