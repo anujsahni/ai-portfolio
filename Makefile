@@ -2,10 +2,12 @@
 .PHONY: help weekendwise weekendwise-test weekendwise-mockups weekendwise-run \
 	weekendwise-scenarios weekendwise-evaluate weekendwise-seed weekendwise-help \
 	test mockups run scenarios evaluate seed \
-	dealpulse dealpulse-help dealpulse-test dealpulse-verify dealpulse-architecture
+	dealpulse dealpulse-help dealpulse-test dealpulse-verify dealpulse-architecture \
+	contextloop contextloop-help contextloop-demo contextloop-test contextloop-pitch
 
 APP := apps/weekendwise
 DP  := apps/dealpulse
+CL  := apps/contextloop
 
 help: ## Show portfolio-level shortcuts
 	@printf '%s\n' 'AI Portfolio shortcuts:' \
@@ -21,7 +23,11 @@ help: ## Show portfolio-level shortcuts
 	  '  make dealpulse-test         Run DealPulse offline tests' \
 	  '  make dealpulse-verify       Check DealPulse AWS resources for drift and permissions (reads only)' \
 	  '  make dealpulse-architecture Render the DealPulse architecture diagram for its README' \
-	  '  make dealpulse-help         Show all DealPulse commands'
+	  '  make dealpulse-help         Show all DealPulse commands' \
+	  '  make contextloop-demo       Start ContextLoop in Docker and open the app (http://127.0.0.1:8501)' \
+	  '  make contextloop-test       Run ContextLoop tests inside its Docker stack' \
+	  '  make contextloop-pitch      Publish the ContextLoop pitch video to its public watch page' \
+	  '  make contextloop-help       Show all ContextLoop commands'
 
 weekendwise: weekendwise-help ## Show commands for the WeekendWise app
 
@@ -74,3 +80,19 @@ dealpulse-verify: ## Check DealPulse AWS resources for drift and permissions (re
 
 dealpulse-architecture: ## Render the DealPulse architecture diagram to its README image
 	$(MAKE) -C $(DP) architecture
+
+# ---------------------------------------------------------------- ContextLoop (local Docker)
+
+contextloop: contextloop-help ## Show commands for the ContextLoop app
+
+contextloop-help: ## Show all ContextLoop commands
+	$(MAKE) -C $(CL) help
+
+contextloop-demo: ## Start ContextLoop in Docker (data, sync, build) and open the app
+	$(MAKE) -C $(CL) demo
+
+contextloop-test: ## Run ContextLoop tests inside its Docker stack
+	$(MAKE) -C $(CL) test
+
+contextloop-pitch: ## Publish the ContextLoop pitch video and its public watch page (S3 + CloudFront)
+	$(MAKE) -C $(CL) publish-pitch

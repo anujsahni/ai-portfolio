@@ -66,3 +66,17 @@ infra/.last-build
 **/.mypy_cache/
 **/.ruff_cache/
 **/reports/
+
+# Video and audio: too heavy for git. Publish videos to YouTube and link them instead
+# (e.g. the ContextLoop pitch video: set CONTEXTLOOP_PITCH_URL). Regenerate locally with make pitch-video.
+*.mp4
+*.mov
+*.m4v
+*.webm
+*.mkv
+*.avi
+*.wav
+*.mp3
+*.m4a
+*.aiff
+*.flac
