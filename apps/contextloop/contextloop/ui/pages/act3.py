@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -63,7 +64,11 @@ def lineage_dot(focus: str = "fct_delivery") -> str:
              'edge [color="#8E98B0"];']
     for layer, nodes in layers.items():
         title = next(f"{name} · {plain.lower()}" for k, name, plain, *_ in LAYERS if k == layer)
-        lines.append(f'subgraph cluster_{layer} {{ label="{title}"; style=dashed; color="#D6DCE8"; fontcolor="#5B6478";')
+        # The ⓘ sits at the box's top right (labeljust=r). Browsers take an SVG tooltip from the group's <title>, which Graphviz
+        # fills with the subgraph's name, so the explanation is the name (cluster=true marks it as a box); the transparent fill
+        # makes the whole box hoverable.
+        lines.append(f'subgraph "{_layer_tooltip(layer)}" {{ cluster=true; label="{title}  ⓘ"; labeljust=r; '
+                     'style="dashed,filled"; fillcolor="#FFFFFF00"; color="#D6DCE8"; fontcolor="#5B6478";')
         for n in sorted(set(nodes)):
             label = n.split(".", 2)[-1] if n.startswith("source.") else n.split(".")[-1]
             lines.append(f'"{n}" [label="{label}", fillcolor="{LAYER_COLOR[layer]}"];')
@@ -112,48 +117,17 @@ LAYERS = [
 ]
 
 
-TIP_CSS = """<style>
-.cl-layers {display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:.3rem 0 .4rem}
-.cl-layer {position:relative; display:inline-flex; align-items:center; gap:7px; padding:7px 12px; border-radius:10px;
-  border:1px solid #E3E7F0; font-size:.9rem; cursor:default}
-.cl-layer b {font-weight:700} .cl-layer small {color:#5B6478}
-.cl-layer .cl-i {display:inline-grid; place-items:center; width:17px; height:17px; border-radius:50%; border:1.5px solid #4B5BDC;
-  color:#4B5BDC; font:700 11px/1 Georgia, serif; font-style:italic; cursor:help}
-.cl-layer .cl-tip {display:none; position:absolute; top:calc(100% + 8px); left:0; z-index:1000; width:360px; padding:14px 16px;
-  background:#fff; border:1px solid #E3E7F0; border-radius:12px; box-shadow:0 12px 32px rgba(24,32,58,.18);
-  font-size:.86rem; line-height:1.5; color:#18203A; white-space:normal}
-.cl-layer.right .cl-tip {left:auto; right:0}
-.cl-layer .cl-i:hover + .cl-tip, .cl-layer .cl-tip:hover {display:block}
-.cl-tip h5 {margin:0 0 .2rem; font-size:.95rem} .cl-tip .plain {font-weight:600; margin-bottom:.4rem}
-.cl-tip code {font-size:.78rem}
-.cl-arrow {color:#8E98B0}
-</style>"""
+def _plain(html: str) -> str:
+    return re.sub(r"<[^>]+>", "", html).replace("&nbsp;", " ")
 
 
-def _tip(inner: str, right: bool = False, label: str = "", bg: str = "#FFFFFF") -> str:
-    return (f'<span class="cl-layer{" right" if right else ""}" style="background:{bg}">{label}'
-            f'<span class="cl-i" title="">i</span><span class="cl-tip">{inner}</span></span>')
-
-
-def layers_explainer(n_test: int | None) -> None:
-    st.subheader("How raw data becomes a number you can trust")
-    st.markdown("dbt builds the trusted data in **layers**, each reading only from the one before it. Every Act 1 trap is fixed in "
-                "one named place" + (f" and checked by {n_test} tests on every build" if n_test else "") +
-                ". Hover the **ⓘ** on a layer to follow one delivery through it.")
-    chips = []
-    for i, (key, name, plain, what, example, fixes) in enumerate(LAYERS):
-        traps = " ".join(t for t, _ in fixes)
-        fixed = ("<div style='margin-top:.5rem'>" + "".join(common.badge(f"{t} · {d}", "ok", "check") for t, d in fixes)
-                 + "</div>") if fixes else ""
-        inner = (f"<h5>{name}</h5><div class='plain'>{plain}</div>{what}"
-                 f"<div style='margin-top:.5rem'><b>One delivery:</b> {example}</div>{fixed}")
-        label = f"<b>{name}</b>" + (f" {common.badge('fixes ' + traps, 'ok')}" if traps else "")
-        chips.append(_tip(inner, right=i >= 3, label=label, bg=LAYER_COLOR[key]))
-    why = _tip("<h5>Why layers?</h5>Each step is small enough to test. A broken rule fails a named test instead of quietly "
-               "changing a number, and anyone (or any agent) can trace a metric back to the raw rows it came from.",
-               right=True, label="<small>Why layers?</small>")
-    st.markdown(TIP_CSS + '<div class="cl-layers">' + ' <span class="cl-arrow">→</span> '.join(chips) + f" {why}</div>",
-                unsafe_allow_html=True)
+def _layer_tooltip(key: str) -> str:
+    """Plain-text hover text for one dashed layer box (Graphviz tooltips can't hold HTML)."""
+    _, name, plain, what, example, fixes = next(x for x in LAYERS if x[0] == key)
+    parts = [f"{name}: {plain}", _plain(what), f"One delivery: {_plain(example)}"]
+    if fixes:
+        parts.append("Fixes: " + "; ".join(f"{t} {d}" for t, d in fixes))
+    return "\n\n".join(parts).replace('"', '\\"')
 
 
 def test_results() -> pd.DataFrame:
@@ -182,10 +156,12 @@ def render() -> None:
         b.metric("Tests run", n_test)
         c.metric("Tests failing", n_fail, delta=None if n_fail == 0 else "broken", delta_color="inverse")
 
-    layers_explainer(n_test)
-
-    st.subheader("Lineage: from four sources to one governed metric")
-    st.caption("The real models behind one mart, layer by layer (left to right). Pick a mart to see what it is built from.")
+    st.subheader("How raw data becomes a number you can trust")
+    st.markdown("dbt builds the trusted data in **layers**, each reading only from the one before it, so each step is small "
+                "enough to test and any metric can be traced back to its raw rows. Every Act 1 trap is fixed in one named "
+                "place" + (f" and checked by {n_test} tests on every build" if n_test else "") + ".")
+    st.caption("The real models behind one mart, layer by layer (left to right). Pick a mart, then hover a dashed box's "
+               "**ⓘ** to follow one delivery through that layer.")
     focus = st.radio("Mart", ["fct_delivery", "account_risk", "fct_revenue", "fct_ticket"], horizontal=True, key="act3-focus")
     st.graphviz_chart(lineage_dot(focus), use_container_width=True)
 

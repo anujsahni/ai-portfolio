@@ -16,7 +16,7 @@ if MODEL not in SUPPORTED_MODELS:
     raise ValueError(f"CONTEXTLOOP_MODEL={MODEL!r} is not one of {', '.join(SUPPORTED_MODELS)}")
 EFFORT = "high"
 MAX_TOKENS = 16000
-MAX_TOOL_CALLS = 15         # data tool calls per question; submitting the answer does not count
+MAX_TOOL_CALLS = 25         # data tool calls per question; submitting the answer does not count
 TIME_LIMIT_S = 300
 FALLBACK_BETA = "server-side-fallback-2026-07-01"   # server-side refusal fallback, "default" routing
 # Claude Haiku 5.5 has no server-side refusal fallback, so the parameter is sent only to models that support it.
